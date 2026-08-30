@@ -209,6 +209,10 @@ public:
                                                                         u32                             fgColor );
                 void        bufferScreenGetGrid         (               unsigned&                       cols,           // +++
                                                                         unsigned&                       rows );
+// code_led.cpp:
+
+                void        menuLedUpdate                   (); // current!!
+                void        circleLedColor            ();
 // code_log.cpp:
                 void        storeLogHex                 (               char*                           p_buffer,                    // +++
                                                                         u32&                            index,
@@ -265,7 +269,7 @@ public:
                 void        modeAudioBbL                (               int                             p_channel);         // channel passed by caller
                 void        modeAudioBbH                (               int                             p_channel);         // channel passed by caller  
                 void        applyTargetModes            ();
-                void        updateLED                   (); // current!!
+
                 void        checkSystemFlags            ();
 
 // code_midi.cpp
