@@ -1,0 +1,244 @@
+/* /css/index.css */
+
+/* =========================
+   CONFIG (change here only)
+   ========================= */
+:root {
+	/* asymmetric carousel margins */
+	--side-left: 2%;
+	--side-right: 20%;
+	--top: 2%;
+	--bottom: 2%;
+
+	/* button inset as % of CAROUSEL WIDTH */
+	--btn-inset: 1%;
+	--btn-opacity: 0.85;
+
+	/* text overlay insets RELATIVE TO TILE */
+	--text-top: 15%;     /* distance from TOP of tile */
+	--text-side: 2%;     /* distance from LEFT/RIGHT of tile */
+	--text-bottom: 2%;  /* distance from BOTTOM of tile */
+}
+
+/* baseline (match render.css) */
+* { box-sizing: border-box; }
+
+html { height: 100%; }
+body {
+	background-color: #000000;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* full-page background */
+#index-bg {
+	position: fixed;
+	inset: 0;
+	background-image: url("/assets/images/background.jpg");
+	background-size: cover;
+	background-position: center;
+	z-index: -1;
+}
+
+/* header */
+#index-header {
+	position: absolute;
+	top: 5%;
+	width: 100%;
+	text-align: center;
+	color: #FFFFFF;
+	font-family: monospace;
+	text-transform: uppercase;
+	z-index: 2;
+}
+
+#index-header h1 {
+	margin: 0;
+	font-size: 28px;
+}
+
+/* =========================
+   CAROUSEL BOUNDS
+   ========================= */
+#index-main {
+	position: absolute;
+	left: var(--side-left);
+	right: var(--side-right);
+	top: var(--top);
+	bottom: var(--bottom);
+	z-index: 1;
+
+	display: flex;
+}
+
+/* carousel container (same role as #gallery) */
+#index-carousel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 8px;
+}
+
+/* =========================
+   CONTROLS OVERLAY
+   (same mechanism as gallery)
+   ========================= */
+.index-controls {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+/* buttons */
+#indexPrev,
+#indexNext {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: auto;
+
+	padding: 10px 14px;
+	border: 0;
+	border-radius: 5px;
+	margin: 0;
+
+	color: #FFFFFF;
+	background-color: #000000;
+	font-family: monospace;
+	font-size: 14px;
+	cursor: pointer;
+	text-transform: uppercase;
+
+	opacity: var(--btn-opacity);
+	z-index: 10;
+}
+
+#indexPrev:hover,
+#indexNext:hover {
+	background-color: #FFFFFF;
+	color: #000000;
+	opacity: 1;
+}
+
+/* button X-position — % of CAROUSEL WIDTH */
+#indexPrev { left: var(--btn-inset); }
+#indexNext { right: var(--btn-inset); }
+
+/* =========================
+   TRACK + TILES
+   ========================= */
+#index-track {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 1fr;
+	gap: 12px;
+	width: 100%;
+	height: 100%;
+}
+
+.index-tile {
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+	border-radius: 20px;
+
+	background-size: cover;
+	background-position: center;
+
+	opacity: 0.95;
+
+	/* === HOVER ZOOM SUPPORT (a) === */
+	transition: transform 0.25s ease;
+	will-change: transform;
+}
+
+.index-tile:hover {
+	transform: scale(1.02);
+	background-color: #222;
+}
+
+/* =========================
+   TEXT OVERLAY
+   ========================= */
+
+
+.tile-overlay {
+	position: absolute;
+
+	/* POSITIONING (edit later) */
+	top:    var(--text-top);       /* TEXT_TOP */
+	bottom: var(--text-bottom);    /* TEXT_BOTTOM */
+	left:   var(--text-side);      /* TEXT_LEFT */
+	right:  var(--text-side);      /* TEXT_RIGHT */
+
+	/* TYPOGRAPHY (edit later) */
+	font-family: monospace;        /* FONT_FAMILY */
+	font-size:   16px;             /* FONT_SIZE */
+	font-style:  normal;           /* FONT_STYLE */
+	font-weight: normal;           /* FONT_WEIGHT */
+	line-height: normal;           /* LINE_HEIGHT */
+	letter-spacing: normal;        /* LETTER_SPACING */
+	word-spacing:   normal;        /* WORD_SPACING */
+	text-transform: none;          /* TEXT_TRANSFORM */
+	text-align:     left;          /* TEXT_ALIGN */
+
+	/* COLOR / VISIBILITY (edit later) */
+ /* background: rgba(0,0,0,0.6); */  /* TEXT_BACKGROUND */
+	color:       #ffffffe1;        /* TEXT_COLOR */
+	opacity:     1;                /* TEXT_OPACITY */
+	text-shadow: none;             /* TEXT_SHADOW */
+
+	/* INTERACTION (edit later) */
+	user-select:    auto;          /* USER_SELECT */
+	pointer-events: auto;          /* POINTER_EVENTS */
+
+	/* WRAPPING (edit later) */
+	white-space:  pre-wrap;        /* WHITE_SPACE */
+	word-break:   normal;          /* WORD_BREAK */
+	text-overflow: clip;           /* TEXT_OVERFLOW */
+
+	padding: 10px;                 /* TEXT_PADDING */
+	overflow: hidden;              /* TEXT_OVERFLOW_BOX */
+}
+
+/* =====================================================
+   OPTION 2 — INNER SCROLL CONTAINER (NEW, REQUIRED)
+   Mouse wheel works automatically, no layout changes
+   ===================================================== */
+.tile-text-scroll {
+	width: 100%;
+	height: 100%;
+
+	overflow-y: auto;   /* enables mouse wheel scrolling */
+	overflow-x: hidden;
+
+	/* optional: hide scrollbar but keep wheel */
+	scrollbar-width: none;          /* Firefox */
+
+	/* === SCROLL INDICATOR (b) — ALPHA GRADIENT ON TEXT ONLY === */
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		rgba(0,0,0,1) 0%,
+		rgba(0,0,0,1) 95%,
+		rgba(0,0,0,0) 100%
+	);
+	mask-image: linear-gradient(
+		to bottom,
+		rgba(0,0,0,1) 0%,
+		rgba(0,0,0,1) 95%,
+		rgba(0,0,0,0) 100%
+	);
+}
+
+.tile-text-scroll::-webkit-scrollbar {
+	display: none;                  /* WebKit */
+}
+
+/* text itself */
+.tile-overlay p {
+	margin: 0;
+	line-height: 1.2;
+	white-space: pre-wrap;
+}

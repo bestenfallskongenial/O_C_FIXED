@@ -1,0 +1,124 @@
+caleid~1.fsh buffer       [ 0x00000000 ] handle       0x00000001
+Vertex        Source Length  0x00000467 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+caleid~1.fsh buffer       [ 0x00000000 ] handle       0x00000002
+Fragment      Source Length  0x00000D08 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+caleid~1.fsh Status Prg.  [ 0x00000000 ] Size         0x00000D07 Link SUCCESS  
+Uniform:       par_a
+Uniform idx    0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+Uniform:       color
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000001
+Uniform:       tres
+Uniform idx    0x00000002 size           0x00000001 type           0x00008B50 location       0x00000002
+Uniform:       time
+Uniform idx    0x00000003 size           0x00000001 type           0x00001406 location       0x00000003
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+
+calai_~1.fsh buffer       [ 0x00000001 ] handle       0x00000004
+Fragment      Source Length  0x00000690 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+bw_tun~1.fsh buffer       [ 0x00000002 ] handle       0x00000005
+Fragment      Source Length  0x00000821 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+bw_tri~1.fsh buffer       [ 0x00000003 ] handle       0x00000006
+Fragment      Source Length  0x00000566 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+bw_smo~1.fsh buffer       [ 0x00000004 ] handle       0x00000007
+Fragment      Source Length  0x000005A6 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+bw_geo~1.fsh buffer       [ 0x00000005 ] handle       0x00000008
+Fragment      Source Length  0x000008F8 [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+bw_cir~1.fsh buffer       [ 0x00000006 ] handle       0x00000009
+Fragment      Source Length  0x00000ADF [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+7exito~1.fsh buffer       [ 0x00000007 ] handle       0x0000000A
+Fragment      Source Length  0x00000F6F [Buffer] + '0'
+Status ->     SUCCESS       Compiled
+
+calai_~1.fsh Status Prg.  [ 0x00000001 ] Size         0x0000068F Link SUCCESS  
+Uniform:       tex
+Uniform idx    0x00000000 size           0x00000008 type           0x00008B5E location       0x00000000
+Uniform:       par_a
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000008
+Uniform:       color
+Uniform idx    0x00000002 size           0x00000001 type           0x00008B52 location       0x00000009
+Uniform:       tres
+Uniform idx    0x00000003 size           0x00000001 type           0x00008B50 location       0x0000000A
+Uniform:       time
+Uniform idx    0x00000004 size           0x00000001 type           0x00001406 location       0x0000000B
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+
+bw_tun~1.fsh Status Prg.  [ 0x00000002 ] Size         0x00000820 Link SUCCESS  
+Uniform:       par_a
+Uniform idx    0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+Uniform:       color
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000001
+Uniform:       tres
+Uniform idx    0x00000002 size           0x00000001 type           0x00008B50 location       0x00000002
+Uniform:       time
+Uniform idx    0x00000003 size           0x00000001 type           0x00001406 location       0x00000003
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+
+bw_tri~1.fsh Status Prg.  [ 0x00000003 ] Size         0x00000565 Link SUCCESS  
+Uniform:       par_a
+Uniform idx    0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+Uniform:       color
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000001
+Uniform:       time
+Uniform idx    0x00000002 size           0x00000001 type           0x00001406 location       0x00000002
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+
+bw_smo~1.fsh Status Prg.  [ 0x00000004 ] Size         0x000005A5 Link FAILED   
+Prg. InfoLog  
+ERROR:LEX/PARSE-2 (fragment shader, line 41) Undefined identifier
+
+bw_geo~1.fsh Status Prg.  [ 0x00000005 ] Size         0x000008F7 Link SUCCESS  
+Uniform:       par_a
+Uniform idx    0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+Uniform:       color
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000001
+Uniform:       tres
+Uniform idx    0x00000002 size           0x00000001 type           0x00008B50 location       0x00000002
+Uniform:       time
+Uniform idx    0x00000003 size           0x00000001 type           0x00001406 location       0x00000003
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+
+bw_cir~1.fsh Status Prg.  [ 0x00000006 ] Size         0x00000ADE Link SUCCESS  
+Uniform:       par_a
+Uniform idx    0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+Uniform:       color
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000001
+Uniform:       tres
+Uniform idx    0x00000002 size           0x00000001 type           0x00008B50 location       0x00000002
+Uniform:       time
+Uniform idx    0x00000003 size           0x00000001 type           0x00001406 location       0x00000003
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+
+7exito~1.fsh Status Prg.  [ 0x00000007 ] Size         0x00000F6E Link SUCCESS  
+Uniform:       par_a
+Uniform idx    0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+Uniform:       color
+Uniform idx    0x00000001 size           0x00000001 type           0x00008B52 location       0x00000001
+Uniform:       tres
+Uniform idx    0x00000002 size           0x00000001 type           0x00008B50 location       0x00000002
+Uniform:       time
+Uniform idx    0x00000003 size           0x00000001 type           0x00001406 location       0x00000003
+Attribute name vertex
+Attribute:     0x00000000 size           0x00000001 type           0x00008B52 location       0x00000000
+

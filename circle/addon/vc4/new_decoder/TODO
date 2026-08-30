@@ -1,0 +1,78 @@
+
+
+/*
+TODO & open ends:
+
+1.  do we really need three snapshots? we debug each send/reply struct on the fly 
+2.  i use one single buffer from host tx message for queueing the pingpong output buffer, reasoning is that the only difference is 
+    - only oone field is different
+    - the poller is protecting the struct until a buffer is ready/consumed
+3.  i also use one buffer from host rx message since the only fields i care about are 
+    - m_BufferFromHostTx_Output.hdr.type
+    - m_BufferFromHostTx_Output.hdr.status
+    - m_BufferFromHostTx_Output.msg.buffer_header.data
+    and the poller is also consume this informations on the fly, means i can reuse the buffer structs
+4. i use "super-structs" like
+        struct MMAL_Component_Create_Msg            // correct
+            {
+            mmal_msg_header                 hdr;
+            mmal_msg_component_create       msg;
+            }
+    because in need them "packed" than i can pass them in the function much easier.
+5.  i use altered structs derived from the original mmal structs to avoid padding issues
+        struct mmal_buffer_header_wire32 
+            {
+            u32 next, priv, cmd, data, alloc_size, length, offset, flags;
+            u32 pts_lo, pts_hi;   // replaces s64 pts
+            u32 dts_lo, dts_hi;   // replaces s64 dts
+            u32 type, user_data;
+            };
+
+        struct mmal_msg_event_to_host32 
+            {
+            u32 client_component;	// component context //
+            u32 port_type;
+            u32 port_num;
+            u32 cmd;
+            u32 length;
+            u8 data[MMAL_WORKER_EVENT_SPACE];
+            u32 delayed_buffer;
+            };
+
+        struct mmal_msg_buffer_from_host_wire32
+            {
+            mmal_driver_buffer drvbuf;     // you set these fields → keep as struct (16)
+
+            u8  drvbuf_ref[16];            // was mmal_driver_buffer (unused → pad as bytes)
+
+            mmal_buffer_header_wire32 buffer_header; // you patch these → keep (56)
+
+            u8  type_specific[40];         // was mmal_buffer_header_type_specific (unused)
+
+            s32 is_zero_copy;              // 4
+            s32 has_reference;             // 4
+            u32 payload_in_message;        // 4
+
+            u8  short_data[128];           // unchanged, stays zero
+            }; // total: 16 + 16 + 56 + 40 + 4 + 4 + 4 + 128 = 268 bytes
+6.  i DON´T use the given struct/union usualy used to receive messages from the vpu
+    struct mmal_msg_wire32
+        {
+        mmal_msg_header h;
+        union
+            {
+            mmal_msg_buffer_from_host_wire32 buffer_from_host;
+            mmal_msg_event_to_host32         event_to_host;
+            u8 payload[MMAL_MSG_MAX_PAYLOAD];
+            } u;
+        };
+    following the reasoning that i never expect or care about anything else than the 
+    mmal_msg_header and mmal_msg_buffer_from_host_wire32 means that the reply from the vpu will look like 
+    struct MMAL_Buffer_From_Host_Reply_Msg          // do i need also a dedicated MMAL_Buffer_From_Host_Reply_Msg
+        {
+        mmal_msg_header                   hdr;
+        mmal_msg_buffer_from_host_wire32  msg;
+        };
+    anyway in the memory
+    
+*/

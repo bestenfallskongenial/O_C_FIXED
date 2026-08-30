@@ -1,0 +1,41 @@
+#      Configuration for Oculus Mendax running on Raspberry Pi Zero V1.3
+
+# !! I suggest to leave this file alone until you know exactly what to do !! 
+
+# remove # to disable the splash screen
+# disable_splash=1
+
+# remove # to show only panic logs
+
+# loglevel=3
+
+# start_file=start_x.elf
+# fixup_file=fixup_x.dat
+
+#hdmi_group=1		# HDMI group 1 (CEA)
+#hdmi_mode=1    	# uncomment for 640x480 (VGA)
+#hdmi_mode=2    	# uncomment for 480p (720x480)
+#hdmi_mode=4    	# uncomment for 720p (1280x720) 60Hz
+#hdmi_mode=16   	# uncomment for 1080p (1920x1080) 60Hz
+#hdmi_mode=19   	# uncomment for 720p (1280x720) 50Hz
+#hdmi_mode=31   	# uncomment for 1080p (1920x1080) 50Hz
+
+ hdmi_group=2		# HDMI group 2 (DMT)
+
+#hdmi_mode=4    	# uncomment for 640x480 60Hz			works with the 480x800 4inch display
+ hdmi_mode=9    	# uncomment for 800x600 60Hz			standard mode oculus mendax
+#hdmi_mode=16   	# uncomment for 1024x768 60Hz
+#hdmi_mode=35   	# uncomment for 1280x1024 60Hz
+#hdmi_mode=82   	# uncomment for 1920x1080 (1080p) 60Hz
+
+# dedicated section for the 480x800 4inch display
+# display_rotate=1
+
+# hdmi_group=2
+# hdmi_mode=87
+# hdmi_cvt=480 800 60 0
+# hdmi_force_hotplug=1
+
+# GPU memory allocation
+gpu_mem=256
+

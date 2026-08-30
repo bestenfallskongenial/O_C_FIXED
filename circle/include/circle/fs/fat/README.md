@@ -1,0 +1,1 @@
+i needed to change this fatfs.h / .cpp file / CFATFileSystem class to get a callback for the load/write operations

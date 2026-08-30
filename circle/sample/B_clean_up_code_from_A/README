@@ -1,0 +1,185 @@
+state of integration:
+
+
+CLogger.cpp                         // my CLogger shim layer for minimal integration of log messages from other libs/headers
+CLogger.h                           
+
+Makefile                            //
+
+README                              // this file 
+
+code_datamanagement.cpp             // seemingly integrated
+code_debug.cpp                      // debug section to test the blocks
+code_graphics.cpp                   //
+code_hardware.cpp                   // seemingly integrated
+code_logging.cpp            
+code_parser.cpp
+code_util.cpp                       // 
+code_stubs.cpp                      //
+code_wrappers.cpp                   //
+
+defs_enum.h                         // i separate the kernel.h files into responsibilities
+defs_include.h                      
+defs_macro.h
+defs_member.h
+defs_struct.h
+
+kernel.cpp                          // constructor / deconstructor
+kernel.h                            // function declarations
+kernel_initialize.cpp               // CKernel::Initialize( void )
+kernel_run.cpp                      // CKernel::Run( void )
+
+main.cpp                            // mandatory for circles linux emulation
+
+o_c_setup.h                         // project / system related macro declarations
+
+table_col.cpp                       // table for the ws2812 LED´s
+table_lfo.cpp                       // table for the lfo´s
+
+
+***NOTES ON THE PARSER:
+
+| Model    | Data needed by model                | Existing struct field                                    | Parser value behind it                                                                                                        | Exact bytes represented                                                                                                                       |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| A        | pointer to complete frame block     | `h->nal_block_address[file][idx]`                            | `data + sps_off[file][idx]`                                                                                                   | starts at SPS start code                                                                                                                      |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| A        | length of complete frame block      | `h->nal_block_length[file][idx]`                             | `end_off - sps_off[file][idx]`                                                                                                | SPS start code + SPS NAL header + SPS payload +                                                                                               |
+|          |                                     |                                                          |                                                                                                                               | PPS start code + PPS NAL header + PPS payload +                                                                                               |
+|          |                                     |                                                          |                                                                                                                               | IDR start code + IDR NAL header + IDR payload                                                                                                 |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| B config | pointer to rewritten SPS/PPS config | `h->extradata[file]`                                     | `tmp =    sc4 + (data + sps_off[file][idx] + sps_sc_len[file][idx]) +                                                         | `00 00 00 01 + SPS NAL header + SPS payload +                                                                                                 |
+|          |                                     |                                                          |           sc4 + (data + pps_off[file][idx] + pps_sc_len[file][idx])`                                                          |  00 00 00 01 + PPS NAL header + PPS payload`                                                                                                  |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| B config | length of rewritten SPS/PPS config  | `h->extradata_len[file]`                                 |  `4 + (sps_len[file][idx] - sps_sc_len[file][idx]) +                                                                          | byte length of   `00 00 00 01 + SPS NAL header + SPS payload +                                                                                |
+|          |                                     |                                                          |   4 + (pps_len[file][idx] - pps_sc_len[file][idx])`                                                                           |                   00 00 00 01 + PPS NAL header + PPS payload`                                                                                 |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| B frame  | pointer to IDR-only block           | `h->nal_block_address[file][idx] +                           | `(data + sps_off[file][idx]) + (idr_off[file][idx] - sps_off[file][idx]) = data + idr_off[file][idx]`                         | starts at IDR start code                                                                                                                      |
+|          |                                     |  h->idr_offset[file][idx]`                               |                                                                                                                               |                                                                                                                                               |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| B frame  | length of IDR-only block            | `h->idr_length[file][idx]`                               | `idr_len[file][idx]`                                                                                                          | IDR start code + IDR NAL header + IDR payload                                                                                                 |
+| -------- | ----------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+
+***NOTES ON THE ENUMS
+
+//------------------------------------------------- // for the array unsigned/float g_inOutMatrix*[CHANNEL][IO_TYPE_COUNT]
+//	INT 	ADC_RAW     (SCALED IN)VAL 	(SCALED)OUT 	RND 	    LF1 	    LF2 	    AUD0        AUD1        AUD2 	    AUD3        TRL         TRH
+//	ch0	    U	        U	        	U           	U	        G	        G                                                           U           U
+//	ch1	    U	        U	       	 	U           	U	                     	                                                        U           U
+//	ch2	    U	        U	        	U           	U	                     	                                                        U           U
+//	ch3	    U	        U	        	U           	U	                     	                                                        U           U
+//	ch4	    U	        U	        	U           	U	                     	                                                        U           U
+//	ch5	    U	        U	        	U           	U	                     	                                                        U           U
+//	ch6	    U	        U	        	U           	U	                     	                                                        U           U
+//	ch7	    U	        U	        	U           	U	                     	                                                        U           U
+
+//	FLT	    ADC_RAW     (SCALED IN)VAL  (SCALED)OUT 	RND 	    LF1 	    LF2 	    AUD0        AUD1        AUD2 	    AUD3        TRL         TRH
+//	ch0	                U	        	U           	U	        G	        G	        G	        G	        G	        G           opt        opt   
+//	ch1	                U	        	U           	U	                     	                                                        opt        opt   
+//	ch2	                U	        	U           	U	                     	                                                        opt        opt   
+//	ch3	                U	        	U           	U	                     	                                                        opt        opt   
+//	ch4	                U	        	U           	U	                     	                                                        opt        opt   
+//	ch5	                U	        	U           	U	                     	                                                        opt        opt   
+//	ch6	                U	        	U           	U	                     	                                                        opt        opt   
+//	ch7	                U	        	U           	U	                     	                                                        opt        opt   
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+
+//------------------------------------------------- // for the array unsigned (long?) g_lfoBpmMatrix[4][LFO_BPM_COUNT]; <- no float needed here - its stores in the io matrix
+// Layer / Instance | BPM        | INTV       | NBT        | LCB        | NCB        | LBC        | LBCT       | LMT        | ELP        | CYL        | SMP        | LTIME      | TIDX       | TB            | DB             | IREG
+// ---------------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ------------- | -------------- | --------------
+// `[0]`            | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | instance 0 | timeBuffer[0] | deltaBuffer[0] | irregularity[0]
+// `[1]`            | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | instance 1 | timeBuffer[1] | deltaBuffer[1] | irregularity[1]
+// `[2]`            | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | timeBuffer[2] | deltaBuffer[2] | irregularity[2]
+// `[3]`            | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | unused     | timeBuffer[3] | unused         | irregularity[3]
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+***NOTES IN UTIL.cpp
+
+**updateKernel();
+                // assumes:
+                // - m_bufferKnl[1] + loaded_bytes_kernel[1] already contain the "new" kernel loaded from usb
+                // - m_bufferKnl[0] + loaded_bytes_kernel[0] already contain the fallback kernel loaded from sd ( the running kernel )
+                // - filesystem is already mounted by caller
+
+
+** buttonPing():
+
+                #define CTRL_PIN    12 ! EXAMPLES !
+                #define SW_PIN_A    13
+                #define SW_PIN_B    6
+            Initialize
+                GPIO_SetAlt(CTRL_PIN,  1, GPIO_PULL_OFF);
+                GPIO_SetAlt(SW_PIN_A, 0, GPIO_PULL_UP);
+                GPIO_SetAlt(SW_PIN_B, 0, GPIO_PULL_UP);
+            Run
+                set_pot_routing(false);
+                set_pot_routing(true);
+
+                buttonPing(0, SW_PIN_A);
+                buttonPing(1, SW_PIN_B);
+
+the next big thing after i fixed the m_bufferLog / m_logBuffer issues!!! 
+
+void            CKernel::button_consumer            (   int                 p_btn_id ) // this is where the magic happens: we need to set the states of menu layer, menu, we need to use one button for bpm input and so on 
+{
+/*
+                if (g_buttons_states[p_btn_id][BTN_SINGLE]) counter += 1;
+                if (g_buttons_states[p_btn_id][BTN_DOUBLE]) counter -= 1;
+
+                if (g_buttons_states[p_btn_id][BTN_HOLD_TICK] == 1)
+                    counter += 5;
+
+                if (g_buttons_states[p_btn_id][BTN_HOLD_TICK] =10)
+                    longhold += 1;
+                if (g_buttons_states[p_btn_id][BTN_HOLD_TICK] =20)
+                    longhold += 2;
+*/
+}
+
+
+/*                        
+                    for (size_t idx = 0; idx < i; idx++)
+                        {
+                        size_t end_off = (idx + 1 < i) ? sps_off[file_index][idx + 1] : size;
+
+                        h->nal_block_address[file_index][idx] = (void*)(data + sps_off[file_index][idx]);
+                        h->nal_block_offset[file_index][idx]  = (size_t)((data + sps_off[file_index][idx]) - (u8*)h->block_base);
+                        h->nal_block_length[file_index][idx]  = end_off - sps_off[file_index][idx];
+                        h->idr_offset[file_index]         = idr_off[file_index][idx] - sps_off[file_index][idx];
+
+#ifdef __LOG_PARSER__
+                        storeLogHex(   MY_BFR, MY_IDX,
+                                    "67+68+65", X_VAL, 
+                                    "a", (u32)h->nal_block_address[file_index][idx], 
+                                    "l", (u32)h->nal_block_length[file_index][idx], 
+                                    "o", (u32)h->nal_block_offset[file_index][idx]);
+#endif
+                  
+                        }
+*/
+
+// code_vc_vcsm.cpp:
+
+/*
+// i thought i might need to alloc my memory by via vpu so i introduced allocMemoryVCSM 
+// and here are the debug level members but in the end everything worked out:)
+// anyway - i keep them here for now, who knows!
+
+public:
+        VCSM_Alloc_MEM_Msg              m_allocTxVCSM_TestA;
+        VCSM_Alloc_MEM_Reply            m_allocRxVCSM_TestA;
+
+        VCSM_Alloc_MEM_Msg              m_allocTxVCSM_TestB;
+        VCSM_Alloc_MEM_Reply            m_allocRxVCSM_TestB;
+
+        VCSM_Alloc_MEM_Msg              m_allocTxVCSM_TestC;
+        VCSM_Alloc_MEM_Reply            m_allocRxVCSM_TestC;
+
+        u32                             m_test_buffer_handle_a;
+        u32                             m_test_buffer_pointer_a;
+
+        u32                             m_test_buffer_handle_b;
+        u32                             m_test_buffer_pointer_b;
+
+        u32                             m_test_buffer_handle_c;
+        u32                             m_test_buffer_pointer_c;
+*/

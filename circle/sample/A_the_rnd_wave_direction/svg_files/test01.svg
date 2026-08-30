@@ -1,0 +1,473 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="1024"
+    height="256"
+    viewBox="0 0 1024 256">
+
+    <rect
+        id="edit_background"
+        width="1024"
+        height="256"
+        fill="white"/>
+
+    <g
+        id="drawing_style"
+        stroke="rgb(0, 0, 0)"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        
+
+<!-- base: top-left -->
+<path
+    id="TARGET_MODE_TL"
+    
+    stroke-width="1"         
+    fill="#000000"
+    d="
+        M 147 131
+        H 171
+        A 16 16 0 0 1 186.77 144.29
+        A 48 48 0 0 0 144.29 186.77
+        A 16 16 0 0 1 131 171
+        V 147
+        A 16 16 0 0 1 147 131
+        Z
+    "/>
+
+<!-- mirror X: top-right -->
+<path
+    id="TARGET_MODE_TR"
+    stroke-width="1"     
+    fill="#000000"
+    transform="translate(384 0) scale(-1 1)"
+    d="
+        M 147 131
+        H 171
+        A 16 16 0 0 1 186.77 144.29
+        A 48 48 0 0 0 144.29 186.77
+        A 16 16 0 0 1 131 171
+        V 147
+        A 16 16 0 0 1 147 131
+        Z
+    "/>
+
+<!-- mirror Y: bottom-left -->
+<path
+    id="TARGET_MODE_BL"
+    stroke-width="1"     
+    fill="#000000"
+    transform="translate(0 384) scale(1 -1)"
+    d="
+        M 147 131
+        H 171
+        A 16 16 0 0 1 186.77 144.29
+        A 48 48 0 0 0 144.29 186.77
+        A 16 16 0 0 1 131 171
+        V 147
+        A 16 16 0 0 1 147 131
+        Z
+    "/>
+
+<!-- mirror X+Y: bottom-right -->
+<path
+    id="TARGET_MODE_BR"
+    stroke-width="1"     
+    fill="#000000"
+    transform="translate(384 384) scale(-1 -1)"
+    d="
+        M 147 131
+        H 171
+        A 16 16 0 0 1 186.77 144.29
+        A 48 48 0 0 0 144.29 186.77
+        A 16 16 0 0 1 131 171
+        V 147
+        A 16 16 0 0 1 147 131
+        Z
+    "/>
+
+
+        <rect
+            id="mode_quarter_top_right"
+            x="325" y="131"
+            width="56" height="56"
+            rx="16" ry="16"
+            fill="rgb(216, 216, 216)"/>
+
+        <rect
+            id="mode_quarter_bottom_left"
+            x="387" y="197"
+            width="56" height="56"
+            rx="16" ry="16"
+            fill="rgb(216, 216, 216)"/>
+
+        <rect
+            id="mode_quarter_bottom_right"
+            x="581" y="197"
+            width="56" height="56"
+            rx="16" ry="16"
+            fill="rgb(216, 216, 216)"/>
+<!-- the mode circle -->
+        <circle
+            id="ADC"
+            cx="64" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>
+<!-- the coordinate system -->
+        <line
+            id="ADC_coord_x_axis"
+
+            x1="16" y1="98"
+            x2="112" y2="98"
+            stroke-width="1"/>
+
+        <line
+            id="ADC_coord_y_axis"
+
+            x1="30" y1="16"
+            x2="30" y2="112"
+            stroke-width="1"/>
+
+        <circle
+            id="TRG"
+            cx="192" cy="64"
+            r="44"
+            fill="rgb(216, 216, 216)"/>
+
+        <circle
+            id="TRG"
+    stroke-width="1"            
+            cx="192" cy="192"
+            r="44"
+            fill="#000000"/>            
+<!-- the coordinate system -->
+        <line
+            id="TRG_coord_x_axis"
+
+            x1="144" y1="98"
+            x2="240" y2="98"
+            stroke-width="1"/>
+
+        <line
+            id="TRG_coord_x_axis"
+
+            x1="144" y1="64"
+            x2="240" y2="64"
+            stroke-width="1"/>
+        <line
+            id="TRG_coord_x_axis"
+
+            x1="144" y1="48"
+            x2="240" y2="48"
+            stroke-width="1"/>            
+
+        <line
+            id="coord_y_axis"
+
+            x1="158" y1="16"
+            x2="158" y2="112"
+            stroke-width="1"/>            
+        <circle
+            id="BPM"
+            cx="320" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>
+<!-- the coordinate system -->
+        <line
+            id="BPM_coord_x_axis"
+
+            x1="272" y1="98"
+            x2="368" y2="98"
+            stroke-width="1"/>
+
+        <line
+            id="BPM_coord_y_axis"
+
+            x1="286" y1="16"
+            x2="286" y2="112"
+            stroke-width="1"/>                   
+        <line
+            id="BPM_coord_y_axis"
+
+            x1="302" y1="16"
+            x2="302" y2="112"
+            stroke-width="1"/>    
+        <line
+            id="BPM_coord_y_axis"
+
+            x1="318" y1="16"
+            x2="318" y2="112"
+            stroke-width="1"/>    
+        <line
+            id="BPM_coord_y_axis"
+
+            x1="334" y1="16"
+            x2="334" y2="112"
+            stroke-width="1"/>    
+        <line
+            id="BPM_coord_y_axis"
+
+            x1="350" y1="16"
+            x2="350" y2="112"
+            stroke-width="1"/>    
+
+
+        <circle
+            id="LF0"
+            cx="448" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>   
+<!-- the coordinate system -->
+        <line
+            id="LF0_coord_x_axis"
+
+            x1="400" y1="98"
+            x2="496" y2="98"
+            stroke-width="1"/>
+
+        <line
+            id="LF0_coord_y_axis"
+
+            x1="414" y1="16"
+            x2="414" y2="112"
+            stroke-width="1"/>  
+
+        <circle
+            id="LF1"
+            cx="576" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>
+<!-- the coordinate system -->
+        <line
+            id="LF1_coord_x_axis"
+
+            x1="528" y1="98"
+            x2="624" y2="98"
+            stroke-width="1"/>
+
+        <line
+            id="LF1_coord_y_axis"
+
+            x1="542" y1="16"
+            x2="542" y2="112"
+            stroke-width="1"/>              
+<!-- the audio modes -->         
+        <circle
+            id="B0L"
+            cx="704" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>
+<!-- the coordinate system -->
+        <line
+            id="B0L_coord_x_axis"
+
+            x1="656" y1="98"
+            x2="752" y2="98"
+            stroke-width="1"/>
+        <line
+            id="B0L_coord_y_axis"
+
+            x1="670" y1="16"
+            x2="670" y2="112"
+            stroke-width="1"/>                
+        <circle
+            id="B0H"
+            cx="832" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>
+<!-- the coordinate system -->
+        <line
+            id="B0H_coord_x_axis"
+
+            x1="784" y1="98"
+            x2="880" y2="98"
+            stroke-width="1"/>
+        <line
+            id="B0H_coord_y_axis"
+
+            x1="798" y1="16"
+            x2="798" y2="112"
+            stroke-width="1"/>                        
+        <circle
+            id="B1L"
+            cx="960" cy="64"
+            r="48"
+            fill="rgb(216, 216, 216)"/>
+<!-- the coordinate system -->
+        <line
+            id="B1L_coord_x_axis"
+
+            x1="912" y1="98"
+            x2="1008" y2="98"
+            stroke-width="1"/>
+        <line
+            id="B1L_coord_y_axis"
+
+            x1="926" y1="16"
+            x2="926" y2="112"
+            stroke-width="1"/>    
+        <circle
+            id="B1H"
+            cx="64" cy="192"
+            r="48"
+            fill="rgb(216, 216, 216)"/>  
+<!-- the coordinate system -->
+        <line
+            id="B1H_coord_x_axis"
+
+            x1="16" y1="226"
+            x2="112" y2="226"
+            stroke-width="1"/>
+
+        <line
+            id="B1H_coord_y_axis"
+
+            x1="30" y1="144"
+            x2="30" y2="240"
+            stroke-width="1"/>
+            
+        <line 
+            id="coord_z_axis"
+visibility="hidden"            
+            x1="112" y1="16" 
+            x2="30" y2="98" 
+            stroke-width="1"/>            
+<!-- the source modes -->
+
+<!-- the target modes -->
+
+<!-- the waveforms -->
+        <polyline
+            id="WAVE_SAW"
+visibility="hidden"
+            fill="none"
+            points="
+                16,64
+                48,40
+                80,88
+                112,64
+            "/>
+
+        <polyline
+            id="saw_polyline"
+visibility="hidden"
+            fill="none"
+            points="
+                16,80
+                64,48
+                64,80
+                112,48
+            "/>
+
+        <polyline
+            id="reverse_saw_polyline"
+visibility="hidden"
+            fill="none"
+            points="
+                16,32
+                16,64
+                64,32
+                64,64
+                114,32
+            "/>
+     
+            <polyline
+            id="saw"
+visibility="hidden"
+            fill="none"
+            points="
+                16,64
+                64,40
+                64,88
+                112,64
+            "/>
+
+        <path
+            id="WAVE_SINE"
+visibility="hidden"
+            fill="none"
+            d="
+                M 16 64
+                C 32 40, 48 40, 64 64
+                C 80 88, 96 88, 112 64
+            "/>
+
+        <polyline
+            id="mode_TRG_polyline"
+       
+            fill="none"
+            points="
+                16,64
+                32,64
+                32,40
+                64,40
+                64,80
+                80,94
+                80,48
+                98,48
+                98,64
+                112,64
+            "/>
+
+<polyline
+    id="mode_TRG_polyline"
+    fill="none"
+    stroke="#ffffff"
+    points="
+        144,192
+        160,192
+        160,176
+        192,168
+        192,208
+        208,214
+        208,176
+        226,179
+        226,192
+        240,192
+    "/>
+
+<text
+    id="mode_quarter_top_left_text"
+    x="148" y="146"
+    font-family="monospace"
+    font-size="15"
+    font-weight="bold"    
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="#ffffff"
+    stroke="none">TEX</text>
+
+<text
+    id="mode_quarter_top_right_text"
+    x="361" y="151"
+    font-family="monospace"
+    font-size="10"
+    font-weight="bold"    
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="rgb(0, 0, 0)"
+    stroke="none">CLK</text>
+
+<text
+    id="mode_quarter_bottom_left_text"
+    x="407" y="233"
+    font-family="monospace"
+    font-size="10"
+    font-weight="bold"    
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="rgb(0, 0, 0)"
+    stroke="none">VID</text>
+
+<text
+    id="mode_quarter_bottom_right_text"
+    x="617" y="233"
+    font-family="monospace"
+    font-size="10"
+    font-weight="bold"    
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="rgb(0, 0, 0)"
+    stroke="none">FRM</text>
+    </g>
+</svg>

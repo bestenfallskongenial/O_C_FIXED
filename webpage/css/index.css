@@ -1,0 +1,294 @@
+/* /css/index.css */
+
+/* =========================
+   CONFIG (change here only)
+   ========================= */
+:root {
+	/* asymmetric carousel margins */
+	--side-left: 20%;
+	--side-right: 2%;
+	--top: 2%;
+	--bottom: 2%;
+
+	/* button inset as % of CAROUSEL WIDTH */
+	--btn-inset: 1%;
+	--btn-opacity: 0.85;
+
+	/* HEADER OVERLAY INSETS (RELATIVE TO TILE) */
+	--header-top: 2%;
+	--header-bottom: 12%;
+
+	/* text overlay insets RELATIVE TO TILE */
+	--text-top: 5%;
+	--text-side: 2%;
+	--text-bottom: 2%;
+
+
+
+	/* OVERLAY (LEFT SPACE, PERCENT-BASED, NO CENTERING) */
+	--overlay-top: var(--top);
+	--overlay-left: var(--side-right);
+	--overlay-width: calc(var(--side-left) - var(--side-right) - var(--side-right));
+	--overlay-aspect: 3 / 4;
+	--overlay-opacity: 0.8;
+	--overlay-rotation: 0deg;
+
+	/* SOCIAL OVERLAY */
+	--social-bottom: calc(var(--bottom) + var(--bottom));
+	--social-left:   var(--overlay-left);
+	--social-width:  var(--overlay-width);
+	--social-gap:    8%;
+	--social-opacity: 0.9;
+}
+
+/* baseline (match render.css) */
+* { box-sizing: border-box; }
+
+html { height: 100%; }
+body {
+	background-color: #000000;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+/* full-page background */
+#index-bg {
+	position: fixed;
+	inset: 0;
+	background-image: url("/assets/images/background.jpg");
+	background-size: cover;
+	background-position: center;
+	z-index: -1;
+}
+
+/* =========================
+   CAROUSEL BOUNDS
+   ========================= */
+#index-main {
+	position: absolute;
+	left: var(--side-left);
+	right: var(--side-right);
+	top: var(--top);
+	bottom: var(--bottom);
+	z-index: 1;
+	display: flex;
+}
+
+/* carousel container */
+#index-carousel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 8px;
+}
+
+/* =========================
+   GLOBAL OVERLAY IMAGE
+   ========================= */
+#index-overlay {
+	position: fixed;
+	top: var(--overlay-top);
+	bottom: var(--bottom);
+	left: var(--overlay-left);
+	width: var(--overlay-width);
+	aspect-ratio: var(--overlay-aspect);
+	height: auto;
+	transform-origin: top left;
+	transform: rotate(var(--overlay-rotation));
+	opacity: var(--overlay-opacity);
+	pointer-events: none;
+	z-index: 10;
+}
+
+/* =========================
+   CONTROLS OVERLAY
+   ========================= */
+.index-controls {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+/* buttons */
+#indexPrev,
+#indexNext {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: auto;
+	padding: 10px 14px;
+	border: 0;
+	border-radius: 5px;
+	margin: 0;
+	color: #FFFFFF;
+	background-color: #000000;
+	font-family: monospace;
+	font-size: 14px;
+	cursor: pointer;
+	text-transform: uppercase;
+	opacity: var(--btn-opacity);
+	z-index: 10;
+}
+
+#indexPrev:hover,
+#indexNext:hover {
+	background-color: #FFFFFF;
+	color: #000000;
+	opacity: 1;
+}
+
+#indexPrev { left: var(--btn-inset); }
+#indexNext { right: var(--btn-inset); }
+
+/* =========================
+   TRACK + TILES
+   ========================= */
+#index-track {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 1fr;
+	gap: 12px;
+	width: 100%;
+	height: 100%;
+}
+
+.index-tile {
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+	border-radius: 20px;
+	background-size: cover;
+	background-position: center;
+	opacity: 0.95;
+	transition: transform 0.25s ease;
+	will-change: transform;
+}
+
+.index-tile:hover {
+	transform: scale(1.02);
+	background-color: #222;
+}
+
+/* =========================
+   TILE HEADER (STATIC, NON-SCROLLING)
+   ========================= */
+.tile-header {
+	position: absolute;
+	top:    var(--header-top);
+	bottom: var(--header-bottom);
+	left:   var(--text-side);
+	right:  var(--text-side);
+	overflow: hidden;
+	pointer-events: auto;
+}
+
+/* =========================
+   TEXT OVERLAY
+   ========================= */
+.tile-overlay {
+	position: absolute;
+	top:    var(--text-top);
+	bottom: var(--text-bottom);
+	left:   var(--text-side);
+	right:  var(--text-side);
+
+	font-family: monospace;
+	font-size:   20px;
+	font-style:  normal;
+	font-weight: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	word-spacing: normal;
+	text-transform: none;
+	text-align: center;
+
+	color: #ffffff;
+	opacity: 0.85;       /* control strength here */
+
+	text-shadow: none;
+
+	user-select: auto;
+	pointer-events: auto;
+
+	white-space: pre-wrap;
+	word-break: normal;
+	text-overflow: clip;
+
+	padding: 10px;
+	overflow: hidden;
+}
+
+/* =========================
+   INNER SCROLL CONTAINER
+   ========================= */
+.tile-text-scroll {
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	scrollbar-width: none;
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		rgba(0,0,0,1) 0%,
+		rgba(0,0,0,1) 85%,
+		rgba(0,0,0,0) 100%
+	);
+	mask-image: linear-gradient(
+		to bottom,
+		rgba(0,0,0,1) 0%,
+		rgba(0,0,0,1) 85%,
+		rgba(0,0,0,0) 100%
+	);
+}
+
+.tile-text-scroll::-webkit-scrollbar {
+	display: none;
+}
+
+.tile-overlay p {
+	margin: 0;
+	line-height: 1.2;
+	white-space: pre-wrap;
+}
+
+/* =========================
+   SOCIAL MEDIA OVERLAY
+   ========================= */
+#index-social {
+	position: fixed;
+	left: var(--social-left);
+	bottom: var(--social-bottom);
+	width: var(--social-width);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--social-gap);
+	pointer-events: auto;
+	z-index: 11;
+}
+
+#index-social a {
+	display: block;
+	flex: 1 1 0;
+	aspect-ratio: 1 / 1;
+	opacity: var(--social-opacity);
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#index-social a:hover {
+	opacity: 1;
+	transform: scale(1.05);
+}
+
+#index-social img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	pointer-events: none;
+}

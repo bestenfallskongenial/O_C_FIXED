@@ -1,0 +1,138 @@
+root@WIN-HS0BFGPCN4F:/home/bestenfalls/oculus_mendax/circle/sample/01-oculus_mendax# make
+  CPP   main.o
+In file included from kernel.h:52,
+                 from main.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   kernel.o
+In file included from kernel.h:52,
+                 from kernel.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   display.o
+In file included from kernel.h:52,
+                 from display.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   filesystem.o
+In file included from kernel.h:52,
+                 from filesystem.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   gfx.o
+In file included from kernel.h:52,
+                 from gfx.cpp:3:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+gfx.cpp: In member function 'void CKernel::gfx_init_OGL(CUBE_STATE_T*)':
+gfx.cpp:196:25: warning: variable 'success' set but not used [-Wunused-but-set-variable]
+  196 |                 int32_t success = 0;
+      |                         ^~~~~~~
+gfx.cpp:197:28: warning: variable 'result' set but not used [-Wunused-but-set-variable]
+  197 |                 EGLBoolean result;
+      |                            ^~~~~~
+  CPP   global.o
+In file included from kernel.h:52,
+                 from global.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   io.o
+In file included from kernel.h:52,
+                 from io.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+io.cpp: In member function 'void CKernel::io_read_ADC()':
+io.cpp:22:29: warning: unused variable 'maxA' [-Wunused-variable]
+   22 |                 const float maxA = 1023.0;
+      |                             ^~~~
+  CPP   LED.o
+In file included from kernel.h:52,
+                 from LED.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   memory.o
+In file included from kernel.h:52,
+                 from memory.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   menu.o
+In file included from kernel.h:52,
+                 from menu.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  CPP   util.o
+In file included from kernel.h:52,
+                 from util.cpp:1:
+../../addon/vc4/h264_parser/vc_h264_parser.h:30: warning: "MMAL_MAX_DEBUG_FILE_LENGTH" redefined
+   30 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 64)
+      |
+In file included from ../../addon/vc4/h264_decoder/VersionC/vc_h264_decoder.h:10,
+                 from kernel.h:51:
+../../addon/vc4/h264_decoder/VersionC/h264_decoder_defs.h:42: note: this is the location of the previous definition
+   42 | #define MMAL_MAX_DEBUG_FILE_LENGTH (1024 * 16)  // was 64
+      |
+  LD    kernel.elf
+  DUMP  kernel.lst
+  COPY  kernel.img
+  WC    kernel.img => 571308
+root@WIN-HS0BFGPCN4F:/home/bestenfalls/oculus_mendax/circle/sample/01-oculus_mendax#

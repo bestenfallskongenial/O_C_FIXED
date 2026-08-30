@@ -1,0 +1,102 @@
+input:
+
+adc_raw_value
+adc_int_value
+adc_float_vaue
+
+mapped:
+
+output_int_value
+output_float_value
+
+menu
+
+mode_storage_buffer
+
+we have input and output modes. input means we process real values from the adc, output means we  use internal values 
+
+adc - will read the input at the adc, attenuates it, sends it to group a ( shader ) or b ( system )
+bpm - will process the tapped in bpm value to randomize the value send to a / b 
+trg - will check the adc for a thresshold and if triggered will randomize the value send to a / b
+lfo - will use the bpm and a wavetable and wave selector and multiplier to read an output value for a / b
+aud - will analyse ( windowed average ) the adc by applying a sensitivity to create 3-4 bands whom i can than map to a / b
+    here some "magic" / questions: 
+    - shall i enable just two bands each possible input?
+    - shall i enable 4 in total to map them to my channels, like 3 for a and one for b or 2 a and 2 b
+    - shall i enable the audio modes only for the shader ( bank a )  or also b?
+    - shall i use an autodetect instead of assinging the audio mode and block every other adc channel like i do now?
+    - shall i than rather assign the band output rather than hard wire the bands to the channels
+
+tex - is for now an extramode where i can choose the displayed texture in my 8 tex bank rather than choosing them from the glsl code ( tex array ),
+      this is evolved from the need to compose many textures in one shader or use a single shader and chose it directly with and input. 
+frm - is a mode that enables the user to map the position in time of the glsl funcion via adc and not as usual by an internal continiuos time ( loop )
+clk - is supposed to assign one of the b adc´s as an sense/trigger input for external clock. the bpm calculation machine uses for now
+      the last actual source ( either the tab in or the clock in ) as base for the bpm driven modes
+vid - will be hopefully the new mode: we will use adc´s to choose between videos ( 0 to 7 ) and frames ( 0 - 1023 or multibles )
+      but we need to figure out how we assign the inputs and on what banks
+
+menu default a:
+
+#define CH0_MODE 0 // store the possible modes for each channel 0-7 ( adc, trg, bpm,  )
+#define CH1_MODE 1
+#define CH2_MODE 2
+#define CH3_MODE 3
+
+menu default b:
+
+#define CH4_MODE 4
+#define CH5_MODE 5
+#define CH6_MODE 6
+#define CH7_MODE 7
+
+menu lfo a:
+
+#define LF1_WAVE 8  // store the wave and multiplier of the two lfo´s
+#define LF2_WAVE 9
+#define LF1_MULT 10
+#define LF2_MULT 11
+
+
+#define AUD_CH_A    12 < input channel can be -1 ( not selected ) ?? is autodetected ??
+#define AUD_SEN_A   13 need to be changed in "menu sens"
+#define AUD_CH_B    14 < input channel can be -1 ( not selected )?? is autodetected ??
+#define AUD_SEN_B   15 need to be changed in "menu sens"
+
+#define AUD_BAND_1_A    stores the channel where the band is assigned ? can be -1 ( not selected )
+#define AUD_BAND_2_A
+#define AUD_BAND_3_A
+#define AUD_BAND_4_A
+
+#define AUD_BAND_1_B
+#define AUD_BAND_2_B
+#define AUD_BAND_3_B
+#define AUD_BAND_4_B
+
+#define ATTENUATION ??
+
+
+#define FRM_MODE    16  flag for frame mode / internal clock mode
+#define FRM_SEL     17  maybe we store also the position we start at or we revolve around?
+#define TEX_MODE    18  flag
+#define TEX_SEL     19
+#define CLK_MODE    20 flag ( if we hardwire the input for clk ) or channel ( if assigneble )
+#define CLK_RATE    21 
+#define VID_MODE    22 
+#define VID_SEL     23
+
+question: how i organise the table that defines the possible modes for each input channel when i also have flags that will change the possible modes for a channel
+
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+#define DMY_MODE 15
+
+likely an enum?
+

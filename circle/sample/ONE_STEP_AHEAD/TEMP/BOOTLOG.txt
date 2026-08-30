@@ -1,0 +1,602 @@
+MEM BOOT START TOTAL 0x18000000 LOW 0x176FDD80
+MEM BOOT START HIGH 0x00000000 ANY 0x176FDD80
+>: 0x0021AFB8 m_Interrupt.Initialize()                DONE
+>: 0x0030F26F m_Timer.Initialize()                    DONE
+>: 0x0030F271 SetRawSink(CKernel::LoggerSink, this)   DONE
+>: 0x0030F273 m_Logger.Initialize(0)                  DONE
+>: 0x0030FB0F frameBufferInit()                       DONE
+
+Machine Model   Raspberry Pi Zero
+SoC Name        BCM2835 Model Major     0x00000001 Model Revision  0x00000004
+
+RAM Size     MB 0x00000200
+
+CPU Speed Mode  0x00000000
+SoC Max Temp    0x0000003C
+
+Clock CORE  MHz 0x000000FA Clock ARM   MHz 0x000002BC Clock EMMC  MHz 0x000000C8 Clock EMMC2 MHz 0x00000064
+Clock UART  MHz 0x00000030
+
+DMA Channel     0x00000006
+
+USB Delay       0x00000000 USB FullSpeed   0x00000000
+
+CF Screen X     0x00000000 CF Screen Y     0x00000000
+FB Screen X     0x00000320 FB Screen Y     0x00000258
+gE Screen X     0x00000320 gE Screen Y     0x00000258
+
+>: 0x00366694 Hardware Info Log                       DONE
+emmc: Found a valid version 4.xx SD card
+>: 0x003ECA5E m_EMMC.Initialize()                     DONE
+usbdev0-1: Device ven13fe-4100 found (HS)
+usbdev0-1: Product: Philips USB Flash Drive
+usbdev0-1: Interface int8-6-50 found
+usbdev0-1: Using device/interface int8-6-50
+umsd: Capacity is 3700 MByte
+dwroot: Device configured
+>: 0x005D2C72 m_USBHCI.Initialize()                   DONE
+>: 0x005FA330 m_USBHCI.UpdatePlugAndPlay()            DONE
+ALLOC-DMA slice [ 0x00000000 ] ptr 0x00507000 size  0x00800000
+ALLOC-DMA slice [ 0x00000001 ] ptr 0x00D07000 size  0x00800000
+ALLOC-DMA slice [ 0x00000002 ] ptr 0x01507000 size  0x00800000
+ALLOC-DMA slice [ 0x00000003 ] ptr 0x01D07000 size  0x00800000
+ALLOC-DMA slice [ 0x00000004 ] ptr 0x02507000 size  0x00800000
+ALLOC-DMA slice [ 0x00000005 ] ptr 0x02D07000 size  0x00800000
+ALLOC-DMA slice [ 0x00000006 ] ptr 0x03507000 size  0x00800000
+ALLOC-DMA slice [ 0x00000007 ] ptr 0x03D07000 size  0x00800000
+
+1/100 sec 0x000001D2 ALLOC-DMA raw 0x00506740 block 0x00507000 total 0x04000000
+ALLOC-DMA slice [ 0x00000000 ] ptr 0x04508000 size  0x00100000
+
+1/100 sec 0x000001EB ALLOC-DMA raw 0x04507760 block 0x04508000 total 0x00100000
+ALLOC-DMA slice [ 0x00000000 ] ptr 0x04609000 size  0x00100000
+
+1/100 sec 0x00000204 ALLOC-DMA raw 0x04608780 block 0x04609000 total 0x00100000
+ALLOC-DMA slice [ 0x00000000 ] ptr 0x0470A000 size  0x00400000
+
+1/100 sec 0x0000021E ALLOC-DMA raw 0x047097A0 block 0x0470A000 total 0x00400000
+ALLOC-DMA slice [ 0x00000000 ] ptr 0x04B0B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000001 ] ptr 0x04F0B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000002 ] ptr 0x0530B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000003 ] ptr 0x0570B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000004 ] ptr 0x05B0B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000005 ] ptr 0x05F0B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000006 ] ptr 0x0630B000 size  0x00400000
+ALLOC-DMA slice [ 0x00000007 ] ptr 0x0670B000 size  0x00400000
+
+1/100 sec 0x00000267 ALLOC-DMA raw 0x04B0A820 block 0x04B0B000 total 0x02000000
+>: 0x0081E446 InitDMA Buffer                          DONE
+MEM AFTER DMA ALLOC TOTAL 0x18000000 LOW 0x110F4780
+MEM AFTER DMA ALLOC HIGH 0x00000000 ANY 0x110F4780
+heaplow: malloc(%lu): 64 blocks (max 92)
+heaplow: malloc(%lu): 1024 blocks (max 8)
+heaplow: malloc(%lu): 4096 blocks (max 2)
+heaplow: malloc(%lu): 16384 blocks (max 0)
+heaplow: malloc(%lu): 65536 blocks (max 0)
+heaplow: malloc(%lu): 262144 blocks (max 0)
+heaplow: malloc(%lu): 524288 blocks (max 0)
+
+ALLOC-MEM base    0x06B0B8A0  count 0x00000002 size  0x00200000
+ALLOC-MEM slice [ 0x00000000 ] ptr  0x06B0B900
+ALLOC-MEM slice [ 0x00000001 ] ptr  0x06D0B920
+1/100 sec 0x000002AE ALLOC-MEM done 0x06B0B8A0 count 0x00000002 size 0x00200000
+
+ALLOC-MEM base    0x06F0B940  count 0x00000010 size  0x00020000
+ALLOC-MEM slice [ 0x00000000 ] ptr  0x06F0B9A0
+ALLOC-MEM slice [ 0x00000001 ] ptr  0x06F4B9C0
+ALLOC-MEM slice [ 0x00000002 ] ptr  0x06F8B9E0
+ALLOC-MEM slice [ 0x00000003 ] ptr  0x06FCBA00
+ALLOC-MEM slice [ 0x00000004 ] ptr  0x0700BA20
+ALLOC-MEM slice [ 0x00000005 ] ptr  0x0704BA40
+ALLOC-MEM slice [ 0x00000006 ] ptr  0x0708BA60
+ALLOC-MEM slice [ 0x00000007 ] ptr  0x070CBA80
+ALLOC-MEM slice [ 0x00000008 ] ptr  0x0710BAA0
+ALLOC-MEM slice [ 0x00000009 ] ptr  0x0714BAC0
+ALLOC-MEM slice [ 0x0000000A ] ptr  0x0718BAE0
+ALLOC-MEM slice [ 0x0000000B ] ptr  0x071CBB00
+ALLOC-MEM slice [ 0x0000000C ] ptr  0x0720BB20
+ALLOC-MEM slice [ 0x0000000D ] ptr  0x0724BB40
+ALLOC-MEM slice [ 0x0000000E ] ptr  0x0728BB60
+ALLOC-MEM slice [ 0x0000000F ] ptr  0x072CBB80
+1/100 sec 0x00000317 ALLOC-MEM done 0x06F0B940 count 0x00000010 size 0x00020000
+
+ALLOC-MEM base    0x0730BBA0  count 0x00000001 size  0x00008000
+ALLOC-MEM slice [ 0x00000000 ] ptr  0x0730BC00
+1/100 sec 0x00000335 ALLOC-MEM done 0x0730BBA0 count 0x00000001 size 0x00008000
+
+ALLOC-MEM base    0x0731BC20  count 0x00000001 size  0x00008000
+ALLOC-MEM slice [ 0x00000000 ] ptr  0x0731BC80
+1/100 sec 0x00000353 ALLOC-MEM done 0x0731BC20 count 0x00000001 size 0x00008000
+
+ALLOC-MEM base    0x005062C0  count 0x00000021 size  0x00008000
+ALLOC-MEM slice [ 0x00000000 ] ptr  0x0732BCA0
+ALLOC-MEM slice [ 0x00000001 ] ptr  0x0733BCC0
+ALLOC-MEM slice [ 0x00000002 ] ptr  0x0734BCE0
+ALLOC-MEM slice [ 0x00000003 ] ptr  0x0735BD00
+ALLOC-MEM slice [ 0x00000004 ] ptr  0x0736BD20
+ALLOC-MEM slice [ 0x00000005 ] ptr  0x0737BD40
+ALLOC-MEM slice [ 0x00000006 ] ptr  0x0738BD60
+ALLOC-MEM slice [ 0x00000007 ] ptr  0x0739BD80
+ALLOC-MEM slice [ 0x00000008 ] ptr  0x073ABDA0
+ALLOC-MEM slice [ 0x00000009 ] ptr  0x073BBDC0
+ALLOC-MEM slice [ 0x0000000A ] ptr  0x073CBDE0
+ALLOC-MEM slice [ 0x0000000B ] ptr  0x073DBE00
+ALLOC-MEM slice [ 0x0000000C ] ptr  0x073EBE20
+ALLOC-MEM slice [ 0x0000000D ] ptr  0x073FBE40
+ALLOC-MEM slice [ 0x0000000E ] ptr  0x0740BE60
+ALLOC-MEM slice [ 0x0000000F ] ptr  0x0741BE80
+ALLOC-MEM slice [ 0x00000010 ] ptr  0x0742BEA0
+ALLOC-MEM slice [ 0x00000011 ] ptr  0x0743BEC0
+ALLOC-MEM slice [ 0x00000012 ] ptr  0x0744BEE0
+ALLOC-MEM slice [ 0x00000013 ] ptr  0x0745BF00
+ALLOC-MEM slice [ 0x00000014 ] ptr  0x0746BF20
+ALLOC-MEM slice [ 0x00000015 ] ptr  0x0747BF40
+ALLOC-MEM slice [ 0x00000016 ] ptr  0x0748BF60
+ALLOC-MEM slice [ 0x00000017 ] ptr  0x0749BF80
+ALLOC-MEM slice [ 0x00000018 ] ptr  0x074ABFA0
+ALLOC-MEM slice [ 0x00000019 ] ptr  0x074BBFC0
+ALLOC-MEM slice [ 0x0000001A ] ptr  0x074CBFE0
+ALLOC-MEM slice [ 0x0000001B ] ptr  0x074DC000
+ALLOC-MEM slice [ 0x0000001C ] ptr  0x074EC020
+ALLOC-MEM slice [ 0x0000001D ] ptr  0x074FC040
+ALLOC-MEM slice [ 0x0000001E ] ptr  0x0750C060
+ALLOC-MEM slice [ 0x0000001F ] ptr  0x0751C080
+ALLOC-MEM slice [ 0x00000020 ] ptr  0x0752C0A0
+1/100 sec 0x00000410 ALLOC-MEM done 0x005062C0 count 0x00000021 size 0x00008000
+>: 0x00C2B278 InitMEM Buffer                          DONE
+MEM AFTER MEM ALLOC TOTAL 0x18000000 LOW 0x106C3F60
+MEM AFTER MEM ALLOC HIGH 0x00000000 ANY 0x106C3F60
+heaplow: malloc(%lu): 64 blocks (max 96)
+heaplow: malloc(%lu): 1024 blocks (max 9)
+heaplow: malloc(%lu): 4096 blocks (max 2)
+heaplow: malloc(%lu): 16384 blocks (max 0)
+heaplow: malloc(%lu): 65536 blocks (max 35)
+heaplow: malloc(%lu): 262144 blocks (max 16)
+heaplow: malloc(%lu): 524288 blocks (max 0)
+printk: vchiq: vchiq_init_state: slot_zero = 0x00480000, is_master = 0
+>: 0x00C505D9 m_VCHIQ.Initialize()                    DONE
+>: 0x00C8EB3F bcm_host_init()                         DONE
+VCHI State Instance 0x0756D560 VCHI State Connection 0x00000000
+m_VCHIInstance 0x0756D560
+m_Connection 0x00000000
+>: 0x00CC0486 getStateVCHI()                          DONE
+>: 0x00CCC983 wrapperInitVCSMstruct()                 DONE
+MEM AFTER VCSM STRUCT INIT TOTAL 0x18000000 LOW 0x1066FD20
+MEM AFTER VCSM STRUCT INIT HIGH 0x00000000 ANY 0x1066FD20
+heaplow: malloc(%lu): 64 blocks (max 128)
+heaplow: malloc(%lu): 1024 blocks (max 22)
+heaplow: malloc(%lu): 4096 blocks (max 2)
+heaplow: malloc(%lu): 16384 blocks (max 0)
+heaplow: malloc(%lu): 65536 blocks (max 40)
+heaplow: malloc(%lu): 262144 blocks (max 16)
+heaplow: malloc(%lu): 524288 blocks (max 0)
+>: 0x00CF1D91 wrapperInitMMALstruct()                 DONE
+MEM AFTER MMAL STRUCT INIT TOTAL 0x18000000 LOW 0x1066A080
+MEM AFTER MMAL STRUCT INIT HIGH 0x00000000 ANY 0x1066A080
+heaplow: malloc(%lu): 64 blocks (max 144)
+heaplow: malloc(%lu): 1024 blocks (max 43)
+heaplow: malloc(%lu): 4096 blocks (max 2)
+heaplow: malloc(%lu): 16384 blocks (max 0)
+heaplow: malloc(%lu): 65536 blocks (max 40)
+heaplow: malloc(%lu): 262144 blocks (max 16)
+heaplow: malloc(%lu): 524288 blocks (max 0)
+>: 0x00D42112 initEventsVCOS (m_EventSMEM, SMEM)      DONE
+>: 0x00D79114 openServiceVCHI ('S','M','E','M')       DONE
+Buffer Address BUS 0x00507000 Buffer Address ARM 0x40507000 Buffer Address VPU 0xC0507000
+Import from ARM Address 0x00507000 to GPU Address 0xC0507000 Size 0x04000000 VCSM Handle 0xC0000002
+Lock  Memory - VCSM Handle 0xC0000002 VCSM Pointer 0xC0507000
+>: 0x00DB0B20 SMEM-MEM Input allocation               DONE
+Buffer Address BUS 0x04508000 Buffer Address ARM 0x44508000 Buffer Address VPU 0xC4508000
+Import from ARM Address 0x04508000 to GPU Address 0xC4508000 Size 0x00100000 VCSM Handle 0xC0000003
+Lock  Memory - VCSM Handle 0xC0000003 VCSM Pointer 0xC4508000
+>: 0x00DE599D SMEM-MEM Output A allocation            DONE
+Buffer Address BUS 0x04609000 Buffer Address ARM 0x44609000 Buffer Address VPU 0xC4609000
+Import from ARM Address 0x04609000 to GPU Address 0xC4609000 Size 0x00100000 VCSM Handle 0xC0000004
+Lock  Memory - VCSM Handle 0xC0000004 VCSM Pointer 0xC4609000
+>: 0x00E1CDD0 SMEM-MEM Output B allocation            DONE
+>: 0x00E2AF33 Allocate/Lock VCSM Buffer               DONE
+>: 0x00E391D6 initEventsVCOS ( m_EventMMAL, MMAL )    DONE
+>: 0x00E475DA openServiceVCHI ('m','m','a','l')       DONE
+>: 0x00E561DC createComponent ()                      DONE
+>: 0x00E647CE getPortInfoMMAL ( Input A )             DONE
+>: 0x00E72EE5 getPortInfoMMAL ( Output A )            DONE
+>: 0x00E8161D setPortInfoMMAL ( Input )               DONE
+>: 0x00E8FD22 setPortInfoMMAL ( Output )              DONE
+>: 0x00E9E383 enableComponentMMAL ()                  DONE
+>: 0x00EACB0D getPortInfoMMAL ( Input B )             DONE
+>: 0x00EBB3C5 getPortInfoMMAL ( Output B )            DONE
+>: 0x00EC9D6E setZeroCopyModeMMAL ( Input )           DONE
+>: 0x00ED886E setZeroCopyModeMMAL ( Output )          DONE
+>: 0x00EE744D getPortInfoMMAL ( Input C )             DONE
+>: 0x00EF6124 getPortInfoMMAL ( Output C )            DONE
+>: 0x00F057E1 enablePortMMAL ( Input )                DONE
+>: 0x00F145C0 enablePortMMAL ( Output )               DONE
+>: 0x00F232D7 getPortInfoMMAL ( Input D )             DONE
+>: 0x00F31D3A getPortInfoMMAL ( Output D )            DONE
+>: 0x00F4036A Init MMAL / ril.video_decode            DONE
+>: 0x00F52E64 initOGL(&m_ogl)                         DONE
+>: 0x00F614C4 SPI_init()                              DONE
+>: 0x00F6F716 SMI_Init(LED_PIN)                       DONE
+>: 0x00F7D639 WS2812_Init(LED_COUNT)                  DONE
+>: 0x00F8B425 GPIO_SetAlt(CTRL_PIN, 1, GPIO_PULL_OFF) DONE
+>: 0x00F9926E GPIO_SetAlt(SW_PIN_A, 0, GPIO_PULL_UP)  DONE
+>: 0x00FA6E10 GPIO_SetAlt(SW_PIN_B, 0, GPIO_PULL_UP) DONE
+MEM AFTER CKERNEL INIT TOTAL 0x18000000 LOW 0x10661020
+MEM AFTER CKERNEL INIT HIGH 0x00000000 ANY 0x10661020
+heaplow: malloc(%lu): 64 blocks (max 148)
+heaplow: malloc(%lu): 1024 blocks (max 62)
+heaplow: malloc(%lu): 4096 blocks (max 2)
+heaplow: malloc(%lu): 16384 blocks (max 1)
+heaplow: malloc(%lu): 65536 blocks (max 40)
+heaplow: malloc(%lu): 262144 blocks (max 16)
+heaplow: malloc(%lu): 524288 blocks (max 0)
+fatinfo: FAT32: 1946656 clusters of 16.0K
+>: 0x00FD0E05 BULKLOAD Start scanned 0x00000001 valid 0x00000000 size 0x00008000
+preset.vsh bytes read 0x00000466 in buffer [ 0x00000000 ]
+>: 0x0101FAA3 BULKLOAD End prev 0x00000000 new 0x00000001 loaded 0x00000001
+>: 0x0102CD86 BULKLOAD Start scanned 0x00000000 valid 0x00000000 size 0x00008000
+>: 0x0103A272 BULKLOAD End prev 0x00000000 new 0x00000000 loaded 0x00000000
+>: 0x01047946 BULKLOAD Start scanned 0x00000001 valid 0x00000000 size 0x00400000
+user01.omt bytes read 0x00030036 in buffer [ 0x00000000 ]
+>: 0x01083950 BULKLOAD End prev 0x00000000 new 0x00000001 loaded 0x00000001
+>: 0x01091458 BULKLOAD Start scanned 0x00000001 valid 0x00000000 size 0x00008000
+caleid~1.fsh bytes read 0x00000D07 in buffer [ 0x00000000 ]
+>: 0x010ADAD4 BULKLOAD End prev 0x00000000 new 0x00000001 loaded 0x00000001
+>: 0x010BB9FC BULKLOAD Start scanned 0x00000000 valid 0x00000000 size 0x00400000
+>: 0x010C9B94 BULKLOAD End prev 0x00000000 new 0x00000000 loaded 0x00000000
+>: 0x010D7EDA BULKLOAD Start scanned 0x00000000 valid 0x00000000 size 0x00800000
+>: 0x010E650E BULKLOAD End prev 0x00000000 new 0x00000000 loaded 0x00000000
+>: 0x010F4CE0 BULKLOAD Start scanned 0x00000001 valid 0x00000000 size 0x00200000
+kernel.img bytes read 0x000846AC in buffer [ 0x00000000 ]
+>: 0x011559C6 BULKLOAD End prev 0x00000000 new 0x00000001 loaded 0x00000001
+dump header from file 0x00000000 buffer 0x0470A000 data 0x0470A000
+
+Header Dump
+42 4D 36 00 03 00 00 00 00 00 36 00 00 00 28 00 
+00 00 00 01 00 00 00 01 00 00 01 00 18 00 00 00 
+00 00 00 00 03 00 C4 0E 
+
+header VALID File 0x00000000 Name user01.omt
+size 0x00030036 loaded 0x00030036 max 0x00400000
+Header offset 0x00000036 header size 0x00000028 img size 0x00030000
+width 0x00000100 height 0x00000100 bpp 0x00000018
+planes 0x00000001 compr. 0x00000000
+exp. size 0x00030000 act. size 0x00030000
+
+Program compile status idx 0x00000000 SUCCESS
+Program compile status idx 0x00000000 SUCCESS
+caleid~1.fsh Program link status idx 0x00000000 Program byte size 0x00000D07 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+usbdev0-1: Device ven13fe-4100 removed
+usbdev0-1: Device ven13fe-4100 found (HS)
+usbdev0-1: Product: Philips USB Flash Drive
+usbdev0-1: Interface int8-6-50 found
+usbdev0-1: Using device/interface int8-6-50
+umsd: Capacity is 3700 MByte
+dwroot: Device configured
+fatinfo: FAT32: 945320 clusters of 4.0K
+>: 0x01931F6E BULKLOAD Start scanned 0x00000010 valid 0x00000001 size 0x00008000
+1xt2xr~1.fsh bytes read 0x00000680 in buffer [ 0x00000001 ]
+1xs2gd~1.fsh bytes read 0x00000948 in buffer [ 0x00000002 ]
+1vec4r~1.fsh bytes read 0x00000B4C in buffer [ 0x00000003 ]
+calai_~1.fsh bytes read 0x0000068F in buffer [ 0x00000004 ]
+bw_tun~1.fsh bytes read 0x00000820 in buffer [ 0x00000005 ]
+bw_tri~1.fsh bytes read 0x00000565 in buffer [ 0x00000006 ]
+bw_smo~1.fsh bytes read 0x000005A4 in buffer [ 0x00000007 ]
+bw_geo~1.fsh bytes read 0x000008F7 in buffer [ 0x00000008 ]
+bw_cir~1.fsh bytes read 0x00000ADE in buffer [ 0x00000009 ]
+7exito~1.fsh bytes read 0x00000F6E in buffer [ 0x0000000A ]
+6tl3fz~1.fsh bytes read 0x000011EC in buffer [ 0x0000000B ]
+06tayl~1.fsh bytes read 0x00000D73 in buffer [ 0x0000000C ]
+4getco~1.fsh bytes read 0x00000A95 in buffer [ 0x0000000D ]
+03_tor~1.fsh bytes read 0x00000D83 in buffer [ 0x0000000E ]
+2thebe~1.fsh bytes read 0x000005F3 in buffer [ 0x0000000F ]
+1z_cdi~1.fsh bytes read 0x0000070C in buffer [ 0x00000010 ]
+>: 0x01A36CFD BULKLOAD End prev 0x00000001 new 0x00000011 loaded 0x00000010
+>: 0x01A43BA6 BULKLOAD Start scanned 0x00000003 valid 0x00000000 size 0x00400000
+user05.bmp bytes read 0x00300036 in buffer [ 0x00000000 ]
+user04.bmp bytes read 0x00300036 in buffer [ 0x00000001 ]
+user01.bmp bytes read 0x00030036 in buffer [ 0x00000002 ]
+>: 0x02085FDA BULKLOAD End prev 0x00000000 new 0x00000003 loaded 0x00000003
+>: 0x02093B9A BULKLOAD Start scanned 0x00000002 valid 0x00000000 size 0x00800000
+test-d.264 bytes read 0x0008918A in buffer [ 0x00000000 ]
+test-a.264 bytes read 0x0057A9D0 in buffer [ 0x00000001 ]
+>: 0x0269ED3F BULKLOAD End prev 0x00000000 new 0x00000002 loaded 0x00000002
+>: 0x026AD326 BULKLOAD Start scanned 0x00000001 valid 0x00000001 size 0x00200000
+kernel.img bytes read 0x0007F424 in buffer [ 0x00000001 ]
+>: 0x0274720D BULKLOAD End prev 0x00000001 new 0x00000002 loaded 0x00000001
+dump header from file 0x00000000 buffer 0x0470A000 data 0x0470A000
+
+Header Dump
+42 4D 36 00 03 00 00 00 00 00 36 00 00 00 28 00 
+00 00 00 01 00 00 00 01 00 00 01 00 18 00 00 00 
+00 00 00 00 03 00 C4 0E 
+
+header VALID File 0x00000000 Name user01.omt
+size 0x00030036 loaded 0x00030036 max 0x00400000
+Header offset 0x00000036 header size 0x00000028 img size 0x00030000
+width 0x00000100 height 0x00000100 bpp 0x00000018
+planes 0x00000001 compr. 0x00000000
+exp. size 0x00030000 act. size 0x00030000
+
+dump header from file 0x00000000 buffer 0x04B0B000 data 0x04B0B000
+
+Header Dump
+42 4D 36 00 30 00 00 00 00 00 36 00 00 00 28 00 
+00 00 00 04 00 00 00 04 00 00 01 00 18 00 00 00 
+00 00 00 00 30 00 C4 0E 
+
+header VALID File 0x00000000 Name user05.bmp
+size 0x00300036 loaded 0x00300036 max 0x00400000
+Header offset 0x00000036 header size 0x00000028 img size 0x00300000
+width 0x00000400 height 0x00000400 bpp 0x00000018
+planes 0x00000001 compr. 0x00000000
+exp. size 0x00300000 act. size 0x00300000
+
+dump header from file 0x00000001 buffer 0x04F0B000 data 0x04F0B000
+
+Header Dump
+42 4D 36 00 30 00 00 00 00 00 36 00 00 00 28 00 
+00 00 00 04 00 00 00 04 00 00 01 00 18 00 00 00 
+00 00 00 00 30 00 C4 0E 
+
+header VALID File 0x00000001 Name user04.bmp
+size 0x00300036 loaded 0x00300036 max 0x00400000
+Header offset 0x00000036 header size 0x00000028 img size 0x00300000
+width 0x00000400 height 0x00000400 bpp 0x00000018
+planes 0x00000001 compr. 0x00000000
+exp. size 0x00300000 act. size 0x00300000
+
+dump header from file 0x00000002 buffer 0x0530B000 data 0x0530B000
+
+Header Dump
+42 4D 36 00 03 00 00 00 00 00 36 00 00 00 28 00 
+00 00 00 01 00 00 00 01 00 00 01 00 18 00 00 00 
+00 00 00 00 03 00 C4 0E 
+
+header VALID File 0x00000002 Name user01.bmp
+size 0x00030036 loaded 0x00030036 max 0x00400000
+Header offset 0x00000036 header size 0x00000028 img size 0x00030000
+width 0x00000100 height 0x00000100 bpp 0x00000018
+planes 0x00000001 compr. 0x00000000
+exp. size 0x00030000 act. size 0x00030000
+
+Parse H264 File No. 0x00000000 Name test-d.264 FileSize 0x0008918A
+file_index 0x00000000 buffer 0x00507000 data 0x00507000
+Parsed Frames 0x000000F0 IDR-Off 0x00000027
+MetaData INVALID for Video 0x00000000 Name test-d.264 FileSize 0x0008918A
+Parse H264 File No. 0x00000001 Name test-a.264 FileSize 0x0057A9D0
+file_index 0x00000001 buffer 0x00D07000 data 0x00D07000
+Parsed Frames 0x000000F1 IDR-Off 0x00000027
+MetaData INVALID for Video 0x00000001 Name test-a.264 FileSize 0x0057A9D0
+Program compile status idx 0x00000001 SUCCESS
+Program compile status idx 0x00000002 SUCCESS
+Program compile status idx 0x00000003 SUCCESS
+Program compile status idx 0x00000004 SUCCESS
+Program compile status idx 0x00000005 SUCCESS
+Program compile status idx 0x00000006 SUCCESS
+Program compile status idx 0x00000007 SUCCESS
+Program compile status idx 0x00000008 SUCCESS
+Program compile status idx 0x00000009 SUCCESS
+Program compile status idx 0x0000000A SUCCESS
+Program compile status idx 0x0000000B SUCCESS
+Program compile status idx 0x0000000C SUCCESS
+Program compile status idx 0x0000000D SUCCESS
+Program compile status idx 0x0000000E SUCCESS
+Program compile status idx 0x0000000F SUCCESS
+Program compile status idx 0x00000010 SUCCESS
+1xs2gd~1.fsh Program link status idx 0x00000001 Program byte size 0x00000680 SUCCESS
+Uniform name: tex
+Uniform idx 0x00000000 size 0x00000008 type 0x00008B5E loc 0x00000000
+Uniform name: par_a
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000008
+Uniform name: color
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B52 loc 0x00000009
+Uniform name: tres
+Uniform idx 0x00000003 size 0x00000001 type 0x00008B50 loc 0x0000000A
+Uniform name: time
+Uniform idx 0x00000004 size 0x00000001 type 0x00001406 loc 0x0000000B
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+1vec4r~1.fsh Program link status idx 0x00000002 Program byte size 0x00000948 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: time
+Uniform idx 0x00000002 size 0x00000001 type 0x00001406 loc 0x00000002
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+calai_~1.fsh Program link status idx 0x00000003 Program byte size 0x00000B4C SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+bw_tun~1.fsh Program link status idx 0x00000004 Program byte size 0x0000068F SUCCESS
+Uniform name: tex
+Uniform idx 0x00000000 size 0x00000008 type 0x00008B5E loc 0x00000000
+Uniform name: par_a
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000008
+Uniform name: color
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B52 loc 0x00000009
+Uniform name: tres
+Uniform idx 0x00000003 size 0x00000001 type 0x00008B50 loc 0x0000000A
+Uniform name: time
+Uniform idx 0x00000004 size 0x00000001 type 0x00001406 loc 0x0000000B
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+bw_tri~1.fsh Program link status idx 0x00000005 Program byte size 0x00000820 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+bw_smo~1.fsh Program link status idx 0x00000006 Program byte size 0x00000565 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: time
+Uniform idx 0x00000002 size 0x00000001 type 0x00001406 loc 0x00000002
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+bw_geo~1.fsh Program link status idx 0x00000007 Program byte size 0x000005A4 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: tres
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B50 loc 0x00000001
+Uniform name: time
+Uniform idx 0x00000002 size 0x00000001 type 0x00001406 loc 0x00000002
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+bw_cir~1.fsh Program link status idx 0x00000008 Program byte size 0x000008F7 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+7exito~1.fsh Program link status idx 0x00000009 Program byte size 0x00000ADE SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+6tl3fz~1.fsh Program link status idx 0x0000000A Program byte size 0x00000F6E SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+06tayl~1.fsh Program link status idx 0x0000000B Program byte size 0x000011EC SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+4getco~1.fsh Program link status idx 0x0000000C Program byte size 0x00000D73 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: tres
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B50 loc 0x00000001
+Uniform name: time
+Uniform idx 0x00000002 size 0x00000001 type 0x00001406 loc 0x00000002
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+03_tor~1.fsh Program link status idx 0x0000000D Program byte size 0x00000A95 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+2thebe~1.fsh Program link status idx 0x0000000E Program byte size 0x00000D83 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+1z_cdi~1.fsh Program link status idx 0x0000000F Program byte size 0x000005F3 SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+
+ Program link status idx 0x00000010 Program byte size 0x0000070C SUCCESS
+Uniform name: par_a
+Uniform idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+Uniform name: color
+Uniform idx 0x00000001 size 0x00000001 type 0x00008B52 loc 0x00000001
+Uniform name: tres
+Uniform idx 0x00000002 size 0x00000001 type 0x00008B50 loc 0x00000002
+Uniform name: time
+Uniform idx 0x00000003 size 0x00000001 type 0x00001406 loc 0x00000003
+Active Attributes 0x00000001
+Attribute name vertex
+Attribute idx 0x00000000 size 0x00000001 type 0x00008B52 loc 0x00000000
+

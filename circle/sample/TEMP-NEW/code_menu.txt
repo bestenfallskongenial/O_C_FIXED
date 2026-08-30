@@ -1,0 +1,160 @@
+Yes — your idea is valid. I missed the important consequence: 
+
+if you add a complete dummy block 0, then you can make `layer == block` everywhere for the accessible menu layers.
+
+But it is not enough to add a dummy row only to `layerModeMap[]`. 
+You must shift the actual block-addressed storage by one block too.
+
+For example:
+
+        enum centralModeBuffer
+        {
+        // block 00 / layer 0 - dummy
+            DUMMY_0 = 0,
+            DUMMY_1,
+            DUMMY_2,
+            DUMMY_3,
+
+        // block 01 / layer 1
+            MODE_CH0,
+            MODE_CH1,
+            MODE_CH2,
+            MODE_CH3,
+
+        // block 02 / layer 2
+            MODE_CH4,
+            MODE_CH5,
+            MODE_CH6,
+            MODE_CH7,
+
+        // block 03 / layer 3
+            LF1_WAVE,
+            LF2_WAVE,
+            LF1_MULT,
+            LF2_MULT,
+
+        // ...
+        };
+
+Then the relation becomes exactly:
+
+        layer 0 -> block 0  dummy
+        layer 1 -> block 1  CH0-3
+        layer 2 -> block 2  CH4-7
+        layer 3 -> block 3  LFO
+        layer 4 -> block 4  threshold
+        ...
+
+and consequently:
+
+        const uint8_t block = g_menuLayer;
+        const uint8_t base  = block << 2;
+
+No `-1`.
+
+Your block tables then also get a dummy row 0:
+
+        const int g_mapType[BLOCK_COUNT][4] =
+        {
+            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE }, // block 0 dummy
+
+            { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  }, // block 1 / layer 1
+            { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  }, // block 2 / layer 2
+
+            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE }, // block 3 / layer 3
+            // ...
+        };
+
+Same for `g_valueRoof[]`:
+
+        const int g_valueRoof[BLOCK_COUNT][4] =
+        {
+            { 0, 0, 0, 0 },        // block 0 dummy
+
+            { 4, 4, 4, 4 },        // layer 1
+            { 4, 4, 4, 4 },        // layer 2
+            { 5, 5, 7, 7 },        // layer 3
+            // ...
+        };
+
+and `g_blockColor[]`:
+
+        int g_blockColor[BLOCK_COUNT][3] =
+        {
+            {  0,   0,   0},       // block 0 dummy
+            {190,  60,  50},       // block 1 / layer 1
+            { 55, 155,  95},       // block 2 / layer 2
+            // ...
+        };
+
+Then `updateLED()` gets particularly clean. `showBank` can store the actual block/layer number:
+
+        static uint8_t showBank = 1;
+
+        if (g_menuLayer == 1 || g_menuLayer == 2)
+            {
+            showBank = g_menuLayer;
+            }
+
+        if (g_menuLayer == 0)
+            {
+            block = showBank;
+            }
+        else
+            {
+            block = g_menuLayer;
+            }
+
+        base = block << 2;
+
+And `dispatchLayer()` becomes:
+
+        void CKernel::dispatchLayer()
+        {
+            if (g_menuLayer == 0)
+                {
+                return;
+                }
+
+            const uint8_t block = g_menuLayer;
+
+            set_mode_roof_map(block);
+            mapMenuGroup(block);
+        }
+
+There is one important catch: currently some code relies on `MODE_CH0 == 0`.
+
+For example, you directly access:
+
+        g_centralModeBuffer[g_currentProgramBuffer][0]
+        ...
+        g_centralModeBuffer[g_currentProgramBuffer][7]
+
+when testing channel modes. 
+
+After inserting the dummy block, those must become:
+
+        g_centralModeBuffer[g_currentProgramBuffer][MODE_CH0]
+        ...
+        g_centralModeBuffer[g_currentProgramBuffer][MODE_CH7]
+
+Likewise, this currently assumes `p_channel` 0..7 is directly the central-buffer index:
+
+        switch (g_centralModeBuffer[g_currentProgramBuffer][p_channel])
+
+That would need to become:
+
+        switch (g_centralModeBuffer[g_currentProgramBuffer][MODE_CH0 + p_channel])
+
+So: yes, adding a real dummy block 0 gives you the cleaner invariant
+
+layer == block
+base  == layer << 2
+
+but you must remove every existing assumption that central-buffer channel indices are numerically `0..7`.
+
+look up also:
+
+        code_user_file.cpp
+        code_debug.cpp
+        etc...

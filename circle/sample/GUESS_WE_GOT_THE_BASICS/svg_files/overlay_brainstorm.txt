@@ -1,0 +1,24 @@
+so, what i need is a mechanism that chooses the correct tiles from the texture atlas depending on the layers, selected modes, the extra modes, the lfo settings etc.
+
+this all is gathered in g_centralModeBuffer[g_currentProgramBuffer][p_channel].
+
+also do i have g_menuLayer for the layer.
+
+means i need a table containing the positions of the tiles per layers
+
+
+g_menuLayer -> g_centralModeBuffer[g_currentProgramBuffer][p_channel] -> layoutTable
+
+what we need to store in the layout table?
+
+- the x/y positions of the tiles.
+- the scale of the tile ?
+- the alpha of the tile ?
+- the start index of the tiles in question since i organized them like
+
+0   - 15    - modes         ( the first 9 ) - adc trg bpm lf0 lf1 b0l b0h b1l b1h
+16  - 23    - targets       ( the first 4 ) - vid frm tex clk 
+16  - 23    - lfo-waves     ( the last 4  ) - sin saw rsw tri
+24  - 31    - lfo-mults     ( the first 7 ) - 1/64 1/32 1/16 1/8 1/4 1/2 1/1 ( or position 09 to 0f)
+32  - 39    - numbers       ( the first 10) - 0 1 2 3 4 5 6 7 8 9 
+40  - 47    -

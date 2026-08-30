@@ -1,0 +1,179 @@
+Q:
+
+my encoder is set to h264 raw but i still have the EPD ( 03 ) in my nal units
+
+No contradiction.
+
+Your XMediaRecode setting **“H.264 Raw Video / .h264”** means:
+
+```text
+raw H.264 elementary stream
+```
+
+That is usually still:
+
+```text
+Annex-B style H.264 bitstream
+startcodes present
+EPB 0x03 present
+```
+
+So seeing `03` inside your NALs is normal.
+
+This is **not the same thing** as:
+
+```cpp
+MMAL_ENCODING_VARIANT_H264_RAW
+```
+
+That MMAL variant means:
+
+```text
+implicitly delimited NAL units
+without emulation-prevention bytes
+```
+
+So:
+
+```text
+XMediaRecode "H.264 Raw Video"
+    = raw file / elementary stream
+    = can still contain startcodes + EPB 03
+
+MMAL_ENCODING_VARIANT_H264_RAW
+    = MMAL input framing mode
+    = expects NAL data without startcodes / without EPB
+```
+
+For your current `.h264` file with startcodes and `03` bytes, the matching VC04/MMAL variant is:
+
+```cpp
+MMAL_ENCODING_VARIANT_H264_DEFAULT
+```
+
+not:
+
+```cpp
+MMAL_ENCODING_VARIANT_H264_RAW
+```
+
+So for your current zero-copy parser path:
+
+```text
+keep 03
+keep startcodes
+use DEFAULT / Annex-B
+```
+
+Do **not** remove `03` unless you deliberately build a separate non-zero-copy RAW-mode buffer.
+
+Q: potential pipeline for jpg decoding
+
+Yes.
+
+For JPEG textures, the path is:
+
+```text
+JPEG file bytes
+    -> VC04 image decoder
+    -> decoded pixel buffer
+    -> EGLImage
+    -> GL texture
+```
+
+Your current BMP path is probably:
+
+```text
+BMP 24b file
+    -> CPU parser
+    -> RGB pixels
+    -> glTexImage2D()
+```
+
+For JPEG hardware decode you need the VC04 image decoder component, normally:
+
+```cpp
+"vc.ril.image_decode"
+```
+
+Conceptual MMAL setup:
+
+```text
+input port:
+    encoding = MMAL_ENCODING_JPEG
+
+output port:
+    encoding = MMAL_ENCODING_RGBA
+    width / height aligned as required
+```
+
+Then:
+
+```text
+send JPEG file buffer to decoder input
+receive decoded RGBA output buffer
+```
+
+For texture population you have two choices.
+
+Copy path:
+
+```cpp
+glBindTexture(GL_TEXTURE_2D, tex_id);
+
+glTexImage2D(   GL_TEXTURE_2D,
+                0,
+                GL_RGBA,
+                width,
+                height,
+                0,
+                GL_RGBA,
+                GL_UNSIGNED_BYTE,
+                decoded_rgba_arm_ptr );
+```
+
+Zero-copy / EGLImage path:
+
+```text
+decoder output buffer must be VPU/GPU-visible memory
+create EGLImage from that decoded buffer
+bind EGLImage to GL texture
+```
+
+GL side:
+
+```cpp
+glGenTextures(1, &tex_id);
+glBindTexture(GL_TEXTURE_2D, tex_id);
+
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, m_EGLImage);
+```
+
+So the important difference to BMP is:
+
+```text
+BMP:
+    your parser creates the pixel buffer
+
+JPEG:
+    VC04 decoder creates the pixel buffer
+```
+
+Then either:
+
+```text
+decoded RGBA ARM pointer -> glTexImage2D()
+```
+
+or:
+
+```text
+decoded VCSM/EGLImage buffer -> glEGLImageTargetTexture2DOES()
+```
+
+For your zero-copy goal, the second path is the relevant one.

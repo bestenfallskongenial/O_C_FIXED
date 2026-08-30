@@ -1,0 +1,37 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float time;
+uniform vec2 tres;
+uniform sampler2D backbuffer;
+varying vec2 tcoord;
+uniform vec4 seed;
+uniform vec4 audio;
+uniform vec4 color;
+uniform vec4 par_a;
+uniform vec4 par_b;
+
+uniform sampler2D tex[8];
+uniform int tex_l;
+
+#define PI 3.14159
+
+void main(){
+	vec2 p = (gl_FragCoord.xy - 0.5 * tres) / min(tres.x, tres.y);
+	vec2 t = vec2(gl_FragCoord.xy / tres);
+	
+	vec3 c = vec3(0);
+	
+	for(int i = 0; i < 33; i++) {
+		float t = 0.4 * PI * float(i) / 30.0 * time * 5.5;
+		float x = cos(3.0*t);
+		float y = sin(4.0*t);
+		vec2 o = 0.40 * vec2(x, y);
+		float r = fract(x);
+		float g = 1.0 - r;
+		c += 0.01 / (length(p-o)) * vec3(r, g, 0.9);
+	}
+	
+	gl_FragColor = vec4(c, 1);
+}

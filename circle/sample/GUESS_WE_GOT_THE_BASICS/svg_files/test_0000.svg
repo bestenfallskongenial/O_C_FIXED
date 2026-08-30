@@ -1,0 +1,141 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128">
+
+    <rect
+        id="edit_background"
+        width="128"
+        height="128"
+        fill="white"/>
+
+    <g
+        id="drawing_style"
+        stroke="rgb(0, 0, 0)"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+
+        <path
+            id="TARGET_MODE_TL"
+
+            stroke-width="1"
+            fill="#000000"
+            d="
+                M 19 3
+                H 43
+                A 16 16 0 0 1 58.77 16.29
+                A 48 48 0 0 0 16.29 58.77
+                A 16 16 0 0 1 3 43
+                V 19
+                A 16 16 0 0 1 19 3
+                Z
+            "/>
+
+        <path
+            id="TARGET_MODE_TR"
+
+            stroke-width="1"
+            fill="#000000"
+            d="
+                M 109 3
+                H 85
+                A 16 16 0 0 0 69.23 16.29
+                A 48 48 0 0 1 111.71 58.77
+                A 16 16 0 0 0 125 43
+                V 19
+                A 16 16 0 0 0 109 3
+                Z
+            "/>
+
+        <path
+            id="TARGET_MODE_BL"
+
+            stroke-width="1"
+            fill="#000000"
+            d="
+                M 19 125
+                H 43
+                A 16 16 0 0 0 58.77 111.71
+                A 48 48 0 0 1 16.29 69.23
+                A 16 16 0 0 0 3 85
+                V 109
+                A 16 16 0 0 0 19 125
+                Z
+            "/>
+
+        <path
+            id="TARGET_MODE_BR"
+
+            stroke-width="1"
+            fill="#000000"
+            d="
+                M 109 125
+                H 85
+                A 16 16 0 0 1 69.23 111.71
+                A 48 48 0 0 0 111.71 69.23
+                A 16 16 0 0 1 125 85
+                V 109
+                A 16 16 0 0 1 109 125
+                Z
+            "/>
+
+        <circle
+            id="TRG"
+
+
+            stroke-width="1"
+            cx="64"
+            cy="64"
+            r="44"
+            fill="#000000"/>
+
+        <line
+            id="ADC_coord_x_axis_a"
+visibility="hidden"            
+            stroke-width="4 "            
+            stroke="#ffffff"
+            x1="28" y1="80"
+            x2="100" y2="80"
+            stroke-width="1"/>
+
+        <line
+            id="ADC_coord_x_axis_b"
+visibility="hidden"            
+            stroke-width="2"            
+            stroke="#ffffff"
+            x1="28" y1="52"
+            x2="100" y2="52"
+            stroke-width="1"/>            
+
+        <line
+            id="ADC_coord_y_axis"
+visibility="hidden"            
+            stroke-width="4"            
+            stroke="#ffffff"
+            x1="30" y1="44"
+            x2="30" y2="82"
+            stroke-width="1"/>
+
+        <polyline
+            id="mode_TRG_polyline"
+
+            fill="none"
+            stroke-width="1"
+            stroke="#ffffff"
+            points="
+                16,64
+                40,64
+                40,48
+                64,40
+                64,88
+                80,80
+                80,48
+                98,51
+                98,64
+                112,64
+            "/>
+
+    </g>
+</svg>

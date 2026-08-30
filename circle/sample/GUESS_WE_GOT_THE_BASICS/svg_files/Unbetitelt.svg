@@ -1,0 +1,82 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="128"
+    height="128"
+    viewBox="0 0 128 128">
+
+    <rect
+        id="edit_background"
+        width="128"
+        height="128"
+        fill="white"/>
+
+    <g
+        id="drawing"
+        stroke="rgb(0, 0, 0)"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+
+        <g id="quadrants" fill="rgb(216, 216, 216)">
+            <rect x="4"  y="4"  width="60" height="60" rx="16" ry="16"/>
+            <rect x="66" y="2"  width="60" height="60" rx="16" ry="16"/>
+            <rect x="2"  y="66" width="60" height="60" rx="16" ry="16"/>
+            <rect x="66" y="66" width="60" height="60" rx="16" ry="16"/>
+        </g>
+
+        <g id="carrier" fill="rgb(216, 216, 216)">
+            <circle cx="64" cy="64" r="48"/>
+        </g>
+
+        <g id="icons" fill="none">
+            <!-- paths / polylines here -->
+        <polyline
+            id="sine_like"
+
+            points="
+                16,64
+                48,40
+                80,88
+                112,64
+            "/>
+
+        <polyline
+            id="saw"
+visibility="hidden"
+            points="
+                16,80
+                64,48
+                64,80
+                112,48
+            "/>
+
+        <polyline
+            id="reverse_saw"
+visibility="hidden"
+            points="
+                16,32
+                16,64
+                64,32
+                64,64
+                114,32
+            "/>
+
+        <polyline
+            id="mode_TRG"
+visibility="hidden"
+            points="
+                16,64
+                32,64
+                32,40
+                64,40
+                64,80
+                80,94
+                80,48
+                98,48
+                98,64
+                112,64
+            "/>
+            </g>
+
+    </g>
+</svg>

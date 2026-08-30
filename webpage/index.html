@@ -1,0 +1,62 @@
+<!-- /index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> -->
+	<link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+	<!-- full-page background -->
+	<div id="index-bg"></div>
+
+	<!-- header -->
+	<header id="index-header">
+	<!--	<h1>Project Title</h1> -->
+	</header>
+
+	<!-- carousel wrapper -->
+	<main id="index-main">
+		<div id="index-carousel">
+
+			<!-- GLOBAL OVERLAY IMAGE -->
+			<img id="index-overlay" src="/assets/images/overlay.png" alt="">
+
+			<button id="indexPrev" type="button" aria-label="Previous">◀</button>
+
+			<div id="index-track">
+				<!-- 3 visible tiles, filled by JS -->
+				<div class="index-tile" data-slot="left"></div>
+				<div class="index-tile" data-slot="center"></div>
+				<div class="index-tile" data-slot="right"></div>
+			</div>
+
+			<button id="indexNext" type="button" aria-label="Next">▶</button>
+		</div>
+	</main>
+
+	<!-- SOCIAL MEDIA OVERLAY (BOTTOM LEFT, DUMMY LINKS) -->
+	<nav id="index-social" aria-label="Social links">
+		<a href="https://www.instagram.com/bestenfallskongenial/" title="Instagram" target="_blank" rel="noopener">
+			<img src="/assets/images/insta.png" alt="Instagram">
+		</a>
+		<a href="https://www.youtube.com/@dieAnthropologischeKonstante" title="YouTube" target="_blank" rel="noopener">
+			<img src="/assets/images/youtube.png" alt="YouTube">
+		</a>
+		<a href="https://example.com/email" title="Email" target="_blank" rel="noopener">
+			<img src="/assets/images/mail.png" alt="Email">
+		</a>
+		<!-- 
+		<a href="https://example.com/whatsapp" title="WhatsApp" target="_blank" rel="noopener">
+			<img src="/assets/images/whatsapp.png" alt="WhatsApp">
+		</a> -->
+		<a href="https://example.com/phone" title="Phone" target="_blank" rel="noopener">
+			<img src="/assets/images/phone.png" alt="Phone">
+		</a>
+	</nav>
+
+	<script src="/js/carousel_index.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+state of integration:
+
+
+CLogger.cpp                         // my CLogger shim layer for minimal integration of log messages from other libs/headers
+CLogger.h                           
+
+Makefile                            //
+
+README                              // this file 
+
+code_datamanagement.cpp             // seemingly integrated
+code_debug.cpp                      // debug section to test the blocks
+code_graphics.cpp                   //
+code_hardware.cpp                   // seemingly integrated
+code_logging.cpp            
+code_parser.cpp
+code_util.cpp                       // 
+code_stubs.cpp                      //
+code_wrappers.cpp                   //
+
+defs_enum.h                         // i separate the kernel.h files into responsibilities
+defs_include.h                      
+defs_macro.h
+defs_member.h
+defs_struct.h
+
+kernel.cpp                          // constructor / deconstructor
+kernel.h                            // function declarations
+kernel_initialize.cpp               // CKernel::Initialize( void )
+kernel_run.cpp                      // CKernel::Run( void )
+
+main.cpp                            // mandatory for circles linux emulation
+
+o_c_setup.h                         // project / system related macro declarations
+
+table_col.cpp                       // table for the ws2812 LED´s
+table_lfo.cpp                       // table for the lfo´s

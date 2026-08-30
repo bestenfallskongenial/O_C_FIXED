@@ -1,0 +1,157 @@
+/* shader gallery layout + controls */
+
+:root {
+	/* gallery overlay margins (adjust like index.css asymmetric margins) */
+	--gallery-left: 5%;
+	--gallery-right: 65%;
+	--gallery-top: 10%;
+	--gallery-bottom: 10%;
+	--gallery-opacity: 0.95;
+	--gallery-radius: 20px;
+	--gallery-gap: 12px;
+	--gallery-columns: 2;
+	--gallery-rows: 4;	
+
+	/* page label controls */
+	--gallery-page-label-display: none;
+	--gallery-page-label-top: 10px;
+	--gallery-page-label-left: 10px;
+	--gallery-page-label-transform: none;
+	--gallery-page-label-color: #fff;
+	--gallery-page-label-font-family: monospace;
+	--gallery-page-label-font-size: 11px;
+	--gallery-page-label-opacity: 1;
+}
+
+#gallery {
+	position: fixed;
+	top: var(--gallery-top);
+	bottom: var(--gallery-bottom);
+	left: var(--gallery-left);
+	right: var(--gallery-right);
+	width: auto;
+	height: auto;
+	z-index: 2;
+	padding: 8px;
+	background-color: transparent;
+	opacity: var(--gallery-opacity);
+	display: flex;
+	flex-direction: column;
+
+
+	gap: var(--gallery-gap);
+	border-radius: var(--gallery-radius);
+	overflow: hidden;
+	transition: background-color 500ms;	
+}
+
+#gallery.gallery-hidden {
+	display: none;
+}
+
+#gallery:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#gallery button {
+	padding: 8px 12px;
+	border: 0;
+	border-radius: 5px;
+	margin-right: 5px;
+	color: #ffffff;
+	background-color: #000000;
+	font-family: monospace;
+	font-size: 11px;
+	cursor: pointer;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+#gallery button:hover {
+	background-color: #ffffff;
+	color: #000000;
+}
+
+/* controls block becomes overlay container */
+.gallery-controls {
+	position: absolute;
+	inset: 0;
+	pointer-events: none; /* allow clicks through except buttons */
+	margin: 0;
+	padding: 0;
+}
+
+/* label stays near top-left so it's still usable */
+#galleryPageLabel {
+	position: absolute;
+	top: var(--gallery-page-label-top);
+	left: var(--gallery-page-label-left);
+	transform: var(--gallery-page-label-transform);
+	display: var(--gallery-page-label-display);
+	color: var(--gallery-page-label-color);
+	font-family: var(--gallery-page-label-font-family);
+	font-size: var(--gallery-page-label-font-size);
+	opacity: var(--gallery-page-label-opacity);
+	user-select: none;
+	pointer-events: none;
+}
+
+/* make the two existing buttons float at 50% height */
+#galleryPrev,
+#galleryNext {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 10;
+	pointer-events: auto; /* clickable */
+	margin-right: 0;
+	padding: 10px 14px;
+	font-size: 14px;
+	opacity: 0.85;
+}
+
+#galleryPrev:hover,
+#galleryNext:hover {
+	opacity: 1;
+}
+
+/* left: ~5% from left edge */
+#galleryPrev { left: 5%; }
+
+/* right: ~5% from right edge */
+#galleryNext { right: 5%; }
+
+/* 2 x 5 gallery grid */
+.gallery-grid {
+	flex: 1 1 auto;
+	display: grid;
+	grid-template-columns: repeat(var(--gallery-columns), 1fr);
+	grid-template-rows: repeat(var(--gallery-rows), 1fr);
+	gap: var(--gallery-gap);
+	min-height: 0; /* important in flex column */
+}
+
+/* gallery tiles */
+.thumb {
+	background-color: #111;
+	cursor: pointer;
+	overflow: hidden;
+	border-radius: var(--gallery-radius);
+}
+
+.thumb:hover { background-color: #222; }
+
+/* gallery images: neutral */
+#gallery img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 0;
+	background: none;
+	box-shadow: none;
+	outline: none;
+	object-fit: cover;
+}

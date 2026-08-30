@@ -1,0 +1,39 @@
+<!-- /index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<link rel="stylesheet" href="/css/page03.css">
+</head>
+
+<body>
+	<!-- full-page background -->
+	<div id="index-bg"></div>
+
+	<!-- header -->
+	<header id="index-header">
+	<!--	<h1>Project Title</h1> -->
+	</header>
+
+	<!-- carousel wrapper -->
+	<main id="index-main">
+		<div id="index-carousel">
+			<button id="indexPrev" type="button" aria-label="Previous">◀</button>
+
+			<div id="index-track">
+				<!-- 3 visible tiles, filled by JS -->
+				<div class="index-tile" data-slot="left"></div>
+				<div class="index-tile" data-slot="center"></div>
+				<div class="index-tile" data-slot="right"></div>
+			</div>
+
+			<button id="indexNext" type="button" aria-label="Next">▶</button>
+		</div>
+	</main>
+
+	<script src="/js/carousel_page03.js"></script>
+
+</body>
+</html>
