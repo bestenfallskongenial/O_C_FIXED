@@ -126,7 +126,7 @@ void            CKernel::bulkLoad                   (           char*       p_fi
 {
                 p_prevFiles = p_validFiles;
 #ifdef __LOG_FILE__
-                storeLogHex(    MY_BFR, MY_IDX, ">:", m_Timer.GetClockTicks(), "   BULKLOAD Start  scanned", (u32)p_scannedFiles, "valid", (u32)p_validFiles, "  size", (u32)p_fileSize );
+                storeLogHex(    MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "   BULKLOAD Start  scanned", (u32)p_scannedFiles, "valid", (u32)p_validFiles, "  size", (u32)p_fileSize );
 #endif
                 for (unsigned i = p_prevFiles; i < p_prevFiles + p_scannedFiles; ++i)
             //  for (unsigned i = 0; i < p_scannedFiles; ++i) 
@@ -146,7 +146,7 @@ void            CKernel::bulkLoad                   (           char*       p_fi
                         }
                     }
 #ifdef __LOG_FILE__
-                storeLogHex(    MY_BFR, MY_IDX, ">:", m_Timer.GetClockTicks(), "BULKLOAD End       prev", (u32)p_prevFiles, "  new", (u32)p_validFiles, "loaded", (u32)(p_validFiles - p_prevFiles) );
+                storeLogHex(    MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "BULKLOAD End       prev", (u32)p_prevFiles, "  new", (u32)p_validFiles, "loaded", (u32)(p_validFiles - p_prevFiles) );
                 nextline(       MY_BFR, MY_IDX );
 #endif
 }

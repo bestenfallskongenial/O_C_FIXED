@@ -62,7 +62,6 @@ void            CKernel::buttonConsumer(int buttonA, int buttonB)
                         }
                     return;
                     }
-
                 if (g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonB][BTN_HOLD_TICK])
                     {
                     stepLayer      = 2;
@@ -71,7 +70,6 @@ void            CKernel::buttonConsumer(int buttonA, int buttonB)
 
                     return;
                     }
-
                 if (g_buttons_states[buttonB][BTN_HOLD_TICK] && !g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonA][BTN_SINGLE])
                     {
                     g_menuLayer    = stepLayer;
@@ -79,7 +77,6 @@ void            CKernel::buttonConsumer(int buttonA, int buttonB)
 
                     return;
                     }
-
                 if (g_buttons_states[buttonB][BTN_HOLD_TICK] && g_buttons_states[buttonA][BTN_SINGLE])
                     {
                     bool layerAvailable = false;
@@ -89,14 +86,10 @@ void            CKernel::buttonConsumer(int buttonA, int buttonB)
 
                         if (stepLayer > ACCESSIBLE_LAYER) stepLayer = 3;
 
-                        layerAvailable =    (   layerModeMap[stepLayer] &   (   modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][0]] | 
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][1]] |
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][2]] | 
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][3]] |
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][4]] | 
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][5]] |
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][6]] | 
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][7]]   ) ) != 0;
+                        layerAvailable =    (   layerModeMap[stepLayer] &   (   modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][0]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][1]] | 
+                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][2]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][3]] |
+                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][4]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][5]] | 
+                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][6]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][7]] ) ) != 0;
                         }
                     while (!layerAvailable);
 
@@ -136,7 +129,6 @@ void            CKernel::set_mode_roof_map          (uint8_t block)
                         g_modeRoof[row] = g_valueRoof[block][slot];
                         continue;
                         }
-
                     uint8_t dst = 0;
 
                     const uint8_t baseLen = g_valueRoof[block][slot];       // base group length comes from g_valueRoof for MAP_MODE blocks (e.g. 5,5,5,5)
@@ -158,7 +150,6 @@ void            CKernel::set_mode_roof_map          (uint8_t block)
                             g_modeMap[row][dst++] = g_groupModes[group][i];
                             }
                         }
-
                     g_modeRoof[row] = dst;
                     }
 }
@@ -178,7 +169,6 @@ void            CKernel::mapMenuGroup               (uint8_t block)
                     {
                     g_centralModeBuffer[g_currentProgramBuffer][base + 0] = v;
                     }
-
                 v = (g_inOutMatrixInt[5][RAW] * g_modeRoof[base + 1]) >> 10;
 
                 if (!g_menuPickUpFlag[base + 1] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 1])
@@ -189,7 +179,6 @@ void            CKernel::mapMenuGroup               (uint8_t block)
                     {
                     g_centralModeBuffer[g_currentProgramBuffer][base + 1] = v;
                     }
-
                 v = (g_inOutMatrixInt[6][RAW] * g_modeRoof[base + 2]) >> 10;
 
                 if (!g_menuPickUpFlag[base + 2] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 2])
@@ -200,7 +189,6 @@ void            CKernel::mapMenuGroup               (uint8_t block)
                     {
                     g_centralModeBuffer[g_currentProgramBuffer][base + 2] = v;
                     }
-
                 v = (g_inOutMatrixInt[7][RAW] * g_modeRoof[base + 3]) >> 10;
 
                 if (!g_menuPickUpFlag[base + 3] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 3])

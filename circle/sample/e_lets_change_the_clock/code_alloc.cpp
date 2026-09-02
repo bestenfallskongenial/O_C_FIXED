@@ -19,7 +19,7 @@ char**          CKernel::allocBufferMEM             (           size_t      p_co
 #endif
                     }
 #ifdef __LOG_ALLOC__
-                storeLogHex(    MY_BFR, MY_IDX, ":>", m_Timer.GetClockTicks(), "ALLOC-MEM done", (u32)buffers, "count", (u32)p_count, "size", (u32)bufferSize);
+                storeLogHex(    MY_BFR, MY_IDX, ":>", getClockMilliseconds(), "ALLOC-MEM done", (u32)buffers, "count", (u32)p_count, "size", (u32)bufferSize);
                 nextline(       MY_BFR, MY_IDX );       
 #endif         
                 msDelay(100);
@@ -54,7 +54,7 @@ char**          CKernel::allocBufferDMA             (           size_t      p_co
                     }
 #ifdef __LOG_ALLOC__
                 nextline(       MY_BFR, MY_IDX);
-                storeLogHex(    MY_BFR, MY_IDX, ":>", m_Timer.GetClockTicks(), "ALLOC-DMA raw", (u32)raw, "block", (u32)dma_block, "total", (u32)total_size );
+                storeLogHex(    MY_BFR, MY_IDX, ":>", getClockMilliseconds(), "ALLOC-DMA raw", (u32)raw, "block", (u32)dma_block, "total", (u32)total_size );
 #endif
                 *blockBaseOut   = dma_block;
                 *rawBlockOut    = raw;
