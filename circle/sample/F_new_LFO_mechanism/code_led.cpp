@@ -68,7 +68,7 @@ void            CKernel::menuLedUpdate()
                     showBank = 1;
                     }
 
- * Layer 0: Show the live output of the last selected channel bank. Every channel uses the color of its stored mode.
+// Layer 0: Show the live output of the last selected channel bank. Every channel uses the color of its stored mode.
 
                 if (g_menuLayer == 0)
                     {
