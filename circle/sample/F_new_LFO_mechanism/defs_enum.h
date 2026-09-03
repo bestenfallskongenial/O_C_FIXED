@@ -12,8 +12,8 @@ enum centralModeBuffer
     MODE_CH6,               // store the mode ( from g_modeTable[] ) for cannel 6
     MODE_CH7,               // store the mode ( from g_modeTable[] ) for cannel 7
 // block 02 / layer 3 - 08
-    LF1_WAVE,               // stores waveform for lfo1 ( from g_waveTable[WAVEFORMS_COUNT][WAVESAMPLES] ) 
-    LF2_WAVE,               // stores waveform for lfo2 ( from g_waveTable[WAVEFORMS_COUNT][WAVESAMPLES] )
+    LF1_WAVE,               // stores waveform for lfo1 from m_bufferLfo[waveTableCount][LFO_SAMPLES]
+    LF2_WAVE,               // stores waveform for lfo2 from m_bufferLfo[waveTableCount][LFO_SAMPLES]
     LF1_MULT,               // stores the multiplier for lfo1 ( from g_lfoMultiplier[LFO_MULTIPLIERS_COUNT] )
     LF2_MULT,               // stores the multiplier for lfo1 ( from g_lfoMultiplier[LFO_MULTIPLIERS_COUNT] )
 // block 03 / layer 4 - 12
@@ -141,6 +141,20 @@ enum lfo_bpm_types
     IREG,                                           // irregularity ... is not really bpm/lfo but audio therefore... it fits so nicely here
     LFO_BPM_COUNT								    // 15
 };
+
+enum waveTableNames
+{
+    waveSinus,
+    waveTriangle,
+    waveRampUp,
+    waveRampDown,
+    waveTrapezoid,
+    waveSmoothUp,
+    waveSmoothDown,
+    waveExponential,
+
+    waveTableCount
+};
 //------------------------------------------------- // unsigned int g_buttons_states[BUTTON_COUNT][5] = {0} !!!
 enum ButtonTSIndex  
 {
@@ -163,6 +177,9 @@ enum FileType
     FT_KLN,                                         		// kernel
     FRM_BF,                                         		// output-frames A & B
     FT_LOG,                                         		// log-buffer
+    
+    FT_LFO,
+
     FT_COUNT
 };
 enum FileField

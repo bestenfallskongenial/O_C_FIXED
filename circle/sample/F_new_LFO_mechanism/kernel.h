@@ -214,6 +214,38 @@ public:
 
                 void        menuLedUpdate                   (); // current!!
                 void        circleLedColor            ();
+// code_lfo.cpp
+                void        generateWaveSinus            (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveTriangle         (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveRampUp           (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveRampDown         (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveTrapezoid        (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveSmoothUp         (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveSmoothDown       (              char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);
+
+                void        generateWaveExponential        (   char**                          p_buffer,
+                                                                        int                             p_index,
+                                                                        int                             p_count);                
 // code_log.cpp:
                 void        storeLogHex                 (               char*                           p_buffer,                    // +++
                                                                         u32&                            index,
@@ -374,6 +406,12 @@ public:
                                                                         int                             p_lfoIn, 
                                                                         int                             p_lfoOut,
                                                                         int                             p_samples);   // NEW p_samples is the max sample -1 
+
+                void        sample1WaveTable            (               char**                          p_buffer,
+                                                                        int                             p_source,
+                                                                        int                             p_lfoIn,
+                                                                        int                             p_lfoOut,
+                                                                        int                             p_samples);                                                                        
 // code_vc_mmal_api.cpp 
                 bool        framePollerMMAL             (               u32                             nal_block_offset,               // comes from the pooler -> h264 struct 
                                                                         u32                             nal_block_length);              // same same
@@ -492,9 +530,12 @@ public:
 
                 void        FATCallback                 (               void );
 
-#include "defs_member.h"
-#include "table_lfo.cpp"
-#include "table_col.cpp"
+                bool        wrapperGenerateWaveTables   (               char**                          p_buffer,
+                                                                        int                             p_count);                
+
+        #include "defs_member.h"
+//      #include "table_lfo.cpp"
+//      #include "table_col.cpp"
 };
 
 #endif

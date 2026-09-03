@@ -17,6 +17,7 @@ OBJS  = main.o \
         code_graphics_run.o \
         code_hardware.o \
         code_led.o \
+        code_lfo.o \
         code_log.o \
         code_menu.o \
         code_midi.o \

@@ -2,7 +2,7 @@
 
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
     #define MY_IDX    m_logKernelIndex
-
+/*
 void            CKernel::circleLedColor()        // simple display_debug / feedback function
 {
                 static int counter = 0;
@@ -14,6 +14,23 @@ void            CKernel::circleLedColor()        // simple display_debug / feedb
                 WS2812_SetLED(LED_C, (g_waveTable[WAVE_SINE][(3 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(1 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(2 * counter) % 255] >> 6));
 
                 WS2812_SetLED(LED_D, (g_waveTable[WAVE_SINE][(2 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(1 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(3 * counter) % 255] >> 6));
+
+                WS2812_Update();
+
+                counter++;
+}
+*/
+void            CKernel::circleLedColor()
+{
+                static int counter = 0;
+
+                WS2812_SetLED(LED_A, (((uint16_t*)m_bufferLfo[waveSinus])[(1 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(2 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(3 * counter) % LFO_SAMPLES] >> 6));
+
+                WS2812_SetLED(LED_B, (((uint16_t*)m_bufferLfo[waveSinus])[(2 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(3 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(1 * counter) % LFO_SAMPLES] >> 6));
+
+                WS2812_SetLED(LED_C, (((uint16_t*)m_bufferLfo[waveSinus])[(3 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(1 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(2 * counter) % LFO_SAMPLES] >> 6));
+
+                WS2812_SetLED(LED_D, (((uint16_t*)m_bufferLfo[waveSinus])[(2 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(1 * counter) % LFO_SAMPLES] >> 6), (((uint16_t*)m_bufferLfo[waveSinus])[(3 * counter) % LFO_SAMPLES] >> 6));
 
                 WS2812_Update();
 
@@ -40,14 +57,8 @@ void            CKernel::menuLedUpdate()
                 const int *colorC;
                 const int *colorD;
 
-/*
- * Remember the last channel bank.
- *
- * Layer 1 selects channel 0-3.
- * Layer 2 selects channel 4-7.
- *
- * Layers 3 and higher do not alter the remembered bank.
- */
+// Remember the last channel bank. Layer 1 selects channel 0-3. Layer 2 selects channel 4-7. Layers 3 and higher do not alter the remembered bank.
+
                 if (g_menuLayer == 1)
                     {
                     showBank = 0;
@@ -57,12 +68,8 @@ void            CKernel::menuLedUpdate()
                     showBank = 1;
                     }
 
-/*
- * Layer 0:
- *
- * Show the live output of the last selected channel bank.
- * Every channel uses the color of its stored mode.
- */
+ * Layer 0: Show the live output of the last selected channel bank. Every channel uses the color of its stored mode.
+
                 if (g_menuLayer == 0)
                     {
                     block = showBank;
@@ -79,15 +86,8 @@ void            CKernel::menuLedUpdate()
                     colorD = g_modeColor[g_centralModeBuffer[g_currentProgramBuffer][base + 3]];
                     }
 
-/*
- * Layer 1 and 2:
- *
- * Show the block base color before pickup.
- * Show the stored mode color after pickup.
- *
- * The mode color itself represents the discrete mode value, so these
- * layers do not use the sine table for their brightness.
- */
+// Layer 1 and 2: Show the block base color before pickup. Show the stored mode color after pickup. The mode color itself represents the discrete mode value, so these layers do not use the sine table for their brightness.
+
                 else if (g_menuLayer == 1 || g_menuLayer == 2)
                     {
                     block = g_menuLayer - 1;
@@ -135,13 +135,8 @@ void            CKernel::menuLedUpdate()
                         }
                     }
 
-/*
- * Every layer above 2:
- *
- * Show the block base color at full level before pickup.
- * After pickup, retain the block color and represent the stored value
- * through the existing sine-table quantization.
- */
+// Every layer above 2: Show the block base color at full level before pickup. After pickup, retain the block color and represent the stored value through the existing sine-table quantization.
+
                 else
                     {
                     block = g_menuLayer - 1;
@@ -159,7 +154,8 @@ void            CKernel::menuLedUpdate()
                     else
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 0] * offset) % 255;
-                        levelA = g_waveTable[WAVE_SINE][idx];
+                        levelA = ((uint16_t*)m_bufferLfo[waveSinus])[idx];
+                    //  levelA = g_waveTable[WAVE_SINE][idx];
                         }
 
                     if (!g_menuPickUpFlag[base + 1])
@@ -169,7 +165,8 @@ void            CKernel::menuLedUpdate()
                     else
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 1] * offset) % 255;
-                        levelB = g_waveTable[WAVE_SINE][idx];
+                        levelB = ((uint16_t*)m_bufferLfo[waveSinus])[idx];                        
+                    //  levelB = g_waveTable[WAVE_SINE][idx];
                         }
 
                     if (!g_menuPickUpFlag[base + 2])
@@ -179,7 +176,8 @@ void            CKernel::menuLedUpdate()
                     else
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 2] * offset) % 255;
-                        levelC = g_waveTable[WAVE_SINE][idx];
+                        levelC = ((uint16_t*)m_bufferLfo[waveSinus])[idx];                        
+                    //  levelC = g_waveTable[WAVE_SINE][idx];
                         }
 
                     if (!g_menuPickUpFlag[base + 3])
@@ -189,7 +187,8 @@ void            CKernel::menuLedUpdate()
                     else
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 3] * offset) % 255;
-                        levelD = g_waveTable[WAVE_SINE][idx];
+                        levelD = ((uint16_t*)m_bufferLfo[waveSinus])[idx];                        
+                    //  levelD = g_waveTable[WAVE_SINE][idx];
                         }
                     }
 

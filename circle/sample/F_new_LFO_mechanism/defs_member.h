@@ -149,22 +149,22 @@ public:         // Logging
                 size_t 				m_textureBlockSize                              = 0;
 
                 char**				m_bufferKnl                                     = nullptr;
-                char*                           m_kernelBlockBase                               = nullptr;
-                char*                           m_kernelRawBlock                                = nullptr;
-                size_t                          m_kernelBlockSize                               = 0;
-
                 char**				m_bufferLog                                     = nullptr;
-                char*                           m_loggerBlockBase                               = nullptr;
-                char*                           m_loggerRawBlock                                = nullptr;
-                size_t                          m_loggerBlockSize                               = 0;
 
                 char** 				m_bufferVsh                                     = nullptr;
                 char** 				m_bufferOmf                                     = nullptr;                
                 char** 				m_bufferFsh                                     = nullptr; 
+
+                char**                          m_bufferLfo                                     = nullptr;
+                
 // the populated filecounter array - source and truth and hub for init and load                                MAXSD   MAXUSB    EXTCNT     SCANNED   LOADED  PREV    V_CNT    SIZE  
                 unsigned                        filecounter[FT_COUNT][FLD_COUNT]                =       {   { VSH_SD, VSH_USB,  VSH_EXT,    0,        0,      0,      0,       VSH_SIZ },  // VSH vertex shader
                                                                                                             { OMF_SD, OMF_USB,  OMF_EXT,    0,        0,      0,      0,       OMF_SIZ },  // OMF overlay fragment shader
                                                                                                             { FSH_SD, FSH_USB,  FSH_EXT,    0,        0,      0,      0,       FSH_SIZ },  // FSH user fragment shader
+
+                                                                                                            { LFO_SD, LFO_USB,        0,    0,        0,      0,      0,       LFO_SIZ },
+
+                                                                                                            
                                                                                                             { OMT_SD, OMT_USB,  OMT_EXT,    0,        0,      0,      0,       OMT_SIZ },  // OMT overlay texture ( atlas)
                                                                                                             { TEX_SD, TEX_USB,  TEX_EXT,    0,        0,      0,      0,       TEX_SIZ },  // TEX user texture
                                                                                                             { VID_SD, VID_USB,  VID_EXT,    0,        0,      0,      0,       VID_SIZ },  // VID video buffer

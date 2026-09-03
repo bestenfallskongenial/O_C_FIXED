@@ -187,7 +187,12 @@ boolean			CKernel::Initialize						(	void )
                     if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "System Variables Setup                  DONE");
 #endif
                     }
+                if (bOK)
+                    {
+                    bOK = wrapperGenerateWaveTables( m_bufferLfo, LFO_SAMPLES);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperGenerateWaveTables()            DONE");
+#endif
+                    }                    
                 return bOK;
 }
-
-

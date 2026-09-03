@@ -1,16 +1,13 @@
 /*
         this file contains the system relevant macros that defines functionality
-*/        
+*/
+
+// here we define the firmware version to log /  show on startup 
     #define         OS_VERSION                  2
     #define         OS_REVISION                 1
-
-    #define         TARGET_FPS                  24
-
+// here we define the log/debug level preprocessor 
     #define 		LOGLEVEL				    2	                            // 0: only panic / 1: also errors / 2: also warnings / 3: also notices / 4: also debug output (default))
-
-//  #define         USE_MIDI
-
-
+//  #define         USE_MIDI                                                    // im not sure about this "mode" - the use requires a powered/buffered usb midi device
     #define         __LOG_ALLOC__                                               // allocation / buffer allocation logging
     #define         __LOG_FILE__                                                // filesystem / file load-store logging
     #define         __LOG_MEMORY__                                              // logs the memory map, only used ones
@@ -26,7 +23,7 @@
 
     #define         __DEBUG_GL__                                                // GL/EGL runtime check() calls
     
-    #define         __DEBUG_TIMING__
+    #define         __DEBUG_TIMING__                                            // shows the framerates
 
 //  #define         __DUMP_HEADER__    
 //  #define         __DUMP_GLSL__                                               // dump shader source from GL
@@ -38,7 +35,7 @@
 
     #define         HEAP_DEBUG                                                  // heap dump / CMemorySystem::DumpStatus() - is already set!
 
-// to prepare filecounter[FT_COUNT][FLD_COUNT]
+// to prepare filecounter[FT_COUNT][FLD_COUNT] for sd
 
     #define         VSH_SD             		1	// max number of u_vertex shader on sd
     #define         OMF_SD             		1	// max number of fragment shader on sd
@@ -50,25 +47,31 @@
     #define         FRM_SD                  1   // i put them here because if my mem/dma allocation
     #define         LOG_SD                  16  // here is the trick:
 
+    #define         LFO_SD                  16
+
     #define         LOG_SYS_0               0   // m_bufferLog[] slot for INIT, ALLOC, FILE, MEMORY 
     #define         LOG_DUMMY_0             1
     #define         LOG_DUMMY_1             2
     #define         LOG_USERFILE            3
 
-    #define         LOG_GLSL_0              4   // m_bufferLog[] slot for GLSL - shader / texture init
-    #define         LOG_VCSM_0              5   // m_bufferLog[] slot for VCSM
-    #define         LOG_MMAL_0              6   // m_bufferLog[] slot for MMAL / Framedata
-    #define         LOG_TEX_0               7   // m_bufferLog[] slot for TEXTURES - parser
+// the definitions for the different log buffer elements
 
-    #define         LOG_VID_0               8   // m_bufferLog[] slot for video 0 - parser  
-    #define         LOG_VID_1               9
-    #define         LOG_VID_2               10
-    #define         LOG_VID_3               11
+        #define     LOG_GLSL_0              4   // m_bufferLog[] slot for GLSL - shader / texture init
+        #define     LOG_VCSM_0              5   // m_bufferLog[] slot for VCSM
+        #define     LOG_MMAL_0              6   // m_bufferLog[] slot for MMAL / Framedata
+        #define     LOG_TEX_0               7   // m_bufferLog[] slot for TEXTURES - parser
 
-    #define         LOG_VID_4               12
-    #define         LOG_VID_5               13
-    #define         LOG_VID_6               14
-    #define         LOG_VID_7               15
+        #define     LOG_VID_0               8   // m_bufferLog[] slot for video 0 - parser  
+        #define     LOG_VID_1               9
+        #define     LOG_VID_2               10
+        #define     LOG_VID_3               11
+
+        #define     LOG_VID_4               12
+        #define     LOG_VID_5               13
+        #define     LOG_VID_6               14
+        #define     LOG_VID_7               15
+
+// to prepare filecounter[FT_COUNT][FLD_COUNT] for usb
 
     #define         VSH_USB                 0	// max number of u_vertex shader on sd
     #define         OMF_USB            		0	// max number of fragment shader on sd
@@ -79,6 +82,11 @@
     #define         KLN_USB                 1   // max number of kernel.img ( loaded if present for update ) 
     #define         FRM_USB                 0   // no additional frm "files"
     #define         LOG_USB                 0   // no additional log "files"
+
+    #define         LFO_USB                 0
+
+// to define the number of filenames per filetype    
+
     #define         VSH_EXT                 1   // the file extensions 
     #define         OMF_EXT                 1
     #define         FSH_EXT                 1
@@ -86,6 +94,9 @@
     #define         TEX_EXT                 1
     #define         VID_EXT                 1
     #define         KLN_EXT                 1
+
+// the allocated buffer size per file / data type  
+    
     #define         VSH_SIZ                 (1024*32)           // 32kb
     #define         OMF_SIZ                 (1024*32)           // 32kb
     #define         FSH_SIZ                 (1024*32)           // 32kb
@@ -95,6 +106,8 @@
     #define         KLN_SIZ                 (1024*1024*2)       // 2mb
     #define         FRM_SIZ                 (1024*1024)         // 1mb
     #define         LOG_SIZ                 (1024*128)          // 128kb
+
+    #define         LFO_SIZ                 (1024*32)           // 32kb
 
     #define         LOG_KERNEL_SIZE         (1024*32) // bigger will break my code!!
 
@@ -107,13 +120,20 @@
 
     #define 		FILENAME_KNL			"kernel.img"                         // for logger
 // LFO
-    #define         WAVEFORMS_COUNT         4		// number of lfo waves
-    #define         WAVESAMPLES             256  	// number of samples per lfo waves
+//  #define         WAVEFORMS_COUNT         4		// number of lfo waves
+//  #define         WAVESAMPLES             256  	// number of samples per lfo waves
 
-    #define         WAVE_SINE               0
+//  #define         WAVE_SINE               0
     
-    #define 		LFO_INSTANCES			2
-    #define			LFO_MULTIPLIERS_COUNT	7
+//  #define 		LFO_INSTANCES			2
+//  #define			LFO_MULTIPLIERS_COUNT	7
+
+        #define         LFO_SAMPLES             1024
+
+        #define         LFO_INSTANCES           2
+        #define         LFO_MULTIPLIERS_COUNT   7
+
+        #define         LFO_AMPLITUDE           1024
 
     #define         SLOTS                   FSH_SD + FSH_USB + 1                // for the g_centralModeBuffer[SLOTS][MODETABLE_COUNT] array -  
                                                                                     // 1 firmware / 32 user / 1 default slot
@@ -167,3 +187,4 @@
 
     #define         FLAG_THRESHOLD          7
 
+    #define         TARGET_FPS                  24
