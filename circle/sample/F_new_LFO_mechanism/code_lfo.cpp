@@ -1,3 +1,8 @@
+#include "kernel.h"
+
+    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
+    #define MY_IDX    m_logKernelIndex
+    
 void CKernel::generateWaveSinus(char** p_buffer, int p_index, int p_count)
 {
     uint16_t* f_buffer = (uint16_t*)p_buffer[p_index];
