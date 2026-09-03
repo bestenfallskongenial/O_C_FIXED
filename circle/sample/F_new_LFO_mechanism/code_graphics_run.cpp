@@ -241,7 +241,7 @@ void            CKernel::fpsBreak()
                 check();
 #endif
 #ifdef __DEBUG_TIMING__
-                g_glDuration = - g_frameStart // (m_Timer.GetClockTicks() - g_frameStart) - g_runtimeDuration;
+                g_glDuration = - g_frameStart; // (m_Timer.GetClockTicks() - g_frameStart) - g_runtimeDuration;
 #endif
                 g_frameCurrent = getClockMilliseconds(); // m_Timer.GetClockTicks();
                 g_frameTarget  = g_frameStart + (1000 / TARGET_FPS); // g_frameStart + (1000000 / TARGET_FPS);
