@@ -164,7 +164,6 @@ public:         // Logging
 
                                                                                                             { LFO_SD, LFO_USB,        0,    0,        0,      0,      0,       LFO_SIZ },
 
-                                                                                                            
                                                                                                             { OMT_SD, OMT_USB,  OMT_EXT,    0,        0,      0,      0,       OMT_SIZ },  // OMT overlay texture ( atlas)
                                                                                                             { TEX_SD, TEX_USB,  TEX_EXT,    0,        0,      0,      0,       TEX_SIZ },  // TEX user texture
                                                                                                             { VID_SD, VID_USB,  VID_EXT,    0,        0,      0,      0,       VID_SIZ },  // VID video buffer

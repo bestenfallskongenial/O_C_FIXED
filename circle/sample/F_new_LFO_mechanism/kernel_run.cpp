@@ -75,7 +75,7 @@ TShutdownMode CKernel::Run(void)
                     getChannelModeA(6);
                     getChannelModeA(7);
 
-                    updateLED();
+                    menuLedUpdate();
 
                 //  sample1WaveTable( 0, LF1_WAVE, LF1, 255 );
                 //  sample1WaveTable( 1, LF2_WAVE, LF2, 255 );
