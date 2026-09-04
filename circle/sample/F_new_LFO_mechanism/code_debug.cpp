@@ -156,7 +156,7 @@ bool            CKernel::startupScreen( void )
 
 void CKernel::logInfoFrameRate(int row)
 {
-                char f_logBuffer[64];
+                char f_logBuffer[128];
                 u32  f_logIndex = 0;
 
                 f_logBuffer[0] = '\0';
