@@ -10,7 +10,7 @@ char**          CKernel::allocBufferMEM             (           size_t      p_co
                 char** buffers = (char**)malloc(p_count * sizeof(char*));
 #ifdef __LOG_ALLOC__
                 nextline(       MY_BFR, MY_IDX);     
-                storeLogHex(    MY_BFR, MY_IDX, "ALLOC-MEM base   ", (u32)buffers, " count", (u32)p_count, "size ", (u32)bufferSize );
+                storeLogHex(    MY_BFR, MY_IDX, "ALLOC-MEM base   ", (u32)buffers, " count", (u32)p_count, "size ", (u32)bufferSize, p_log);
 #endif
                 for (size_t i = 0; i < p_count; ++i) 
                     {
@@ -56,7 +56,7 @@ char**          CKernel::allocBufferDMA             (           size_t      p_co
                     }
 #ifdef __LOG_ALLOC__
                 nextline(       MY_BFR, MY_IDX);
-                storeLogHex(    MY_BFR, MY_IDX, ":>", getClockMilliseconds(), "ALLOC-DMA raw", (u32)raw, "block", (u32)dma_block, "total", (u32)total_size );
+                storeLogHex(    MY_BFR, MY_IDX, ":>", getClockMilliseconds(), "ALLOC-DMA raw", (u32)raw, "block", (u32)dma_block, "total", (u32)total_size, p_log );
 #endif
                 *blockBaseOut   = dma_block;
                 *rawBlockOut    = raw;
