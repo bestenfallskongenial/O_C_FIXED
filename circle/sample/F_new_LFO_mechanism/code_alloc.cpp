@@ -45,7 +45,7 @@ char**          CKernel::allocBufferDMA             (           size_t      p_co
                 char** buffers = new char*[p_count];
 #ifdef __LOG_ALLOC__ 
                 nextline( MY_BFR, MY_IDX );
-                toreLogHex(    MY_BFR, MY_IDX, p_log, X_VAL );
+                storeLogHex(    MY_BFR, MY_IDX, p_log, X_VAL );
 #endif
                 for (size_t i = 0; i < p_count; ++i)
                     {
