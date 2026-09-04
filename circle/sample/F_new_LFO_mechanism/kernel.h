@@ -28,12 +28,14 @@ public:
                 TShutdownMode   Run                     (               void );
 // code_alloc.cpp               !! TESTED AND APPROVED !!
                 char**      allocBufferMEM              (               size_t                          p_count,                // +++ number of buffer slots
-                                                                        size_t                          bufferSize);            // size of each buffer in bytes *** msleep ?!
+                                                                        size_t                          bufferSize,             // size of each buffer in bytes *** msleep ?!
+                                                                const   char*                           p_log);
                 char**      allocBufferDMA              (               size_t                          p_count,                // +++ number of buffer slots
                                                                         size_t                          bufferSize,             // size of each buffer in bytes
                                                                         char**                          blockBaseOut,           // receives 4K-aligned DMA block base
                                                                         char**                          rawBlockOut,            // receives original raw allocation pointer
-                                                                        size_t*                         alignedSizeOut);        // receives total aligned allocation size *** msleep ?!
+                                                                        size_t*                         alignedSizeOut,         // receives total aligned allocation size *** msleep ?!
+                                                                const   char*                           p_log);
                 void        clearBufferMEM              (               char**                          buffers,                // +++ buffer pointer table returned by allocBufferMEM()
                                                                         size_t                          p_count);               // number of buffers in the table
                 void        clearBufferDMA              (               char**                          buffers,                // +++ buffer pointer table returned by allocBufferDMA()

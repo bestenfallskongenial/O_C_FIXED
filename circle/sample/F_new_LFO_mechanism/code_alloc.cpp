@@ -4,7 +4,8 @@
     #define MY_IDX    m_logKernelIndex
 
 char**          CKernel::allocBufferMEM             (           size_t      p_count, 
-                                                                size_t      bufferSize ) 
+                                                                size_t      bufferSize 
+                                                        const   char*       p_log) 
 {
                 char** buffers = (char**)malloc(p_count * sizeof(char*));
 #ifdef __LOG_ALLOC__
@@ -30,7 +31,8 @@ char**          CKernel::allocBufferDMA             (           size_t      p_co
                                                                 size_t      bufferSize,
                                                                 char**      blockBaseOut,
                                                                 char**      rawBlockOut,
-                                                                size_t*     alignedSizeOut )
+                                                                size_t*     alignedSizeOut 
+                                                        const   char*       p_log )
 {
                 size_t total_size = p_count * bufferSize;
 

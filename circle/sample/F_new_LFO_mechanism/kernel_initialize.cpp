@@ -191,7 +191,7 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = wrapperGenerateWaveTables( m_bufferLfo, LFO_SAMPLES);
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperGenerateWaveTables()            DONE");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperGenerateWaveTables()             DONE");
 #endif
                     }                    
                 return bOK;

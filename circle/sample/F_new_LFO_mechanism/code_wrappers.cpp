@@ -7,11 +7,11 @@ bool            CKernel::wrapperInitDMA             (   )
 {
                 bool bOK = true;
 
-                if (bOK) { bOK = (m_bufferVid = allocBufferDMA  (  filecounter[FT_VID][FLD_MAXSD]+filecounter[FT_VID][FLD_MAXUSB], filecounter[FT_VID][FLD_SIZE], &m_videoBlockBase, &m_videoRawBlock, &m_videoBlockSize)); }
-                if (bOK) { bOK = (m_bufferFrA = allocBufferDMA  (  filecounter[FRM_BF][FLD_MAXSD]+filecounter[FRM_BF][FLD_MAXUSB], filecounter[FRM_BF][FLD_SIZE], &m_frameBlockBaseA, &m_frameRawBlockA, &m_frameBlockSizeA)); }
-                if (bOK) { bOK = (m_bufferFrB = allocBufferDMA  (  filecounter[FRM_BF][FLD_MAXSD]+filecounter[FRM_BF][FLD_MAXUSB], filecounter[FRM_BF][FLD_SIZE], &m_frameBlockBaseB, &m_frameRawBlockB, &m_frameBlockSizeB)); }
-                if (bOK) { bOK = (m_bufferOmt = allocBufferDMA  (  filecounter[FT_OMT][FLD_MAXSD]+filecounter[FT_OMT][FLD_MAXUSB], filecounter[FT_OMT][FLD_SIZE], &m_overlyBlockBase, &m_overlayRawBlock, &m_overlyBlockSize)); }
-                if (bOK) { bOK = (m_bufferTex = allocBufferDMA  (  filecounter[FT_TEX][FLD_MAXSD]+filecounter[FT_TEX][FLD_MAXUSB], filecounter[FT_TEX][FLD_SIZE], &m_textureBlockBase, &m_textureRawBlock, &m_textureBlockSize)); }
+                if (bOK) { bOK = (m_bufferVid = allocBufferDMA  (  filecounter[FT_VID][FLD_MAXSD]+filecounter[FT_VID][FLD_MAXUSB], filecounter[FT_VID][FLD_SIZE], &m_videoBlockBase, &m_videoRawBlock, &m_videoBlockSize, "m_bufferVid")); }
+                if (bOK) { bOK = (m_bufferFrA = allocBufferDMA  (  filecounter[FRM_BF][FLD_MAXSD]+filecounter[FRM_BF][FLD_MAXUSB], filecounter[FRM_BF][FLD_SIZE], &m_frameBlockBaseA, &m_frameRawBlockA, &m_frameBlockSizeA, "m_bufferFrA")); }
+                if (bOK) { bOK = (m_bufferFrB = allocBufferDMA  (  filecounter[FRM_BF][FLD_MAXSD]+filecounter[FRM_BF][FLD_MAXUSB], filecounter[FRM_BF][FLD_SIZE], &m_frameBlockBaseB, &m_frameRawBlockB, &m_frameBlockSizeB, "m_bufferFrB")); }
+                if (bOK) { bOK = (m_bufferOmt = allocBufferDMA  (  filecounter[FT_OMT][FLD_MAXSD]+filecounter[FT_OMT][FLD_MAXUSB], filecounter[FT_OMT][FLD_SIZE], &m_overlyBlockBase, &m_overlayRawBlock, &m_overlyBlockSize, "m_bufferOmt")); }
+                if (bOK) { bOK = (m_bufferTex = allocBufferDMA  (  filecounter[FT_TEX][FLD_MAXSD]+filecounter[FT_TEX][FLD_MAXUSB], filecounter[FT_TEX][FLD_SIZE], &m_textureBlockBase, &m_textureRawBlock, &m_textureBlockSize,"m_bufferTex")); }
                 return bOK;                    
 }
 
@@ -19,13 +19,13 @@ bool            CKernel::wrapperInitMEM             (   )
 {
                 bool bOK = true;
 
-                if (bOK) { bOK = (m_bufferKnl = allocBufferMEM( filecounter[FT_KLN][FLD_MAXSD]+filecounter[FT_KLN][FLD_MAXUSB], filecounter[FT_KLN][FLD_SIZE])); }
-                if (bOK) { bOK = (m_bufferLog = allocBufferMEM( filecounter[FT_LOG][FLD_MAXSD]+filecounter[FT_LOG][FLD_MAXUSB], filecounter[FT_LOG][FLD_SIZE])); }                   
-                if (bOK) { bOK = (m_bufferVsh = allocBufferMEM( filecounter[FT_VSH][FLD_MAXSD]+filecounter[FT_VSH][FLD_MAXUSB], filecounter[FT_VSH][FLD_SIZE])); }
-                if (bOK) { bOK = (m_bufferOmf = allocBufferMEM( filecounter[FT_OMF][FLD_MAXSD]+filecounter[FT_OMF][FLD_MAXUSB], filecounter[FT_OMF][FLD_SIZE])); }
-                if (bOK) { bOK = (m_bufferFsh = allocBufferMEM( filecounter[FT_FSH][FLD_MAXSD]+filecounter[FT_FSH][FLD_MAXUSB], filecounter[FT_FSH][FLD_SIZE])); }
+                if (bOK) { bOK = (m_bufferKnl = allocBufferMEM( filecounter[FT_KLN][FLD_MAXSD]+filecounter[FT_KLN][FLD_MAXUSB], filecounter[FT_KLN][FLD_SIZE], "m_bufferKnl")); }
+                if (bOK) { bOK = (m_bufferLog = allocBufferMEM( filecounter[FT_LOG][FLD_MAXSD]+filecounter[FT_LOG][FLD_MAXUSB], filecounter[FT_LOG][FLD_SIZE], "m_bufferLog")); }                   
+                if (bOK) { bOK = (m_bufferVsh = allocBufferMEM( filecounter[FT_VSH][FLD_MAXSD]+filecounter[FT_VSH][FLD_MAXUSB], filecounter[FT_VSH][FLD_SIZE], "m_bufferVsh")); }
+                if (bOK) { bOK = (m_bufferOmf = allocBufferMEM( filecounter[FT_OMF][FLD_MAXSD]+filecounter[FT_OMF][FLD_MAXUSB], filecounter[FT_OMF][FLD_SIZE], "m_bufferOmf")); }
+                if (bOK) { bOK = (m_bufferFsh = allocBufferMEM( filecounter[FT_FSH][FLD_MAXSD]+filecounter[FT_FSH][FLD_MAXUSB], filecounter[FT_FSH][FLD_SIZE], "m_bufferFsh")); }
 
-                if (bOK) { bOK = (m_bufferLfo = allocBufferMEM( filecounter[FT_LFO][FLD_MAXSD]+filecounter[FT_LFO][FLD_MAXUSB], filecounter[FT_LFO][FLD_SIZE])); }
+                if (bOK) { bOK = (m_bufferLfo = allocBufferMEM( filecounter[FT_LFO][FLD_MAXSD]+filecounter[FT_LFO][FLD_MAXUSB], filecounter[FT_LFO][FLD_SIZE], "m_bufferLfo")); }
 
                 return bOK;
 }
