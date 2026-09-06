@@ -121,7 +121,7 @@ TShutdownMode CKernel::Run(void)
                             m_activeTex,
                             filecounter[FT_TEX][FLD_VALID]);                            
 
-                    setTexBackbuffer( &m_fsh, &m_tex );     // new
+                    setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
 
                     drawGLsPrg();
 
