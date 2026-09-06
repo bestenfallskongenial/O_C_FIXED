@@ -17,7 +17,7 @@
     #define         __LOG_VCSM__                                                // VCSM alloc/import/lock logging
     #define         __LOG_INIT__                                                // kernel initialization step logging
     #define         __LOG_RUNTIME__         // maybe i should rename it...
-//  #define         __LOG_GLSL__                                                // shader/program/uniform/gfx_check OpenGL logging
+    #define         __LOG_GLSL__                                                // shader/program/uniform/gfx_check OpenGL logging
 //  #define         __LOG_FIRST_FRAME__                                         // logs the fist frame vpu messaging - later useful
     #define         __LOG_TO_SCREEN__                                           // shows the log on the screen
 
