@@ -155,6 +155,74 @@ void            CKernel::setTexPrg                  (   olg_state*  o,
 #endif   
 }
 
+bool            CKernel::setTexBackbuffer           (   glsl_state* s,
+                                                        tex_state*  t,
+                                                        unsigned    p_validTextureCount )
+{
+                if (!t->gl_tex_bfr || t->u_tex_bfr[g_gl_program_current] == -1)
+                    {
+                    return false;
+                    }
+
+                GLint f_textureUnits = 0;
+                glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &f_textureUnits);
+
+                unsigned f_usedTextureUnits = 0;
+
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] == FLAG_THRESHOLD)
+                    {
+                    f_usedTextureUnits = p_validTextureCount;
+                    }
+                else if (p_validTextureCount == 1)
+                    {
+                    f_usedTextureUnits = 1;
+                    }
+                else if (p_validTextureCount > 1)
+                    {
+                    f_usedTextureUnits = 2;
+                    }
+
+                if (f_usedTextureUnits >= (unsigned)f_textureUnits)
+                    {
+                    return false;
+                    }
+
+                glActiveTexture(GL_TEXTURE0 + f_usedTextureUnits);
+                glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
+
+                glUniform1i(t->u_tex_bfr[g_gl_program_current], f_usedTextureUnits);
+
+#ifdef __DEBUG_GL__
+                check();
+#endif
+
+                return true;
+}
+
+void            CKernel::captureBackbuffer          (   olg_state*  o,
+                                                        tex_state*  t )
+{
+                if (!t->gl_tex_bfr)
+                    {
+                    return;
+                    }
+
+                glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
+
+                glCopyTexSubImage2D(    GL_TEXTURE_2D, 
+                                        0, 
+                                        0, 
+                                        0, 
+                                        0, 
+                                        0,
+                                        o->screen_width, 
+                                        o->screen_height);
+
+#ifdef __DEBUG_GL__
+                check();
+#endif
+}
+
 void            CKernel::drawGLsPrg                 (   )
 {
 #ifdef __DEBUG_GL__
