@@ -1,7 +1,7 @@
 #include "kernel.h"
 
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
-    #define MY_IDX    m_logKernelIndex
+    #define MY_IDX   m_logKernelIndex
 
 bool            CKernel::BMPparser                  (   tex_state*  t,
                                                         char*       p_buffer_array[],

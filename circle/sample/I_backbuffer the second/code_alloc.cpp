@@ -1,7 +1,7 @@
 #include "kernel.h"
 
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
-    #define MY_IDX    m_logKernelIndex
+    #define MY_IDX   m_logKernelIndex
 
 char**          CKernel::allocBufferMEM             (           size_t      p_count, 
                                                                 size_t      bufferSize, 
