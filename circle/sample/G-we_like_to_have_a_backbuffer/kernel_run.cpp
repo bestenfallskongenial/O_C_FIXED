@@ -16,8 +16,8 @@ TShutdownMode CKernel::Run(void)
                         wrapper_parser_sd();
                         wrapper_init_gl_sd();
 
-                        msDelay(3000);
-                        m_logKernelIndex = 0;
+                        msDelay(1000);
+                    //  m_logKernelIndex = 0;
                         bufferScreenClear();
 
                         m_SD_has_load = true;
@@ -28,25 +28,25 @@ TShutdownMode CKernel::Run(void)
                         wrapper_parser_usb();
                         wrapper_init_gl_usb();
 
-                        msDelay(3000);
-                        m_logKernelIndex = 0;
+                        msDelay(1000);
+                    //  m_logKernelIndex = 0;
                         bufferScreenClear();
 
                         m_USB_has_load = true;
                         }
                     if( m_SD_has_load && m_USB_has_load )
                         {
-                        saveFromBuffer         (   PARTITION_NAME_SD,
-                                                  /*gen83FileName("TXT"*/
-                                                    "bootlog.txt",
-                                                    m_logKernel,            // stores the pre-init buffer
-                                                    m_logKernelIndex );
 
-                                                    msDelay(100);
-                        saveFromBuffer         (   PARTITION_NAME_SD,
-                                                    "GLSL.txt",
-                                                    m_bufferLog[1],
-                                                    m_bufferLogIndex[1] );
+//                      saveFromBuffer         (   PARTITION_NAME_SD,
+//                                                /*gen83FileName("TXT"*/
+//                                                  "bootlog.txt",
+//                                                  m_logKernel,            // stores the pre-init buffer
+//                                                  m_logKernelIndex );
+
+//                      saveFromBuffer         (   PARTITION_NAME_SD,
+//                                                  "GLSL.txt",
+//                                                  m_bufferLog[1],
+//                                                  m_bufferLogIndex[1] );
 
                         m_logKernelIndex = 0;
                         bufferScreenClear();
