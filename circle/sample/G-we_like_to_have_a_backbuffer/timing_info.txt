@@ -1,0 +1,113 @@
+                     RASPBERRY PI SYSTEM TIMER
+                       microsecond time base
+                                |
+        +-----------------------+----------------------+
+        |                       |                      |
+        v                       v                      v
+  g_frameStart             direct delays         currentTime
+  once per loop          usDelay/msDelay        inside LFO sample
+        |                       |                      |
+        |                       +--> GPIO timing       |
+        |                       +--> SMI setup         |
+        |                       +--> startup pause     |
+        |                       `--> frame pacing      |
+        |                                              |
+        +----------------------+-----------------------+
+                               |
+              +----------------+----------------+
+              |                                 |
+              v                                 v
+       FRAME/POLL DOMAIN                   BPM/LFO DOMAIN
+       nominally 24 Hz                         |
+              |                                +-- tap timestamps
+              |                                +-- trigger timestamps
+              |                                +-- average interval
+              |                                +-- beat boundaries
+              |                                `-- continuous phase
+              |
+   +----------+-----------+--------------------------+
+   |          |           |                          |
+   v          v           v                          v
+ ADC       buttons     random                    shader time
+   |          |           |                          |
+   |          |           +--> trigger sample/hold   +--> u_time
+   |          |
+   |          +--> tap BPM source 0
+   |          +--> menu layer
+   |          `--> storage gesture
+   |
+   +--> RAW/VAL
+   |
+   +--> trigger edge --> timestamp --> BPM source 1
+   |
+   +--> audio ring --> AU0..AU3
+   |
+   +--> menu pots
+   |
+   `--> channel mode routing
+              |
+              v
+          OUT[0..7]
+              |
+              v
+      GLSL uniform upload
+              |
+              v
+       GPU command domain
+              |
+              v
+     EGL presentation/swap
+              |
+              +--> measured swap duration
+              |
+              `--> next frame's pacing prediction
+
+
+ASYNCHRONOUS SIDE DOMAINS
+
+USB MIDI packets
+      |
+      v
+MIDI callback
+      |
+      v
+latest MIDI state
+      |
+      `-------------> sampled by frame-domain channel routing
+
+
+ARM VCHI request
+      |
+      v
+VideoCore VCSM/MMAL service
+      |
+      v
+callback / VCOS event / receive queue
+      |
+      `-------------> initialization or decoded-buffer state
+
+
+frame-domain LED state
+      |
+      v
+pulse buffer
+      |
+      v
+DMA + SMI hardware timing
+      |
+      v
+WS2812 LEDs
+
+
+Circle	40 FPS µs	40 FPS ms	40 FPS cs	30 FPS µs	30 FPS ms	30 FPS cs	24 FPS µs	24 FPS ms	24 FPS cs	16 FPS µs	16 FPS ms	16 FPS cs	12 FPS µs	12 FPS ms	12 FPS cs
+0	      0	      0	      0	      0	      0	      0	      0	      0	      0	      0	      0	      0	      0	      0	      0
+1	      25,000	25	      2	      33,333	33	      3	      41,666	41	      4	      62,500	62	      6	      83,333	83	      8
+2	      50,000	50	      5	      66,666	66	      6	      83,333	83	      8	      125,000	125	      12	      166,666	166	      16
+3	      75,000	75	      7	      100,000	100	      10	      125,000	125	      12	      187,500	187	      18	      250,000	250	      25
+4	      100,000	100	      10	      133,333	133	      13	      166,666	166	      16	      250,000	250	      25	      333,333	333	      33
+5	      125,000	125	      12	      166,666	166	      16	      208,333	208	      20	      312,500	312	      31	      416,666	416	      41
+6	      150,000	150	      15	      200,000	200	      20	      250,000	250	      25	      375,000	375	      37	      500,000	500	      50
+7	      175,000	175	      17	      233,333	233	      23	      291,666	291	      29	      437,500	437	      43	      583,333	583	      58
+8	      200,000	200	      20	      266,666	266	      26	      333,333	333	      33	      500,000	500	      50	      666,666	666	      66
+9	      225,000	225	      22	      300,000	300	      30	      375,000	375	      37	      562,500	562	      56	      750,000	750	      75
+
