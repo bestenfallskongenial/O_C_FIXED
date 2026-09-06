@@ -36,14 +36,14 @@ TShutdownMode CKernel::Run(void)
                         }
                     if( m_SD_has_load && m_USB_has_load )
                         {
-                        saveFromBufferM         (   PARTITION_NAME_SD,
+                        saveFromBuffer         (   PARTITION_NAME_SD,
                                                   /*gen83FileName("TXT"*/
                                                     "bootlog.txt",
                                                     m_logKernel,            // stores the pre-init buffer
                                                     m_logKernelIndex );
 
                                                     msDelay(100);
-                        saveFromBufferM         (   PARTITION_NAME_SD,
+                        saveFromBuffer         (   PARTITION_NAME_SD,
                                                     "GLSL.txt",
                                                     m_bufferLog[1],
                                                     m_bufferLogIndex[1] );
