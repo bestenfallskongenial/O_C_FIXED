@@ -1,7 +1,10 @@
 #include "kernel.h"
 
-    #define MY_BFR  m_bufferLog[LOG_GLSL_0]
-    #define MY_IDX  m_bufferLogIndex[LOG_GLSL_0]
+    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
+    #define MY_IDX    m_logKernelIndex
+
+//  #define MY_BFR  m_bufferLog[LOG_GLSL_0]
+//  #define MY_IDX  m_bufferLogIndex[LOG_GLSL_0]
 
 bool            CKernel::shaderLog                  (   GLint       shader,
                                                         int         shaderIndex )
