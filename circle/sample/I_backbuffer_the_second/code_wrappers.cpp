@@ -324,6 +324,8 @@ void            CKernel::wrapper_init_gl_usb        (   )
                 initProgram     (   &m_vtx, &m_vsh, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_VALID]);            
                 initUniform     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_VALID]);            
                 initTexture     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_TEX][FLD_PREV], filecounter[FT_TEX][FLD_LOADED], filecounter[FT_TEX][FLD_VALID], GL_REPEAT, GL_REPEAT);
+
+                initTextureBackbuffer( &m_ogl, &m_tex ); // ???????????                              
 }
 
 // instead of having life time long structs for my vcsm / mmal i declare pointer instead and provide wrappers to alloc and free the structs after use!
