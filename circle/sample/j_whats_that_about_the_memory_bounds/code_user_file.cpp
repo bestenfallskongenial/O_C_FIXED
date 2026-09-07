@@ -1,7 +1,7 @@
 #include "kernel.h"
 
-    #define MY_BFR  m_bufferLog[8]                 // means the log goes into the pre-init buffer 
-    #define MY_IDX  m_bufferLogIndex[8]
+    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
+    #define MY_IDX   m_logKernelIndex 
 
 const char*     CKernel::bufferSourceModeName       (   u32         p_value)
 {
