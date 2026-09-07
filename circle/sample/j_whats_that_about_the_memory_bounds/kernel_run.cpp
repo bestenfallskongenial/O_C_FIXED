@@ -16,8 +16,8 @@ TShutdownMode CKernel::Run(void)
                         wrapper_parser_sd();
                         wrapper_init_gl_sd();
 
-                        msDelay(3000);
-                        m_logKernelIndex = 0;
+                    //  msDelay(3000);
+                    //  m_logKernelIndex = 0;
                         bufferScreenClear();
 
                         m_SD_has_load = true;
@@ -28,14 +28,25 @@ TShutdownMode CKernel::Run(void)
                         wrapper_parser_usb();
                         wrapper_init_gl_usb();
 
-                        msDelay(3000);
-                        m_logKernelIndex = 0;
+                    //  msDelay(3000);
+                    //  m_logKernelIndex = 0;
                         bufferScreenClear();
 
                         m_USB_has_load = true;
                         }
                     if( m_SD_has_load && m_USB_has_load )
                         {
+                        saveFromBuffer         (   PARTITION_NAME_SD,
+                                                  /*gen83FileName("TXT"*/
+                                                    "bootlog.txt",
+                                                    m_logKernel,            // stores the pre-init buffer
+                                                    m_logKernelIndex );
+
+                        saveFromBuffer         (   PARTITION_NAME_SD,
+                                                    "GLSL.txt",
+                                                    m_bufferLog[LOG_GLSL_0],
+                                                    m_bufferLogIndex[LOG_GLSL_0] );          
+
                         m_logKernelIndex = 0;
                         bufferScreenClear();
                         } 
@@ -77,22 +88,13 @@ TShutdownMode CKernel::Run(void)
 
                     menuLedUpdate();
 
-                //  sample1WaveTable( 0, LF1_WAVE, LF1, 255 );
-                //  sample1WaveTable( 1, LF2_WAVE, LF2, 255 );
-
                     sample1WaveTable( m_bufferLfo, 0, LF1_WAVE, LF1, 1023 );
                     sample1WaveTable( m_bufferLfo, 1, LF2_WAVE, LF2, 1023 );                    
 
                     predict1Beat( 0, LF1_MULT );
                     predict1Beat( 1, LF2_MULT ); 
                                        
-                //  logButtonStatesRuntime();
-
                     logModesRuntime( 0 );
-
-                //  logPickUpFlags( 9 );
-
-                //  logInOutRuntime( 10 );
 
                     logInfosRuntime( 10 );
 

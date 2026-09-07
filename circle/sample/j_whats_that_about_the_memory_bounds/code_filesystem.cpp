@@ -1,7 +1,7 @@
 #include "kernel.h"
 
-    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
-    #define MY_IDX    m_logKernelIndex
+    #define MY_BFR  m_bufferLog[LOG_SYS_0]
+    #define MY_IDX  m_bufferLogIndex[LOG_SYS_0]
 
 bool            CKernel::Mount                      (   const   char*       p_deviceName )
 {

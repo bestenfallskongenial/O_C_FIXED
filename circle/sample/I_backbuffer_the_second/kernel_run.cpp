@@ -38,15 +38,24 @@ TShutdownMode CKernel::Run(void)
                         {
                         saveFromBuffer         (   PARTITION_NAME_SD,
                                                   /*gen83FileName("TXT"*/
-                                                    "bootlog.txt",
+                                                    "boot.txt",
                                                     m_logKernel,            // stores the pre-init buffer
                                                     m_logKernelIndex );
+                        m_logKernelIndex = 0;
+                        
+                        saveFromBuffer         (   PARTITION_NAME_SD,
+                                                  /*gen83FileName("TXT"*/
+                                                    "system.txt",
+                                                    m_bufferLog[LOG_SYS_0],            // stores the pre-init buffer
+                                                    m_bufferLogIndex[LOG_SYS_0] );
+                        m_bufferLogIndex[LOG_SYS_0] = 0;
 
                         saveFromBuffer         (   PARTITION_NAME_SD,
                                                     "GLSL.txt",
                                                     m_bufferLog[LOG_GLSL_0],
                                                     m_bufferLogIndex[LOG_GLSL_0] );                            
-                        m_logKernelIndex = 0;
+                        m_bufferLogIndex[LOG_GLSL_0] = 0;
+
                         bufferScreenClear();
                         } 
 
