@@ -50,7 +50,7 @@
     #define         LFO_SD                  16
 
     #define         LOG_SYS_0               0   // m_bufferLog[] slot for INIT, ALLOC, FILE, MEMORY 
-    #define         LOG_DUMMY_0             1
+    #define         LOG_PARSER              1
     #define         LOG_DUMMY_1             2
     #define         LOG_USERFILE            3
 
