@@ -8,10 +8,10 @@
 // here we define the log/debug level preprocessor 
     #define 		LOGLEVEL				    2	                            // 0: only panic / 1: also errors / 2: also warnings / 3: also notices / 4: also debug output (default))
 //  #define         USE_MIDI                                                    // im not sure about this "mode" - the use requires a powered/buffered usb midi device
-    #define         __LOG_ALLOC__                                               // allocation / buffer allocation logging
-    #define         __LOG_FILE__                                                // filesystem / file load-store logging
-    #define         __LOG_MEMORY__                                              // logs the memory map, only used ones
-    #define         __LOG_PARSER__                                              // parser / file parser logging
+//  #define         __LOG_ALLOC__                                               // allocation / buffer allocation logging
+//  #define         __LOG_FILE__                                                // filesystem / file load-store logging
+//  #define         __LOG_MEMORY__                                              // logs the memory map, only used ones
+//  #define         __LOG_PARSER__                                              // parser / file parser logging
     #define         __LOG_MMAL__                                                // MMAL init/wrapper/message logging
     #define         __LOG_VC04__                                                // VC/VCHI service logging
     #define         __LOG_VCSM__                                                // VCSM alloc/import/lock logging
