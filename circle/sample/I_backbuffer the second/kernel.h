@@ -108,6 +108,8 @@ public:
                                                                         unsigned&                       valid_count,
                                                                         GLint                           wrap_s,
                                                                         GLint                           wrap_t);
+                bool        initTextureBackbuffer       (               olg_state*                      o,
+                                                                        tex_state*                      t);                                                                        
                 void        initUniform                 (               vtx_state*                      v,
                                                                         glsl_state*                     s,
                                                                         tex_state*                      t,
@@ -141,6 +143,12 @@ public:
                 void        setTexOvl                   (               olg_state*                      o, 
                                                                         glsl_state*                     s, 
                                                                         tex_state*                      t);
+                bool        setTexBackbuffer            (               glsl_state*                     s,
+                                                                        tex_state*                      t,
+                                                                        unsigned                        p_validTextureCount);
+
+                void        captureBackbuffer           (               olg_state*                      o,
+                                                                        tex_state*                      t);                                                                        
                 void        drawGLsOvl                  ();                  
 
                 void        fpsBegin                    ();
