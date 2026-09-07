@@ -42,10 +42,10 @@ TShutdownMode CKernel::Run(void)
                                                     m_logKernel,            // stores the pre-init buffer
                                                     m_logKernelIndex );
 
-//                      saveFromBuffer         (   PARTITION_NAME_SD,
-//                                                  "GLSL.txt",
-//                                                  m_bufferLog[LOG_GLSL_0],
-//                                                  m_bufferLogIndex[LOG_GLSL_0] );                            
+                        saveFromBuffer         (   PARTITION_NAME_SD,
+                                                    "GLSL.txt",
+                                                    m_bufferLog[LOG_GLSL_0],
+                                                    m_bufferLogIndex[LOG_GLSL_0] );                            
                         m_logKernelIndex = 0;
                         bufferScreenClear();
                         } 
