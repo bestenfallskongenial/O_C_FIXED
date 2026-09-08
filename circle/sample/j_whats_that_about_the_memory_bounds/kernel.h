@@ -108,6 +108,8 @@ public:
                                                                         unsigned&                       valid_count,
                                                                         GLint                           wrap_s,
                                                                         GLint                           wrap_t);
+                bool        initTextureBackbuffer       (               olg_state*                      o,
+                                                                        tex_state*                      t);                                                                        
                 void        initUniform                 (               vtx_state*                      v,
                                                                         glsl_state*                     s,
                                                                         tex_state*                      t,
@@ -133,6 +135,12 @@ public:
                                                                         tex_state*                      t,
                                                                         int                             gl_current_tex,
                                                                         unsigned                        p_validTextureCount);   // ?? UNTESTED ??
+                bool        setTexBackbuffer            (               glsl_state*                     s,
+                                                                        tex_state*                      t,
+                                                                        unsigned                        p_validTextureCount);
+
+                void        captureBackbuffer           (               olg_state*                      o,
+                                                                        tex_state*                      t);                                                                        
                 void        drawGLsPrg                  ();                                                                     // !! WORKS !!
         //      void        frmRateBreak                (               bool                            noTargetFPS);
                 void        setUniOvl                   (               olg_state*                      o, 
