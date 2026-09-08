@@ -154,7 +154,7 @@ void            CKernel::setTexPrg                  (   olg_state*  o,
                     }
 #endif   
 }
-#ifdef BACKBUFFER
+#ifdef USE_BACKBUFFER
 bool            CKernel::setTexBackbuffer           (   glsl_state* s,
                                                         tex_state*  t,
                                                         unsigned    p_validTextureCount )

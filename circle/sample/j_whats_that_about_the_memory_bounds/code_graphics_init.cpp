@@ -210,7 +210,7 @@ void            CKernel::initTexture                (   vtx_state*  v,
                      // m_Watchdog.Start(TIMEOUT);
                     }
 }
-#ifdef BACKBUFFER
+#ifdef USE_BACKBUFFER
 bool            CKernel::initTextureBackbuffer      (   olg_state*  o,
                                                         tex_state*  t )
 {
@@ -266,7 +266,7 @@ void            CKernel::initUniform                (   vtx_state*  v,
                     s->u_par_b[i]      = glGetUniformLocation(s->gl_program_id[i], "par_b");
 
                     s->u_tex_l[i]      = glGetUniformLocation(s->gl_program_id[i], "tex_l");
-#ifdef BACKBUFFER
+#ifdef USE_BACKBUFFER
                     t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "backbuffer");                    
 #endif
                     s->u_atlas[i]      = glGetUniformLocation(s->gl_program_id[i], "u_menu_atlas");

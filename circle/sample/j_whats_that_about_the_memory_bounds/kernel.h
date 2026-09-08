@@ -108,7 +108,7 @@ public:
                                                                         unsigned&                       valid_count,
                                                                         GLint                           wrap_s,
                                                                         GLint                           wrap_t);
-#ifdef BACKBUFFER                                                                        
+#ifdef USE_BACKBUFFER                                                                        
                 bool        initTextureBackbuffer       (               olg_state*                      o,
                                                                         tex_state*                      t);
 #endif                                                                                                                                                
@@ -137,7 +137,7 @@ public:
                                                                         tex_state*                      t,
                                                                         int                             gl_current_tex,
                                                                         unsigned                        p_validTextureCount);   // ?? UNTESTED ??
-#ifdef BACKBUFFER                                                                        
+#ifdef USE_BACKBUFFER                                                                        
                 bool        setTexBackbuffer            (               glsl_state*                     s,
                                                                         tex_state*                      t,
                                                                         unsigned                        p_validTextureCount);
