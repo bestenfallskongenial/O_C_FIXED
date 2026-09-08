@@ -108,8 +108,10 @@ public:
                                                                         unsigned&                       valid_count,
                                                                         GLint                           wrap_s,
                                                                         GLint                           wrap_t);
+#ifdef BACKBUFFER                                                                        
                 bool        initTextureBackbuffer       (               olg_state*                      o,
-                                                                        tex_state*                      t);                                                                        
+                                                                        tex_state*                      t);
+#endif                                                                                                                                                
                 void        initUniform                 (               vtx_state*                      v,
                                                                         glsl_state*                     s,
                                                                         tex_state*                      t,
@@ -135,12 +137,14 @@ public:
                                                                         tex_state*                      t,
                                                                         int                             gl_current_tex,
                                                                         unsigned                        p_validTextureCount);   // ?? UNTESTED ??
+#ifdef BACKBUFFER                                                                        
                 bool        setTexBackbuffer            (               glsl_state*                     s,
                                                                         tex_state*                      t,
                                                                         unsigned                        p_validTextureCount);
 
                 void        captureBackbuffer           (               olg_state*                      o,
-                                                                        tex_state*                      t);                                                                        
+                                                                        tex_state*                      t);
+#endif                                                                                                                                                
                 void        drawGLsPrg                  ();                                                                     // !! WORKS !!
         //      void        frmRateBreak                (               bool                            noTargetFPS);
                 void        setUniOvl                   (               olg_state*                      o, 

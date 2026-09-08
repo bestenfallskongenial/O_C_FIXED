@@ -110,18 +110,18 @@ TShutdownMode CKernel::Run(void)
                             &m_tex,
                             m_activeTex,
                             filecounter[FT_TEX][FLD_VALID]);                            
-
+#ifdef BACKBUFFER
                     bool f_backbuffer = setTexBackbuffer( &m_fsh,
                                                          &m_tex,
                                                          filecounter[FT_TEX][FLD_VALID]);
-
+#endif
                     drawGLsPrg();
-
+#ifdef BACKBUFFER
                     if (f_backbuffer)
                         {
                         captureBackbuffer( &m_ogl, &m_tex );
                         }
-                        
+#endif                        
                 fpsBreak();
 
                     frmBufferSwap(&m_ogl); 
