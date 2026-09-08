@@ -171,6 +171,9 @@ enum FileType
     FT_VSH = 0,                                     // vertex shader 
     FT_OMF,                                         // overlay fragment shader 
     FT_FSH,                                         // user fragment shader
+
+    FT_LFO,
+
     FT_OMT,                                         // overlay texture
     FT_TEX,                                         // user texture
     FT_VID,                                         		// user video 
@@ -178,8 +181,6 @@ enum FileType
     FRM_BF,                                         		// output-frames A & B
     FT_LOG,                                         		// log-buffer
     
-    FT_LFO,
-
     FT_COUNT
 };
 enum FileField
