@@ -34,8 +34,11 @@ TShutdownMode CKernel::Run(void)
 
                         m_USB_has_load = true;
                         }
-                    if( m_SD_has_load && m_USB_has_load )
+                    if( m_SD_has_load && m_USB_has_load && !m_bootLogsSaved )
+                //  if( m_SD_has_load && m_USB_has_load )
                         {
+                        m_bootLogsSaved = true;
+                        
                         saveFromBuffer         (   PARTITION_NAME_SD,
                                                   /*gen83FileName("TXT"*/
                                                     "bootlog.txt",

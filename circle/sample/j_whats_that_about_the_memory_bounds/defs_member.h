@@ -72,7 +72,8 @@ public:         // Logging
 // missing globals / shared state / dummies for now
                 bool                            m_SD_has_load                                   = false;
                 bool                            m_USB_has_load                                  = false;
-
+                bool                            m_bootLogsSaved                                 = false;
+                
                 int                             g_currentProgramBuffer                          = 0;
 
                 bool                            g_activeProgramFlag                             = false;
