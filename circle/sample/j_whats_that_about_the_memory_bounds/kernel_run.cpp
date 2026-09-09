@@ -120,7 +120,7 @@ TShutdownMode CKernel::Run(void)
                     drawGLsPrg();
 #ifdef USE_BACKBUFFER
                 //  if (f_backbuffer) captureBackbuffer( &m_ogl, &m_tex );
-                    captureBackbuffer( &m_ogl, &m_tex )
+                    captureBackbuffer( &m_ogl, &m_tex );
 #endif                        
                 fpsBreak();
 
