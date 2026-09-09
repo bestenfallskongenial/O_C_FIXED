@@ -1,12 +1,15 @@
 #ifndef _kernel_h
 #define _kernel_h
 
+
+#include "o_c_setup.h"
+#include "defs_macro.h"
 #include "defs_include.h"
 
             extern "C" void     vc_host_get_vchi_state(VCHI_INSTANCE_T *inst, VCHI_CONNECTION_T **conn);
 
-#include "o_c_setup.h"
-#include "defs_macro.h"
+
+
 
 enum TShutdownMode
 {
