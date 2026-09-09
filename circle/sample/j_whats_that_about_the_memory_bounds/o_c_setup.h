@@ -8,7 +8,7 @@
 // here we define the log/debug level preprocessor 
     #define 		LOGLEVEL				    2	                            // 0: only panic / 1: also errors / 2: also warnings / 3: also notices / 4: also debug output (default))
 
-//  #define         USE_MIDI                                                    // im not sure about this "mode" - the use requires a powered/buffered usb midi device
+    #define         USE_MIDI                                                    // im not sure about this "mode" - the use requires a powered/buffered usb midi device!!!
     #define         USE_BACKBUFFER
     #define         USE_AUDIO
 
@@ -186,8 +186,8 @@
 
     #define         SCROLLSPEED             5 // in 1000/1th
 
-    #define         DOUBLE_CLICK_TIME       500
-    #define         LONG_CLICK_TIME         1000
+    #define         DOUBLE_CLICK_TIME       100
+    #define         LONG_CLICK_TIME         300
 
     #define         FLAG_THRESHOLD          7
 

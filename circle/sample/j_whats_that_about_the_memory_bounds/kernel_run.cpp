@@ -61,8 +61,8 @@ TShutdownMode CKernel::Run(void)
                     resetMenuPickUpFlags();
                     storeModes();
 
-                    m_audio_hold_A = AUDIO_HOLD_TIMEOUT;                            // to debug the audio mode and menu code!!!
-                    m_audio_hold_B = AUDIO_HOLD_TIMEOUT;
+                //  m_audio_hold_A = AUDIO_HOLD_TIMEOUT;                            // to debug the audio mode and menu code!!!
+                //  m_audio_hold_B = AUDIO_HOLD_TIMEOUT;
                     
                     readAndConvertADC();
 #ifdef USE_AUDIO                
