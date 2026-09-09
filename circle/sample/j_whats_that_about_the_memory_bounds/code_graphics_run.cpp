@@ -42,7 +42,7 @@ void            CKernel::setUniPrg                  (   olg_state*  o,
 #ifdef __DEBUG_GL__
                 check();
 #endif                
-                if(s->u_tres[g_gl_program_current]!= -1 )  glUniform2f(s->u_tres[g_gl_program_current], o->screen_width, o->screen_width);
+                if(s->u_tres[g_gl_program_current]!= -1 )  glUniform2f(s->u_tres[g_gl_program_current], o->screen_width, o->screen_height);
 #ifdef __DEBUG_GL__
                 check();
 #endif                
