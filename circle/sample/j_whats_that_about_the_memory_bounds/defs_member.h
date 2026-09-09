@@ -88,7 +88,7 @@ public:         // Logging
 
         //      unsigned                        g_frameStart;                                   // !! has become g_frameStart !!
 
-                bool                            m_audio_mode_activated                          = true; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //      bool                            m_audio_mode_activated                          = true; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 bool                            is_audio[2]                                     =           { 0 };
 

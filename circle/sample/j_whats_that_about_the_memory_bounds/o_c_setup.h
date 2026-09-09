@@ -7,8 +7,11 @@
     #define         OS_REVISION                 1
 // here we define the log/debug level preprocessor 
     #define 		LOGLEVEL				    2	                            // 0: only panic / 1: also errors / 2: also warnings / 3: also notices / 4: also debug output (default))
+
 //  #define         USE_MIDI                                                    // im not sure about this "mode" - the use requires a powered/buffered usb midi device
-    #define         USE_BACKBUFFER     
+    #define         USE_BACKBUFFER
+    #define         USE_AUDIO
+
     #define         __LOG_ALLOC__                                               // allocation / buffer allocation logging
     #define         __LOG_FILE__                                                // filesystem / file load-store logging
     #define         __LOG_MEMORY__                                              // logs the memory map, only used ones
@@ -22,7 +25,7 @@
 //  #define         __LOG_FIRST_FRAME__                                         // logs the fist frame vpu messaging - later useful
     #define         __LOG_TO_SCREEN__                                           // shows the log on the screen
 
-    #define         __DEBUG_GL__                                                // GL/EGL runtime check() calls
+    #define         __DEBUG_GL__                                                // GL/EGL runtime debug_gl() calls
     
     #define         __DEBUG_TIMING__                                            // shows the framerates
 

@@ -305,21 +305,21 @@
             <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
   </svg>
 
-  <svg      id="MODE_MIDI_NOTE" class="glyph-tile" data-cell="0,0">   <!-- MODE PLACEMENT -->
+  <svg      id="MODE_MIDI_NOTE" class="glyph-tile" data-cell="0,1">   <!-- MODE PLACEMENT -->
             <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+      <!--  <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/> -->
       <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
   </svg>  
 
-  <svg      id="MODE_MIDI_CC0" class="glyph-tile" data-cell="0,0">   <!-- MODE PLACEMENT -->
+  <svg      id="MODE_MIDI_CC0" class="glyph-tile" data-cell="1,1">   <!-- MODE PLACEMENT -->
             <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
             <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
       <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
   </svg>
 
-  <svg      id="MODE_MIDI_CC1" class="glyph-tile" data-cell="0,0">   <!-- MODE PLACEMENT -->
+  <svg      id="MODE_MIDI_CC1" class="glyph-tile" data-cell="2,1">   <!-- MODE PLACEMENT -->
             <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+            <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
       <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
   </svg>    
 

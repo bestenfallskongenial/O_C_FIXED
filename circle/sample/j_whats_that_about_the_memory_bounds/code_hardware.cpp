@@ -532,10 +532,10 @@ void            CKernel::readAndConvertADC         (   void    )
                 g_inOutMatrixInt[7][VAL] = (g_inOutMatrixInt[7][RAW] * f_scale) >> 10;
                 g_inOutMatrixFlt[7][VAL] = g_inOutMatrixInt[7][VAL] * 0.0009765625f;
 }
-
+#ifdef USE_AUDIO
 void            CKernel::adc_ProcessAudio           (   void    )
 {
-                if (!m_audio_mode_activated) return; // is a fixed position in g_centralModeBuffer mapped by modeMenuAssignGroup()
+            //  if (!m_audio_mode_activated) return; // is a fixed position in g_centralModeBuffer mapped by modeMenuAssignGroup()
 
                 int i0 = m_adc_index & 3;
                 int i1 = (m_adc_index - 1) & 3;
@@ -665,7 +665,7 @@ void            CKernel::adc_ProcessAudio           (   void    )
                 if (m_audio_hold_B > 0) --m_audio_hold_B;
                 g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B] = (m_audio_hold_B > 0);
 }
-
+#endif
 void            CKernel::adc_AdvanceIndex           (   void    )
 {
                 m_adc_index = (m_adc_index + 1) & 3;

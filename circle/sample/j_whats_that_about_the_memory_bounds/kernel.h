@@ -314,7 +314,12 @@ public:
                 void        modeAudioAbL                (               int                             p_channel);         // channel passed by caller
                 void        modeAudioAbH                (               int                             p_channel);         // channel passed by caller
                 void        modeAudioBbL                (               int                             p_channel);         // channel passed by caller
-                void        modeAudioBbH                (               int                             p_channel);         // channel passed by caller  
+                void        modeAudioBbH                (               int                             p_channel);         // channel passed by caller
+#ifdef USE_MIDI
+                void        modeMidiNote                (               int                             p_channel);
+                void        modeMidiCC0                 (               int                             p_channel);
+                void        modeMidiCC1                 (               int                             p_channel);         
+#endif        
                 void        applyTargetModes            ();
 
                 void        checkSystemFlags            ();
@@ -329,10 +334,6 @@ public:
                                                                         unsigned                        nLength,
                                                                         unsigned                        nDevice,
                                                                         void*                           pParam);
-// relocated to code_menu.cpp!                                                                        
-                void        modeMidiNote                (               int                             p_channel);
-                void        modeMidiCC0                 (               int                             p_channel);
-                void        modeMidiCC1                 (               int                             p_channel);
 #endif
 // code_parser.cpp              !! TESTED AND APPROVED !!
                 bool        BMPparser                   (               tex_state*                      t,

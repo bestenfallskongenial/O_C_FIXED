@@ -17,7 +17,7 @@
 #else
     #define ACCESSIBLE_LAYER                                                7
 #endif
-    #define             check() 				                            gfx_check(__FILE__, __LINE__) 	// my own assertiion implimentation
+    #define             debug_gl() 				                            gfx_check(__FILE__, __LINE__) 	// my own assertiion implimentation
 
     #define             MAX_WATCHDOG_SEC                                    15
 

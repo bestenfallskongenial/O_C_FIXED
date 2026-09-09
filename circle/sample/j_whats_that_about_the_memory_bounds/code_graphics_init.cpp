@@ -29,27 +29,27 @@ void            CKernel::initOGL                    (   olg_state*  o )
                 
                 o->display                  = eglGetDisplay             (   EGL_DEFAULT_DISPLAY     );
 #ifdef __DEBUG_GL__        
-                check();        
+                debug_gl();        
 #endif  
                                              eglInitialize              (   o->display, NULL, NULL );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                                              eglChooseConfig            (   o->display, attribute_list, &config, 1, &num_config );
 #ifdef __DEBUG_GL__       
-                check();         
+                debug_gl();         
 #endif  
                                              eglBindAPI                 (   EGL_OPENGL_ES_API );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                 o->context                  = eglCreateContext          (   o->display, config, EGL_NO_CONTEXT, context_attributes );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                                              graphics_get_display_size  (   0, &o->screen_width, &o->screen_height );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                 dst_rect.x                  = 0;
                 dst_rect.y                  = 0;
@@ -72,20 +72,20 @@ void            CKernel::initOGL                    (   olg_state*  o )
 
                 vc_dispmanx_update_submit_sync                          (   dispman_update );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif              
                 o->surface                  = eglCreateWindowSurface    (   o->display, config, &nativewindow, NULL );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif                  
                                              eglMakeCurrent             (   o->display, o->surface, o->surface, o->context );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                                               glClearColor              (   0.15f, 0.25f, 0.35f, 1.0f );
                                               glClear                   (   GL_COLOR_BUFFER_BIT );
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif              
 }
 
@@ -97,22 +97,22 @@ void            CKernel::initVbuffer                (   olg_state*  o,
                 glClearColor(0.0, 1.0, 1.0, 1.0);
                 glGenBuffers(1, &v->gl_buf);
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                 glViewport(0, 0, o->screen_width, o->screen_height);
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
                 glBindBuffer(GL_ARRAY_BUFFER, v->gl_buf);
                 glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
                 glVertexAttribPointer(v->gl_vtx[0], 4, GL_FLOAT, 0, 16, 0);
                 glEnableVertexAttribArray(v->gl_vtx[0]);
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif  
 }
 
@@ -134,7 +134,7 @@ void            CKernel::initShader                 (   vtx_state*  v,
 
                     s->shader_valid[i] = shaderLog(s->gl_shader_id[i], i);
 #ifdef __DEBUG_GL__
-                    check();
+                    debug_gl();
 #endif
                     }
 }
@@ -253,7 +253,7 @@ void            CKernel::initUniform                (   vtx_state*  v,
                     {
                     glUseProgram(s->gl_program_id[i]);
 #ifdef __DEBUG_GL__
-                    check();
+                    debug_gl();
 #endif
                     v->gl_vtx[i]       = glGetAttribLocation(s->gl_program_id[i], "vertex");
 
@@ -296,7 +296,7 @@ void            CKernel::initUniform                (   vtx_state*  v,
                     t->u_tex_id[i][j] = glGetUniformLocation(s->gl_program_id[i], name);
                     }
 #ifdef __DEBUG_GL__
-                check();
+                debug_gl();
 #endif
                 }
 }

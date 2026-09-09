@@ -65,9 +65,9 @@ TShutdownMode CKernel::Run(void)
                     m_audio_hold_B = AUDIO_HOLD_TIMEOUT;
                     
                     readAndConvertADC();
-                
+#ifdef USE_AUDIO                
                     adc_ProcessAudio();
-
+#endif
                     adc_AdvanceIndex();
 
                     randomVec8(g_frameStart);
@@ -114,16 +114,13 @@ TShutdownMode CKernel::Run(void)
                             m_activeTex,
                             filecounter[FT_TEX][FLD_VALID]);                            
 #ifdef USE_BACKBUFFER
-                    bool f_backbuffer = setTexBackbuffer( &m_fsh,
-                                                         &m_tex,
-                                                         filecounter[FT_TEX][FLD_VALID]);
+                //  bool f_backbuffer = setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
+                    setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
 #endif
                     drawGLsPrg();
 #ifdef USE_BACKBUFFER
-                    if (f_backbuffer)
-                        {
-                        captureBackbuffer( &m_ogl, &m_tex );
-                        }
+                //  if (f_backbuffer) captureBackbuffer( &m_ogl, &m_tex );
+                    captureBackbuffer( &m_ogl, &m_tex )
 #endif                        
                 fpsBreak();
 
