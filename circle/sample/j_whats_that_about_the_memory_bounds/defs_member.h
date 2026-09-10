@@ -348,7 +348,7 @@ public:         // Logging
 
                                                                                                             {220, 200,  25},   // IN_MODE_MIDI_NOTE     - yellow
                                                                                                             { 45, 125, 215},   // IN_MODE_MIDI_CC0      - azure
-                                                                                                            {205,  75,  35};   // IN_MODE_MIDI_CC1      - vermilion
+                                                                                                            {205,  75,  35}    // IN_MODE_MIDI_CC1      - vermilion
                                                                                                         };
 
 
