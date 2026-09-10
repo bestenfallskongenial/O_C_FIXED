@@ -232,10 +232,10 @@ public:         // Logging
                                                                                                             0b0000000000001100,     // layer 3: modes 2 or 3
                                                                                                             0b0000000000000010,     // layer 4: mode 1
                                                                                                             0b0000000011110000,     // layer 5: modes 4, 5, 6 or 7
-
-                                                                                                            0b0000011111111111,     // layer 6: every mode
+                                                                                                            0b0000011100000000,     // layer 6: modes 8, 9 or 10 - midi 
                                                                                                             0b0000011111111111,     // layer 7: every mode
-                                                                                                            0b0000011100000000,     // layer 8: modes 8, 9 or 10 - midi 
+                                                                                                            0b0000011111111111,     // layer 8: every mode
+
                                                                                                             0b0000011111111111 };   // filler to get BLOCK_COUNT
 
         const   int                         g_mapType[BLOCK_COUNT][4]                           =       {   { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  },     // layer  1 for mode channel 0-3 
