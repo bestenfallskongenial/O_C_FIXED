@@ -210,7 +210,7 @@ void            CKernel::initTexture                (   vtx_state*  v,
                      // m_Watchdog.Start(TIMEOUT);
                     }
 }
-#ifdef USE_BACKBUFFER
+
 bool            CKernel::initTextureBackbuffer      (   olg_state*  o,
                                                         tex_state*  t )
 {
@@ -242,7 +242,7 @@ bool            CKernel::initTextureBackbuffer      (   olg_state*  o,
 
                 return true;
 }
-#endif
+
 void            CKernel::initUniform                (   vtx_state*  v,
                                                         glsl_state* s,
                                                         tex_state*  t,
@@ -266,9 +266,9 @@ void            CKernel::initUniform                (   vtx_state*  v,
                     s->u_par_b[i]      = glGetUniformLocation(s->gl_program_id[i], "par_b");
 
                     s->u_tex_l[i]      = glGetUniformLocation(s->gl_program_id[i], "tex_l");
-#ifdef USE_BACKBUFFER
+
                     t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "backbuffer");                    
-#endif
+
                     s->u_atlas[i]      = glGetUniformLocation(s->gl_program_id[i], "u_menu_atlas");
                     s->u_tile_count[i] = glGetUniformLocation(s->gl_program_id[i], "u_menu_tile_count");
                     s->u_tile_rect[i]  = glGetUniformLocation(s->gl_program_id[i], "u_menu_tile_rect");

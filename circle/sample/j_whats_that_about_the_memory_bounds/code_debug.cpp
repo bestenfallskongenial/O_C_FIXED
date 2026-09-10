@@ -33,9 +33,8 @@ void            CKernel::logModesRuntime( int row )
                 storeLogHex(   f_logBuffer, f_logIndex, "SENS   16-19", (u32)g_centralModeBuffer[g_currentProgramBuffer][16], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][17], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][18], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][19] );
                 storeLogHex(   f_logBuffer, f_logIndex, "INPUT  20-23", (u32)g_centralModeBuffer[g_currentProgramBuffer][20], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][21], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][22], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][23] );
                 storeLogHex(   f_logBuffer, f_logIndex, "SYSTEM 24-27", (u32)g_centralModeBuffer[g_currentProgramBuffer][24], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][25], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][26], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][27] );
-#ifdef USE_MIDI
                 storeLogHex(   f_logBuffer, f_logIndex, "MIDI   28-31", (u32)g_centralModeBuffer[g_currentProgramBuffer][28], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][29], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][30], X_STR, (u32)g_centralModeBuffer[g_currentProgramBuffer][31] );
-#endif
+
                 bufferScreenDraw(   f_logBuffer, 0, f_logIndex, 0, row, 0xFFFFFFFF );
 }
 
@@ -90,9 +89,9 @@ void            CKernel::logInfosRuntime( int row )
                 storeLogHex(    f_logBuffer, f_logIndex, "AUDIO 1", g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B]);
                 storeLogHex(    f_logBuffer, f_logIndex, "MIDI", g_centralModeBuffer[g_currentProgramBuffer][FLAG_MIDI]);
                 //  storeLogHex(    f_logBuffer, f_logIndex, "mapping", ((g_inOutMatrixInt[ADC_SELECT_PRG][RAW] * (filecounter[FT_FSH][FLD_VALID]  ) ) >> 10) ); // (filecounter[FT_FSH][FLD_VALID] -1 )
-#ifdef USE_MIDI
+
                 storeLogHex(    f_logBuffer, f_logIndex, "MIDI", (u32)g_midiConnected );            
-#endif
+
                 bufferScreenDraw(   f_logBuffer, 0, f_logIndex, 0, row, 0xFFFFFFFF );                
 }
 

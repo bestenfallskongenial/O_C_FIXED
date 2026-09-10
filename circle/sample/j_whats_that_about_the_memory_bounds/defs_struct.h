@@ -74,10 +74,10 @@ struct tex_state
 
     GLuint      				gl_tex_id[MAX_TEXTURE];
     GLint       				u_tex_id[MAX_SHADER][MAX_TEXTURE];
-#ifdef USE_BACKBUFFER
+
     GLuint                      gl_tex_bfr;
     GLint                       u_tex_bfr[MAX_SHADER];	
-#endif
+
        // for my video frame texture 
     GLuint          			gl_tex_vid;                 // video texture handle
     EGLImageKHR     			m_EGLimage = nullptr;       // backing (changes per frame) 

@@ -1,7 +1,5 @@
 #include "kernel.h"
 
-#ifdef USE_MIDI
-
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
     #define MY_IDX   m_logKernelIndex 
     
@@ -94,4 +92,3 @@ void            CKernel::MIDIPacketHandler(unsigned nCable,
                         }
                     }
 }
-#endif 

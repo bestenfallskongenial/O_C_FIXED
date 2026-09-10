@@ -240,7 +240,7 @@ void            CKernel::getChannelModeA(int p_channel)
                     case 7:
                         modeAudioBbH(p_channel);
                     break;
-#ifdef USE_MIDI
+
                     case 8:
                         modeMidiNote(p_channel);
                     break;
@@ -252,7 +252,7 @@ void            CKernel::getChannelModeA(int p_channel)
                     case 10:
                         modeMidiCC1(p_channel);
                     break;
-#endif                                        
+                                       
                     }
 }
 
@@ -317,7 +317,7 @@ void            CKernel::modeAudioBbH               (   int p_channel)
                 g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][AU3];
                 g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][AU3];
 }
-#ifdef USE_MIDI
+
 void            CKernel::modeMidiNote(int p_channel)
 {
                 unsigned low;
@@ -351,7 +351,7 @@ void            CKernel::modeMidiCC1(int p_channel)
                 g_inOutMatrixInt[p_channel][OUT] = g_midiCC1Int;
                 g_inOutMatrixFlt[p_channel][OUT] = g_midiCC1Flt;
 }
-#endif
+
 
 void            CKernel::applyTargetModes           (   )
 {

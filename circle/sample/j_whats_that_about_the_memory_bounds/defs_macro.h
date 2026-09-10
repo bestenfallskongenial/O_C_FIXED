@@ -12,11 +12,9 @@
 
     #define BLOCK_WIDTH                                                     4
     #define BLOCK_COUNT                                                     (MODETABLE_COUNT / BLOCK_WIDTH)
-#ifdef USE_MIDI    
+ 
     #define ACCESSIBLE_LAYER                                                8
-#else
-    #define ACCESSIBLE_LAYER                                                7
-#endif
+
     #define             debug_gl() 				                            gfx_check(__FILE__, __LINE__) 	// my own assertiion implimentation
 
     #define             MAX_WATCHDOG_SEC                                    15

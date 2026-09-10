@@ -38,20 +38,18 @@ enum centralModeBuffer
     LOG_STORE,
     KLN_LOAD,
 // block 07 / layer 8 - 28      - !!!! NEW! STILL UNSURE ABOUT THE LOCATION HERE !!!!
-#ifdef USE_MIDI
+
     MIDI_CHANNEL,
     MIDI_CC0,
     MIDI_CC1,
     MIDI_RANGE,
-#endif    
+   
 // block 07 / layer 8 - "mute" block
     FLAG_AUDIO_A,           // for internal use only! 
     FLAG_AUDIO_B,
-#ifdef USE_MIDI    
+ 
     FLAG_MIDI,
-#else 
-    FLAG_DUMMY_A,
-#endif
+
     FLAG_DUMMY_B,           // or i autodetect the last correct bpm because the bpm function is autodetecting ...
 // block 08 / layer 9 - "mute" block
     SEL_PRG,                // instead of an additional "allow prg changes" global flag - what if this will never be released again!?!
@@ -72,11 +70,11 @@ enum modeNames
     MODE_AU_AH,
     MODE_AU_BL,
     MODE_AU_BH,
-#ifdef USE_MIDI   
+
     IN_MODE_MIDI_NOTE,
     IN_MODE_MIDI_CC0,
     IN_MODE_MIDI_CC1,
-#endif
+
     MODE_NAME_COUNT
 };
 
@@ -91,9 +89,9 @@ enum ModeFlags
     GROUP_BASE, 
     GROUP_FLAG1,
     GROUP_FLAG2,
-#ifdef USE_MIDI       
+   
     GROUP_FLAG3,  
-#endif      
+     
     GROUP_COUNT
 };
 //------------------------------------------------- // for the array unsigned/float g_inOutMatrix*[CHANNEL][IO_TYPE_COUNT]
