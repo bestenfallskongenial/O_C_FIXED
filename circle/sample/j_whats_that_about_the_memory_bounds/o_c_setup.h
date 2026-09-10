@@ -144,7 +144,7 @@
     #define         DEFAULT_SLOT            FSH_SD + FSH_USB                    //  because 0 plus 34 = 33 ?? 
     #define         AUDIO_BUFFER_COUNT      64
     #define         AUDIO_THRESHOLD         160
-    #define         AUDIO_HOLD_TIMEOUT      3000
+    #define         AUDIO_HOLD_TIMEOUT      300
 
     #define 		CHUNK_SIZE				1024                                // for the file load 
 
