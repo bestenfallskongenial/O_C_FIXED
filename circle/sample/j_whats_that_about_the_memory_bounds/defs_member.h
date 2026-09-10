@@ -64,8 +64,7 @@ public:         // Logging
                 tex_state                       m_omt                                           =       {};
                 h264_state                      m_vid                                           =       {};    
 
-                uint32_t                        m_audio_hold_A                                  = 0;
-                uint32_t                        m_audio_hold_B                                  = 0;                
+          
 
                 int                             m_activeTex                                     = 0;
                 int                             m_activeVideo                                   = 0;
@@ -119,13 +118,13 @@ public:         // Logging
                 int                             m_band[4][AUDIO_BUFFER_COUNT]                   =           { 0 };
                 int                             m_sum[4]                                        =           { 0 };  
 
+                uint32_t                        m_audio_hold_A                                  = 0;
+                uint32_t                        m_audio_hold_B                                  = 0;      
+
                 uint8_t                         m_idx0                                          = 0;
                 uint8_t                         m_idx1                                          = 0;
                 uint8_t                         m_idx2                                          = 0;
                 uint8_t                         m_idx3                                          = 0;                                                         
-
-                uint32_t                        m_audio_hold_A;
-                uint32_t                        m_audio_hold_B;
 
                 char** 				m_bufferVid                                     = nullptr;      // thats the pointer to my "array-like" buffer allocation
                 char* 				m_videoBlockBase                                = nullptr;      // returns the aligned DMA base pointer
