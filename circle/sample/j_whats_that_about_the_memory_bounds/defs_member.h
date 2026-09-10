@@ -211,10 +211,10 @@ public:         // Logging
                 float                           g_midiCC0Flt                                    = 0.0f;
                 float                           g_midiCC1Flt                                    = 0.0f;
 
-        const   uint16_t                    modeMaskByValue[IN_MODE_NAME_COUNT]                    =    {   0b0000000000000001,     // mode 0
-                                                                                                            0b0000000000000010,     // mode 1
-                                                                                                            0b0000000000000100,     // mode 2
-                                                                                                            0b0000000000001000,     // mode 3
+        const   uint16_t                    modeMaskByValue[IN_MODE_NAME_COUNT]                    =    {   0b0000000000000001,     // mode 0 IN_MODE_SDC
+                                                                                                            0b0000000000000010,     // mode 1 IN_MODE_TRG
+                                                                                                            0b0000000000000100,     // mode 2 IN_MODE_LF0
+                                                                                                            0b0000000000001000,     // mode 3 IN_MODE_LF1
 
                                                                                                             0b0000000000010000,     // mode 4
                                                                                                             0b0000000000100000,     // mode 5
@@ -233,9 +233,10 @@ public:         // Logging
                                                                                                             0b0000000000000010,     // layer 4: mode 1
                                                                                                             0b0000000011110000,     // layer 5: modes 4, 5, 6 or 7
 
-                                                                                                            0b0000011111111111,     // layer 6: every mode
+                                                                                                            0b0000011100000000,     // layer 6: modes 8, 9 or 10 - midi
                                                                                                             0b0000011111111111,     // layer 7: every mode
-                                                                                                            0b0000011100000000,     // layer 8: modes 8, 9 or 10 - midi 
+                                                                                                            0b0000011111111111,     // layer 8: every mode
+                                                                                                             
                                                                                                             0b0000011111111111 };   // filler to get BLOCK_COUNT
 
         const   int                         g_mapType[BLOCK_COUNT][4]                           =       {   { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  },     // layer  1 for mode channel 0-3 
