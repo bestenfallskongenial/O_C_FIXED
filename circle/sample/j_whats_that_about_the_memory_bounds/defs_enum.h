@@ -1,57 +1,53 @@
 //------------------------------------------------- // for the array unsigned g_centralModeBuffer[SLOTS][MODETABLE_COUNT]
 enum centralModeBuffer
 {
-// block 00 / layer 1 - 00
+// block 00 / layer 1
     MODE_CH0 = 0,           // store the mode ( from g_modeTable[] ) for cannel 0
     MODE_CH1,				// store the mode ( from g_modeTable[] ) for cannel 1
     MODE_CH2,               // store the mode ( from g_modeTable[] ) for cannel 2
     MODE_CH3,               // store the mode ( from g_modeTable[] ) for cannel 3
-// block 01 / layer 2 - 04
+// block 01 / layer 2
     MODE_CH4,               // store the mode ( from g_modeTable[] ) for cannel 4
     MODE_CH5,               // store the mode ( from g_modeTable[] ) for cannel 5
     MODE_CH6,               // store the mode ( from g_modeTable[] ) for cannel 6
     MODE_CH7,               // store the mode ( from g_modeTable[] ) for cannel 7
-// block 02 / layer 3 - 08
+// block 02 / layer 3
     LF1_WAVE,               // stores waveform for lfo1 from m_bufferLfo[waveTableCount][LFO_SAMPLES]
     LF2_WAVE,               // stores waveform for lfo2 from m_bufferLfo[waveTableCount][LFO_SAMPLES]
     LF1_MULT,               // stores the multiplier for lfo1 ( from g_lfoMultiplier[LFO_MULTIPLIERS_COUNT] )
     LF2_MULT,               // stores the multiplier for lfo1 ( from g_lfoMultiplier[LFO_MULTIPLIERS_COUNT] )
-// block 03 / layer 4 - 12
+// block 03 / layer 4
     THRESHOLD_L,            // NEW - the threshold low for IN_MODE_TRG
     THRESHOLD_H,            // NEW - the threshold heigh for IN_MODE_TRG
     SEL_EXT,                // NEW - extern clock input
 //  EFFECT,                 // NEW - hypothetical "strength" for the randomizer - not implemented
     ATTENUATION,            // New - attenuation for the readAndConvertADC() 
-// block 04 / layer 5 - 16
+// block 04 / layer 5
     SENS_A,                 // stores the sensitivity for the audio mode ( available if enabled ) bandA0
     SENS_B,                 // stores the sensitivity for the audio mode ( available if enabled ) bandA1
     SENS_C,                 // stores the sensitivity for the audio mode ( available if enabled ) bandB0
     SENS_D,                 // stores the sensitivity for the audio mode ( available if enabled ) bandB1
-// block 05 / layer 6 - 20
-    SEL_TIME,               // SEL_TIME & FLAG_TIME should be unified by count any SEL_TIME < MAX as true
-    SEL_TEX,
-    SEL_VID,
-    SEL_FRM,
-// block 06 / layer 7 - 24
-    SET_STORE,
-    SET_LOAD,
-    LOG_STORE,
-    KLN_LOAD,
-// block 07 / layer 8 - 28      - !!!! NEW! STILL UNSURE ABOUT THE LOCATION HERE !!!!
-
+// block 05 / layer 6 
     MIDI_CHANNEL,
     MIDI_CC0,
     MIDI_CC1,
     MIDI_RANGE,
-   
-// block 07 / layer 8 - "mute" block
+// block 06 / layer 7
+    SEL_TIME,               // SEL_TIME & FLAG_TIME should be unified by count any SEL_TIME < MAX as true
+    SEL_TEX,
+    SEL_VID,
+    SEL_FRM,
+// block 07 / layer 8 -
+    SET_STORE,
+    SET_LOAD,
+    LOG_STORE,
+    KLN_LOAD,
+// block 08 / layer  9  - "mute" block
     FLAG_AUDIO_A,           // for internal use only! 
     FLAG_AUDIO_B,
- 
     FLAG_MIDI,
-
-    FLAG_DUMMY_B,           // or i autodetect the last correct bpm because the bpm function is autodetecting ...
-// block 08 / layer 9 - "mute" block
+    FLAG_DUMMY_B,
+// block 09 / layer 10  - "mute" block
     SEL_PRG,                // instead of an additional "allow prg changes" global flag - what if this will never be released again!?!
     FLAG_EXT,
     LAST_EXT,
@@ -59,23 +55,23 @@ enum centralModeBuffer
     MODETABLE_COUNT         // theoretical i can now define BLOCK_COUNT as MODETABLE_COUNT / 4 correct????
 };
 
-enum modeNames
+enum inModeNames
 {
     IN_MODE_ADC,
     IN_MODE_TRG,
-    IN_MODE_LF1,
-    IN_MODE_LF2,
+    IN_MODE_LF_0,
+    IN_MODE_LF_1,
 
-    MODE_AU_AL,
-    MODE_AU_AH,
-    MODE_AU_BL,
-    MODE_AU_BH,
+    IN_MODE_AU_AL,
+    IN_MODE_AU_AH,
+    IN_MODE_AU_BL,
+    IN_MODE_AU_BH,
 
     IN_MODE_MIDI_NOTE,
     IN_MODE_MIDI_CC0,
     IN_MODE_MIDI_CC1,
 
-    MODE_NAME_COUNT
+    IN_MODE_NAME_COUNT
 };
 
 enum MapType
@@ -86,11 +82,11 @@ enum MapType
 
 enum ModeFlags
 {
-    GROUP_BASE, 
-    GROUP_FLAG1,
-    GROUP_FLAG2,
+    GROUP_BASE,         // standard in modes    - adc, trg, lf0, fl1
+    GROUP_FLAG1,        // extra audio 0 modes  - aud0 band lo, aud0 band hi 
+    GROUP_FLAG2,        // extra audio 1 modes  - aud1 band lo, aud1 band hi
    
-    GROUP_FLAG3,  
+    GROUP_FLAG3,        // extra modes midi     - midi note, midi cc0, midi cc1
      
     GROUP_COUNT
 };

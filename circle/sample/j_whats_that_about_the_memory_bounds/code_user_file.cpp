@@ -10,12 +10,12 @@ const char*     CKernel::bufferSourceModeName       (   u32         p_value)
                     case IN_MODE_ADC:    return "ADC";
                     case IN_MODE_TRG:    return "TRG";
                 //  case IN_MODE_BMP:    return "BMP";
-                    case IN_MODE_LF1:    return "LF1";
-                    case IN_MODE_LF2:    return "LF2";
-                    case MODE_AU_AL:     return "LOW0";
-                    case MODE_AU_AH:     return "HIGH0";
-                    case MODE_AU_BL:     return "LOW1";
-                    case MODE_AU_BH:     return "HIGH1";
+                    case IN_MODE_LF_0:   return "LF1";
+                    case IN_MODE_LF_1:   return "LF2";
+                    case IN_MODE_AU_AL:  return "LOW0";
+                    case IN_MODE_AU_AH:  return "HIGH0";
+                    case IN_MODE_AU_BL:  return "LOW1";
+                    case IN_MODE_AU_BH:  return "HIGH1";
                     default:             return "ADC";
                     }
 }
@@ -241,15 +241,15 @@ bool            CKernel::readBufferDec              (   const char* p_token,
 bool            CKernel::readSourceMode             (   const char* p_token,
                                                         u32&        p_value)
 {
-                if (sameText(p_token, "ADC"))   { p_value = IN_MODE_ADC;  return true; }
-                if (sameText(p_token, "TRG"))   { p_value = IN_MODE_TRG;  return true; }
-            //  if (sameText(p_token, "BMP"))   { p_value = IN_MODE_BMP;  return true; }
-                if (sameText(p_token, "LF1"))   { p_value = IN_MODE_LF1;  return true; }
-                if (sameText(p_token, "LF2"))   { p_value = IN_MODE_LF2;  return true; }
-                if (sameText(p_token, "LOW0"))  { p_value = MODE_AU_AL; return true; }
-                if (sameText(p_token, "HIGH0")) { p_value = MODE_AU_AH; return true; }
-                if (sameText(p_token, "LOW1"))  { p_value = MODE_AU_BL; return true; }
-                if (sameText(p_token, "HIGH1")) { p_value = MODE_AU_BH; return true; }
+                if (sameText(p_token, "ADC"))   { p_value = IN_MODE_ADC;    return true; }
+                if (sameText(p_token, "TRG"))   { p_value = IN_MODE_TRG;    return true; }
+            //  if (sameText(p_token, "BMP"))   { p_value = IN_MODE_BMP;    return true; }
+                if (sameText(p_token, "LF1"))   { p_value = IN_MODE_LF_0;   return true; }
+                if (sameText(p_token, "LF2"))   { p_value = IN_MODE_LF_1;   return true; }
+                if (sameText(p_token, "LOW0"))  { p_value = IN_MODE_AU_AL;  return true; }
+                if (sameText(p_token, "HIGH0")) { p_value = IN_MODE_AU_AH;  return true; }
+                if (sameText(p_token, "LOW1"))  { p_value = IN_MODE_AU_BL;  return true; }
+                if (sameText(p_token, "HIGH1")) { p_value = IN_MODE_AU_BH;  return true; }
 
                 return false;
 }

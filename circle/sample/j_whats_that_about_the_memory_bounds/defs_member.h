@@ -211,63 +211,66 @@ public:         // Logging
                 float                           g_midiCC0Flt                                    = 0.0f;
                 float                           g_midiCC1Flt                                    = 0.0f;
 
-        const   uint16_t                    modeMaskByValue[MODE_NAME_COUNT]                    =       {   0b00000000001,     // mode 0
-                                                                                                            0b00000000010,     // mode 1
-                                                                                                            0b00000000100,     // mode 2
-                                                                                                            0b00000001000,     // mode 3
-                                                                                                            0b00000010000,     // mode 4
-                                                                                                            0b00000100000,     // mode 5
-                                                                                                            0b00001000000,     // mode 6
-                                                                                                            0b00010000000,     // mode 7
-                                                                                                            0b00100000000,     // mode 8
-                                                                                                            0b01000000000,     // mode 9
-                                                                                                            0b10000000000 };   // mode 10
+        const   uint16_t                    modeMaskByValue[IN_MODE_NAME_COUNT]                    =    {   0b0000000000000001,     // mode 0
+                                                                                                            0b0000000000000010,     // mode 1
+                                                                                                            0b0000000000000100,     // mode 2
+                                                                                                            0b0000000000001000,     // mode 3
 
-        const   uint16_t                    layerModeMap[BLOCK_COUNT]                           =       {   0b11111111111,     // layer 0: dummy row
-                                                                                                            0b11111111111,     // layer 1: every mode
-                                                                                                            0b11111111111,     // layer 2: every mode
+                                                                                                            0b0000000000010000,     // mode 4
+                                                                                                            0b0000000000100000,     // mode 5
+                                                                                                            0b0000000001000000,     // mode 6
+                                                                                                            0b0000000010000000,     // mode 7
 
-                                                                                                            0b00000001100,     // layer 3: modes 2 or 3
-                                                                                                            0b00000000010,     // layer 4: mode 1
-                                                                                                            0b00011110000,     // layer 5: modes 4, 5, 6 or 7
+                                                                                                            0b0000000100000000,     // mode 8
+                                                                                                            0b0000001000000000,     // mode 9
+                                                                                                            0b0000010000000000 };   // mode 10
 
-                                                                                                            0b11111111111,     // layer 6: every mode
-                                                                                                            0b11111111111,     // layer 7: every mode
-                                                                                                            0b11100000000,     // layer 8: modes 8, 9 or 10 - midi 
-                                                                                                            0b11111111111 };   // filler to get BLOCK_COUNT
+        const   uint16_t                    layerModeMap[BLOCK_COUNT]                           =       {   0b0000011111111111,     // layer 0: dummy row
+                                                                                                            0b0000011111111111,     // layer 1: every mode
+                                                                                                            0b0000011111111111,     // layer 2: every mode
 
-        const   int                         g_mapType[BLOCK_COUNT][4]                           =       {   { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  }, // mode channel 0-3 
-                                                                                                            { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  }, // mode channel 4-7
+                                                                                                            0b0000000000001100,     // layer 3: modes 2 or 3
+                                                                                                            0b0000000000000010,     // layer 4: mode 1
+                                                                                                            0b0000000011110000,     // layer 5: modes 4, 5, 6 or 7
 
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE }, // 
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE }, // 
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE }, // 
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },
+                                                                                                            0b0000011111111111,     // layer 6: every mode
+                                                                                                            0b0000011111111111,     // layer 7: every mode
+                                                                                                            0b0000011100000000,     // layer 8: modes 8, 9 or 10 - midi 
+                                                                                                            0b0000011111111111 };   // filler to get BLOCK_COUNT
 
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE }, // new for midi
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },                                                    
-                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE } };
+        const   int                         g_mapType[BLOCK_COUNT][4]                           =       {   { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  },     // layer  1 for mode channel 0-3 
+                                                                                                            { MAP_MODE,  MAP_MODE,  MAP_MODE,  MAP_MODE  },     // layer  2 for mode channel 4-7
 
-        const   int                         g_valueRoof[BLOCK_COUNT][4]                         =       {   {    4,    4,    4,    4  },                        // channel 0-3 four modes ( before roof mapping )
-                                                                                                            {    4,    4,    4,    4  },                        // channel 4-7 four modes ( before roof mapping )
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  3 for IN_MODE_LF_X 
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  4 for IN_MODE_TRG
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  5 for IN_MODE_AU_X
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  6 for MIDI
 
-                                                                                                            {    9,    9,    7,    7  },                        // LF0 wave, LF0 mult, LF1 wave, LF1 mult
-                                                                                                            {  511,  511,    8,    3  },                        // HIGH = THRESHOLD_L + 1 + THRESHOLD_H was 1024 / 1024 and in the original code 128 and 320 ( middle-ground )                                    // threshold, effect, attenuation, none/dummy
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  7 target mode selector
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  8 system settings
 
-                                                                                                            {   64,   64,   64,   64  },                        // sensitivity Aud0_L, Aud0_H, Aud1_L, Aud1_H
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  9 hidden layer ( runtime parameters / flags )
+                                                                                                            { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE } };   // layer 10 hidden layer ( runtime parameters / flags )
 
-                                                                                                            {    8,    8,    8,    8  },                        // means i need the max +1
-                                                                                                            {    2,    2,    2,    2  },
-                                                                                                            {   16,  128,  128,    4  }, // new for midi
-                                                                                                            {    0,    0,    0,    0  },
-                                                                                                            {    0,    0,    0,    0  } };
+        const   int                         g_valueRoof[BLOCK_COUNT][4]                         =       {   {    4,    4,    4,    4  },                        // layer  1 for mode channel 0-3
+                                                                                                            {    4,    4,    4,    4  },                        // layer  2 for mode channel 4-7
 
-        const   int                         g_groupLen[GROUP_COUNT]                             =           { 4, 2, 2, 3 };
-        const   int                         g_groupModes[GROUP_COUNT][4]                        =       {   { 0, 1, 2, 3 },
-                                                                                                            { 4, 5, 0, 0 },
-                                                                                                            { 6, 7, 0, 0 }, 
-                                                                                                            { 8, 9,10, 0 } };           // new for midi
+                                                                                                            {    9,    9,    7,    7  },                        // layer  3 for IN_MODE_LF_X            ( wave 0, wave 1, mult 0, mult 1 )
+                                                                                                            {  511,  511,    8,    3  },                        // layer  4 for IN_MODE_TRG             ( thr_low, thr_hi, ext_selector, attenuation? )
+
+                                                                                                            {   64,   64,   64,   64  },                        // layer  5 for IN_MODE_AU_X            ( aud 0 low, aud o hi, aud 1 low, aud 1 hi )
+                                                                                                            {   16,  128,  128,    4  },                        // layer  6 for MIDI                    ( midi channel, cc 0, cc 1, note range )
+                                                                                                            {    8,    8,    8,    8  },                        // layer  7 for target mode selector    ( time, texture, video, frame )
+                                                                                                            {    2,    2,    2,    2  },                        // layer  8 for system settings         ( store set, load set, store logs,  load firmware )
+
+                                                                                                            {    0,    0,    0,    0  },                        // layer  9 hidden layer ( runtime parameters / flags )
+                                                                                                            {    0,    0,    0,    0  } };                      // layer 10 hidden layer ( runtime parameters / flags )
+
+        const   int                         g_groupLen[GROUP_COUNT]                             =           {   4,     2,    2,    3 };
+        const   int                         g_groupModes[GROUP_COUNT][4]                        =       {   {   0,     1,    2,    3 },
+                                                                                                            {   4,     5,    0,    0 },
+                                                                                                            {   6,     7,    0,    0 }, 
+                                                                                                            {   8,     9,   10,    0 } };           // new for midi
 #else 
         const   uint8_t                     modeMaskByValue[8]                                  =       {   0b00000001,     // mode 0
                                                                                                             0b00000010,     // mode 1
@@ -315,37 +318,38 @@ public:         // Logging
                                                                                                             {    0,    0,    0,    0  },
                                                                                                             {    0,    0,    0,    0  } };
         const   int                         g_groupLen[GROUP_COUNT]                             =           { 4, 2, 2 };
+
         const   int                         g_groupModes[GROUP_COUNT][4]                        =       {   { 0, 1, 2, 3 },
                                                                                                             { 4, 5, 0, 0 },
                                                                                                             { 6, 7, 0, 0 } };                                                                                                        
 #endif
                 int                         g_modeRoof[MODETABLE_COUNT]                         =           { 0 };
-                int                         g_modeMap[MODETABLE_COUNT][MODE_NAME_COUNT]         =           { 0 };
+                int                         g_modeMap[MODETABLE_COUNT][IN_MODE_NAME_COUNT]      =           { 0 };
 
 
-                int                         g_blockColor[BLOCK_COUNT][3]                        =       {   {190,  60,  50},   // block 0 - warm red
-                                                                                                            { 55, 155,  95},   // block 1 - jade green
-                                                                                                            { 60, 105, 180},   // block 2 - medium blue
-                                                                                                            {185, 105,  40},   // block 3 - burnt orange
-                                                                                                            { 45, 140, 160},   // block 4 - blue teal
-                                                                                                            { 95,  90, 170},   // block 5 - indigo violet
-                                                                                                            {  0,   0,   0},   // block 6 - invisible
-                                                                                                            {150, 115,  45} }; // block 7 - muted gold
+                int                         g_blockColor[BLOCK_COUNT][3]                        =       {   {190,  60,  50},   // block 0               - warm red
+                                                                                                            { 55, 155,  95},   // block 1               - jade green
+                                                                                                            { 60, 105, 180},   // block 2               - medium blue
+                                                                                                            {185, 105,  40},   // block 3               - burnt orange
+                                                                                                            { 45, 140, 160},   // block 4               - blue teal
+                                                                                                            { 95,  90, 170},   // block 5               - indigo violet
+                                                                                                            {  0,   0,   0},   // block 6               - invisible
+                                                                                                            {150, 115,  45} }; // block 7               - muted gold
 
-                int                         g_modeColor[MODE_NAME_COUNT][3]                     =       {   { 40, 180, 180},   // IN_MODE_ADC       - cyan
-                                                                                                            {210,  35,  35},   // IN_MODE_TRG       - red
-                                                                                                            { 55, 190,  55},   // IN_MODE_LF1       - green
-                                                                                                            { 45,  75, 210},   // IN_MODE_LF2       - blue
+                int                         g_modeColor[IN_MODE_NAME_COUNT][3]                  =       {   { 40, 180, 180},   // IN_MODE_ADC           - cyan
+                                                                                                            {210,  35,  35},   // IN_MODE_TRG           - red
+                                                                                                            { 55, 190,  55},   // IN_MODE_LF_0          - green
+                                                                                                            { 45,  75, 210},   // IN_MODE_LF_1          - blue
 
-                                                                                                            {220, 125,  25},   // MODE_AU_AL        - orange
-                                                                                                            {210,  45, 155},   // MODE_AU_AH        - magenta
-                                                                                                            { 30, 150, 105},   // MODE_AU_BL        - jade
-                                                                                                            {135,  55, 205}    // MODE_AU_BH        - violet
-#ifdef USE_MIDI
-                                                                                                           ,{220, 200,  25},   // IN_MODE_MIDI_NOTE - yellow
-                                                                                                            { 45, 125, 215},   // IN_MODE_MIDI_CC0  - azure
-                                                                                                            {205,  75,  35}    // IN_MODE_MIDI_CC1  - vermilion
-#endif
+                                                                                                            {220, 125,  25},   // IN_MODE_AU_AL         - orange
+                                                                                                            {210,  45, 155},   // IN_MODE_AU_AH         - magenta
+                                                                                                            { 30, 150, 105},   // IN_MODE_AU_BL         - jade
+                                                                                                            {135,  55, 205};   // IN_MODE_AU_BH         - violet
+
+                                                                                                            {220, 200,  25},   // IN_MODE_MIDI_NOTE     - yellow
+                                                                                                            { 45, 125, 215},   // IN_MODE_MIDI_CC0      - azure
+                                                                                                            {205,  75,  35}    // IN_MODE_MIDI_CC1      - vermilion
+
                                                                                                         };
 
 
