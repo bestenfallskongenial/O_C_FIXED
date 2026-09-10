@@ -344,12 +344,11 @@ public:         // Logging
                                                                                                             {220, 125,  25},   // IN_MODE_AU_AL         - orange
                                                                                                             {210,  45, 155},   // IN_MODE_AU_AH         - magenta
                                                                                                             { 30, 150, 105},   // IN_MODE_AU_BL         - jade
-                                                                                                            {135,  55, 205};   // IN_MODE_AU_BH         - violet
+                                                                                                            {135,  55, 205},   // IN_MODE_AU_BH         - violet
 
                                                                                                             {220, 200,  25},   // IN_MODE_MIDI_NOTE     - yellow
                                                                                                             { 45, 125, 215},   // IN_MODE_MIDI_CC0      - azure
-                                                                                                            {205,  75,  35}    // IN_MODE_MIDI_CC1      - vermilion
-
+                                                                                                            {205,  75,  35};   // IN_MODE_MIDI_CC1      - vermilion
                                                                                                         };
 
 
