@@ -88,7 +88,6 @@ void            CKernel::logInfosRuntime( int row )
                 storeLogHex(    f_logBuffer, f_logIndex, "AUDIO 0", g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A]);
                 storeLogHex(    f_logBuffer, f_logIndex, "AUDIO 1", g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B]);
                 storeLogHex(    f_logBuffer, f_logIndex, "MIDI", g_centralModeBuffer[g_currentProgramBuffer][FLAG_MIDI]);
-                //  storeLogHex(    f_logBuffer, f_logIndex, "mapping", ((g_inOutMatrixInt[ADC_SELECT_PRG][RAW] * (filecounter[FT_FSH][FLD_VALID]  ) ) >> 10) ); // (filecounter[FT_FSH][FLD_VALID] -1 )
 
                 storeLogHex(    f_logBuffer, f_logIndex, "MIDI", (u32)g_midiConnected );            
 
