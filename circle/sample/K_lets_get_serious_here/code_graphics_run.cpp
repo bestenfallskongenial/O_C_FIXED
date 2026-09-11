@@ -217,7 +217,6 @@ void            CKernel::captureBackbuffer          (   olg_state*  o,
 #endif
 }
 
-
 void            CKernel::drawGLsPrg                 (   )
 {
 #ifdef __DEBUG_GL__
@@ -229,20 +228,7 @@ void            CKernel::drawGLsPrg                 (   )
 #endif
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-/*
-void            CKernel::frmRateBreak               (   bool noTargetFPS )
-{
-                glFlush();
 
-                if ( noTargetFPS )
-                    {
-                    glFinish();
-#ifdef __DEBUG_GL__
-                    debug_gl();
-#endif
-                    }
-}
-*/
 void            CKernel::setUniOvl                  (   olg_state*  o, 
                                                         glsl_state* s, 
                                                         tex_state*  t )
@@ -287,28 +273,25 @@ void            CKernel::drawGLsOvl                 (   )
 #endif
 }
 
-// lets try the fps break here:
-
 void            CKernel::fpsBegin()
 {
-                g_frameStart = getClockMilliseconds(); // m_Timer.GetClockTicks();
+                g_frameStart = getClockMilliseconds();
 }
 
 void            CKernel::fpsBreak()
 {
 #ifdef __DEBUG_TIMING__    
-                g_runtimeDuration = getClockMilliseconds() - g_frameStart; //m_Timer.GetClockTicks() - g_frameStart;
+                g_runtimeDuration = getClockMilliseconds() - g_frameStart;
 #endif                
                 glFlush();
 #ifdef __DEBUG_GL__
                 debug_gl();
 #endif
 #ifdef __DEBUG_TIMING__
-            //  g_glDuration = - g_frameStart; // (m_Timer.GetClockTicks() - g_frameStart) - g_runtimeDuration;
                 g_glDuration = (getClockMilliseconds() - g_frameStart) - g_runtimeDuration;                
 #endif
-                g_frameCurrent = getClockMilliseconds(); // m_Timer.GetClockTicks();
-                g_frameTarget  = g_frameStart + (1000 / TARGET_FPS); // g_frameStart + (1000000 / TARGET_FPS);
+                g_frameCurrent = getClockMilliseconds();
+                g_frameTarget  = g_frameStart + (1000 / TARGET_FPS);
 
                 if (g_limitFPS && g_frameTarget > g_frameCurrent + g_lastSwapDuration)
                     {
@@ -316,25 +299,19 @@ void            CKernel::fpsBreak()
 
                     msDelay(g_frameDelay);
                     }
-
-                g_frameCurrent = getClockMilliseconds(); // m_Timer.GetClockTicks();
+                g_frameCurrent = getClockMilliseconds();
 }
 
 void            CKernel::fpsEnd()
 {
-                g_frameEnd = getClockMilliseconds(); // m_Timer.GetClockTicks();
+                g_frameEnd = getClockMilliseconds();
 
                 g_lastSwapDuration = g_frameEnd - g_frameCurrent;
-
 #ifdef __DEBUG_TIMING__
                 g_glDuration += g_lastSwapDuration;
 #endif
-
                 g_frameTime        = g_frameEnd - g_frameStart;
 
-                if (g_frameTime) g_currentFPS = 1000.0f / g_frameTime; // 1000000.0f / g_frameTime;
+                if (g_frameTime) g_currentFPS = 1000.0f / g_frameTime;
 }
-
-// END OF FILE
-
 

@@ -1,5 +1,5 @@
     #include "CLogger.h"                        // my CLogger shimm layer <-because i have to redirect all other includes of CLogger !!
-    //  #include <circle/logger.h>
+
     #include <stdlib.h>   // malloc, calloc, free
     #include <stdint.h>   // uintptr_t
 
@@ -8,8 +8,7 @@
     #include <circle/koptions.h>
     #include <circle/machineinfo.h>
     #include <circle/devicenameservice.h>
-    //  #include <circle/screen.h>
-    //  #include <circle/serial.h>
+
     #include <circle/exceptionhandler.h>
 
     #include <circle/bcmframebuffer.h>
@@ -47,5 +46,5 @@
     #include <GLES2/gl2ext.h>
 
     #include <circle/types.h>
-//  #include <string.h>
+
 

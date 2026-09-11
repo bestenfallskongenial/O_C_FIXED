@@ -88,10 +88,6 @@ public:         // Logging
                 GLfloat                         GLtime                                          = 0;
                 GLfloat                         g_opaque                                        = 0.5; 
 
-        //      unsigned                        g_frameStart;                                   // !! has become g_frameStart !!
-
-        //      bool                            m_audio_mode_activated                          = true; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
                 bool                            is_audio[2]                                     =           { 0 };
 
                 unsigned                        g_inOutMatrixInt[CHANNEL][IO_TYPE_COUNT]        =           { 0 };           // the integer in/out matrix
@@ -103,7 +99,6 @@ public:         // Logging
                 unsigned                        g_lfoMultiplier[LFO_MULTIPLIERS_COUNT]          =           { 64, 32, 16, 8, 4, 2, 1 };
 
                 unsigned long                   g_lfoBpmMatrix[4][LFO_BPM_COUNT]                =           { 0 }; // was unsigned !
-
 // datamanagement.cpp
                 unsigned                        g_hFile;
 
@@ -159,7 +154,6 @@ public:         // Logging
                 char** 				m_bufferFsh                                     = nullptr; 
 
                 char**                          m_bufferLfo                                     = nullptr;
-                
 // the populated filecounter array - source and truth and hub for init and load                                MAXSD   MAXUSB    EXTCNT     SCANNED   LOADED  PREV    V_CNT    SIZE  
                 unsigned                        filecounter[FT_COUNT][FLD_COUNT]                =       {   { VSH_SD, VSH_USB,  VSH_EXT,    0,        0,      0,      0,       VSH_SIZ },  // VSH vertex shader
                                                                                                             { OMF_SD, OMF_USB,  OMF_EXT,    0,        0,      0,      0,       OMF_SIZ },  // OMF overlay fragment shader
@@ -299,8 +293,6 @@ public:         // Logging
                                                                                                             { 45, 125, 215},   // IN_MODE_MIDI_CC0      - azure
                                                                                                             {205,  75,  35}    // IN_MODE_MIDI_CC1      - vermilion
                                                                                                         };
-
-
 private:
                 VCHI_INSTANCE_T                 m_VCHIInstance                                  = 0;
                 VCHI_CONNECTION_T*              m_Connection                                    = 0;
@@ -392,15 +384,12 @@ public:
                 MMAL_Port_Info_Get_Reply*       m_PortInfoGetRx_Output_D                        = nullptr;
 
                 bool                            f_firstFrameQueued                              = false;
-
 // placeholder until i solved this!
 
                 EGLDisplay                      m_eglDisplay;      // is stored in the olg_state struct -> display     and needed by bufferReadyMMAL
                 EGLContext                      m_eglContext;      // is stored in the olg_state struct -> context     and needed by bufferReadyMMAL
                 EGLImageKHR                     m_EGLimage;        // is stored in the tex_state struct -> m_EGLimage  and needed by bufferReadyMMAL
                 GLuint                          m_Texture;         // is stored in the tex_state struct -> gl_tex_vid  and needed by bufferReadyMMAL               
-
-
 // lets try the fps break here:
 
 

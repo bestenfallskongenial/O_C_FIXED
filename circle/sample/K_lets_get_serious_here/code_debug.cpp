@@ -103,8 +103,6 @@ bool            CKernel::startupScreen( void )
                 unsigned modelRevision  =  m_MachineInfo.GetModelRevision();
                 unsigned ramSize        =  m_MachineInfo.GetRAMSize();
 
-            //  unsigned cpuSpeedMode   = (m_Options.GetCPUSpeed() == CPUSpeedMaximum) ? 1 : 0;
-
                 unsigned cpuSpeedMode   = m_CPUThrottle.GetClockRate() == m_CPUThrottle.GetMaxClockRate();
 
                 unsigned socMaxTemp     =  m_Options.GetSoCMaxTemp();
@@ -132,7 +130,6 @@ bool            CKernel::startupScreen( void )
                 nextline(       MY_BFR, MY_IDX);
                 storeLogU32(    MY_BFR, MY_IDX, "RAM Size       ", ramSize, "MB" ); 
                 nextline(       MY_BFR, MY_IDX);                
-            //  storeLogU32(    MY_BFR, MY_IDX, "CPU Speed Mode", cpuSpeedMode );
                 storeLogU32(    MY_BFR, MY_IDX, "CPU Speed Mode ", X_VAL, cpuSpeedMode ? "Fast" : "Normal" );
                 storeLogU32(    MY_BFR, MY_IDX, "SoC Max Temp   ", socMaxTemp, "Celsius" );
                 nextline(       MY_BFR, MY_IDX);
@@ -142,7 +139,6 @@ bool            CKernel::startupScreen( void )
                 storeLogU32(    MY_BFR, MY_IDX, "Clock UART     ", uartClock, "MHz" );
                 storeLogU32(    MY_BFR, MY_IDX, "DMA Channels   ", dmaChannel );
                 storeLogU32(    MY_BFR, MY_IDX, "USB Delay      ", usbDelay, "ms");
-            //  storeLogU32(    MY_BFR, MY_IDX, "USB Speed", usbSpeed);
                 storeLogU32(    MY_BFR, MY_IDX, "USB Speed      ", X_VAL, usbSpeed ? " 12 Mbps" : "480 Mbps" );
                 nextline(       MY_BFR, MY_IDX);
                 storeLogU32(    MY_BFR, MY_IDX, "FB Screen", fbWidth, "/", fbHeight, "Pixel" );  

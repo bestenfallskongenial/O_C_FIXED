@@ -10,13 +10,11 @@
 
     #define         __LOG_ALLOC__                                               // allocation / buffer allocation logging
     #define         __LOG_FILE__                                                // filesystem / file load-store logging
-    #define         __LOG_MEMORY__                                              // logs the memory map, only used ones
     #define         __LOG_PARSER__                                              // parser / file parser logging
     #define         __LOG_MMAL__                                                // MMAL init/wrapper/message logging
     #define         __LOG_VC04__                                                // VC/VCHI service logging
     #define         __LOG_VCSM__                                                // VCSM alloc/import/lock logging
     #define         __LOG_INIT__                                                // kernel initialization step logging
-    #define         __LOG_RUNTIME__         // maybe i should rename it...
     #define         __LOG_GLSL__                                                // shader/program/uniform/gfx_check OpenGL logging
 //  #define         __LOG_FIRST_FRAME__                                         // logs the fist frame vpu messaging - later useful
 //  #define         __LOG_TO_SCREEN__                                           // shows the log on the screen
@@ -33,7 +31,7 @@
 //  #define         __SCROLLING__                                               // animated/intermediate log-screen scrolling frames
 //  #define         __H264_DEBUG_TEX__                                          // H264 debug texture path
 
-    #define         HEAP_DEBUG                                                  // heap dump / CMemorySystem::DumpStatus() - is already set!
+//  #define         HEAP_DEBUG                                                  // heap dump / CMemorySystem::DumpStatus() - is already set!
 
 // to prepare filecounter[FT_COUNT][FLD_COUNT] for sd
     #define         VSH_SD             		1	// max number of u_vertex shader on sd
@@ -125,7 +123,7 @@
     #define         LED_C                   3
     #define         LED_D                   0
 //  buttons
-    #define         BTN_COUNT            2                                   // was addon/sensors/buttons.h is now buttonPing()  no class required 
+    #define         BTN_COUNT               2                                   // was addon/sensors/buttons.h is now buttonPing()  no class required 
     #define         SW_PIN_A	            13                                  // button A ( lower )
     #define         SW_PIN_B	          	6                                   // button B ( upper )
 // control / adc routing pin

@@ -390,11 +390,8 @@ bool            CKernel::memoryDebugCheckpoint      (   const char* p_Label,
 {
                 CMemorySystem* pMem = CMemorySystem::Get();
 
-                if (pMem == nullptr)
-                    {
-                    return FALSE;
-                    }
-#ifdef __LOG_MEMORY__                    
+                if (pMem == nullptr) return FALSE;
+            
                 size_t total = pMem->GetMemSize();
                 size_t low   = pMem->GetHeapFreeSpace(HEAP_LOW);
                 size_t high  = pMem->GetHeapFreeSpace(HEAP_HIGH);
@@ -415,13 +412,10 @@ bool            CKernel::memoryDebugCheckpoint      (   const char* p_Label,
                             "ANY", (u32)any );
 
 #ifdef HEAP_DEBUG
-                if (p_DumpStatus)
-                    {
-                    CMemorySystem::DumpStatus();
-                    }
+                if (p_DumpStatus) CMemorySystem::DumpStatus();
 #endif
                 nextline( MY_BFR, MY_IDX );
-#endif            
+         
                 return TRUE;
 }
 

@@ -1,15 +1,9 @@
     #define             X_STR                                               0 // ""                                                 // for the logger
     #define             X_VAL                                               255                                                // for the logger
 
-
     #define             BPM_NUM                                             9
-    #define             BPM_DEN                                             8   // 1.25  = 5/4   -> *4 < *5
-                                                                                // 1.2   = 6/5   -> *5 < *6
-                                                                                // 1.125 = 9/8   -> *8 < *9
-// #define             LAYER                                                6
-
-// #define             BLOCK_COUNT                                          8  // <---- ****** confusion?!?! i need to be this as single source of trueh or derived from g_centralModeBuffer
-
+    #define             BPM_DEN                                             8   // 1.25  = 5/4   -> *4 < *5 / 1.2   = 6/5   -> *5 < *6 / 1.125 = 9/8   -> *8 < *9
+    
     #define BLOCK_WIDTH                                                     4
     #define BLOCK_COUNT                                                     (MODETABLE_COUNT / BLOCK_WIDTH)
  
@@ -40,8 +34,6 @@
     #define             NAL_TYPE_PPS                                        8
 
     #define             MMAL_FORMAT_EXTRADATA_MAX_SIZE                      128              // Maximum size of the format extradata. //
-
-
 // SPI
     #define         SPI0_BASE                                           (ARM_IO_BASE + 0x204000)
 
@@ -119,7 +111,6 @@
     #define         CM_SMIDIV_DIVI_SHIFT                                12
 
     #define         SMI_WIDTH_16                                        1
- 
 // WS2812 timing
     #define         NEOPIXEL_SMI_NS                                     10
     #define         NEOPIXEL_SMI_SETUP                                  10
@@ -174,8 +165,7 @@
     #define         IS_POWEROF_2(num)                                   ((num) != 0 && (((num) & ((num) - 1)) == 0))
 
     #define         BE(value)                                           ((((value) & 0xFF00) >> 8) | (((value) & 0x00FF) << 8))
-
-        // vcsm and mmal 
+// vcsm and mmal 
     #define         VC_SM_VER                                           1    // Version to be reported to the VPU VPU assumes 0 (aka 1) which does not require the released callback
     #define         VC_SM_MIN_VER                                       0 // nor expect the client to handle VC_MEM_REQUESTS. Version 2 requires the released callback, and must support VC_MEM_REQUESTS.
 
@@ -198,8 +188,7 @@
     #define         MMAL_MSG_MAX_SIZE                                   512
     // with six 32bit header elements max payload is therefore 488 bytes //
     #define         MMAL_MSG_MAX_PAYLOAD                                488
-    // #define MMAL_TIME_UNKNOWN BIT_ULL(63)                               // Special value signalling that time is not known //
-    // #define MMAL_TIME_UNKNOWN (1ULL << 63)
+
     #define         BIT(n)                                              (1U << (n))
     #define         BIT_ULL(n)                                          (1ULL << (n))
     #define         MMAL_TIME_UNKNOWN                                   BIT_ULL(63)
@@ -207,21 +196,18 @@
     #define         NUMBER_INPUTBUFFER                                  1
     #define         NUMBER_OUTPUTBUFFER                                 2
 
-//  #define MIN_BUFFERS 2                                                 // from CKernel ??
-//  #define MAX_BUFFER 8 // ???
-
     #define         VC_SM_PROTOCOL_VERSION	                            2 // ???
-    //              FROM MMAL-VCHIQ.H
+// FROM MMAL-VCHIQ.H
     #define         MAX_PORT_COUNT                                      4
-    // Maximum size of the format extradata. //
+// Maximum size of the format extradata. //
     #define         MMAL_FORMAT_EXTRADATA_MAX_SIZE                      128
-    //              FROM MMAL-VCHIQ.H
+// FROM MMAL-VCHIQ.H
     #define         MAX_PORT_COUNT 4
-    // Maximum size of the format extradata. //
+// Maximum size of the format extradata. //
     #define         MMAL_FORMAT_EXTRADATA_MAX_SIZE                      128
-    //              FROM MMAL-PARAMETERS.H
+// FROM MMAL-PARAMETERS.H
     #define         MMAL_PARAMETER_GROUP_COMMON	                        (0 << 16)
-    //              FROM MMAL-MSG-PORT.H what do we really need here?
+// FROM MMAL-MSG-PORT.H what do we really need here?
     // The port is pass-through and doesn't need buffer headers allocated //
     #define         MMAL_PORT_CAPABILITY_PASSTHROUGH                    0x01
     //The port wants to allocate the buffer payloads.
@@ -234,29 +220,29 @@
     // change event (i.e. without having to disable the port).
     #define         MMAL_PORT_CAPABILITY_SUPPORTS_EVENT_FORMAT_CHANGE   0x04
     // mmal port structure (MMAL_PORT_T)
-    //
+
     // most elements are informational only, the pointer values for
     // interogation messages are generally provided as additional
     // structures within the message. When used to set values only the
     // buffer_num, buffer_size and userdata parameters are writable.
-    //              FROM MMAL-MSG.H
+// FROM MMAL-MSG.H
     // MMAL buffer transfer //
     
-    #define         MMAL_VC_SHORT_DATA 128                                          // Size of space reserved in a buffer message for short messages. //
-    #define         MMAL_BUFFER_HEADER_FLAG_EOS                         BIT(0)       // Signals that the current payload is the end of the stream of data //
-    #define         MMAL_BUFFER_HEADER_FLAG_FRAME_START                 BIT(1)       // Signals that the start of the current payload starts a frame //
-    #define         MMAL_BUFFER_HEADER_FLAG_FRAME_END                   BIT(2)       // Signals that the end of the current payload ends a frame //
+    #define         MMAL_VC_SHORT_DATA                                  128         // Size of space reserved in a buffer message for short messages. //
+    #define         MMAL_BUFFER_HEADER_FLAG_EOS                         BIT(0)      // Signals that the current payload is the end of the stream of data //
+    #define         MMAL_BUFFER_HEADER_FLAG_FRAME_START                 BIT(1)      // Signals that the start of the current payload starts a frame //
+    #define         MMAL_BUFFER_HEADER_FLAG_FRAME_END                   BIT(2)      // Signals that the end of the current payload ends a frame //
     #define         MMAL_BUFFER_HEADER_FLAG_FRAME \
                     (MMAL_BUFFER_HEADER_FLAG_FRAME_START | \
                     MMAL_BUFFER_HEADER_FLAG_FRAME_END)                              // Signals that the current payload contains only complete frames (>1) //
-    #define         MMAL_BUFFER_HEADER_FLAG_KEYFRAME                    BIT(3)       // Signals that the current payload is a keyframe (i.e. self decodable) //
-    #define         MMAL_BUFFER_HEADER_FLAG_DISCONTINUITY               BIT(4)       // Signals a discontinuity in the stream of data (e.g. after a seek). Can be used for instance by a decoder to reset its state
-    #define         MMAL_BUFFER_HEADER_FLAG_CONFIG                      BIT(5)       // Signals a buffer containing some kind of config data for the component (e.g. codec config data)
-    #define         MMAL_BUFFER_HEADER_FLAG_ENCRYPTED                   BIT(6)       // Signals an encrypted payload //
-    #define         MMAL_BUFFER_HEADER_FLAG_CODECSIDEINFO               BIT(7)       // Signals a buffer containing side information //
-    #define         MMAL_BUFFER_HEADER_FLAGS_SNAPSHOT                   BIT(8)       // Signals a buffer which is the snapshot/postview image from a stills capture
-    #define         MMAL_BUFFER_HEADER_FLAG_CORRUPTED                   BIT(9)       // Signals a buffer which contains data known to be corrupted //
-    #define         MMAL_BUFFER_HEADER_FLAG_TRANSMISSION_FAILED         BIT(10)      // Signals that a buffer failed to be transmitted //
+    #define         MMAL_BUFFER_HEADER_FLAG_KEYFRAME                    BIT(3)      // Signals that the current payload is a keyframe (i.e. self decodable) //
+    #define         MMAL_BUFFER_HEADER_FLAG_DISCONTINUITY               BIT(4)      // Signals a discontinuity in the stream of data (e.g. after a seek). Can be used for instance by a decoder to reset its state
+    #define         MMAL_BUFFER_HEADER_FLAG_CONFIG                      BIT(5)      // Signals a buffer containing some kind of config data for the component (e.g. codec config data)
+    #define         MMAL_BUFFER_HEADER_FLAG_ENCRYPTED                   BIT(6)      // Signals an encrypted payload //
+    #define         MMAL_BUFFER_HEADER_FLAG_CODECSIDEINFO               BIT(7)      // Signals a buffer containing side information //
+    #define         MMAL_BUFFER_HEADER_FLAGS_SNAPSHOT                   BIT(8)      // Signals a buffer which is the snapshot/postview image from a stills capture
+    #define         MMAL_BUFFER_HEADER_FLAG_CORRUPTED                   BIT(9)      // Signals a buffer which contains data known to be corrupted //
+    #define         MMAL_BUFFER_HEADER_FLAG_TRANSMISSION_FAILED         BIT(10)     // Signals that a buffer failed to be transmitted //
     // Video buffer header flags
     // videobufferheaderflags
     // The following flags describe properties of a video buffer header.
@@ -268,16 +254,13 @@
     
     #define         MMAL_BUFFER_HEADER_VIDEO_FLAG_INTERLACED \
                     (MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START << 0)    // Signals an interlaced video frame //
-    
-    // 
+
     #define         MMAL_BUFFER_HEADER_VIDEO_FLAG_TOP_FIELD_FIRST \
                     (MMAL_BUFFER_HEADER_FLAG_FORMAT_SPECIFIC_START << 1)    // Signals that the top field of the current interlaced frame should be displayed first
     // port parameter setting //
     #define         MMAL_WORKER_PORT_PARAMETER_SPACE                    96        
     // event messages //
     #define         MMAL_WORKER_EVENT_SPACE                             256
-    
-//  #define         MMAL_FOURCC(a, b, c, d) ((a) | (b << 8) | (c << 16) | (d << 24))    // Four CC's for events //
 
     #define         MMAL_EVENT_ERROR		                            MMAL_FOURCC('E', 'R', 'R', 'O')
     #define         MMAL_EVENT_EOS			                            MMAL_FOURCC('E', 'E', 'O', 'S')
