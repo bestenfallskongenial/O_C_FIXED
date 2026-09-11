@@ -2,24 +2,7 @@
 
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
     #define MY_IDX   m_logKernelIndex 
-/*
-void            CKernel::circleLedColor()        // simple display_debug / feedback function
-{
-                static int counter = 0;
 
-                WS2812_SetLED(LED_A, (g_waveTable[WAVE_SINE][(1 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(2 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(3 * counter) % 255] >> 6));
-
-                WS2812_SetLED(LED_B, (g_waveTable[WAVE_SINE][(2 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(3 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(1 * counter) % 255] >> 6));
-
-                WS2812_SetLED(LED_C, (g_waveTable[WAVE_SINE][(3 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(1 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(2 * counter) % 255] >> 6));
-
-                WS2812_SetLED(LED_D, (g_waveTable[WAVE_SINE][(2 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(1 * counter) % 255] >> 6), (g_waveTable[WAVE_SINE][(3 * counter) % 255] >> 6));
-
-                WS2812_Update();
-
-                counter++;
-}
-*/
 void            CKernel::circleLedColor()
 {
                 static int counter = 0;
@@ -155,7 +138,6 @@ void            CKernel::menuLedUpdate()
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 0] * offset) % 255;
                         levelA = ((uint16_t*)m_bufferLfo[waveSinus])[idx];
-                    //  levelA = g_waveTable[WAVE_SINE][idx];
                         }
 
                     if (!g_menuPickUpFlag[base + 1])
@@ -166,7 +148,6 @@ void            CKernel::menuLedUpdate()
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 1] * offset) % 255;
                         levelB = ((uint16_t*)m_bufferLfo[waveSinus])[idx];                        
-                    //  levelB = g_waveTable[WAVE_SINE][idx];
                         }
 
                     if (!g_menuPickUpFlag[base + 2])
@@ -177,7 +158,6 @@ void            CKernel::menuLedUpdate()
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 2] * offset) % 255;
                         levelC = ((uint16_t*)m_bufferLfo[waveSinus])[idx];                        
-                    //  levelC = g_waveTable[WAVE_SINE][idx];
                         }
 
                     if (!g_menuPickUpFlag[base + 3])
@@ -188,7 +168,6 @@ void            CKernel::menuLedUpdate()
                         {
                         idx = (g_centralModeBuffer[g_currentProgramBuffer][base + 3] * offset) % 255;
                         levelD = ((uint16_t*)m_bufferLfo[waveSinus])[idx];                        
-                    //  levelD = g_waveTable[WAVE_SINE][idx];
                         }
                     }
 

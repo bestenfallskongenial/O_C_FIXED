@@ -397,13 +397,8 @@ void            CKernel::applyTargetModes           (   )
 
                     calculate1BPMnew( 1, TB1, DB1, g_extClockTime[g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT]]);
                     }
-/*
-                else
-                    {
-                    g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT] = g_centralModeBuffer[g_currentProgramBuffer][LAST_EXT];
-                    }
-*/
-                g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] = false;
+
+                    g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] = false;
 }
 
 void            CKernel::checkSystemFlags()

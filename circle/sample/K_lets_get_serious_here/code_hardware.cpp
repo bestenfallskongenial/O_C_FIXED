@@ -71,11 +71,9 @@ void            CKernel::GPIO_SetPull            (   unsigned nPin,
 
                 write32(ARM_GPIO_GPPUD, nPullMode);
 
-            //  CTimer::SimpleusDelay(5);
                 usDelay(5);
                 write32(nClkReg, nMask);
 
-            //  CTimer::SimpleusDelay(5);
                 usDelay(5);
                 write32(ARM_GPIO_GPPUD, 0);
                 write32(nClkReg, 0);
@@ -282,8 +280,6 @@ int             CKernel::WriteRead                  (   unsigned nChipSelect,
                     const u8 *pWritePtr = (const u8 *) pWriteBuffer;
                     u8 *pReadPtr = (u8 *) pReadBuffer;
 
-                //  m_SpinLock.Acquire ();
-
                     PeripheralEntry();
 
                     write32(ARM_SPI_DLEN, nCount);
@@ -330,8 +326,6 @@ int             CKernel::WriteRead                  (   unsigned nChipSelect,
 
                     PeripheralExit();
 
-                // 	m_SpinLock.Release ();
-
                     return (int) nCount;
 }
 
@@ -342,9 +336,9 @@ bool            CKernel::SMI_Init                (   unsigned gpioPin)
 
                 m_SMIGpioPin = gpioPin;
 
-                m_SMISDMask = (1 << (gpioPin - 8)); // GPIO8 -> SD0 -> (1 << 0) GPIO9 -> SD1 -> (1 << 1)
+                m_SMISDMask = (1 << (gpioPin - 8));
 
-                GPIO_SetAlt(gpioPin, GPIO_ALT1, GPIO_PULL_OFF); // switch GPIO to SMI ALT1
+                GPIO_SetAlt(gpioPin, GPIO_ALT1, GPIO_PULL_OFF);
 
                 m_SMIValid = TRUE;
 
@@ -373,22 +367,19 @@ void            CKernel::SMI_SetupTiming            (   unsigned width,
                 if (read32(ARM_CM_SMICTL) != (divi << CM_SMIDIV_DIVI_SHIFT))
                     {
                     write32(ARM_CM_SMICTL, ARM_CM_PASSWD | CM_SMICTL_KILL);
-                //  CTimer::Get()->usDelay(10);
+
                     usDelay(10);
                     while (read32(ARM_CM_SMICTL) & CM_SMICTL_BUSY) {}
 
-                //  CTimer::Get()->usDelay(10);
                     usDelay(10);
                     write32( ARM_CM_SMIDIV, ARM_CM_PASSWD | (divi << CM_SMIDIV_DIVI_SHIFT));
 
-                //  CTimer::Get()->usDelay(10);
                     usDelay(10);
                     write32( ARM_CM_SMICTL, ARM_CM_PASSWD | 6 | CM_SMICTL_ENAB );
 
-                //  CTimer::Get()->usDelay(10);
                     usDelay(10);
                     while ((read32(ARM_CM_SMICTL) & CM_SMICTL_BUSY) == 0) {}
-                //  CTimer::Get()->usDelay(100);
+
                     usDelay(100);
                     }
 
@@ -739,7 +730,7 @@ void            CKernel::bufferScreenDraw   (   const   char*       pSourceBuffe
 
                     if (ch == '\n')
                         {
-                        col = startCol; // startCol = indented wrap // 0 = left-edge wrap
+                        col = startCol;
                         row++;
                         if (row >= gE_Rows) break;
 
@@ -750,7 +741,7 @@ void            CKernel::bufferScreenDraw   (   const   char*       pSourceBuffe
                     col++;
                     if (col >= gE_Cols)
                         {
-                        col = startCol; // startCol = indented wrap // 0 = left-edge wrap
+                        col = startCol;
                         row++;
                         if (row >= gE_Rows) break;
                         }
