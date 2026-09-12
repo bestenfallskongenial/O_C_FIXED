@@ -40,14 +40,9 @@
      height="1024"
      viewBox="0 0 1024 1024">
 <style>
-  .glyph-tile { width: 128px; height: 128px; overflow: hidden; fill: #000000; fill-rule: evenodd; }
 
-  .glyph-tile use.line { stroke: #000000; stroke-width: 6px; stroke-linecap: round; }  
-  .glyph-stroke-8 { fill: none; stroke: #000000; stroke-width: 8px; stroke-linecap: round; stroke-linejoin: round; }  
-  .num-glyph-data { transform: translate(64px, 64px) scale(0.25) translate(-64px, -64px) translate(0px, -486px); fill: #000000; fill-rule: evenodd; }
-  .glyph-tile { overflow: hidden; fill: #000000; fill-rule: evenodd; }
-</style>
-  <g>
+
+</style>    
 <!--  128/128 RASTER FOR EDITING - REMOVE LATER! -->    
     <polyline fill="none" points="128,0 128,1024" stroke="#000000" stroke-width="1" />
     <polyline fill="none" points="256,0 256,1024" stroke="#000000" stroke-width="1" />
@@ -64,8 +59,6 @@
     <polyline fill="none" points="0,640 1024,640" stroke="#000000" stroke-width="1" />
     <polyline fill="none" points="0,768 1024,768" stroke="#000000" stroke-width="1" />
     <polyline fill="none" points="0,896 1024,896" stroke="#000000" stroke-width="1" />
-  </g>
-
 <defs>
 <!-- GLYPH DATA -->
   <path     id="GLYPH_0" d="M88 28.5 L59 28.5 L37 28.5 C33.87 28.5 31 30.52 31 33.5 L31 37.5 L31 89.5 L31 93.5 C31 96.48 33.87 99.5 37 99.5 L59 99.5 L88 99.5 L92 99.5 C95.13 99.5 97 96.48 97 93.5 L97 89.5 L97 79.5 L97 72.5 L97 37.5 L97 33.5 C97 30.52 95.13 28.5 92 28.5 C92 28.5 88 28.5 88 28.5 Z M80 45.5 L70 62.5 C67.27 67.52 59 66.15 59 60.5 L59 42.5 C59 39.52 61.87 37.5 65 37.5 L75 37.5 C79.25 37.5 81.95 41.91 80 45.5 Z M88 79.5 L88 84.5 C88 87.48 85.13 89.5 82 89.5 L76 89.5 C71.76 89.5 69.05 86.09 71 82.5 L77 69.5 C79.73 64.48 88 66.85 88 72.5 L88 72.5 C88 72.5 88 79.5 88 79.5 Z"/>
@@ -96,88 +89,16 @@
   <path     id="GLYPH_X" d="M81 73H70L90 35C93 33 90 28 86 28H70C68 28 68 28 66 30L57 46C54 48 50 48 50 46L43 30C43 28 41 28 39 28C36 28 34 33 34 35L48 62C48 64 48 64 48 66L34 93C32 96 34 100 39 100H54C57 100 57 100 59 98L66 84C66 82 68 82 70 82H75C77 82 77 82 79 84L86 98C86 100 88 100 90 100C93 100 95 96 95 93L88 82L81 73Z"/>
 
   <rect     id="GLYPH_DOT" x="56" y="76" width="24" height="24" rx="8" ry="8"/>
-  
+
+  <circle   id="COMMON_CIRCLE" cx="64" cy="64" r="44"/>
+
   <path     id="LOAD_BODY" d="M7 15L4 18L3 22L1 26L0 29L0 30L0 31L0 96L0 97 L1 101L2 104L4 107L7 111L11 115L15 118L19 120L24 121 L29 122L32 121L34 120L36 118L37 115L37 112L37 111 L36 109L34 107L31 106L28 106L27 106L25 105L22 104 L19 101L18 99L16 96L16 94L16 42L112 42L112 43L112 94 L112 96L111 98L109 101L107 103L105 104L103 105L101 106 L100 106L97 106L94 107L92 109L91 111L91 112L91 115 L92 118L94 121L96 121L98 122L99 122L102 122L109 120 L113 118L118 115L121 111L124 107L126 104L127 101L128 97 L128 96L128 41L128 40L127 36L126 33L124 30L121 26 L117 22L114 19L111 18L107 16L104 16L103 16L103 15 L100 15L68 15L53 7L52 7L51 7L49 5L45 5L26 5L24 5 L21 6L18 7L14 9L10 12Z"/>
   <path     id="LOAD_ARROW" d="M64 43L61 44L59 45L57 47L56 49L56 57L47 57L45 58L43 59L43 60L42 61L42 64L43 65L61 84L63 85L65 85L67 84L85 65L86 64L86 61L85 59L82 57L81 57L72 57L72 49L71 47L69 45L67 44Z"/>
   <path     id="GLYPH_GEAR" d="M64 29L60 30L57 33L56 36L56 41L56 42L53 43L49 46L47 45L45 44L43 43L39 43L36 44L34 47L33 50L33 53L34 55L36 57L40 60L40 61L40 62L40 68L39 69L37 71L35 72L33 75L33 78L33 78L33 80L35 82L36 84L38 85L40 85L42 85L44 85L48 83L49 82L52 85L56 86L56 87L56 92L58 96L59 97L61 98L62 99L66 99L69 97L71 95L72 92L72 87L72 86L76 85L79 82L80 83L84 85L86 85L88 85L91 84L94 82L95 79L95 78L95 78L95 75L94 73L92 71L88 68L88 67L88 67L88 60L92 57L94 55L95 53L95 50L94 47L94 46L92 44L90 43L89 43L85 43L84 43L81 45L79 46L75 43L72 42L72 41L72 36L71 33L68 30L66 30ZM62 56L66 56L68 57L71 59L72 62L72 65L72 67L71 68L69 70L67 72L65 72L63 72L60 71L58 69L56 66L56 63L57 60L59 58Z"/>
   <path     id="TIME_BODY" fill-rule="evenodd" d="M64 0 A64 64 0 1 1 0.5 72 A8 8 0 0 1 16.5 70 A48 48 0 1 0 32.8 27.5 L39 33.7 A5 5 0 0 1 35.5 42.5 H10.5 A5 5 0 0 1 5.5 37.5 V12.5 A5 5 0 0 1 14 9 L21.5 16.5 A63.8 63.8 0 0 1 64 0Z"/>
   <path     id="TIME_HAND" d="M61 37 A8 8 0 0 1 69 45 V66 L77 74 A8 8 0 0 1 65.7 85.3 L55.3 74.9 A8 8 0 0 1 53 69.3 V45 A8 8 0 0 1 61 37Z"/>
 
-  <path     id="WAVE_SINE" d="M24 85C36 85 40 44 64 44C88 44 92 85 104 85"/>
-  <path     id="COMMON_WAVE_PATH_1" d="M44 64 C50.7 54.7 56.2 48 64 48 C71.8 48 77.3 54.7 84 64"/>
-  <path     id="COMMON_WAVE_PATH_2" d="M44 64 C47.3 58.7 50.7 56 54 56 C57.3 56 60.7 58.7 64 64 C67.3 69.3 70.7 72 74 72 C77.3 72 80.7 69.3 84 64"/>
-  <path     id="COMMON_WAVE_PATH_3" d="M44 64 C46 60 48 58 50 58 C52 58 54 60 56 64 C58 68 60 70 62 70 C64 70 66 68 68 64 C70 60 72 58 74 58 C76 58 78 60 80 64 C82 68 84 70 84 70"/>
-  <path     id="TARGET_MODE_CORNER" fill-rule="evenodd" d="M19 3 L43 3 C50.791 3 57.45 8.611 58.77 16.29 C36.404 18.743 18.743 36.404 16.29 58.77 C8.611 57.45 3 50.791 3 43 L3 19 C3 14.757 4.686 10.687 7.686 7.686 C10.687 4.686 14.757 3 19 3 Z"/>
-  <path     id="TARGET_MODE_MEDIA_FRAME" fill-rule="evenodd" d="M29 1H99 A28 28 0 0 1 127 29 V62 A28 28 0 0 1 99 90 H29 A28 28 0 0 1 1 62 V29 A28 28 0 0 1 29 1 Z M30 17 H98 A13 13 0 0 1 111 30 V61 A13 13 0 0 1 98 74 H30 A13 13 0 0 1 17 61 V30 A13 13 0 0 1 30 17 Z"/>
-  <path     id="TARGET_MODE_VIDEO_PLAY" d="M55 29 C53 30 52 32 52 35 V56 C52 58 53 60 55 61 C57 62 59 62 61 61 L81 50 C83 48 84 47 84 45 C84 43 83 42 81 40 L61 29 C59 28 57 28 55 29 Z"/>
-  <path     id="TARGET_MODE_CLOCK_ARC" d="M64 24 A21 21 0 1 0 85 45"/>
-  <path     id="WAVE_SINE" d="M24 85C36 85 40 44 64 44C88 44 92 85 104 85"/>
-  <line     id="WAVE_RAMP_UP" x1="24" y1="85" x2="104" y2="44"/>
-  <line     id="WAVE_RAMP_DOWN" x1="24" y1="44" x2="104" y2="85"/>
-  <path     id="WAVE_SMOOTH_UP" d="M24 85 C50.667 85 77.333 44 104 44"/>
-  <path     id="WAVE_SMOOTH_DOWN" d="M24 44 C50.667 44 77.333 85 104 85"/>
-  <path     id="WAVE_EXPONENTIAL" d="M24 85 C46 85 59 82 64 44 C84 44 99 61 104 85"/>  
-  <line     id="COMMON_WAVE_LINE" x1="64" y1="54" x2="64" y2="74"/>
-  <line     id="TARGET_MODE_CLOCK_HAND_HORIZONTAL" x1="64" y1="45" x2="75" y2="45"/>
-  <line     id="TARGET_MODE_CLOCK_HAND_VERTICAL" x1="64" y1="45" x2="64" y2="35"/>
-  <polyline id="WAVE_TRIANGLE" points="24,85 64,44 104,85"/>
-  <polyline id="WAVE_RANDOM" points="24,77 40,77 40,53 56,53 56,81 72,81 72,61 88,61 88,73 104,73"/>
-  <polyline id="TARGET_MODE_PICTURE_LINE" points="24,66 48,48 60,58 88,35 104,50"/>
-  <circle   id="COMMON_CIRCLE" cx="64" cy="64" r="44"/>
-  <circle   id="TARGET_MODE_PICTURE_DOT" cx="37" cy="38" r="9"/>
-  <circle   id="TARGET_MODE_VIDEO_CONTROL_MIDDLE" cx="43" cy="115" r="13"/>
-  <rect     id="TARGET_MODE_VIDEO_CONTROL_RIGHT" x="64" y="107" width="63" height="16" rx="8" ry="8"/>
-  <rect     id="TARGET_MODE_VIDEO_CONTROL_LEFT" x="1" y="107" width="20" height="16" rx="8" ry="8"/>
-
-  <polyline id="WAVE_TRAPEZOID" points="24,85 44,44 84,44 104,85"/>
-
-  <path     id="ARROW_HEAD" d=" M 64 48 Q 65.5 48 67 49 L 120 77 Q 123 78.5 121 80 Q 120 81 117 81 L 11 81 Q 8 81 7 80 Q 5 78.5 8 77 L 61 49 Q 62.5 48 64 48 Z"/>
-<path     id="KEYBOARD_SYNTH" fill-rule="evenodd" d="M18 14H110A12 12 0 0 1 122 26V102A12 12 0 0 1 110 114H18A12 12 0 0 1 6 102V26A12 12 0 0 1 18 14Z M26 24H68A6 6 0 0 1 74 30V46A6 6 0 0 1 68 52H26A6 6 0 0 1 20 46V30A6 6 0 0 1 26 24Z M88 24H104A6 6 0 0 1 110 30V46A6 6 0 0 1 104 52H88A6 6 0 0 1 82 46V30A6 6 0 0 1 88 24Z M16 62H112V104H16Z M32 62H44V80C44 85 41 88 38 88C34 88 32 85 32 80Z M60 62H72V80C72 85 69 88 66 88C62 88 60 85 60 80Z M88 62H100V80C100 85 97 88 94 88C90 88 88 85 88 80Z"/>
-<path     id="KEYBOARD_SYNTH1" fill-rule="evenodd" d="M18 14H110A12 12 0 0 1 122 26V96A12 12 0 0 1 110 108H18A12 12 0 0 1 6 96V26A12 12 0 0 1 18 14Z M26 24H68A6 6 0 0 1 74 30V46A6 6 0 0 1 68 52H26A6 6 0 0 1 20 46V30A6 6 0 0 1 26 24Z M88 24H104A6 6 0 0 1 110 30V46A6 6 0 0 1 104 52H88A6 6 0 0 1 82 46V30A6 6 0 0 1 88 24Z M16 62H112V98H16Z M32 62H44V74C44 79 41 82 38 82C34 82 32 79 32 74Z M60 62H72V74C72 79 69 82 66 82C62 82 60 79 60 74Z M88 62H100V74C100 79 97 82 94 82C90 82 88 79 88 74Z"/>
-
-  <path     id="KEYBOARD_PIANO" d=" M12 12H20V68C20 71 22 72 24 72H32V116H12C9 116 8 114 8 112V16C8 14 9 12 12 12Z M44 12H52V68C52 71 50 72 48 72H40V116H60V72H56C54 72 52 70 52 68V12Z M76 12H84V68C84 71 86 72 88 72H92V116H68V72H72C74 72 76 70 76 68V12Z M108 12H116C119 12 120 14 120 16V112C120 114 119 116 116 116H96V72H104C106 72 108 71 108 68V12Z"/>
 <!--  MASKS DATA -->
-  <mask     id="MASK_TARGET_MODE_TL_PICTURE" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
-            <rect width="128" height="128" fill="white"/>
-            <g transform="rotate(-45 20 20) translate(20 20) scale(0.20) translate(-64 -64)">
-              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
-              <use href="#TARGET_MODE_PICTURE_DOT" fill="black"/>
-              <use href="#TARGET_MODE_PICTURE_LINE" fill="none" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-  </mask>
-  <mask     id="MASK_TARGET_MODE_TR_VIDEO" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
-            <rect width="128" height="128" fill="white"/>
-            <g transform="rotate(45 108 20) translate(108 20) scale(0.20) translate(-64 -64)">
-              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
-              <use href="#TARGET_MODE_VIDEO_PLAY" fill="black"/>
-              <use href="#TARGET_MODE_VIDEO_CONTROL_LEFT" fill="black"/>
-              <use href="#TARGET_MODE_VIDEO_CONTROL_MIDDLE" fill="black"/>
-              <use href="#TARGET_MODE_VIDEO_CONTROL_RIGHT" fill="black"/>
-            </g>
-  </mask>
-  <mask     id="MASK_TARGET_MODE_BL_CLOCK" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
-            <rect width="128" height="128" fill="white"/>
-            <g transform="rotate(-135 20 108) translate(20 108) scale(0.20) translate(-64 -64)">
-              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
-              <use href="#TARGET_MODE_CLOCK_ARC" fill="none" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-              <use href="#TARGET_MODE_CLOCK_HAND_HORIZONTAL" stroke="black" stroke-width="8" stroke-linecap="round"/>
-              <use href="#TARGET_MODE_CLOCK_HAND_VERTICAL" stroke="black" stroke-width="8" stroke-linecap="round"/>
-            </g>
-  </mask>
-  <mask     id="MASK_TARGET_MODE_BR_VIDEO" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
-            <rect width="128" height="128" fill="white"/>
-            <g transform="rotate(135 108 108) translate(108 108) scale(0.20) translate(-64 -64)">
-              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
-              <use href="#TARGET_MODE_VIDEO_PLAY" fill="black"/>
-            </g>
-  </mask>
-  <mask     id="MASK_TARGET_MODE_BR_GL" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
-            <rect width="128" height="128" fill="white"/>
-            <g transform="rotate(45 108 108) translate(110 108) scale(0.40) translate(-64 -64)">
-              <use href="#GLYPH_G" fill="black" transform="translate(48 64) scale(0.44) translate(-64 -64)"/>
-              <use href="#GLYPH_L" fill="black" transform="translate(80 64) scale(0.44) translate(-64 -64)"/>
-            </g>
-  </mask>
   <mask     id="COMMON_MODE_CUTOUT" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
             <use href="#COMMON_CIRCLE" fill="white"/>
             <circle cx="64" cy="26" r="14" fill="black"/>
@@ -189,67 +110,17 @@
             <circle cx="64" cy="102" r="14" fill="black"/>
             <rect x="30" y="48" width="48" height="32" rx="6" ry="6" fill="black" stroke="none"/>
             <rect x="82" y="48" width="16" height="32" rx="6" ry="6" fill="black" stroke="none"/>
+  </mask>  
 
-  </mask>
-  <mask     id="COMMON_WAVE_MASK" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
-            <rect x="0" y="0" width="128" height="128" fill="white"/>
-            <g fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-              <use href="#COMMON_WAVE_LINE" transform="translate(-32 0)"/>
-              <use href="#COMMON_WAVE_LINE" transform="translate( 8 0)"/>
-              <rect x="82" y="64" width="16" height="16" rx="6" ry="6" fill="black" stroke="none"/>
-              <rect x="72" y="48" width="16" height="16" rx="6" ry="6" fill="black" stroke="none"/>
-        <!--  <use href="#COMMON_WAVE_LINE" transform="translate(40 0)"/> -->
-        <!--  <use href="#COMMON_WAVE_PATH_1" transform="translate(-20 0)"/> -->
-              <use href="#COMMON_WAVE_PATH_2" transform="translate(-12 0)"/>
-              <use href="#COMMON_WAVE_PATH_3" transform="translate(-12 0)"/>
-            </g>
-  </mask>
-  <mask     id="COMMON_MODE_WINDOW_CUTOUT">
-            <rect x="0" y="0" width="128" height="128" fill="white"/>
-            <rect x="40" y="40" width="8" height="48" rx="4" ry="4" fill="black"/>
-  </mask>
-  
 </defs>
 
-<!-- LFO POSITIONING 1/4 of a normal tile --> 
-  <svg      id="LFO_WAVE_SINE" class="glyph-tile" data-cell="0,4" data-size="64" data-sub="0,0">  <!-- LFO PLACEMENT -->
-       <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-            <use href="#WAVE_SINE" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  <svg      id="MODE_LFO_0" class="glyph-tile" data-cell="2,0">
+            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_LFO_CUTOUT)"/>
+            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
   </svg>
-    <svg      id="LFO_WAVE_TRIANGLE" class="glyph-tile" data-cell="2,0">  <!-- !ONLY FOR DEMO PURPOSES! -->
-        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-                <use href="#WAVE_TRIANGLE" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-    </svg>
-  <svg      id="LFO_WAVE_TRIANGLE-ORG" class="glyph-tile" data-cell="0,4" data-size="64" data-sub="1,0">
-       <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-            <use href="#WAVE_TRIANGLE" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
-  <svg      id="LFO_WAVE_RAMP_UP" class="glyph-tile" data-cell="1,4" data-size="64" data-sub="0,0">
-        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-            <use href="#WAVE_RAMP_UP" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
-  <svg      id="LFO_WAVE_RAMP_DOWN" class="glyph-tile" data-cell="1,4" data-size="64" data-sub="1,0">
-        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-            <use href="#WAVE_RAMP_DOWN" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
-<!--
-  <svg      id="LFO_WAVE_TRAPEZOID" class="glyph-tile" data-cell="5,3">
-            <use href="#WAVE_TRAPEZOID" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
--->
-  <svg      id="LFO_WAVE_SMOOTH_UP" class="glyph-tile" data-cell="2,4" data-size="64" data-sub="0,0">
-            <use href="#WAVE_SMOOTH_UP" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
-  <svg      id="LFO_WAVE_SMOOTH_DOWN" class="glyph-tile" data-cell="2,4" data-size="64" data-sub="1,0">
-            <use href="#WAVE_SMOOTH_DOWN" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
-  <svg      id="LFO_WAVE_EXPONENTIAL" class="glyph-tile" data-cell="3,4" data-size="64" data-sub="0,0">
-            <use href="#WAVE_EXPONENTIAL" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
-  <svg      id="LFO_WAVE_RAMP_RANDOM" class="glyph-tile" data-cell="3,4" data-size="64" data-sub="1,0">
-        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-            <use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
-  </svg>
+
+
+
 <!-- NUMBER POSITIONING 1/4 of a normal tile -->  
   <svg      id="NUM_0" class="glyph-tile" data-cell="0,4" data-size="64" data-sub="0,1">    <!-- NUMBER GLYPH PLACEMENT -->
             <use href="#GLYPH_0" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
@@ -285,64 +156,8 @@
   <svg      id="DOT" class="glyph-tile" data-cell="5,4" data-size="64" data-sub="0,1">
             <use href="#GLYPH_DOT" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
   </svg>
-<!-- MODE POSITIONING -->
-  <svg      id="MODE_ADC" class="glyph-tile" data-cell="0,0">   <!-- MODE PLACEMENT -->
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-      <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
-  </svg>
-  <svg      id="MODE_TRG" class="glyph-tile" data-cell="1,0">
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-            <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_LFO_0" class="glyph-tile" data-cell="2,0">
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_LFO_CUTOUT)"/>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_LFO_1" class="glyph-tile" data-cell="3,0">
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_LFO_CUTOUT)"/>
-            <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_A_L_0" class="glyph-tile" data-cell="4,0">
-            <g mask="url(#COMMON_WAVE_MASK)" transform="rotate(0 64 64)">
-              <use href="#COMMON_CIRCLE" mask="url(#COMMON_MODE_CUTOUT)"/>
-            </g>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_A_H_0" class="glyph-tile" data-cell="5,0">
-            <g mask="url(#COMMON_WAVE_MASK)" transform="rotate(0 64 64)">
-              <use href="#COMMON_CIRCLE" mask="url(#COMMON_MODE_CUTOUT)"/>
-            </g>
-            <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_A_L_1" class="glyph-tile" data-cell="6,0">
-            <g mask="url(#COMMON_WAVE_MASK)" transform="rotate(180 64 64)">
-              <use href="#COMMON_CIRCLE" mask="url(#COMMON_MODE_CUTOUT)"/>
-            </g>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_A_H_1" class="glyph-tile" data-cell="7,0">
-            <g mask="url(#COMMON_WAVE_MASK)" transform="rotate(180 64 64)">
-              <use href="#COMMON_CIRCLE" mask="url(#COMMON_MODE_CUTOUT)"/>
-            </g>
-            <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-  </svg>
-  <svg      id="MODE_MIDI_NOTE" class="glyph-tile" data-cell="0,1">   <!-- MODE PLACEMENT -->
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-      <!--  <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/> -->
-      <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
-  </svg>  
-  <svg      id="MODE_MIDI_CC0" class="glyph-tile" data-cell="1,1">   <!-- MODE PLACEMENT -->
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-      <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
-  </svg>
-  <svg      id="MODE_MIDI_CC1" class="glyph-tile" data-cell="2,1">   <!-- MODE PLACEMENT -->
-            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
-            <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-      <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
-  </svg>    
-<!-- STRINGS POSITIONING 1/4 of a normal tile -->
+
+  <!-- STRINGS POSITIONING 1/4 of a normal tile -->
   <svg      id="BPM" class="glyph-tile" data-cell="6,4" data-size="64" data-sub="0,1">
             <use href="#GLYPH_B" transform="translate(44 64) scale(0.3) translate(-64 -64)"/>
             <use href="#GLYPH_P" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
@@ -364,8 +179,16 @@
             <use href="#GLYPH_D" transform="translate(72 64) scale(0.3) translate(-64 -64)"/>
             <use href="#GLYPH_I" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
   </svg>  
+
+
+
+  <svg      id="MODE_ADC" class="glyph-tile" data-cell="0,0">   <!-- MODE PLACEMENT -->
+            <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_CUTOUT)"/>
+            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+      <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
+  </svg>  
 <!-- SYSTEM ICON POSITIONING -->
-  <svg      id="SYSTEM_TIME" class="glyph-tile" data-cell="3,7">
+  <svg      id="SYSTEM_TIME" class="glyph-tile" data-cell="3,7" >
             <use href="#TIME_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
             <use href="#TIME_HAND" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
   </svg>  
@@ -388,131 +211,6 @@
             <use href="#GLYPH_O" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
             <use href="#GLYPH_G" transform="translate(84 64) scale(0.25) translate(-64 -64)"/>
   </svg>
-<!-- FRACTION POSITIONING 1/4 of a normal tile -->
-    <svg      id="FRAC_1_64" class="glyph-tile" data-cell="2,0">  <!-- !ONLY FOR DEMO PURPOSES! -->
-                <g transform="rotate(90 64 64)">
-            <!-- <use class="line" href="#DIVIDER"/> -->
-                <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
-                <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-                </g>
-    </svg>
-  <svg      id="FRAC_1_64-ORG" class="glyph-tile" data-cell="4,4" data-size="64" data-sub="0,0">
-            <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
-              <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>  
-  <svg      id="FRAC_1_32" class="glyph-tile" data-cell="4,4" data-size="64" data-sub="1,0">  <!-- 1/32 -->
-            <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_3" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
-              <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>
-  <svg      id="FRAC_1_16" class="glyph-tile" data-cell="5,4" data-size="64" data-sub="0,0">  <!-- 1/16 -->
-            <g transform="rotate(90 64 64)">
-          <!--- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_1" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
-              <use href="#GLYPH_6" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>
-  <svg      id="FRAC_1_8" class="glyph-tile" data-cell="5,4" data-size="64" data-sub="1,0">   <!-- 1/8 -->
-            <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_8" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>
-  <svg      id="FRAC_1_4" class="glyph-tile" data-cell="6,4" data-size="64" data-sub="0,0">   <!-- 1/4 -->
-            <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>
-  <svg      id="FRAC_1_2" class="glyph-tile" data-cell="6,4" data-size="64" data-sub="1,0">   <!-- 1/2 -->
-            <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>
-  <svg      id="FRAC_1_1" class="glyph-tile" data-cell="7,4" data-size="64" data-sub="0,0">   <!-- 1/1 -->
-            <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
-              <use href="#GLYPH_1" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
-            </g>
-  </svg>
-<!-- TARGET MODE POSITIONING 1/4 of a normal tile but not really -->  
-  <svg      id="TARGET_MODE_PICK_TIME" class="glyph-tile" data-cell="0,5">  <!-- quadrant 0 / upper left -->
-            <g transform="rotate(90 64 64)">
-              <g mask="url(#MASK_TARGET_MODE_BL_CLOCK)">
-                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(270 64 64)"/>
-              </g>
-            </g>
-  </svg>
-  <svg      id="TARGET_MODE_PICK_TEXTURE" class="glyph-tile" data-cell="0,5">  <!-- quadrant 1 / upper right -->
-            <g transform="rotate(90 64 64)">
-              <g mask="url(#MASK_TARGET_MODE_TL_PICTURE)">
-                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(0 64 64)"/>
-              </g>
-            </g>
-  </svg>
-  <svg      id="TARGET_MODE_PICK_VIDEO" class="glyph-tile" data-cell="0,5">  <!-- quadrant 2 / lower left -->
-            <g transform="rotate(90 64 64)">
-              <g mask="url(#MASK_TARGET_MODE_BR_VIDEO)">
-                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
-              </g>
-            </g>
-  </svg>
-  <svg      id="TARGET_MODE_PICK_FRAME" class="glyph-tile" data-cell="0,5">  <!-- quadrant 3 / lower right -->
-            <g transform="rotate(90 64 64)">
-              <g mask="url(#MASK_TARGET_MODE_TR_VIDEO)">
-                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(90 64 64)"/>
-              </g>
-            </g>
-  </svg>
-  <svg      id="TARGET_MODE_PICK_GL_PROGRAM" class="glyph-tile" data-cell="1,5">
-            <g mask="url(#MASK_TARGET_MODE_BR_GL)">
-              <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
-            </g>
-  </svg>
-  <svg      id="EXTERN_INPUT" class="glyph-tile" data-cell="5,5">
-            <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>
-  </svg>
-
-
-  <svg      id="MODE_ADC" class="glyph-tile" data-cell="2,2">   <!-- MODE PLACEMENT -->
-            <g mask="url(#COMMON_MODE_CUTOUT)">
-              <use href="#COMMON_CIRCLE" fill="black" mask="url(#COMMON_MODE_WINDOW_CUTOUT)"/>
-            </g>
-            <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
-      <!--  <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>  FOR DEMO PURPOSES ONLY--> 
-  </svg>
-
-
-  <svg      id="SYSTEM_SYNTH" class="glyph-tile" data-cell="0,7">
-            <use href="#KEYBOARD_SYNTH" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
-  </svg>
-
-  <svg      id="SYSTEM_KEYBOARD" class="glyph-tile" data-cell="1,7">
-            <use href="#KEYBOARD_PIANO" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
-  </svg>
-
-<svg id="ARROW_UP"
-     class="glyph-tile"
-     data-cell="6,5">
-
-    <use href="#ARROW_HEAD"
-         transform="translate( 0 -32 ) rotate(0 64 64)"/>
-</svg>
-
-<svg id="ARROW_DOWN"
-     class="glyph-tile"
-     data-cell="7,5">
-
-    <use href="#ARROW_HEAD"
-         transform="translate( 0 -32 ) rotate(180 64 64)"/>
-</svg>
-
 <!--  POSITION SCRIP! -->
 <script><![CDATA[
 (() => {
@@ -561,5 +259,6 @@
     }
 })();
 ]]></script>
-
 </svg>
+
+
