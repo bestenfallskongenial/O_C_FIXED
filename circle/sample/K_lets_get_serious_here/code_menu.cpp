@@ -201,6 +201,61 @@ void            CKernel::mapMenuGroup               (uint8_t block)
                     }
 }
 
+void            CKernel::getChannelModeB             ()
+{
+                uint8_t mode; 
+                
+                ModeFunc fn;
+
+                mode = g_modeMap[0][g_centralModeBuffer[g_currentProgramBuffer][0]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(0);
+
+                mode = g_modeMap[1][g_centralModeBuffer[g_currentProgramBuffer][1]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(1);
+
+                mode = g_modeMap[2][g_centralModeBuffer[g_currentProgramBuffer][2]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(2);
+
+                mode = g_modeMap[3][g_centralModeBuffer[g_currentProgramBuffer][3]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(3);
+
+                mode = g_modeMap[4][g_centralModeBuffer[g_currentProgramBuffer][4]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(4);
+
+                mode = g_modeMap[5][g_centralModeBuffer[g_currentProgramBuffer][5]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(5);
+
+                mode = g_modeMap[6][g_centralModeBuffer[g_currentProgramBuffer][6]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(6);
+
+                mode = g_modeMap[7][g_centralModeBuffer[g_currentProgramBuffer][7]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(7);                
+}
+
 void            CKernel::getChannelModeA(int p_channel)
 {
                 switch (g_centralModeBuffer[g_currentProgramBuffer][p_channel])
@@ -212,44 +267,44 @@ void            CKernel::getChannelModeA(int p_channel)
                     case 1:
                         modeTRG(p_channel);
                     break;
-/*
+
                     case 2:
                         modeBPM(p_channel);
                     break;
-*/
-                    case 2:
+
+                    case 3://2:
+                        modeLF0(p_channel);
+                    break;
+
+                    case 4://3:
                         modeLF1(p_channel);
                     break;
 
-                    case 3:
-                        modeLF2(p_channel);
-                    break;
-
-                    case 4:
+                    case 5://4:
                         modeAudioAbL(p_channel);
                     break;
 
-                    case 5:
+                    case 6://5:
                         modeAudioAbH(p_channel);
                     break;
 
-                    case 6:
+                    case 7://6:
                         modeAudioBbL(p_channel);
                     break;
 
-                    case 7:
+                    case 8://7:
                         modeAudioBbH(p_channel);
                     break;
 
-                    case 8:
+                    case 9://8:
                         modeMidiNote(p_channel);
                     break;
 
-                    case 9:
+                    case 10://9:
                         modeMidiCC0(p_channel);
                     break;
 
-                    case 10:
+                    case 11://10:
                         modeMidiCC1(p_channel);
                     break;
                                        
@@ -282,13 +337,22 @@ void            CKernel::modeTRG(int p_channel)
                     }
 }
 
-void            CKernel::modeLF1                    (   int p_channel)
+void            CKernel::modeBPM                    (   int p_channel)
+{ 
+                if ( g_currentTime >= g_lfoBpmMatrix[p_channel][NBT] )
+                    {
+                    g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[p_channel][RND];
+                    g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[p_channel][RND];
+                    }
+}
+
+void            CKernel::modeLF0                    (   int p_channel)
 {
                 g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][LF1];
                 g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][LF1];
 }
 
-void            CKernel::modeLF2                    (   int p_channel)
+void            CKernel::modeLF1                    (   int p_channel)
 {
                 g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][LF2];
                 g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][LF2]; 
@@ -352,7 +416,6 @@ void            CKernel::modeMidiCC1(int p_channel)
                 g_inOutMatrixFlt[p_channel][OUT] = g_midiCC1Flt;
 }
 
-
 void            CKernel::applyTargetModes           (   )
 {
                 if (g_menuLayer == 0)
@@ -389,7 +452,7 @@ void            CKernel::applyTargetModes           (   )
                     }
                 else
                     {
-                    GLtime = g_frameStart / 1000.0f; // / 1000000.0f;
+                    GLtime = g_frameStart / 1000.0f;
                     }
                 if (g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] && g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT] < FLAG_THRESHOLD)
                     {
@@ -405,19 +468,16 @@ void            CKernel::checkSystemFlags()
 {
                 if ( g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] )
                     {
-                    /* execute */
                     g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] = 0;
                     }
                 if ( g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD] )
                     {
-                    /* execute */
                     g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD] = 0;
                     }
                 if ( g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] )
                     {
-                    /* execute */
                     saveFromBuffer          (   PARTITION_NAME_SD,
-                                            /*  gen83FileName("TXT"), */
+                                            //  gen83FileName("TXT"),
                                                 "bootlog.txt",
                                                 m_logKernel,            // stores the pre-init buffer
                                                 m_logKernelIndex );
@@ -441,7 +501,6 @@ void            CKernel::checkSystemFlags()
                     }
                 if ( g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD] )
                     {
-                    /* execute */
                     UpdateKernel();
 
                     g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD] = 0;

@@ -311,9 +311,9 @@ public:
                 void        getChannelModeB             ();
                 void        modeADC                     (               int                             p_channel);         // channel passed by caller
                 void        modeTRG                     (               int                             p_channel);         // channel passed by caller
-//              void        modeBPM                     (               int                             p_channel);         // channel passed by caller
+                void        modeBPM                     (               int                             p_channel);         // channel passed by caller
+                void        modeLF0                     (               int                             p_channel);         // channel passed by caller
                 void        modeLF1                     (               int                             p_channel);         // channel passed by caller
-                void        modeLF2                     (               int                             p_channel);         // channel passed by caller
                 void        modeAudioAbL                (               int                             p_channel);         // channel passed by caller
                 void        modeAudioAbH                (               int                             p_channel);         // channel passed by caller
                 void        modeAudioBbL                (               int                             p_channel);         // channel passed by caller

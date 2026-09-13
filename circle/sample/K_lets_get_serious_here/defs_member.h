@@ -205,6 +205,27 @@ public:         // Logging
                 float                           g_midiCC0Flt                                    = 0.0f;
                 float                           g_midiCC1Flt                                    = 0.0f;
 
+       typedef void                            (CKernel::*ModeFunc)(int);
+
+                ModeFunc                        g_modeTable[] =
+{
+                &CKernel::modeADC,
+                &CKernel::modeTRG,
+                &CKernel::modeBPM,
+
+                &CKernel::modeLF0,
+                &CKernel::modeLF1,
+
+                &CKernel::modeAudioAbL,
+                &CKernel::modeAudioAbH,
+                &CKernel::modeAudioBbL,
+                &CKernel::modeAudioBbH,
+
+                &CKernel::modeMidiNote,
+                &CKernel::modeMidiCC0,
+                &CKERNEL::modeMidiCC1
+};
+
         const   uint16_t                    modeMaskByValue[IN_MODE_NAME_COUNT]                    =    {   0b0000000000000001,     // mode 0
                                                                                                             0b0000000000000010,     // mode 1
                                                                                                             0b0000000000000100,     // mode 2
@@ -246,8 +267,11 @@ public:         // Logging
                                                                                                             { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE },     // layer  9 hidden layer ( runtime parameters / flags )
                                                                                                             { MAP_VALUE, MAP_VALUE, MAP_VALUE, MAP_VALUE } };   // layer 10 hidden layer ( runtime parameters / flags )
 
-        const   int                         g_valueRoof[BLOCK_COUNT][4]                         =       {   {    4,    4,    4,    4  },                        // layer  1 for mode channel 0-3
-                                                                                                            {    4,    4,    4,    4  },                        // layer  2 for mode channel 4-7
+        const   int                         g_valueRoof[BLOCK_COUNT][4]                         =       { //{    4,    4,    4,    4  },                        // layer  1 for mode channel 0-3
+                                                                                                          //{    4,    4,    4,    4  },                        // layer  2 for mode channel 4-7
+                                                                                                        
+                                                                                                            {    5,    5,    5,    5  },
+                                                                                                            {    5,    5,    5,    5  },
 
                                                                                                             {    9,    9,    7,    7  },                        // layer  3 for IN_MODE_LF_X            ( wave 0, wave 1, mult 0, mult 1 )
                                                                                                             {  511,  511,    8,    3  },                        // layer  4 for IN_MODE_TRG             ( thr_low, thr_hi, ext_selector, attenuation? )

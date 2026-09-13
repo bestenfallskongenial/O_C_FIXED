@@ -59,6 +59,8 @@ enum inModeNames
 {
     IN_MODE_ADC,
     IN_MODE_TRG,
+//  IN_MODE_BMP,    
+
     IN_MODE_LF_0,
     IN_MODE_LF_1,
 

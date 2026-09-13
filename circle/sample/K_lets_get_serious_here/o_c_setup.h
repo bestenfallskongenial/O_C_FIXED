@@ -45,22 +45,22 @@
     #define         FRM_SD                  1   // i put them here because if my mem/dma allocation
     #define         LOG_SD                  16  // here is the trick:
 // the definitions for the different log buffer elements
-            #define     LOG_SYS_0               0   // m_bufferLog[] slot for INIT, ALLOC, FILE, MEMORY 
-            #define     LOG_PARSER              1
-            #define     LOG_DUMMY_1             2
-            #define     LOG_USERFILE            3
-            #define     LOG_GLSL_0              4   // m_bufferLog[] slot for GLSL - shader / texture init
-            #define     LOG_VCSM_0              5   // m_bufferLog[] slot for VCSM
-            #define     LOG_MMAL_0              6   // m_bufferLog[] slot for MMAL / Framedata
-            #define     LOG_TEX_0               7   // m_bufferLog[] slot for TEXTURES - parser
-            #define     LOG_VID_0               8   // m_bufferLog[] slot for video 0 - parser  
-            #define     LOG_VID_1               9
-            #define     LOG_VID_2               10
-            #define     LOG_VID_3               11
-            #define     LOG_VID_4               12
-            #define     LOG_VID_5               13
-            #define     LOG_VID_6               14
-            #define     LOG_VID_7               15
+        #define     LOG_SYS_0               0   // m_bufferLog[] slot for INIT, ALLOC, FILE, MEMORY 
+        #define     LOG_PARSER              1
+        #define     LOG_DUMMY_1             2
+        #define     LOG_USERFILE            3
+        #define     LOG_GLSL_0              4   // m_bufferLog[] slot for GLSL - shader / texture init
+        #define     LOG_VCSM_0              5   // m_bufferLog[] slot for VCSM
+        #define     LOG_MMAL_0              6   // m_bufferLog[] slot for MMAL / Framedata
+        #define     LOG_TEX_0               7   // m_bufferLog[] slot for TEXTURES - parser
+        #define     LOG_VID_0               8   // m_bufferLog[] slot for video 0 - parser  
+        #define     LOG_VID_1               9
+        #define     LOG_VID_2               10
+        #define     LOG_VID_3               11
+        #define     LOG_VID_4               12
+        #define     LOG_VID_5               13
+        #define     LOG_VID_6               14
+        #define     LOG_VID_7               15
 // to prepare filecounter[FT_COUNT][FLD_COUNT] for usb
     #define         VSH_USB                 0	// max number of u_vertex shader on sd
     #define         OMF_USB            		0	// max number of fragment shader on sd
@@ -156,6 +156,6 @@
     #define         DOUBLE_CLICK_TIME       100
     #define         LONG_CLICK_TIME         300
 
-    #define         FLAG_THRESHOLD          7
+    #define         FLAG_THRESHOLD          ADC_SELECT_PRG //is 7 aka ADC_SELECT_PRG because it defines the upper bound for the target mode selector. i wonder, theoretically i cant select channel 7, is it still correct 
 
     #define         TARGET_FPS              24
