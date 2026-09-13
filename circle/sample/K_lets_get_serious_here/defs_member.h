@@ -292,7 +292,7 @@ public:         // Logging
                                                                                                             {   6,     7,    0,    0 }, 
                                                                                                             {   8,     9,   10,    0 } };           // new for midi
 */
-        const   int                         g_groupModes[GROUP_COUNT][4]                        =       {   {   0,     1,    2,    3,    4 },
+        const   int                         g_groupModes[GROUP_COUNT][5]                        =       {   {   0,     1,    2,    3,    4 },
                                                                                                             {   5,     6,    0,    0,    0 },
                                                                                                             {   7,     8,    0,    0,    0 }, 
                                                                                                             {   9,    10,   11,    0,    0 } };           // new for midi
