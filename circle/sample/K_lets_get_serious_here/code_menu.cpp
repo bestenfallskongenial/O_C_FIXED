@@ -339,7 +339,7 @@ void            CKernel::modeTRG(int p_channel)
 
 void            CKernel::modeBPM                    (   int p_channel)
 { 
-                if ( g_frameStart >= g_lfoBpmMatrix[p_channel][NBT] )
+                if ( g_frameStart >= g_lfoBpmMatrix[g_activeBpmChannel][NBT] )
                     {
                     g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[p_channel][RND];
                     g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[p_channel][RND];
