@@ -238,7 +238,7 @@ public:         // Logging
 
                                                                                                             0b0000000100000000,     // mode 8
                                                                                                             0b0000001000000000,     // mode 9
-                                                                                                            0b0000010000000000
+                                                                                                            0b0000010000000000,
                                                                                                             0b0000100000000000  };  // mode 10
 
         const   uint16_t                    layerModeMap[BLOCK_COUNT]                           =       {   0b0000011111111111,     // layer 0: dummy row
