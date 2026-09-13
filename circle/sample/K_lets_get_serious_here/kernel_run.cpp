@@ -80,8 +80,8 @@ TShutdownMode CKernel::Run(void)
 
                     applyTargetModes();  // <- correct place here?
 
-                //  getChannelModeB();
-
+                    getChannelModeB();
+/*
                     getChannelModeA(0);
                     getChannelModeA(1);
                     getChannelModeA(2);
@@ -90,7 +90,7 @@ TShutdownMode CKernel::Run(void)
                     getChannelModeA(5);
                     getChannelModeA(6);
                     getChannelModeA(7);
-
+*/
                     menuLedUpdate();
 
                     sample1WaveTable( m_bufferLfo, 0, LF1_WAVE, LF1, 1023 );
