@@ -207,7 +207,7 @@ public:         // Logging
 
        typedef void                            (CKernel::*ModeFunc)(int);
 
-                ModeFunc                        g_modeTable[] =
+                ModeFunc                        g_modeTable[12] =
 {
                 &CKernel::modeADC,
                 &CKernel::modeTRG,
