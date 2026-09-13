@@ -223,7 +223,7 @@ public:         // Logging
 
                 &CKernel::modeMidiNote,
                 &CKernel::modeMidiCC0,
-                &CKERNEL::modeMidiCC1
+                &CKernel::modeMidiCC1
 };
 
         const   uint16_t                    modeMaskByValue[IN_MODE_NAME_COUNT]                    =    {   0b0000000000000001,     // mode 0
