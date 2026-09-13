@@ -238,7 +238,8 @@ public:         // Logging
 
                                                                                                             0b0000000100000000,     // mode 8
                                                                                                             0b0000001000000000,     // mode 9
-                                                                                                            0b0000010000000000 };   // mode 10
+                                                                                                            0b0000010000000000
+                                                                                                            0b0000100000000000  };  // mode 10
 
         const   uint16_t                    layerModeMap[BLOCK_COUNT]                           =       {   0b0000011111111111,     // layer 0: dummy row
                                                                                                             0b0000011111111111,     // layer 1: every mode
@@ -284,11 +285,17 @@ public:         // Logging
                                                                                                             {    0,    0,    0,    0  },                        // layer  9 hidden layer ( runtime parameters / flags )
                                                                                                             {    0,    0,    0,    0  } };                      // layer 10 hidden layer ( runtime parameters / flags )
 
-        const   int                         g_groupLen[GROUP_COUNT]                             =           {   4,     2,    2,    3 };
+        const   int                         g_groupLen[GROUP_COUNT]                             =           {   5,     2,    2,    3 }; //      {   4,     2,    2,    3 };
+/*
         const   int                         g_groupModes[GROUP_COUNT][4]                        =       {   {   0,     1,    2,    3 },
                                                                                                             {   4,     5,    0,    0 },
                                                                                                             {   6,     7,    0,    0 }, 
                                                                                                             {   8,     9,   10,    0 } };           // new for midi
+*/
+        const   int                         g_groupModes[GROUP_COUNT][4]                        =       {   {   0,     1,    2,    3,    4 },
+                                                                                                            {   5,     6,    0,    0,    0 },
+                                                                                                            {   7,     8,    0,    0,    0 }, 
+                                                                                                            {   9,    10,   11,    0,    0 } };           // new for midi
 
                 int                         g_modeRoof[MODETABLE_COUNT]                         =           { 0 };
                 int                         g_modeMap[MODETABLE_COUNT][IN_MODE_NAME_COUNT]      =           { 0 };
@@ -305,6 +312,7 @@ public:         // Logging
 
                 int                         g_modeColor[IN_MODE_NAME_COUNT][3]                  =       {   { 40, 180, 180},   // IN_MODE_ADC           - cyan
                                                                                                             {210,  35,  35},   // IN_MODE_TRG           - red
+                                                                                                            { 45, 135, 135},   // IN_MODE_BMP           - ???
                                                                                                             { 55, 190,  55},   // IN_MODE_LF_0          - green
                                                                                                             { 45,  75, 210},   // IN_MODE_LF_1          - blue
 
