@@ -7,17 +7,16 @@ TShutdownMode CKernel::Run(void)
 {
                 while (/*m_resetFlag == false*/ 1)
                     {
+                    fpsBegin();                 // here starts the actual runtimeloop
 
-                    m_CPUThrottle.Update(); // NEW!!!
+                    m_CPUThrottle.Update();     // NEW!!!
                        
-                    if (!m_SD_has_load)                                             // first load block - get the system files from sd
+                    if (!m_SD_has_load)         // first load block - get the system files from sd
                         {
                         wrapper_load_sd();
                         wrapper_parser_sd();
                         wrapper_init_gl_sd();
 
-                    //  msDelay(3000);
-                    //  m_logKernelIndex = 0;
                         bufferScreenClear();
 
                         m_SD_has_load = true;
@@ -28,41 +27,33 @@ TShutdownMode CKernel::Run(void)
                         wrapper_parser_usb();
                         wrapper_init_gl_usb();
 
-                    //  msDelay(3000);
-                    //  m_logKernelIndex = 0;
                         bufferScreenClear();
 
                         m_USB_has_load = true;
                         }
                     if( m_SD_has_load && m_USB_has_load && !m_bootLogsSaved )
-                //  if( m_SD_has_load && m_USB_has_load )
                         {
                         m_bootLogsSaved = true;
                         
-                        saveFromBuffer         (   PARTITION_NAME_SD,
-                                                  /*gen83FileName("TXT"*/
-                                                    "bootlog.txt",
-                                                    m_logKernel,            // stores the pre-init buffer
-                                                    m_logKernelIndex );
+                        saveFromBuffer  (   PARTITION_NAME_SD,
+                                        // gen83FileName("TXT"),
+                                            "bootlog.txt",
+                                            m_logKernel,            // stores the pre-init buffer
+                                            m_logKernelIndex );
 
-                        saveFromBuffer         (   PARTITION_NAME_SD,
-                                                    "GLSL.txt",
-                                                    m_bufferLog[LOG_GLSL_0],
-                                                    m_bufferLogIndex[LOG_GLSL_0] );          
+                        saveFromBuffer  (   PARTITION_NAME_SD,
+                                            "GLSL.txt",
+                                            m_bufferLog[LOG_GLSL_0],
+                                            m_bufferLogIndex[LOG_GLSL_0] );          
 
                         m_logKernelIndex = 0;
                         bufferScreenClear();
                         } 
 
-                fpsBegin();                                                             // here starts the actual runtimeloop
-
                     updateMIDI();
                   
                     resetMenuPickUpFlags();
                     storeModes();
-
-                //  m_audio_hold_A = AUDIO_HOLD_TIMEOUT;                            // to debug the audio mode and menu code!!!
-                //  m_audio_hold_B = AUDIO_HOLD_TIMEOUT;
                     
                     readAndConvertADC();
              
@@ -81,16 +72,7 @@ TShutdownMode CKernel::Run(void)
                     applyTargetModes();  // <- correct place here?
 
                     getChannelModeB();
-/*
-                    getChannelModeA(0);
-                    getChannelModeA(1);
-                    getChannelModeA(2);
-                    getChannelModeA(3);
-                    getChannelModeA(4);
-                    getChannelModeA(5);
-                    getChannelModeA(6);
-                    getChannelModeA(7);
-*/
+
                     menuLedUpdate();
 
                     sample1WaveTable( m_bufferLfo, 0, LF1_WAVE, LF1, 1023 );
@@ -116,12 +98,10 @@ TShutdownMode CKernel::Run(void)
                             m_activeTex,
                             filecounter[FT_TEX][FLD_VALID]);                            
 
-                //  bool f_backbuffer = setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
                     setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
 
                     drawGLsPrg();
 
-                //  if (f_backbuffer) captureBackbuffer( &m_ogl, &m_tex );
                     captureBackbuffer( &m_ogl, &m_tex );
                       
                 fpsBreak();

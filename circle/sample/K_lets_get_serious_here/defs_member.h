@@ -88,12 +88,12 @@ public:         // Logging
                 GLfloat                         GLtime                                          = 0;
                 GLfloat                         g_opaque                                        = 0.5; 
 
-                bool                            is_audio[2]                                     =           { 0 };
+                int                            is_audio[2]                                      =           { 0 };
 
                 unsigned                        g_inOutMatrixInt[CHANNEL][IO_TYPE_COUNT]        =           { 0 };           // the integer in/out matrix
                 float                           g_inOutMatrixFlt[CHANNEL][IO_TYPE_COUNT]        =           { 0.0f };           // the float in/out matrix
                 bool                            g_menuPickUpFlag[MODETABLE_COUNT]               =           { 0 };                     // the flags for the pickup mechanism  
-                unsigned                        g_buttons_states[BTN_COUNT][BTN_INDEX_COUNT] =           { 0 };      // the button state machine
+                unsigned                        g_buttons_states[BTN_COUNT][BTN_INDEX_COUNT]    =           { 0 };      // the button state machine
                 unsigned                        g_centralModeBuffer[SLOTS][MODETABLE_COUNT]     =           { 0 };         // the general user settings, storable per program 
                 unsigned                        g_centralModeBufferTemp[SLOTS][MODETABLE_COUNT] =           { 0 };
                 unsigned                        g_lfoMultiplier[LFO_MULTIPLIERS_COUNT]          =           { 64, 32, 16, 8, 4, 2, 1 };

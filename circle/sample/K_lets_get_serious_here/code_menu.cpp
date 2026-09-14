@@ -104,15 +104,12 @@ void            CKernel::buttonConsumer(int buttonA, int buttonB)
 
 void            CKernel::dispatchLayer()
 {
-    if (g_menuLayer == 0)
-    {
-        return;
-    }
+                if (g_menuLayer == 0) return;
 
-    const uint8_t block = g_menuLayer - 1;
+                const uint8_t block = g_menuLayer - 1;
 
-    set_mode_roof_map(block);
-    mapMenuGroup(block);
+                set_mode_roof_map(block);
+                mapMenuGroup(block);
 }
 
 void            CKernel::set_mode_roof_map          (uint8_t block)
