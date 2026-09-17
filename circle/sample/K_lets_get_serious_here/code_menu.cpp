@@ -415,6 +415,62 @@ void            CKernel::modeMidiCC1(int p_channel)
 
 void            CKernel::applyTargetModes           (   )
 {
+/*    
+                // The single audio group contains either: Model 2: two audio modes / Model 3: four audio modes
+                const unsigned audioFirstMode = g_groupModes[GROUP_AUDIO][0];
+
+                const unsigned audioModeCount = g_groupLen[GROUP_AUDIO];
+
+                const unsigned audioLastMode = audioFirstMode + audioModeCount - 1;
+
+
+                // FLAG_AUDIO is the existing audio/no-audio state.
+                if (g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO])
+                    {
+                    // is_audio contains the physical ADC input channel, 0-3, on which the audio signal was detected.
+                    const unsigned audioChannel = is_audio;
+                    // Read the selected position for that channel.
+                    const unsigned selection = g_centralModeBuffer[g_currentProgramBuffer][audioChannel];
+                    // Resolve the selected position to the mode that getChannelModeB() would execute.
+                    const unsigned mode = g_modeMap[audioChannel][selection];
+                    // The physical audio source must itself use one of the available audio modes.
+                    if (mode < audioFirstMode || mode > audioLastMode)
+                        {
+                        // Find the packed position of the first audio mode in this channel's currently available mode map.
+                        for (unsigned position = 0; position < (unsigned)g_modeRoof[audioChannel]; ++position)
+                            {
+                            if (g_modeMap[audioChannel][position] == audioFirstMode)
+                                {
+                                // Override the invalid selection made by mapMenuGroup().
+                                g_centralModeBuffer [g_currentProgramBuffer][audioChannel] = position;
+                                // The selection was changed by code rather than by the physical potentiometer.
+                                g_menuPickUpFlag[audioChannel] = false;
+
+                                break;
+                                }
+                            }
+                        }
+                    }
+                else
+                    {
+                    // There is no detected audio signal. No channel may continue using an audio mode.
+                    for (unsigned channel = 0; channel < 8; ++channel)
+                        {
+                        // Resolve this channel's stored selection to its mode.
+                        const unsigned selection = g_centralModeBuffer[g_currentProgramBuffer][channel];
+
+                        const unsigned mode = g_modeMap[channel][selection];
+                        // Reset only channels that currently resolve to one of the audio modes.
+                        if (mode >= audioFirstMode && mode <= audioLastMode)
+                            {
+                            // Position zero is the existing ADC fallback.
+                            g_centralModeBuffer[g_currentProgramBuffer] [channel] = 0;
+                            // Require the physical control to pick up the new programmatically assigned ADC selection.
+                            g_menuPickUpFlag[channel] = false;
+                            }
+                        }
+                    }
+*/
                 if (g_menuLayer == 0)
                     {
                     g_activeProgram = (g_inOutMatrixInt[ADC_SELECT_PRG][OUT] * (filecounter[FT_FSH][FLD_VALID])) >> 10;

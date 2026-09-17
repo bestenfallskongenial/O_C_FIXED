@@ -43,6 +43,14 @@ public:
                                                                         size_t                          p_count);               // number of buffers in the table
                 void        clearBufferDMA              (               char**                          buffers,                // +++ buffer pointer table returned by allocBufferDMA()
                                                                         char*                           rawBlock);              // original raw allocation pointer to delete
+// code_audio.cpp
+                void        adc_ProcessAudio            (               void );
+
+                void        adc_ProcessAudio_1_2        (               void );
+
+                void        adc_ProcessAudio_1_4        (               void );
+
+
 // code_debug.cpp               !! TESTED AND APPROVED !!
                 void        logButtonStatesRuntime      (               int                             row ); // +++
                 void        logModesRuntime             (               int                             row );
@@ -206,8 +214,6 @@ public:
                 void        WS2812_Update               (               void);                                                              // +++
                 int         ReadMCP3008Raw              (               unsigned                        channel);                           // +++ MPC 3008
                 void        readAndConvertADC           ();                                                                 // +++ can we extract the erraticness / audio engine and the mode_index_mod into separate functions?
-
-                void        adc_ProcessAudio            (               void );
 
                 void        adc_AdvanceIndex            ();                              
                 bool        frameBufferInit             (               void );                                                             // +++
