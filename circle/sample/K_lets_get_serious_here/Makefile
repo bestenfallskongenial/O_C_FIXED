@@ -10,7 +10,7 @@ OBJS  = main.o \
         kernel_initialize.o \
         kernel_run.o \
         code_alloc.o \
-        code_audio \
+        code_audio.o \
         code_debug.o \
         code_filesystem.o \
         code_graphics_init.o \
