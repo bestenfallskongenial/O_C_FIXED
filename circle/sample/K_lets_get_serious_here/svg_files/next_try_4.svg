@@ -117,11 +117,12 @@
   <path     id="WAVE_SMOOTH_UP" d="M24 85 C50.667 85 77.333 44 104 44"/>
   <path     id="WAVE_SMOOTH_DOWN" d="M24 44 C50.667 44 77.333 85 104 85"/>
   <path     id="WAVE_EXPONENTIAL" d="M24 85 C46 85 59 82 64 44 C84 44 99 61 104 85"/>  
+  <polyline id="WAVE_TRIANGLE" points="24,85 64,44 104,85"/>
+  <polyline id="WAVE_RANDOM" points="24,77 40,77 40,53 56,53 56,81 72,81 72,61 88,61 88,73 104,73"/>  
   <line     id="COMMON_WAVE_LINE" x1="64" y1="54" x2="64" y2="74"/>
   <line     id="TARGET_MODE_CLOCK_HAND_HORIZONTAL" x1="64" y1="45" x2="75" y2="45"/>
   <line     id="TARGET_MODE_CLOCK_HAND_VERTICAL" x1="64" y1="45" x2="64" y2="35"/>
-  <polyline id="WAVE_TRIANGLE" points="24,85 64,44 104,85"/>
-  <polyline id="WAVE_RANDOM" points="24,77 40,77 40,53 56,53 56,81 72,81 72,61 88,61 88,73 104,73"/>
+
   <polyline id="TARGET_MODE_PICTURE_LINE" points="24,66 48,48 60,58 88,35 104,50"/>
   <circle   id="COMMON_CIRCLE" cx="64" cy="64" r="44"/>
   <circle   id="TARGET_MODE_PICTURE_DOT" cx="37" cy="38" r="9"/>
