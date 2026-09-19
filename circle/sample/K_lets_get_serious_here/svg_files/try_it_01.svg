@@ -535,7 +535,7 @@
               <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
-  <svg      id="FRAC_1_64-ORG" class="glyph-tile" data-cell="0,4">
+  <svg      id="FRAC_1_64-ORG" class="glyph-tile" data-cell="4,0">
             <g transform="rotate(90 64 64)">
           <!-- <use class="line" href="#DIVIDER"/> -->
               <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
