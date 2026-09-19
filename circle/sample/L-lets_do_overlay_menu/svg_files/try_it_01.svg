@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Structural source for the menu texture atlas.
+
+  Layout rules:
+  - The atlas is an 8 x 8 grid of 128 x 128 cells.
+  - Full-size tiles use data-cell="column,row".
+  - 64 x 64 tiles additionally use data-size="64" and data-sub="column,row".
+  - Mode values map directly to the first cells in row-major order.
+  - Geometry, masks, tile placement, and positioning code stay in separate sections.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1024"
+     height="1024"
+     viewBox="0 0 1024 1024">
+
+  <!-- ==================================================================== -->
+  <!-- STYLE                                                                -->
+  <!-- ==================================================================== -->
+  <style>
+    .atlas-tile {
+      overflow: hidden;
+      fill: #000000;
+      fill-rule: evenodd;
+    }
+
+    .atlas-grid {
+      fill: none;
+      stroke: #000000;
+      stroke-width: 1px;
+    }
+
+    .audio-cutout-stroke {
+      fill: none;
+      stroke: #000000;
+      stroke-width: 4px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }    
+
+    .glyph-stroke-8 { fill: none; stroke: #000000; stroke-width: 8px; stroke-linecap: round; stroke-linejoin: round; }  
+
+  </style>
+  <defs>
+  <!-- ==================================================================== -->
+  <!-- DEFINITIONS: COMMON GEOMETRY                                         -->
+  <!-- ==================================================================== -->
+<!-- GLYPH DATA -->
+  <path     id="GLYPH_0" d="M88 28.5 L59 28.5 L37 28.5 C33.87 28.5 31 30.52 31 33.5 L31 37.5 L31 89.5 L31 93.5 C31 96.48 33.87 99.5 37 99.5 L59 99.5 L88 99.5 L92 99.5 C95.13 99.5 97 96.48 97 93.5 L97 89.5 L97 79.5 L97 72.5 L97 37.5 L97 33.5 C97 30.52 95.13 28.5 92 28.5 C92 28.5 88 28.5 88 28.5 Z M80 45.5 L70 62.5 C67.27 67.52 59 66.15 59 60.5 L59 42.5 C59 39.52 61.87 37.5 65 37.5 L75 37.5 C79.25 37.5 81.95 41.91 80 45.5 Z M88 79.5 L88 84.5 C88 87.48 85.13 89.5 82 89.5 L76 89.5 C71.76 89.5 69.05 86.09 71 82.5 L77 69.5 C79.73 64.48 88 66.85 88 72.5 L88 72.5 C88 72.5 88 79.5 88 79.5 Z"/>
+  <path     id="GLYPH_1" d="M50.96 28.5 L45.96 28.5 C42.91 28.5 40.34 29.77 38.96 31.5 L35.96 34.5 C33.23 37.91 36.93 41.5 42.96 41.5 L42.96 41.5 C47.41 41.5 50.96 44.67 50.96 47.5 L50.96 94.5 C50.96 97.33 54.49 99.5 58.96 99.5 L84.95 99.5 C89.41 99.5 92.95 97.33 92.95 94.5 L92.95 33.5 C92.95 30.67 89.42 28.5 84.95 28.5 L62.96 28.5 L50.96 28.5 C50.96 28.5 50.96 28.5 50.96 28.5 Z"/>
+  <path     id="GLYPH_2" d="M59 28.5 L39 28.5 C35.42 28.5 32 30.9 32 34.5 L32 50.5 C32 52.82 33.69 54.5 36 54.5 L55 54.5 C57.31 54.5 59 52.82 59 50.5 L59 41.5 C59 39.18 60.69 37.5 63 37.5 L82 37.5 C84.31 37.5 86 39.18 86 41.5 L86 68.5 C86 70.82 84.31 72.5 82 72.5 L59 72.5 L37 72.5 C34.69 72.5 33 74.18 33 76.5 L33 81.5 L33 90.5 L33 94.5 C33 96.82 34.69 99.5 37 99.5 L59 99.5 L91 99.5 C93.31 99.5 96 96.82 96 94.5 L96 94.5 C96 92.18 93.31 90.5 91 90.5 L64 90.5 C61.69 90.5 59 87.82 59 85.5 L59 85.5 C59 83.18 61.69 81.5 64 81.5 L86 81.5 L91 81.5 C93.31 81.5 96 79.82 96 77.5 L96 72.5 L96 37.5 L96 32.5 C96 30.18 93.31 28.5 91 28.5 L86 28.5 C86 28.5 59 28.5 59 28.5 Z"/>
+  <path     id="GLYPH_3" d="M59.5 28.5 L36.5 28.5 C34.19 28.5 32.5 30.18 32.5 32.5 L32.5 37.5 L32.5 50.5 C32.5 52.82 34.19 55.5 36.5 55.5 L54.5 55.5 C56.81 55.5 59.5 52.82 59.5 50.5 L59.5 41.5 C59.5 39.18 61.19 37.5 63.5 37.5 L82.5 37.5 C84.81 37.5 86.5 39.18 86.5 41.5 L86.5 68.5 C86.5 70.82 84.81 72.5 82.5 72.5 L36.5 72.5 C34.19 72.5 32.5 74.18 32.5 76.5 L32.5 77.5 C32.5 79.82 34.19 81.5 36.5 81.5 L82.5 81.5 C84.81 81.5 86.5 84.18 86.5 86.5 L86.5 86.5 C86.5 88.82 84.81 90.5 82.5 90.5 L36.5 90.5 C34.19 90.5 32.5 92.18 32.5 94.5 L32.5 95.5 C32.5 97.82 34.19 99.5 36.5 99.5 L86.5 99.5 L91.5 99.5 C93.81 99.5 95.5 97.82 95.5 95.5 L95.5 90.5 L95.5 81.5 L95.5 72.5 L95.5 37.5 L95.5 32.5 C95.5 30.18 93.81 28.5 91.5 28.5 L86.5 28.5 L59.5 28.5 C59.5 28.5 59.5 28.5 59.5 28.5 Z"/>
+  <path     id="GLYPH_4" d="M82 72.5 L64 72.5 C61.51 72.5 59 71.01 59 68.5 L59 33.5 C59 30.99 57.49 28.5 55 28.5 L37 28.5 C34.51 28.5 33 30.99 33 33.5 L33 72.5 L33 77.5 C33 80.01 34.51 82.5 37 82.5 L59 82.5 L82 82.5 C84.49 82.5 86 83.99 86 86.5 L86 94.5 C86 97.01 88.51 99.5 91 99.5 L91 99.5 C93.49 99.5 95 97.01 95 94.5 L95 82.5 L95 72.5 L95 33.5 C95 30.99 93.49 28.5 91 28.5 L91 28.5 C88.51 28.5 86 30.99 86 33.5 L86 68.5 C86 71.01 84.49 72.5 82 72.5 Z"/>
+  <path     id="GLYPH_5" d="M86 28.5 L59 28.5 L37 28.5 C34.69 28.5 33 30.18 33 32.5 L33 37.5 L33 72.5 L33 77.5 C33 79.82 34.69 81.5 37 81.5 L59 81.5 L82 81.5 C84.31 81.5 86 84.18 86 86.5 L86 86.5 C86 88.82 84.31 90.5 82 90.5 L37 90.5 C34.69 90.5 33 92.18 33 94.5 L33 95.5 C33 97.82 34.69 99.5 37 99.5 L86 99.5 L91 99.5 C93.31 99.5 95 97.82 95 95.5 L95 90.5 L95 81.5 L95 77.5 C95 75.18 93.31 72.5 91 72.5 L86 72.5 L63 72.5 C60.69 72.5 59 70.82 59 68.5 L59 41.5 C59 39.18 60.69 37.5 63 37.5 L82 37.5 C84.31 37.5 86 39.18 86 41.5 L86 50.5 C86 52.82 88.69 55.5 91 55.5 L91 55.5 C93.31 55.5 95 52.82 95 50.5 L95 28.5 L95 28.5 C95 28.5 86 28.5 86 28.5 Z"/>
+  <path     id="GLYPH_6" d="M59.5 29 L36.5 29 C34.19 29 32.5 30.68 32.5 33 L32.5 38 L32.5 73 L32.5 82 L32.5 90 L32.5 95 C32.5 97.32 34.19 99 36.5 99 L59.5 99 L86.5 99 L91.5 99 C93.81 99 95.5 97.32 95.5 95 L95.5 90 L95.5 82 L95.5 77 C95.5 74.68 93.81 73 91.5 73 L86.5 73 L63.5 73 C61.19 73 59.5 71.32 59.5 69 L59.5 42 C59.5 39.68 61.19 38 63.5 38 L82.5 38 C84.81 38 86.5 39.68 86.5 42 L86.5 51 C86.5 53.32 88.19 55 90.5 55 L91.5 55 C93.81 55 95.5 53.32 95.5 51 L95.5 38 L95.5 33 C95.5 30.68 93.81 29 91.5 29 L86.5 29 C86.5 29 59.5 29 59.5 29 Z M86.5 86 L86.5 86 C86.5 88.32 84.81 90 82.5 90 L63.5 90 C61.19 90 59.5 88.32 59.5 86 L59.5 86 C59.5 83.68 61.19 82 63.5 82 L82.5 82 C84.81 82 86.5 83.68 86.5 86 Z"/>
+  <path     id="GLYPH_7" d="M32.22 33.5 L32.22 33.5 C32.22 36.01 34.59 37.5 37.22 37.5 L58.22 37.5 C61.78 37.5 63.85 41.48 62.22 44.5 L36.22 93.5 C34.59 96.52 36.65 99.5 40.22 99.5 L58.22 99.5 C60.01 99.5 61.4 99.01 62.22 97.5 L94.22 37.5 L94.22 37.5 L95.22 35.5 C96.85 32.48 94.78 28.5 91.22 28.5 L71.22 28.5 L37.22 28.5 C34.59 28.5 32.22 30.99 32.22 33.5 Z"/>
+  <path     id="GLYPH_8" d="M59.5 28.5 L36.5 28.5 C34.19 28.5 32.5 30.18 32.5 32.5 L32.5 37.5 L32.5 72.5 L32.5 81.5 L32.5 90.5 L32.5 94.5 C32.5 96.82 34.19 99.5 36.5 99.5 L59.5 99.5 L86.5 99.5 L91.5 99.5 C93.81 99.5 95.5 96.82 95.5 94.5 L95.5 90.5 L95.5 81.5 L95.5 79.5 L95.5 72.5 L95.5 37.5 L95.5 32.5 C95.5 30.18 93.81 28.5 91.5 28.5 L86.5 28.5 L59.5 28.5 C59.5 28.5 59.5 28.5 59.5 28.5 Z M82.5 90.5 L63.5 90.5 C61.19 90.5 59.5 87.82 59.5 85.5 L59.5 85.5 C59.5 83.18 61.19 81.5 63.5 81.5 L82.5 81.5 C84.81 81.5 86.5 83.18 86.5 85.5 L86.5 85.5 C86.5 87.83 84.82 90.5 82.5 90.5 Z M82.5 72.5 L63.5 72.5 C61.19 72.5 59.5 70.82 59.5 68.5 L59.5 41.5 C59.5 39.18 61.19 37.5 63.5 37.5 L82.5 37.5 C84.81 37.5 86.5 39.18 86.5 41.5 L86.5 68.5 C86.5 70.83 84.82 72.5 82.5 72.5 Z"/>
+  <path     id="GLYPH_9" d="M59.5 28.5 L36.5 28.5 C34.19 28.5 32.5 30.18 32.5 32.5 L32.5 37.5 L32.5 73.5 L32.5 77.5 C32.5 79.82 34.19 82.5 36.5 82.5 L59.5 82.5 L82.5 82.5 C84.81 82.5 86.5 84.18 86.5 86.5 L86.5 86.5 C86.5 88.82 84.81 90.5 82.5 90.5 L36.5 90.5 C34.19 90.5 32.5 92.18 32.5 94.5 L32.5 95.5 C32.5 97.82 34.19 99.5 36.5 99.5 L86.5 99.5 L91.5 99.5 C93.81 99.5 95.5 97.82 95.5 95.5 L95.5 90.5 L95.5 82.5 L95.5 80.5 L95.5 73.5 L95.5 37.5 L95.5 32.5 C95.5 30.18 93.81 28.5 91.5 28.5 L86.5 28.5 C86.5 28.5 59.5 28.5 59.5 28.5 Z M82.5 73.5 L63.5 73.5 C61.19 73.5 59.5 70.82 59.5 68.5 L59.5 42.5 C59.5 40.18 61.19 37.5 63.5 37.5 L82.5 37.5 C84.81 37.5 86.5 40.18 86.5 42.5 L86.5 68.5 C86.5 70.83 84.82 73.5 82.5 73.5 Z"/>
+
+  <path     id="GLYPH_A" d="M60 28H37C35 28 33 30 33 33V37V73V82V96C33 98 35 100 37 100H55C57 100 60 98 60 96V87C60 84 62 82 64 82H82C84 82 87 84 87 87V96C87 98 89 100 91 100C93 100 96 98 96 96V82V73V37V33C96 30 93 28 91 28H87H60Z M82 71H64C62 71 60 69 60 66V39C60 37 62 35 64 35H82C84 35 87 37 87 39V66C87 69 84 71 82 71Z"/>
+  <path     id="GLYPH_B" d="M60 28H37C35 28 33 30 33 33V37V73V82V91V96C33 98 35 100 37 100H60H87H91C93 100 96 98 96 96V91V82V73V37V33C96 30 93 28 91 28H87H60Z M82 89H64C62 89 60 87 60 84S62 80 64 80H82C84 80 87 82 87 84S84 89 82 89Z M82 71H64C62 71 60 69 60 66V39C60 37 62 35 64 35H82C84 35 87 37 87 39V66C87 69 84 71 82 71Z"/>
+  <path     id="GLYPH_C" d="M36.427 28c-2.435 0-4.407 1.974-4.407 4.407v4.666v53.853v4.666c0 2.435 1.974 4.407 4.407 4.407h22.734h27.745h4.666c2.435 0 4.407-1.972 4.407-4.407v-4.666v-4.407c0-2.435-1.974-4.407-4.407-4.407h-0.259c-2.435 0-4.407 1.974-4.407 4.407l0 0c0 2.435-1.972 4.407-4.407 4.407h-18.93c-2.435 0-4.407-1.974-4.407-4.407V41.48c0-2.435 1.972-4.407 4.407-4.407h18.93c2.435 0 4.407 1.974 4.407 4.407v27.148c0 2.435 1.974 4.407 4.407 4.407h0.259c2.435 0 4.407-1.972 4.407-4.407V37.073l0 0c0-5.011-4.062-9.073-9.073-9.073H59.161H36.427Z"/>
+  <path     id="GLYPH_D" d="M59.16 100H88.39C92.58 100 95.98 96.6 95.98 92.41V35.58C95.98 31.39 92.58 28 88.39 28H32.02V37.07V90.92V100H59.16ZM59.16 37.07H86.9V90.92H59.16V37.07Z"/>
+  <path     id="GLYPH_E" d="M38 28C36 28 34 30 34 33V37V73V82V91V96C34 98 36 100 38 100H58H90C92 100 94 98 94 96S92 91 90 91H63C61 91 58 89 58 87S61 82 63 82H90C92 82 94 80 94 78S92 73 90 73H63C61 73 58 71 58 69V42C58 39 61 37 63 37H90C92 37 94 35 94 33S92 28 90 28H58H38Z"/>
+  <path     id="GLYPH_F" d="M37 28 C34 28 32 30 32 33 V37 V73 V82 V95 C32 98 34 100 37 100 H55 C57 100 59 98 59 95 V87 C59 84 61 82 64 82 H91 C94 82 96 80 96 78 C96 75 94 73 91 73 H64 C61 73 59 71 59 68 V42 C59 39 61 37 64 37 H91 C94 37 96 35 96 33 C96 30 94 28 91 28 H59 H37 Z"/>
+  <path     id="GLYPH_G" d="M37 28C35 28 33 30 33 33V37V73V82V91V96C33 98 35 100 37 100H60H87H91C93 100 96 98 96 96V91V82V78C96 75 93 73 91 73H87H64C62 73 60 71 60 69V42C60 39 62 37 64 37H91C93 37 96 35 96 33S93 28 91 28H60H37Z M89 84C89 87 87 89 84 89H66C64 89 62 87 62 84S64 80 66 80H84C87 80 89 82 89 84Z"/>
+  <path     id="GLYPH_I" d="M72.62 28H55.37C52.64 28 50.42 30.22 50.42 32.95V95.05C50.42 97.78 52.64 100 55.37 100H72.62C75.35 100 77.57 97.78 77.57 95.05V32.95C77.57 30.22 75.35 28 72.62 28Z"/>
+  <path     id="GLYPH_L" d="M55 28H37C35 28 33 30 33 33V91V96C33 98 35 100 37 100H60H91C93 100 96 98 96 96S93 91 91 91H64C62 91 60 89 60 87V33C60 30 57 28 55 28Z"/>
+  <path     id="GLYPH_M" d="M37 28C35 28 33 30 33 33V37V96C33 98 35 100 37 100H55C57 100 60 98 60 96V42C60 39 62 37 64 37C66 37 69 39 69 42V96C69 98 71 100 73 100S78 98 78 96V42C78 39 80 37 82 37C84 37 87 39 87 42V96C87 98 89 100 91 100S96 98 96 96V37V33C96 30 93 28 91 28H60H37Z"/>
+  <path     id="GLYPH_O" d="M42 28C37 28 33 33 33 37V91C33 96 37 100 42 100H60H87C91 100 96 96 96 91V37C96 33 91 28 87 28H60H42Z M89 46V82C89 87 84 91 80 91H71C66 91 62 87 62 82V46C62 42 66 37 71 37H80C84 37 89 42 89 46Z"/>
+  <path     id="GLYPH_P" d="M42 28C37 28 33 33 33 37V73V82V91C33 96 37 100 42 100H51C55 100 60 96 60 91S64 82 69 82H87C91 82 96 78 96 73V37C96 33 91 28 87 28H60H42Z M89 46V64C89 69 84 73 80 73H71C66 73 62 69 62 64V46C62 42 66 37 71 37H80C84 37 89 42 89 46Z"/>
+  <path     id="GLYPH_S" d="M36 28 C34 28 32 30 32 32 V37 V73 V78 C32 80 34 82 36 82 H59 H82 C85 82 87 84 87 87 C87 89 85 91 82 91 H36 C34 91 32 93 32 95 V96 C32 98 34 100 36 100 H92 C94 100 96 98 96 96 V91 V82 V77 C96 75 94 73 92 73 H87 H64 C61 73 59 71 59 69 V41 C59 39 61 37 64 37 H92 C94 37 96 35 96 33 V32 C96 30 94 28 92 28 H59 H36 Z"/>
+  <path     id="GLYPH_T" d="M51 28H37C35 28 33 30 33 33S35 37 37 37H46C48 37 51 39 51 42V96C51 98 53 100 55 100H73C75 100 78 98 78 96V42C78 39 80 37 82 37H91C93 37 96 35 96 33S93 28 91 28H78H51Z"/>
+  <path     id="GLYPH_X" d="M81 73H70L90 35C93 33 90 28 86 28H70C68 28 68 28 66 30L57 46C54 48 50 48 50 46L43 30C43 28 41 28 39 28C36 28 34 33 34 35L48 62C48 64 48 64 48 66L34 93C32 96 34 100 39 100H54C57 100 57 100 59 98L66 84C66 82 68 82 70 82H75C77 82 77 82 79 84L86 98C86 100 88 100 90 100C93 100 95 96 95 93L88 82L81 73Z"/>
+
+  <rect     id="GLYPH_DOT" x="56" y="76" width="24" height="24" rx="8" ry="8"/>
+  
+  <path     id="ARROW_HEAD" d=" M 64 48 Q 65.5 48 67 49 L 120 77 Q 123 78.5 121 80 Q 120 81 117 81 L 11 81 Q 8 81 7 80 Q 5 78.5 8 77 L 61 49 Q 62.5 48 64 48 Z"/>
+
+
+    <circle id="COMMON_MODE_BODY" cx="64" cy="64" r="44"/>
+
+    <!-- Shared mask primitives. Black geometry cuts windows from a mode. -->
+    <circle id="COMMON_MODE_TOP_CUTOUT" cx="64" cy="26" r="14"/>
+    <circle id="COMMON_MODE_BOTTOM_CUTOUT" cx="64" cy="102" r="14"/>
+    <!-- Audio-mode cutout primitives. -->
+    <line id="AUDIO_CUTOUT_LINE" x1="64" y1="54" x2="64" y2="74"/>
+    <path id="AUDIO_CUTOUT_WAVE_DOUBLE"
+          d="M44 64 C47.3 58.7 50.7 56 54 56 C57.3 56 60.7 58.7 64 64 C67.3 69.3 70.7 72 74 72 C77.3 72 80.7 69.3 84 64"/>
+    <path id="AUDIO_CUTOUT_WAVE_TRIPLE" d="M44 64 C46 60 48 58 50 58 C52 58 54 60 56 64 C58 68 60 70 62 70 C64 70 66 68 68 64 C70 60 72 58 74 58 C76 58 78 60 80 64 C82 68 84 70 84 70"/>
+    <rect id="AUDIO_CUTOUT_WINDOW" x="82" y="48" width="16" height="32" rx="6"/>
+
+  <path     id="TARGET_MODE_CORNER" fill-rule="evenodd" d="M19 3 L43 3 C50.791 3 57.45 8.611 58.77 16.29 C36.404 18.743 18.743 36.404 16.29 58.77 C8.611 57.45 3 50.791 3 43 L3 19 C3 14.757 4.686 10.687 7.686 7.686 C10.687 4.686 14.757 3 19 3 Z"/>
+  <path     id="TARGET_MODE_MEDIA_FRAME" fill-rule="evenodd" d="M29 1H99 A28 28 0 0 1 127 29 V62 A28 28 0 0 1 99 90 H29 A28 28 0 0 1 1 62 V29 A28 28 0 0 1 29 1 Z M30 17 H98 A13 13 0 0 1 111 30 V61 A13 13 0 0 1 98 74 H30 A13 13 0 0 1 17 61 V30 A13 13 0 0 1 30 17 Z"/>
+  <path     id="TARGET_MODE_VIDEO_PLAY" d="M55 29 C53 30 52 32 52 35 V56 C52 58 53 60 55 61 C57 62 59 62 61 61 L81 50 C83 48 84 47 84 45 C84 43 83 42 81 40 L61 29 C59 28 57 28 55 29 Z"/>
+  <path     id="TARGET_MODE_CLOCK_ARC" d="M64 24 A21 21 0 1 0 85 45"/>
+  <line     id="TARGET_MODE_CLOCK_HAND_HORIZONTAL" x1="64" y1="45" x2="75" y2="45"/>
+  <line     id="TARGET_MODE_CLOCK_HAND_VERTICAL" x1="64" y1="45" x2="64" y2="35"/>
+  <polyline id="TARGET_MODE_PICTURE_LINE" points="24,66 48,48 60,58 88,35 104,50"/>
+  <circle   id="TARGET_MODE_PICTURE_DOT" cx="37" cy="38" r="9"/>
+  <circle   id="TARGET_MODE_VIDEO_CONTROL_MIDDLE" cx="43" cy="115" r="13"/>
+  <rect     id="TARGET_MODE_VIDEO_CONTROL_RIGHT" x="64" y="107" width="63" height="16" rx="8" ry="8"/>
+  <rect     id="TARGET_MODE_VIDEO_CONTROL_LEFT" x="1" y="107" width="20" height="16" rx="8" ry="8"/>
+
+  <path     id="LOAD_BODY" d="M7 15L4 18L3 22L1 26L0 29L0 30L0 31L0 96L0 97 L1 101L2 104L4 107L7 111L11 115L15 118L19 120L24 121 L29 122L32 121L34 120L36 118L37 115L37 112L37 111 L36 109L34 107L31 106L28 106L27 106L25 105L22 104 L19 101L18 99L16 96L16 94L16 42L112 42L112 43L112 94 L112 96L111 98L109 101L107 103L105 104L103 105L101 106 L100 106L97 106L94 107L92 109L91 111L91 112L91 115 L92 118L94 121L96 121L98 122L99 122L102 122L109 120 L113 118L118 115L121 111L124 107L126 104L127 101L128 97 L128 96L128 41L128 40L127 36L126 33L124 30L121 26 L117 22L114 19L111 18L107 16L104 16L103 16L103 15 L100 15L68 15L53 7L52 7L51 7L49 5L45 5L26 5L24 5 L21 6L18 7L14 9L10 12Z"/>
+  <path     id="LOAD_ARROW" d="M64 43L61 44L59 45L57 47L56 49L56 57L47 57L45 58L43 59L43 60L42 61L42 64L43 65L61 84L63 85L65 85L67 84L85 65L86 64L86 61L85 59L82 57L81 57L72 57L72 49L71 47L69 45L67 44Z"/>
+  <path     id="GLYPH_GEAR" d="M64 29L60 30L57 33L56 36L56 41L56 42L53 43L49 46L47 45L45 44L43 43L39 43L36 44L34 47L33 50L33 53L34 55L36 57L40 60L40 61L40 62L40 68L39 69L37 71L35 72L33 75L33 78L33 78L33 80L35 82L36 84L38 85L40 85L42 85L44 85L48 83L49 82L52 85L56 86L56 87L56 92L58 96L59 97L61 98L62 99L66 99L69 97L71 95L72 92L72 87L72 86L76 85L79 82L80 83L84 85L86 85L88 85L91 84L94 82L95 79L95 78L95 78L95 75L94 73L92 71L88 68L88 67L88 67L88 60L92 57L94 55L95 53L95 50L94 47L94 46L92 44L90 43L89 43L85 43L84 43L81 45L79 46L75 43L72 42L72 41L72 36L71 33L68 30L66 30ZM62 56L66 56L68 57L71 59L72 62L72 65L72 67L71 68L69 70L67 72L65 72L63 72L60 71L58 69L56 66L56 63L57 60L59 58Z"/>
+  <path     id="TIME_BODY" fill-rule="evenodd" d="M64 0 A64 64 0 1 1 0.5 72 A8 8 0 0 1 16.5 70 A48 48 0 1 0 32.8 27.5 L39 33.7 A5 5 0 0 1 35.5 42.5 H10.5 A5 5 0 0 1 5.5 37.5 V12.5 A5 5 0 0 1 14 9 L21.5 16.5 A63.8 63.8 0 0 1 64 0Z"/>
+  <path     id="TIME_HAND" d="M61 37 A8 8 0 0 1 69 45 V66 L77 74 A8 8 0 0 1 65.7 85.3 L55.3 74.9 A8 8 0 0 1 53 69.3 V45 A8 8 0 0 1 61 37Z"/>
+
+  <path     id="WAVE_SINE" d="M24 85C36 85 40 44 64 44C88 44 92 85 104 85"/>
+  <line     id="WAVE_RAMP_UP" x1="24" y1="85" x2="104" y2="44"/>
+  <line     id="WAVE_RAMP_DOWN" x1="24" y1="44" x2="104" y2="85"/>
+  <path     id="WAVE_SMOOTH_UP" d="M24 85 C50.667 85 77.333 44 104 44"/>
+  <path     id="WAVE_SMOOTH_DOWN" d="M24 44 C50.667 44 77.333 85 104 85"/>
+  <path     id="WAVE_EXPONENTIAL" d="M24 85 C46 85 59 82 64 44 C84 44 99 61 104 85"/>  
+  <polyline id="WAVE_TRIANGLE" points="24,85 64,44 104,85"/>
+  <polyline id="WAVE_RANDOM" points="24,77 40,77 40,53 56,53 56,81 72,81 72,61 88,61 88,73 104,73"/>  
+
+    <!-- ================================================================ -->
+    <!-- DEFINITIONS: EDITING GRID                                       -->
+    <!-- ================================================================ -->
+    <path id="ATLAS_GRID_VERTICAL" d="M128 0V1024 M256 0V1024 M384 0V1024 M512 0V1024 M640 0V1024 M768 0V1024 M896 0V1024"/>
+    <path id="ATLAS_GRID_HORIZONTAL" d="M0 128H1024 M0 256H1024 M0 384H1024 M0 512H1024 M0 640H1024 M0 768H1024 M0 896H1024"/>
+    <!-- ==================================================================== -->
+    <!-- DEFINITIONS: MODE MASKS                                              -->
+    <!--                                                                      -->
+    <!-- Every mode owns a mask, even while it only uses the common           -->
+    <!-- cutouts. Add mode-specific windows to that mode's mask only.         -->
+    <!-- ==================================================================== -->
+    <mask id="MODE_MASK_ADC" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <g class="audio-cutout-stroke">
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+  <!--  <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/> -->
+<use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(64 64) scale(0.5) translate(-64 -64)"/>   
+<rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/>     
+  <!--  <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>  -->
+  <!--  <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>  -->
+      </g>      
+    </mask>
+
+    <mask id="MODE_MASK_TRG" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <g class="audio-cutout-stroke">
+<!--    <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>       -->
+<!--    <use href="#AUDIO_CUTOUT_LINE" transform="translate(20 0)"/>        -->
+<!--    <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/> -->
+<use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(64 64) scale(0.5) translate(-64 -64)"/>    
+<rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/>  
+<rect x="36" y="48" width="8" height="32" rx="4" ry="4" fill="black"/>      
+  <!--  <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>  -->
+      </g>         
+    </mask>
+
+    <mask id="MODE_MASK_BMP" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+        <g class="audio-cutout-stroke">
+                  <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
+<use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(52 64) scale(0.5) translate(-64 -64)"/>
+      <rect x="82" y="48" width="16" height="32" rx="6" fill="black"/> 
+        </g>
+
+    </mask>
+<!-- LFO mask model: waveform window on the left, multiplier on the right. -->
+    <mask id="MODE_MASK_LF0" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <rect x="30" y="48" width="48" height="32" rx="6" fill="black"/>
+      <rect x="82" y="48" width="16" height="32" rx="6" fill="black"/>
+    </mask>
+
+    <mask id="MODE_MASK_LF1" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <rect x="30" y="48" width="48" height="32" rx="6" fill="black"/>
+      <rect x="82" y="48" width="16" height="32" rx="6" fill="black"/>
+    </mask>
+<!-- DEFINITIONS: AUDIO MODE MASKS 05-07                             -->
+    <mask id="MODE_MASK_AB0" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+
+      <g class="audio-cutout-stroke">
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+      </g>
+      <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+    </mask>
+
+    <mask id="MODE_MASK_AB1" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+
+      <g transform="rotate(180 64 64)">
+        <g class="audio-cutout-stroke">
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+        </g>
+        <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+      </g>
+    </mask>
+
+    <mask id="MODE_MASK_AB2" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+
+      <g class="audio-cutout-stroke">
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+      </g>
+      <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+    </mask>
+
+    <mask id="MODE_MASK_AB3" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+
+      <g transform="rotate(180 64 64)">
+        <g class="audio-cutout-stroke">
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+        </g>
+        <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+      </g>
+    </mask>
+
+    <mask id="MODE_MASK_08" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <!-- Reserved for mode 08 windows. -->
+    </mask>
+
+
+    <mask id="MODE_MASK_09" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <!-- Reserved for mode 09 windows. -->
+    </mask>
+
+    <mask id="MODE_MASK_10" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <!-- Reserved for mode 10 windows. -->
+    </mask>
+
+    <mask id="MODE_MASK_11" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <!-- Reserved for mode 11 windows. -->
+    </mask>
+
+    <mask id="MODE_MASK_12" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <use href="#COMMON_MODE_BODY" fill="white"/>
+      <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
+      <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
+      <!-- Reserved for mode 12 windows. -->
+    </mask>
+
+  <mask     id="MASK_TARGET_MODE_BL_CLOCK" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+            <rect width="128" height="128" fill="white"/>
+            <g transform="rotate(-135 20 108) translate(20 108) scale(0.20) translate(-64 -64)">
+              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
+              <use href="#TARGET_MODE_CLOCK_ARC" fill="none" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <use href="#TARGET_MODE_CLOCK_HAND_HORIZONTAL" stroke="black" stroke-width="8" stroke-linecap="round"/>
+              <use href="#TARGET_MODE_CLOCK_HAND_VERTICAL" stroke="black" stroke-width="8" stroke-linecap="round"/>
+            </g>
+  </mask>
+
+  <mask     id="MASK_TARGET_MODE_TL_PICTURE" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+            <rect width="128" height="128" fill="white"/>
+            <g transform="rotate(-45 20 20) translate(20 20) scale(0.20) translate(-64 -64)">
+              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
+              <use href="#TARGET_MODE_PICTURE_DOT" fill="black"/>
+              <use href="#TARGET_MODE_PICTURE_LINE" fill="none" stroke="black" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+  </mask>
+
+  <mask     id="MASK_TARGET_MODE_TR_VIDEO" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+            <rect width="128" height="128" fill="white"/>
+            <g transform="rotate(45 108 20) translate(108 20) scale(0.20) translate(-64 -64)">
+              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
+              <use href="#TARGET_MODE_VIDEO_PLAY" fill="black"/>
+              <use href="#TARGET_MODE_VIDEO_CONTROL_LEFT" fill="black"/>
+              <use href="#TARGET_MODE_VIDEO_CONTROL_MIDDLE" fill="black"/>
+              <use href="#TARGET_MODE_VIDEO_CONTROL_RIGHT" fill="black"/>
+            </g>
+  </mask>
+
+  <mask     id="MASK_TARGET_MODE_BR_VIDEO" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+            <rect width="128" height="128" fill="white"/>
+            <g transform="rotate(135 108 108) translate(108 108) scale(0.20) translate(-64 -64)">
+              <use href="#TARGET_MODE_MEDIA_FRAME" fill="black"/>
+              <use href="#TARGET_MODE_VIDEO_PLAY" fill="black"/>
+            </g>
+  </mask>
+  <mask     id="MASK_TARGET_MODE_BR_GL" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+            <rect width="128" height="128" fill="white"/>
+            <g transform="rotate(45 108 108) translate(110 108) scale(0.40) translate(-64 -64)">
+              <use href="#GLYPH_G" fill="black" transform="translate(48 64) scale(0.44) translate(-64 -64)"/>
+              <use href="#GLYPH_L" fill="black" transform="translate(80 64) scale(0.44) translate(-64 -64)"/>
+            </g>
+  </mask>
+  </defs>
+  <!-- ==================================================================== -->
+  <!-- EDITING GUIDE: 128 x 128 CELL GRID                                   -->
+  <!-- Remove or hide this group when exporting the production atlas.      -->
+  <!-- ==================================================================== -->
+  <g id="ATLAS_GRID" class="atlas-grid">
+    <use href="#ATLAS_GRID_VERTICAL"/>
+    <use href="#ATLAS_GRID_HORIZONTAL"/>
+  </g>
+  <!-- ==================================================================== -->
+  <!-- ATLAS TILES: MODES 00-12                                             -->
+  <!--                                                                      -->
+  <!-- Mode index maps directly to an 8-column row-major atlas cell:        -->
+  <!--   00-07 -> row 0, cells 0-7                                          -->
+  <!--   08-12 -> row 1, cells 0-4                                          -->
+  <!-- ==================================================================== -->
+  <svg id="MODE_ADC" class="atlas-tile" data-cell="0,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_ADC)"/>
+  </svg>
+  <svg id="MODE_TRG" class="atlas-tile" data-cell="1,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_TRG)"/>
+  </svg>
+   <svg id="MODE_BMP" class="atlas-tile" data-cell="2,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_BMP)"/>
+  </svg> 
+  <svg id="MODE_LF0" class="atlas-tile" data-cell="3,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_LF0)"/>
+    <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
+  </svg>
+  <svg id="MODE_LF1" class="atlas-tile" data-cell="4,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_LF1)"/>
+    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
+  </svg>
+  <svg id="MODE_AB0" class="atlas-tile" data-cell="5,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB0)"/>
+    <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
+  </svg>
+  <svg id="MODE_AB1" class="atlas-tile" data-cell="6,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB1)"/>
+    <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
+  </svg>
+  <svg id="MODE_AB2" class="atlas-tile" data-cell="7,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB2)"/>
+    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
+  </svg>
+  <svg id="MODE_AB3" class="atlas-tile" data-cell="0,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB3)"/>
+    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
+  </svg>
+  <svg id="MODE_09" class="atlas-tile" data-cell="1,1">
+  <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_08)"/>
+  </svg>
+  <svg id="MODE_10" class="atlas-tile" data-cell="2,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_09)"/>
+  </svg>
+  <svg id="MODE_11" class="atlas-tile" data-cell="3,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_10)"/>
+  </svg>
+  <svg id="MODE_12" class="atlas-tile" data-cell="4,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_11)"/>
+  </svg>
+  <svg id="MODE_13" class="atlas-tile" data-cell="5,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_12)"/>
+  </svg>
+    <svg id="MODE_14" class="atlas-tile" data-cell="6,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_12)"/>
+  </svg>
+    <svg id="MODE_15" class="atlas-tile" data-cell="7,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_12)"/>
+  </svg>
+
+<!-- TARGET MODE POSITIONING -->
+  <svg      id="TARGET_MODE_PICK_TIME" class="glyph-tile" data-cell="0,2">  <!-- quadrant 0 / upper left -->
+            <g transform="rotate(90 64 64)">
+              <g mask="url(#MASK_TARGET_MODE_BL_CLOCK)">
+                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(270 64 64)"/>
+              </g>
+            </g>
+  </svg>
+  <svg      id="TARGET_MODE_PICK_TEXTURE" class="glyph-tile" data-cell="1,2">  <!-- quadrant 1 / upper right -->
+            <g transform="rotate(90 64 64)">
+              <g mask="url(#MASK_TARGET_MODE_TL_PICTURE)">
+                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(0 64 64)"/>
+              </g>
+            </g>
+  </svg>
+  <svg      id="TARGET_MODE_PICK_VIDEO" class="glyph-tile" data-cell="2,2">  <!-- quadrant 2 / lower left -->
+            <g transform="rotate(90 64 64)">
+              <g mask="url(#MASK_TARGET_MODE_BR_VIDEO)">
+                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
+              </g>
+            </g>
+  </svg>
+  <svg      id="TARGET_MODE_PICK_FRAME" class="glyph-tile" data-cell="3,2">  <!-- quadrant 3 / lower right -->
+            <g transform="rotate(90 64 64)">
+              <g mask="url(#MASK_TARGET_MODE_TR_VIDEO)">
+                <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(90 64 64)"/>
+              </g>
+            </g>
+  </svg>
+  <svg      id="TARGET_MODE_PICK_GL_PROGRAM" class="glyph-tile" data-cell="4,2">
+            <g mask="url(#MASK_TARGET_MODE_BR_GL)">
+              <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
+            </g>
+  </svg>
+
+<!-- SYSTEM ICON POSITIONING -->
+  <svg      id="SYSTEM_TIME" class="glyph-tile" data-cell="3,7">
+            <use href="#TIME_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
+            <use href="#TIME_HAND" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
+  </svg>  
+  <svg      id="SYSTEM_STORE" class="glyph-tile" data-cell="4,7">
+            <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
+            <use href="#LOAD_ARROW" transform="translate(64 92) scale(0.75) translate(-64 -64)"/>
+  </svg>
+  <svg      id="SYSTEM_LOAD" class="glyph-tile" data-cell="5,7">
+            <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
+            <use href="#LOAD_ARROW" transform="translate(64 92) scale(0.75) rotate (180) translate(-64 -64)"/>
+  </svg>
+  <svg      id="SYSTEM_UPDATE" class="glyph-tile" data-cell="6,7">
+            <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
+            <use href="#GLYPH_GEAR" transform="translate(64 80) rotate (32) scale(.75) translate(-64 -64)"/>
+  </svg>
+  <svg      id="SYSTEM_LOG" class="glyph-tile" data-cell="7,7">
+            <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
+            <use href="#LOAD_ARROW" transform="translate(64 92) scale(0.75) translate(-64 -64)"/>
+            <use href="#GLYPH_L" transform="translate(44 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_O" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_G" transform="translate(84 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+
+<!-- LFO POSITIONING  --> 
+  <svg      id="LFO_WAVE_SINE" class="glyph-tile" data-cell="0,3">  <!-- LFO PLACEMENT -->
+       <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
+            <use href="#WAVE_SINE" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+
+  <svg      id="LFO_WAVE_TRIANGLE-ORG" class="glyph-tile" data-cell="1,3">
+       <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
+            <use href="#WAVE_TRIANGLE" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+  <svg      id="LFO_WAVE_RAMP_UP" class="glyph-tile" data-cell="2,3">
+        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
+            <use href="#WAVE_RAMP_UP" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+  <svg      id="LFO_WAVE_RAMP_DOWN" class="glyph-tile" data-cell="3,3">
+        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
+            <use href="#WAVE_RAMP_DOWN" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+<!--
+  <svg      id="LFO_WAVE_TRAPEZOID" class="glyph-tile" data-cell="5,3">
+            <use href="#WAVE_TRAPEZOID" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+-->
+  <svg      id="LFO_WAVE_SMOOTH_UP" class="glyph-tile" data-cell="4,3">
+            <use href="#WAVE_SMOOTH_UP" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+  <svg      id="LFO_WAVE_SMOOTH_DOWN" class="glyph-tile" data-cell="5,3">
+            <use href="#WAVE_SMOOTH_DOWN" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+  <svg      id="LFO_WAVE_EXPONENTIAL" class="glyph-tile" data-cell="6,3">
+            <use href="#WAVE_EXPONENTIAL" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+  <svg      id="LFO_WAVE_RAMP_RANDOM" class="glyph-tile" data-cell="7,3">
+        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
+            <use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+<!-- NUMBER GLYPHS POSITIONING  --> 
+  <svg      id="NUM_0" class="glyph-tile" data-cell="0,6">    <!-- NUMBER GLYPH PLACEMENT -->
+            <use href="#GLYPH_0" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_1" class="glyph-tile" data-cell="1,6">
+            <use href="#GLYPH_1" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_2" class="glyph-tile" data-cell="2,6">
+            <use href="#GLYPH_2" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_3" class="glyph-tile" data-cell="3,6">
+            <use href="#GLYPH_3" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_4" class="glyph-tile" data-cell="4,6">
+            <use href="#GLYPH_4" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_5" class="glyph-tile" data-cell="5,6">
+            <use href="#GLYPH_5" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_6" class="glyph-tile" data-cell="6,6">
+            <use href="#GLYPH_6" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_7" class="glyph-tile" data-cell="7,6">
+            <use href="#GLYPH_7" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_8" class="glyph-tile" data-cell="0,7">
+            <use href="#GLYPH_8" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>
+  <svg      id="NUM_9" class="glyph-tile" data-cell="1,7">
+            <use href="#GLYPH_9" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>  
+  <svg      id="DOT" class="glyph-tile" data-cell="2,7">
+            <use href="#GLYPH_DOT" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+  </svg>  
+<!-- FRACTION GLYPHS POSITIONING  --> 
+  <svg      id="FRAC_1_64" class="glyph-tile" data-cell="2,0">  <!-- !ONLY FOR DEMO PURPOSES! -->
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
+              <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>
+  <svg      id="FRAC_1_64-ORG" class="glyph-tile" data-cell="0,4">
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
+              <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>  
+  <svg      id="FRAC_1_32" class="glyph-tile" data-cell="1,4">  <!-- 1/32 -->
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_3" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
+              <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>
+  <svg      id="FRAC_1_16" class="glyph-tile" data-cell="2,4">  <!-- 1/16 -->
+            <g transform="rotate(90 64 64)">
+          <!--- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_1" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
+              <use href="#GLYPH_6" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>
+  <svg      id="FRAC_1_8" class="glyph-tile" data-cell="3,4">   <!-- 1/8 -->
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_8" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>
+  <svg      id="FRAC_1_4" class="glyph-tile" data-cell="4,4">   <!-- 1/4 -->
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>
+  <svg      id="FRAC_1_2" class="glyph-tile" data-cell="5,4">   <!-- 1/2 -->
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>
+  <svg      id="FRAC_1_1" class="glyph-tile" data-cell="6,4">   <!-- 1/1 -->
+            <g transform="rotate(90 64 64)">
+          <!-- <use class="line" href="#DIVIDER"/> -->
+              <use href="#GLYPH_1" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
+            </g>
+  </svg>    
+<!-- ARROW POSITIONING  --> 
+<svg id="ARROW_UP" class="glyph-tile" data-cell="6,2">
+    <use href="#ARROW_HEAD" transform="translate( 0 -32 ) rotate(0 64 64)"/>
+</svg>
+
+<svg id="ARROW_DOWN" class="glyph-tile" data-cell="7,2">
+    <use href="#ARROW_HEAD" transform="translate( 0 -32 ) rotate(180 64 64)"/>
+</svg>
+<!-- STRING POSITIONING  -->
+  <svg      id="BPM" class="glyph-tile" data-cell="7,5">
+            <use href="#GLYPH_B" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+            <use href="#GLYPH_P" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+            <use href="#GLYPH_M" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+  </svg>
+
+<svg id="FPS" class="glyph-tile" data-cell="6,5">
+      <use href="#GLYPH_F" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_P" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+  <!-- ==================================================================== -->
+  <!-- ATLAS TILES: 64 x 64 OVERLAYS                                        -->
+  <!-- Add waveform, multiplier, number, and label tiles here.              -->
+  <!-- ==================================================================== -->
+
+  <!-- ==================================================================== -->
+  <!-- ATLAS TILES: TARGETS AND NAVIGATION                                  -->
+  <!-- ==================================================================== -->
+
+  <!-- ==================================================================== -->
+  <!-- ATLAS TILES: SYSTEM                                                  -->
+  <!-- ==================================================================== -->
+
+  <!-- ==================================================================== -->
+  <!-- POSITIONING SCRIPT                                                   -->
+  <!-- Converts declarative cell metadata into physical atlas placement.    -->
+  <!-- ==================================================================== -->
+  <script><![CDATA[
+  (() => {
+      const CELL_SIZE = 128;
+      const TILE_SIZE = 64;
+
+      for (const icon of document.querySelectorAll("svg[data-cell]"))
+      {
+          const cell = icon.getAttribute("data-cell");
+          const m = /^\s*(\d+)\s*,\s*(\d+)\s*$/.exec(cell);
+
+          if (!m)
+              throw new Error(`Invalid data-cell on ${icon.id}: "${cell}"`);
+
+          const cellX = Number(m[1]);
+          const cellY = Number(m[2]);
+          const size = Number(icon.getAttribute("data-size") || CELL_SIZE);
+
+          let subX = 0;
+          let subY = 0;
+
+          if (size === TILE_SIZE)
+          {
+              const sub = icon.getAttribute("data-sub");
+              const s = /^\s*([01])\s*,\s*([01])\s*$/.exec(sub || "");
+
+              if (!s)
+                  throw new Error(`Invalid data-sub on ${icon.id}`);
+
+              subX = Number(s[1]);
+              subY = Number(s[2]);
+
+              icon.setAttribute("x", String(cellX * CELL_SIZE + subX * TILE_SIZE));
+              icon.setAttribute("y", String(cellY * CELL_SIZE + subY * TILE_SIZE));
+              icon.setAttribute("width", "64");
+              icon.setAttribute("height", "64");
+              icon.style.width = "64px";
+              icon.style.height = "64px";
+              icon.setAttribute("viewBox", "32 32 64 64");
+          }
+          else
+          {
+              icon.setAttribute("x", String(cellX * CELL_SIZE));
+              icon.setAttribute("y", String(cellY * CELL_SIZE));
+          }
+      }
+  })();
+  ]]></script>
+</svg>

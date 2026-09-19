@@ -1,0 +1,658 @@
+#include "kernel.h"
+
+    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
+    #define MY_IDX   m_logKernelIndex 
+
+void            CKernel::resetMenuPickUpFlags()
+{
+                if (g_menuLayer != g_lastLayer)
+                    {
+                    memset(g_menuPickUpFlag, 0, sizeof(g_menuPickUpFlag));
+
+                //  g_activeProgramFlag = false;
+
+                    g_centralModeBuffer[g_currentProgramBuffer][SEL_PRG] = 0;
+
+                    g_lastLayer = g_menuLayer;
+                    }
+}
+void            CKernel::storeModes()
+{
+                if (g_gl_program_current != g_gl_program_last)
+                    {
+                    g_currentProgramBuffer = g_centralModeBuffer[g_gl_program_current][IS_STORED] ? g_gl_program_current : DEFAULT_SLOT;
+                    g_gl_program_last = g_gl_program_current;
+                    }
+
+                if (g_centralModeBuffer[g_gl_program_current][IS_STORED] && g_currentProgramBuffer != g_gl_program_current)
+                    {
+                    int stored = g_centralModeBuffer[g_gl_program_current][IS_STORED];
+
+                    memcpy(&g_centralModeBuffer[g_gl_program_current][0], &g_centralModeBuffer[DEFAULT_SLOT][0], sizeof(g_centralModeBuffer[g_gl_program_current]));
+
+                    g_centralModeBuffer[g_gl_program_current][IS_STORED] = stored;
+                    g_currentProgramBuffer = g_gl_program_current;
+                    }
+                else if (!g_centralModeBuffer[g_gl_program_current][IS_STORED] && g_currentProgramBuffer != DEFAULT_SLOT)
+                    {
+                    g_currentProgramBuffer = DEFAULT_SLOT;
+                    }
+}
+
+void            CKernel::buttonConsumer(int buttonA, int buttonB)
+{
+                static int stepLayer = 2;
+
+                if (!g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonB][BTN_HOLD_TICK])
+                    {
+                    stepLayer      = 2;
+                    g_menuLayer    = 0;
+                    g_lastLayerLED = 0;
+
+                    if (g_buttons_states[buttonA][BTN_SINGLE])
+                        {
+                        calculate1BPMnew(0, TB0, DB0, g_frameStart);
+                        g_buttons_states[buttonA][BTN_SINGLE] = 0;
+                        }
+                    if (g_buttons_states[buttonB][BTN_DOUBLE])
+                        {
+                        g_centralModeBuffer[g_gl_program_current][IS_STORED] = !g_centralModeBuffer[g_gl_program_current][IS_STORED];
+
+                        g_buttons_states[buttonB][BTN_DOUBLE] = 0;
+                        }
+                    return;
+                    }
+                if (g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonB][BTN_HOLD_TICK])
+                    {
+                    stepLayer      = 2;
+                    g_menuLayer    = 1;
+                    g_lastLayerLED = 1;
+
+                    return;
+                    }
+                if (g_buttons_states[buttonB][BTN_HOLD_TICK] && !g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonA][BTN_SINGLE])
+                    {
+                    g_menuLayer    = stepLayer;
+                    g_lastLayerLED = stepLayer;
+
+                    return;
+                    }
+                if (g_buttons_states[buttonB][BTN_HOLD_TICK] && g_buttons_states[buttonA][BTN_SINGLE])
+                    {
+                    bool layerAvailable = false;
+
+                    do  {
+                        ++stepLayer;
+
+                        if (stepLayer > ACCESSIBLE_LAYER) stepLayer = 3;
+
+                        layerAvailable =    (   layerModeMap[stepLayer] &   (   modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][0]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][1]] | 
+                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][2]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][3]] |
+                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][4]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][5]] | 
+                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][6]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][7]] ) ) != 0;
+                        }
+                    while (!layerAvailable);
+
+                    g_menuLayer    = stepLayer;
+                    g_lastLayerLED = stepLayer;
+
+                    g_buttons_states[buttonA][BTN_SINGLE] = 0;
+
+                    return;
+                    }
+}
+
+void            CKernel::dispatchLayer()
+{
+                if (g_menuLayer == 0) return;
+
+                const uint8_t block = g_menuLayer - 1;
+
+                set_mode_roof_map(block);
+                mapMenuGroup(block);
+}
+
+void            CKernel::set_mode_roof_map          (uint8_t block)
+{
+                const uint8_t f_first_flag = FLAG_AUDIO_A;
+                const uint8_t base         = block << 2;
+
+                for (uint8_t slot = 0; slot < 4; ++slot)
+                    {
+                    const uint8_t row = base + slot;
+
+                    if (g_mapType[block][slot] == MAP_VALUE)
+                        {
+                        g_modeRoof[row] = g_valueRoof[block][slot];
+                        continue;
+                        }
+                    uint8_t dst = 0;
+
+                    const uint8_t baseLen = g_valueRoof[block][slot];       // base group length comes from g_valueRoof for MAP_MODE blocks (e.g. 5,5,5,5)
+
+                    for (uint8_t i = 0; i < baseLen; ++i)
+                        {
+                        g_modeMap[row][dst++] = g_groupModes[GROUP_BASE][i];
+                        }
+                    for (uint8_t group = GROUP_FLAG1; group < GROUP_COUNT; ++group) // optional groups (A/B)
+                        {
+                        const uint8_t flag_pos = f_first_flag + (group - GROUP_FLAG1);
+
+                        if (!g_centralModeBuffer[g_currentProgramBuffer][flag_pos]) 
+                            {
+                            continue;
+                            }
+                        for (uint8_t i = 0; i < g_groupLen[group]; ++i)
+                            {
+                            g_modeMap[row][dst++] = g_groupModes[group][i];
+                            }
+                        }
+                    g_modeRoof[row] = dst;
+                    }
+}
+
+void            CKernel::mapMenuGroup               (uint8_t block)
+{
+                const uint8_t base = block << 2;
+                unsigned v;
+
+                v = (g_inOutMatrixInt[4][RAW] * g_modeRoof[base + 0]) >> 10;
+
+                if (!g_menuPickUpFlag[base + 0] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 0])
+                    {
+                    g_menuPickUpFlag[base + 0] = true;
+                    }
+                else if (g_menuPickUpFlag[base + 0])
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][base + 0] = v;
+                    }
+                v = (g_inOutMatrixInt[5][RAW] * g_modeRoof[base + 1]) >> 10;
+
+                if (!g_menuPickUpFlag[base + 1] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 1])
+                    {
+                    g_menuPickUpFlag[base + 1] = true;
+                    }
+                else if (g_menuPickUpFlag[base + 1])
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][base + 1] = v;
+                    }
+                v = (g_inOutMatrixInt[6][RAW] * g_modeRoof[base + 2]) >> 10;
+
+                if (!g_menuPickUpFlag[base + 2] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 2])
+                    {
+                    g_menuPickUpFlag[base + 2] = true;
+                    }
+                else if (g_menuPickUpFlag[base + 2])
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][base + 2] = v;
+                    }
+                v = (g_inOutMatrixInt[7][RAW] * g_modeRoof[base + 3]) >> 10;
+
+                if (!g_menuPickUpFlag[base + 3] && v == g_centralModeBuffer[g_currentProgramBuffer][base + 3])
+                    {
+                    g_menuPickUpFlag[base + 3] = true;
+                    }
+                else if (g_menuPickUpFlag[base + 3])
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][base + 3] = v;
+                    }
+}
+
+void            CKernel::getChannelModeB             ()
+{
+                uint8_t mode; 
+                
+                ModeFunc fn;
+
+                mode = g_modeMap[0][g_centralModeBuffer[g_currentProgramBuffer][0]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(0);
+
+                mode = g_modeMap[1][g_centralModeBuffer[g_currentProgramBuffer][1]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(1);
+
+                mode = g_modeMap[2][g_centralModeBuffer[g_currentProgramBuffer][2]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(2);
+
+                mode = g_modeMap[3][g_centralModeBuffer[g_currentProgramBuffer][3]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(3);
+
+                mode = g_modeMap[4][g_centralModeBuffer[g_currentProgramBuffer][4]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(4);
+
+                mode = g_modeMap[5][g_centralModeBuffer[g_currentProgramBuffer][5]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(5);
+
+                mode = g_modeMap[6][g_centralModeBuffer[g_currentProgramBuffer][6]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(6);
+
+                mode = g_modeMap[7][g_centralModeBuffer[g_currentProgramBuffer][7]];
+
+                fn = g_modeTable[mode];
+
+                if (fn) (this->*fn)(7);                
+}
+
+void            CKernel::getChannelModeA(int p_channel)
+{
+                switch (g_centralModeBuffer[g_currentProgramBuffer][p_channel])
+                    {
+                    case 0:
+                        modeADC(p_channel);
+                    break;
+
+                    case 1:
+                        modeTRG(p_channel);
+                    break;
+
+                    case 2:
+                        modeBPM(p_channel);
+                    break;
+
+                    case 3://2:
+                        modeLF0(p_channel);
+                    break;
+
+                    case 4://3:
+                        modeLF1(p_channel);
+                    break;
+
+                    case 5://4:
+                        modeAudioAbL(p_channel);
+                    break;
+
+                    case 6://5:
+                        modeAudioAbH(p_channel);
+                    break;
+
+                    case 7://6:
+                        modeAudioBbL(p_channel);
+                    break;
+
+                    case 8://7:
+                        modeAudioBbH(p_channel);
+                    break;
+
+                    case 9://8:
+                        modeMidiNote(p_channel);
+                    break;
+
+                    case 10://9:
+                        modeMidiCC0(p_channel);
+                    break;
+
+                    case 11://10:
+                        modeMidiCC1(p_channel);
+                    break;
+                                       
+                    }
+}
+
+void            CKernel::modeADC                    (   int p_channel) 
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[p_channel][VAL];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[p_channel][VAL];       
+}
+
+void            CKernel::modeTRG(int p_channel)
+{
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT] == (unsigned)p_channel) g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] = true;
+
+                if (g_inOutMatrixInt[p_channel][VAL] >=  g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] && !g_inOutMatrixInt[p_channel][TRF])
+                    {
+                    g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[p_channel][RND];
+                    g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[p_channel][RND];
+
+                    g_extClockTime[p_channel] = g_frameStart;
+
+                    g_inOutMatrixInt[p_channel][TRF] = true;
+                    }
+                else if (g_inOutMatrixInt[p_channel][VAL] <= g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] + 1       // new- hight is never <= low!
+                                                           + g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H])
+                    {
+                    g_inOutMatrixInt[p_channel][TRF] = false;
+                    }
+}
+
+void            CKernel::modeBPM                    (   int p_channel)
+{ 
+                if ( g_frameStart >= g_lfoBpmMatrix[g_activeBpmChannel][NBT] )
+                    {
+                    g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[p_channel][RND];
+                    g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[p_channel][RND];
+                    }
+}
+
+void            CKernel::modeLF0                    (   int p_channel)
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][LF1];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][LF1];
+}
+
+void            CKernel::modeLF1                    (   int p_channel)
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][LF2];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][LF2]; 
+}
+
+void            CKernel::modeAudioAbL               (   int p_channel)
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][AU0];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][AU0];
+}
+
+void            CKernel::modeAudioAbH               (   int p_channel)
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][AU1];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][AU1];
+}
+
+void            CKernel::modeAudioBbL               (   int p_channel)
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][AU2];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][AU2];
+}
+
+void            CKernel::modeAudioBbH               (   int p_channel)
+{
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixFlt[0][AU3];
+                g_inOutMatrixInt[p_channel][OUT] = g_inOutMatrixInt[0][AU3];
+}
+
+void            CKernel::modeMidiNote(int p_channel)
+{
+                unsigned low;
+                unsigned high;
+
+                switch (g_centralModeBuffer[g_currentProgramBuffer][MIDI_RANGE])
+                    {
+                    case 0: low = 36; high = 47; break;
+                    case 1: low = 36; high = 59; break;
+                    case 2: low = 36; high = 71; break;
+                    default: low = 12; high = 72; break;
+                    }
+
+                unsigned note = g_midiNote;
+
+                if (note < low) note = low;
+                if (note > high) note = high;
+
+                g_inOutMatrixInt[p_channel][OUT] = ((note - low) * 1023) / (high - low);
+                g_inOutMatrixFlt[p_channel][OUT] = g_inOutMatrixInt[p_channel][OUT] / 1024.0f;
+}
+
+void            CKernel::modeMidiCC0(int p_channel)
+{
+                g_inOutMatrixInt[p_channel][OUT] = g_midiCC0Int;
+                g_inOutMatrixFlt[p_channel][OUT] = g_midiCC0Flt;
+}
+
+void            CKernel::modeMidiCC1(int p_channel)
+{
+                g_inOutMatrixInt[p_channel][OUT] = g_midiCC1Int;
+                g_inOutMatrixFlt[p_channel][OUT] = g_midiCC1Flt;
+}
+
+void            CKernel::applyTargetModes           (   )
+{
+/*    
+                // The single audio group contains either: Model 2: two audio modes / Model 3: four audio modes
+                const unsigned audioFirstMode = g_groupModes[GROUP_AUDIO][0];
+
+                const unsigned audioModeCount = g_groupLen[GROUP_AUDIO];
+
+                const unsigned audioLastMode = audioFirstMode + audioModeCount - 1;
+
+
+                // FLAG_AUDIO is the existing audio/no-audio state.
+                if (g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO])
+                    {
+                    // is_audio contains the physical ADC input channel, 0-3, on which the audio signal was detected.
+                    const unsigned audioChannel = is_audio;
+                    // Read the selected position for that channel.
+                    const unsigned selection = g_centralModeBuffer[g_currentProgramBuffer][audioChannel];
+                    // Resolve the selected position to the mode that getChannelModeB() would execute.
+                    const unsigned mode = g_modeMap[audioChannel][selection];
+                    // The physical audio source must itself use one of the available audio modes.
+                    if (mode < audioFirstMode || mode > audioLastMode)
+                        {
+                        // Find the packed position of the first audio mode in this channel's currently available mode map.
+                        for (unsigned position = 0; position < (unsigned)g_modeRoof[audioChannel]; ++position)
+                            {
+                            if (g_modeMap[audioChannel][position] == audioFirstMode)
+                                {
+                                // Override the invalid selection made by mapMenuGroup().
+                                g_centralModeBuffer [g_currentProgramBuffer][audioChannel] = position;
+                                // The selection was changed by code rather than by the physical potentiometer.
+                                g_menuPickUpFlag[audioChannel] = false;
+
+                                break;
+                                }
+                            }
+                        }
+                    }
+                else
+                    {
+                    // There is no detected audio signal. No channel may continue using an audio mode.
+                    for (unsigned channel = 0; channel < 8; ++channel)
+                        {
+                        // Resolve this channel's stored selection to its mode.
+                        const unsigned selection = g_centralModeBuffer[g_currentProgramBuffer][channel];
+
+                        const unsigned mode = g_modeMap[channel][selection];
+                        // Reset only channels that currently resolve to one of the audio modes.
+                        if (mode >= audioFirstMode && mode <= audioLastMode)
+                            {
+                            // Position zero is the existing ADC fallback.
+                            g_centralModeBuffer[g_currentProgramBuffer] [channel] = 0;
+                            // Require the physical control to pick up the new programmatically assigned ADC selection.
+                            g_menuPickUpFlag[channel] = false;
+                            }
+                        }
+                    }
+*/
+// OR:
+/*
+                const unsigned audioFirstMode = g_groupModes[GROUP_AUDIO][0];                               // The single audio group contains either: Model 2: two audio modes / Model 3: four audio modes
+
+                const unsigned audioModeCount = g_groupLen[GROUP_AUDIO];
+
+                const unsigned audioLastMode = audioFirstMode + audioModeCount - 1;
+
+                const unsigned audioFirstPosition = g_groupLen[GROUP_BASE];                                 // The audio group is appended immediately after the base group.
+
+                if (g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO])                                // FLAG_AUDIO is the existing audio/no-audio state.
+                    {
+                    const unsigned audioChannel = is_audio;                                                 // is_audio is limited by audio detection to physical channels 0-3.
+                    const unsigned selection = g_centralModeBuffer[g_currentProgramBuffer][audioChannel];   // Resolve the source channel's stored selection to its mode.
+                    const unsigned mode = g_modeMap[audioChannel][selection];
+
+                    if (mode < audioFirstMode || mode > audioLastMode)                                      // The physical audio source must itself use an audio mode.
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][audioChannel] = audioFirstPosition;     // The first audio position is known because GROUP_AUDIO follows GROUP_BASE in every packed mode map.
+                        g_menuPickUpFlag[audioChannel] = false;                                             // The selection was changed by code.
+                        }
+                    }
+                else
+                    {
+                    const unsigned selection0 =g_centralModeBuffer[g_currentProgramBuffer][0];              // Channel 0
+                    const unsigned mode0 = g_modeMap[0][selection0];
+
+                    if (mode0 >= audioFirstMode && mode0 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][0] = 0;
+                        g_menuPickUpFlag[0] = false;
+                        }
+
+                    const unsigned selection1 = g_centralModeBuffer[g_currentProgramBuffer][1];             // Channel 1
+                    const unsigned mode1 = g_modeMap[1][selection1];
+
+                    if (mode1 >= audioFirstMode && mode1 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][1] = 0;
+                        g_menuPickUpFlag[1] = false;
+                        }
+                    
+                    const unsigned selection2 = g_centralModeBuffer[g_currentProgramBuffer][2];             // Channel 2
+                    const unsigned mode2 = g_modeMap[2][selection2];
+
+                    if (mode2 >= audioFirstMode && mode2 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][2] = 0;
+                        g_menuPickUpFlag[2] = false;
+                        }
+                    
+                    const unsigned selection3 = g_centralModeBuffer[g_currentProgramBuffer][3];             // Channel 3
+                    const unsigned mode3 = g_modeMap[3][selection3];
+
+                    if (mode3 >= audioFirstMode && mode3 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][3] = 0;
+                        g_menuPickUpFlag[3] = false;
+                        }
+                    
+                    const unsigned selection4 = g_centralModeBuffer[g_currentProgramBuffer][4];             // Channel 4
+                    const unsigned mode4 = g_modeMap[4][selection4];
+
+                    if (mode4 >= audioFirstMode && mode4 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][4] = 0;
+                        g_menuPickUpFlag[4] = false;
+                        }
+                    
+                    const unsigned selection5 = g_centralModeBuffer[g_currentProgramBuffer][5];             // Channel 5
+                    const unsigned mode5 = g_modeMap[5][selection5];
+
+                    if (mode5 >= audioFirstMode && mode5 <= audioLastMode)
+                        {
+                        g_centralModeBuffer [g_currentProgramBuffer][5] = 0;
+                        g_menuPickUpFlag[5] = false;
+                        }
+                    
+                    const unsigned selection6 = g_centralModeBuffer[g_currentProgramBuffer][6];             // Channel 6
+                    const unsigned mode6 =  g_modeMap[6][selection6];
+
+                    if (mode6 >= audioFirstMode && mode6 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][6] = 0;
+                        g_menuPickUpFlag[6] = false;
+                        }
+                    
+                    const unsigned selection7 = g_centralModeBuffer[g_currentProgramBuffer][7];             // Channel 7
+                    const unsigned mode7 = g_modeMap[7][selection7];
+
+                    if (mode7 >= audioFirstMode && mode7 <= audioLastMode)
+                        {
+                        g_centralModeBuffer[g_currentProgramBuffer][7] = 0;
+                        g_menuPickUpFlag[7] = false;
+                        }
+                    }
+*/
+                if (g_menuLayer == 0)
+                    {
+                    g_activeProgram = (g_inOutMatrixInt[ADC_SELECT_PRG][OUT] * (filecounter[FT_FSH][FLD_VALID])) >> 10;
+
+                    if (g_centralModeBuffer[g_currentProgramBuffer][SEL_PRG] == 0)
+                        {
+                        if (g_activeProgram == g_gl_program_current)
+                            {
+                            g_centralModeBuffer[g_currentProgramBuffer][SEL_PRG] = 1;
+                            }
+                        }
+                    else
+                        {
+                        g_gl_program_current = g_activeProgram;
+                        }
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] < FLAG_THRESHOLD)
+                    {
+                    m_activeTex = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX]][OUT] * (filecounter[FT_TEX][FLD_VALID])) >> 10;
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_VID] < FLAG_THRESHOLD)
+                    {
+                    m_activeVideo = g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_VID]][OUT];
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] < FLAG_THRESHOLD)
+                    {
+                    m_activeFrame = g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM]][OUT];
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME] < FLAG_THRESHOLD)
+                    {
+                    GLtime = g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME]][OUT] / 36.0f;
+                    }
+                else
+                    {
+                    GLtime = g_frameStart / 1000.0f;
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] && g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT] < FLAG_THRESHOLD)
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][LAST_EXT] = g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT];
+
+                    calculate1BPMnew( 1, TB1, DB1, g_extClockTime[g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT]]);
+                    }
+
+                    g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] = false;
+}
+
+void            CKernel::checkSystemFlags()
+{
+                if ( g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] )
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] = 0;
+                    }
+                if ( g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD] )
+                    {
+                    g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD] = 0;
+                    }
+                if ( g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] )
+                    {
+                    saveFromBuffer          (   PARTITION_NAME_SD,
+                                            //  gen83FileName("TXT"),
+                                                "bootlog.txt",
+                                                m_logKernel,            // stores the pre-init buffer
+                                                m_logKernelIndex );
+                    msDelay(100);
+                    saveFromBuffer          (   PARTITION_NAME_SD,
+                                                "GLSL.txt",
+                                                m_bufferLog[1],
+                                                m_bufferLogIndex[1] );
+                    msDelay(100);
+                    saveFromBuffer          (   PARTITION_NAME_SD,
+                                                "parser.txt",
+                                                m_bufferLog[0],
+                                                m_bufferLogIndex[0] );
+                    msDelay(100);
+                    saveFromBuffer          (   PARTITION_NAME_SD,
+                                                "vc04.txt",
+                                                m_bufferLog[2],
+                                                m_bufferLogIndex[2] );
+
+                    g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] = 0;
+                    }
+                if ( g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD] )
+                    {
+                    UpdateKernel();
+
+                    g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD] = 0;
+                    }
+}
