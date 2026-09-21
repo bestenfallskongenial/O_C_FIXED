@@ -40,8 +40,8 @@ enum centralModeBuffer
 // block 07 / layer 8 -
     SET_STORE,
     SET_LOAD,
+    KLN_LOAD,    
     LOG_STORE,
-    KLN_LOAD,
 // block 08 / layer  9  - "mute" block
     FLAG_AUDIO_A,           // for internal use only! 
     FLAG_AUDIO_B,
