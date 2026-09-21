@@ -578,7 +578,7 @@
   </svg>    
 <!-- ARROW POSITIONING  --> 
 <svg id="ARROW_UP" class="glyph-tile" data-cell="6,2">
-    <use href="#ARROW_HEAD" transform="translate( 0 -32 ) rotate(0 64 64)"/>
+    <use href="#ARROW_HEAD" transform="translate( 0 32 ) rotate(0 64 64)"/>
 </svg>
 
 <svg id="ARROW_DOWN" class="glyph-tile" data-cell="7,2">
