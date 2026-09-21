@@ -38,7 +38,9 @@
       stroke-linejoin: round;
     }    
 
-    .glyph-stroke-8 { fill: none; stroke: #000000; stroke-width: 8px; stroke-linecap: round; stroke-linejoin: round; }  
+    .glyph-stroke-8 { fill: none; stroke: #000000; stroke-width: 8px; stroke-linecap: round; stroke-linejoin: round; }
+
+    .glyph-stroke-4 { fill: none; stroke: #000000; stroke-width: 4px; stroke-linecap: round; stroke-linejoin: round; }
 
   </style>
   <defs>
@@ -116,7 +118,8 @@
   <path     id="WAVE_EXPONENTIAL" d="M24 85 C46 85 59 82 64 44 C84 44 99 61 104 85"/>  
   <polyline id="WAVE_TRIANGLE" points="24,85 64,44 104,85"/>
   <polyline id="WAVE_RANDOM" points="24,77 40,77 40,53 56,53 56,81 72,81 72,61 88,61 88,73 104,73"/>  
-
+<!-- in progress !!! -->
+  <line     id="LINE_TEST" x1="32" y1="0" x2="96" y2="0"/>
     <!-- ================================================================ -->
     <!-- DEFINITIONS: EDITING GRID                                       -->
     <!-- ================================================================ -->
@@ -593,6 +596,15 @@
       <use href="#GLYPH_P" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
       <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
 </svg>
+
+
+<!-- in progress !!! -->
+    <svg      id="LFO_WA" class="glyph-tile" data-cell="1,0">  <!-- LFO PLACEMENT -->
+       <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
+            <use href="#LINE_TEST" class="glyph-stroke-4" transform="translate(64 140) translate( -64 -64) "/>
+  </svg>
+
+
 
   <!-- ==================================================================== -->
   <!-- ATLAS TILES: 64 x 64 OVERLAYS                                        -->
