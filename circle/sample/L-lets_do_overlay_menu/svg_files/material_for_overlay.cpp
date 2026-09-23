@@ -1,7 +1,9 @@
+// FIXED - DETERMINISTIC APPROACH TO REALIZE THE OVERLAY MENU
+
 enum AtlasTileIndex
 {
     // Row 0: mode tiles
-    ATLAS_TILE_MODE_ADC,            // 00
+    ATLAS_TILE_MODE_ADC,            // 00 - first of modes 
     ATLAS_TILE_MODE_TRG,            // 01
     ATLAS_TILE_MODE_BMP,            // 02
 
@@ -25,7 +27,7 @@ enum AtlasTileIndex
     ATLAS_TILE_MODE_15,             // 15
 
     // Row 2: target and navigation tiles
-    ATLAS_TILE_TARGET_TIME,         // 16
+    ATLAS_TILE_TARGET_TIME,         // 16 - first of target modes
     ATLAS_TILE_TARGET_TEXTURE,      // 17
     ATLAS_TILE_TARGET_VIDEO,        // 18
     ATLAS_TILE_TARGET_FRAME,        // 19
@@ -33,11 +35,11 @@ enum AtlasTileIndex
 
     ATLAS_TILE_21,                  // 21
 
-    ATLAS_TILE_ARROW_UP,            // 22
-    ATLAS_TILE_ARROW_DOWN,          // 23
+    ATLAS_TILE_ARROW_UP,            // 22 - arrow up
+    ATLAS_TILE_ARROW_DOWN,          // 23 - arrow down
 
     // Row 3: LFO waveform tiles
-    ATLAS_TILE_LFO_WAVE_SINE,       // 24
+    ATLAS_TILE_LFO_WAVE_SINE,       // 24 - first of waveforms
     ATLAS_TILE_LFO_WAVE_TRIANGLE,   // 25
     ATLAS_TILE_LFO_WAVE_RAMP_UP,    // 26
     ATLAS_TILE_LFO_WAVE_RAMP_DOWN,  // 27
@@ -47,7 +49,7 @@ enum AtlasTileIndex
     ATLAS_TILE_LFO_WAVE_RANDOM,     // 31
 
     // Row 4: divider tiles
-    ATLAS_TILE_DIVIDER_1_64,        // 32
+    ATLAS_TILE_DIVIDER_1_64,        // 32 - first of dividers 
     ATLAS_TILE_DIVIDER_1_32,        // 33
     ATLAS_TILE_DIVIDER_1_16,        // 34
     ATLAS_TILE_DIVIDER_1_8,         // 35
@@ -58,18 +60,18 @@ enum AtlasTileIndex
     ATLAS_TILE_39,                  // 39
 
     // Row 5: labels and reserved tiles
-    ATLAS_TILE_40,                  // 40
-    ATLAS_TILE_41,                  // 41
-    ATLAS_TILE_42,                  // 42
+    ATLAS_TILE_INDICATOR_BAR_C,     // 40   // unused 
+    ATLAS_TILE_INDICATOR_BAR_L,     // 41   // used for ATLAS_TILE_MODE_TRG ( THRESHOLD_L ), ATLAS_TILE_MODE_AU_XL ( SENS_A / SENS_C )
+    ATLAS_TILE_INDICATOR_BAR_R,     // 42   // used for ATLAS_TILE_MODE_ADC ( g_inOutMatrixInt[0][RAW] ), ATLAS_TILE_MODE_TRG ( THRESHOLD_H ), ATLAS_TILE_MODE_AU_XH ( SENS_B / SENS_D )
     ATLAS_TILE_43,                  // 43
     ATLAS_TILE_44,                  // 44
     ATLAS_TILE_45,                  // 45
 
-    ATLAS_TILE_LABEL_FPS,           // 46
-    ATLAS_TILE_LABEL_BPM,           // 47
+    ATLAS_TILE_LABEL_FPS,           // 46 - "fps"
+    ATLAS_TILE_LABEL_BPM,           // 47 - "bpm"
 
     // Row 6: number glyphs 0-7
-    ATLAS_TILE_NUMBER_0,            // 48
+    ATLAS_TILE_NUMBER_0,            // 48 - first of numbers ( 0 )
     ATLAS_TILE_NUMBER_1,            // 49
     ATLAS_TILE_NUMBER_2,            // 50
     ATLAS_TILE_NUMBER_3,            // 51
@@ -83,8 +85,8 @@ enum AtlasTileIndex
     ATLAS_TILE_NUMBER_9,            // 57
     ATLAS_TILE_NUMBER_DOT,          // 58
 
-    ATLAS_TILE_SYSTEM_TIME,         // 59
-    ATLAS_TILE_SYSTEM_STORE,        // 60
+    ATLAS_TILE_SYSTEM_IDLE,         // 59 
+    ATLAS_TILE_SYSTEM_STORE,        // 60 - fist of sys-layer
     ATLAS_TILE_SYSTEM_LOAD,         // 61
     ATLAS_TILE_SYSTEM_UPDATE,       // 62
     ATLAS_TILE_SYSTEM_LOG,          // 63
@@ -98,6 +100,13 @@ enum OverlayScreenCoordinates
     MENU_COORD_MODE_1,
     MENU_COORD_MODE_2,
     MENU_COORD_MODE_3,
+
+    MENU_COORD_TARGET_TIME,
+    MENU_COORD_TARGET_TEXTURE,
+    MENU_COORD_TARGET_VIDEO,
+    MENU_COORD_TARGET_FRAME,
+
+    MENU_COORD_TARGET_PROGRAM,
 
     MENU_COORD_ARROW_UP,
     MENU_COORD_ARROW_DOWN,
@@ -119,84 +128,84 @@ enum OverlayScreenCoordinates
 const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
 {
     // SVG row 0
-    { 0.000f, 0.875f }, // ATLAS_TILE_00
-    { 0.125f, 0.875f }, // ATLAS_TILE_01
-    { 0.250f, 0.875f }, // ATLAS_TILE_02
-    { 0.375f, 0.875f }, // ATLAS_TILE_03
-    { 0.500f, 0.875f }, // ATLAS_TILE_04
-    { 0.625f, 0.875f }, // ATLAS_TILE_05
-    { 0.750f, 0.875f }, // ATLAS_TILE_06
-    { 0.875f, 0.875f }, // ATLAS_TILE_07
+    { 0.000f, 0.875f }, // ATLAS_TILE_MODE_ADC
+    { 0.125f, 0.875f }, // ATLAS_TILE_MODE_TRG
+    { 0.250f, 0.875f }, // ATLAS_TILE_MODE_BMP
+    { 0.375f, 0.875f }, // ATLAS_TILE_MODE_LF0
+    { 0.500f, 0.875f }, // ATLAS_TILE_MODE_LF1
+    { 0.625f, 0.875f }, // ATLAS_TILE_MODE_AU_AL
+    { 0.750f, 0.875f }, // ATLAS_TILE_MODE_AU_AH
+    { 0.875f, 0.875f }, // ATLAS_TILE_MODE_AU_BL
 
     // SVG row 1
-    { 0.000f, 0.750f }, // ATLAS_TILE_08
-    { 0.125f, 0.750f }, // ATLAS_TILE_09
-    { 0.250f, 0.750f }, // ATLAS_TILE_10
-    { 0.375f, 0.750f }, // ATLAS_TILE_11
-    { 0.500f, 0.750f }, // ATLAS_TILE_12
-    { 0.625f, 0.750f }, // ATLAS_TILE_13
-    { 0.750f, 0.750f }, // ATLAS_TILE_14
-    { 0.875f, 0.750f }, // ATLAS_TILE_15
+    { 0.000f, 0.750f }, // ATLAS_TILE_MODE_AU_BH
+    { 0.125f, 0.750f }, // ATLAS_TILE_MODE_MIDI_NOTE
+    { 0.250f, 0.750f }, // ATLAS_TILE_MODE_MIDI_CC0
+    { 0.375f, 0.750f }, // ATLAS_TILE_MODE_MIDI_CC1
+    { 0.500f, 0.750f }, // ATLAS_TILE_MODE_12
+    { 0.625f, 0.750f }, // ATLAS_TILE_MODE_13
+    { 0.750f, 0.750f }, // ATLAS_TILE_MODE_14
+    { 0.875f, 0.750f }, // ATLAS_TILE_MODE_15
 
     // SVG row 2
-    { 0.000f, 0.625f }, // ATLAS_TILE_16
-    { 0.125f, 0.625f }, // ATLAS_TILE_17
-    { 0.250f, 0.625f }, // ATLAS_TILE_18
-    { 0.375f, 0.625f }, // ATLAS_TILE_19
-    { 0.500f, 0.625f }, // ATLAS_TILE_20
+    { 0.000f, 0.625f }, // ATLAS_TILE_TARGET_TIME
+    { 0.125f, 0.625f }, // ATLAS_TILE_TARGET_TEXTURE
+    { 0.250f, 0.625f }, // ATLAS_TILE_TARGET_VIDEO
+    { 0.375f, 0.625f }, // ATLAS_TILE_TARGET_FRAME
+    { 0.500f, 0.625f }, // ATLAS_TILE_TARGET_GL_PROGRAM
     { 0.625f, 0.625f }, // ATLAS_TILE_21
-    { 0.750f, 0.625f }, // ATLAS_TILE_22
-    { 0.875f, 0.625f }, // ATLAS_TILE_23
+    { 0.750f, 0.625f }, // ATLAS_TILE_ARROW_UP
+    { 0.875f, 0.625f }, // ATLAS_TILE_ARROW_DOWN
 
     // SVG row 3
-    { 0.000f, 0.500f }, // ATLAS_TILE_24
-    { 0.125f, 0.500f }, // ATLAS_TILE_25
-    { 0.250f, 0.500f }, // ATLAS_TILE_26
-    { 0.375f, 0.500f }, // ATLAS_TILE_27
-    { 0.500f, 0.500f }, // ATLAS_TILE_28
-    { 0.625f, 0.500f }, // ATLAS_TILE_29
-    { 0.750f, 0.500f }, // ATLAS_TILE_30
-    { 0.875f, 0.500f }, // ATLAS_TILE_31
+    { 0.000f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SINE
+    { 0.125f, 0.500f }, // ATLAS_TILE_LFO_WAVE_TRIANGLE
+    { 0.250f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RAMP_UP
+    { 0.375f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RAMP_DOWN
+    { 0.500f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SMOOTH_UP
+    { 0.625f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN
+    { 0.750f, 0.500f }, // ATLAS_TILE_LFO_WAVE_EXPONENTIAL
+    { 0.875f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RANDOM
 
     // SVG row 4
-    { 0.000f, 0.375f }, // ATLAS_TILE_32
-    { 0.125f, 0.375f }, // ATLAS_TILE_33
-    { 0.250f, 0.375f }, // ATLAS_TILE_34
-    { 0.375f, 0.375f }, // ATLAS_TILE_35
-    { 0.500f, 0.375f }, // ATLAS_TILE_36
-    { 0.625f, 0.375f }, // ATLAS_TILE_37
-    { 0.750f, 0.375f }, // ATLAS_TILE_38
+    { 0.000f, 0.375f }, // ATLAS_TILE_DIVIDER_1_64
+    { 0.125f, 0.375f }, // ATLAS_TILE_DIVIDER_1_32
+    { 0.250f, 0.375f }, // ATLAS_TILE_DIVIDER_1_16
+    { 0.375f, 0.375f }, // ATLAS_TILE_DIVIDER_1_8
+    { 0.500f, 0.375f }, // ATLAS_TILE_DIVIDER_1_4
+    { 0.625f, 0.375f }, // ATLAS_TILE_DIVIDER_1_2
+    { 0.750f, 0.375f }, // ATLAS_TILE_DIVIDER_1_1
     { 0.875f, 0.375f }, // ATLAS_TILE_39
 
     // SVG row 5
-    { 0.000f, 0.250f }, // ATLAS_TILE_40
-    { 0.125f, 0.250f }, // ATLAS_TILE_41
-    { 0.250f, 0.250f }, // ATLAS_TILE_42
+    { 0.000f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_C
+    { 0.125f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_L
+    { 0.250f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_R
     { 0.375f, 0.250f }, // ATLAS_TILE_43
     { 0.500f, 0.250f }, // ATLAS_TILE_44
     { 0.625f, 0.250f }, // ATLAS_TILE_45
-    { 0.750f, 0.250f }, // ATLAS_TILE_46
-    { 0.875f, 0.250f }, // ATLAS_TILE_47
+    { 0.750f, 0.250f }, // ATLAS_TILE_LABEL_FPS
+    { 0.875f, 0.250f }, // ATLAS_TILE_LABEL_BPM
 
     // SVG row 6
-    { 0.000f, 0.125f }, // ATLAS_TILE_48
-    { 0.125f, 0.125f }, // ATLAS_TILE_49
-    { 0.250f, 0.125f }, // ATLAS_TILE_50
-    { 0.375f, 0.125f }, // ATLAS_TILE_51
-    { 0.500f, 0.125f }, // ATLAS_TILE_52
-    { 0.625f, 0.125f }, // ATLAS_TILE_53
-    { 0.750f, 0.125f }, // ATLAS_TILE_54
-    { 0.875f, 0.125f }, // ATLAS_TILE_55
+    { 0.000f, 0.125f }, // ATLAS_TILE_NUMBER_0
+    { 0.125f, 0.125f }, // ATLAS_TILE_NUMBER_1
+    { 0.250f, 0.125f }, // ATLAS_TILE_NUMBER_2
+    { 0.375f, 0.125f }, // ATLAS_TILE_NUMBER_3
+    { 0.500f, 0.125f }, // ATLAS_TILE_NUMBER_4
+    { 0.625f, 0.125f }, // ATLAS_TILE_NUMBER_5
+    { 0.750f, 0.125f }, // ATLAS_TILE_NUMBER_6
+    { 0.875f, 0.125f }, // ATLAS_TILE_NUMBER_7
 
     // SVG row 7
-    { 0.000f, 0.000f }, // ATLAS_TILE_56
-    { 0.125f, 0.000f }, // ATLAS_TILE_57
-    { 0.250f, 0.000f }, // ATLAS_TILE_58
-    { 0.375f, 0.000f }, // ATLAS_TILE_59
-    { 0.500f, 0.000f }, // ATLAS_TILE_60
-    { 0.625f, 0.000f }, // ATLAS_TILE_61
-    { 0.750f, 0.000f }, // ATLAS_TILE_62
-    { 0.875f, 0.000f }  // ATLAS_TILE_63
+    { 0.000f, 0.000f }, // ATLAS_TILE_NUMBER_8
+    { 0.125f, 0.000f }, // ATLAS_TILE_NUMBER_9
+    { 0.250f, 0.000f }, // ATLAS_TILE_NUMBER_DOT
+    { 0.375f, 0.000f }, // ATLAS_TILE_SYSTEM_IDLE
+    { 0.500f, 0.000f }, // ATLAS_TILE_SYSTEM_STORE
+    { 0.625f, 0.000f }, // ATLAS_TILE_SYSTEM_LOAD
+    { 0.750f, 0.000f }, // ATLAS_TILE_SYSTEM_UPDATE
+    { 0.875f, 0.000f }  // ATLAS_TILE_SYSTEM_LOG
 };
 
 const int g_menuCoordinates[MENU_COORD_COUNT][2] =
@@ -206,8 +215,8 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] =
     { -128,    0 }, // MENU_COORD_MODE_2
     {    0,    0 }, // MENU_COORD_MODE_3
 
-    { 0, 0 },       // MENU_COORD_ARROW_UP
-    { 0, 0 },       // MENU_COORD_ARROW_DOWN
+    { - 64, -256 },       // MENU_COORD_ARROW_UP
+    { - 64,  128 },       // MENU_COORD_ARROW_DOWN
 
     { 0, 0 },       // MENU_COORD_BPM_STRING
 
@@ -220,6 +229,8 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] =
     { 0, 0 },       // MENU_COORD_BPM_10D
     { 0, 0 }        // MENU_COORD_BPM_01D
 };
+
+// EXAMPLE CODE! IN WORK / PROGRESS !!!
 
 void            CKernel::Overlay_dispatcher()
 {

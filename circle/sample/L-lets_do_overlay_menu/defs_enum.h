@@ -43,12 +43,12 @@ enum centralModeBuffer
     KLN_LOAD,    
     LOG_STORE,
 // block 08 / layer  9  - "mute" block
+    SEL_PRG,
     FLAG_AUDIO_A,           // for internal use only! 
     FLAG_AUDIO_B,
     FLAG_MIDI,
-    FLAG_DUMMY_B,
 // block 09 / layer 10  - "mute" block
-    SEL_PRG,                // instead of an additional "allow prg changes" global flag - what if this will never be released again!?!
+    FLAG_DUMMY_B,            // instead of an additional "allow prg changes" global flag - what if this will never be released again!?!
     FLAG_EXT,
     LAST_EXT,
     IS_STORED,              // needs to be the last position as far as i remember

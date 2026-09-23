@@ -65,14 +65,19 @@
   <path     id="GLYPH_D" d="M59.16 100H88.39C92.58 100 95.98 96.6 95.98 92.41V35.58C95.98 31.39 92.58 28 88.39 28H32.02V37.07V90.92V100H59.16ZM59.16 37.07H86.9V90.92H59.16V37.07Z"/>
   <path     id="GLYPH_E" d="M38 28C36 28 34 30 34 33V37V73V82V91V96C34 98 36 100 38 100H58H90C92 100 94 98 94 96S92 91 90 91H63C61 91 58 89 58 87S61 82 63 82H90C92 82 94 80 94 78S92 73 90 73H63C61 73 58 71 58 69V42C58 39 61 37 63 37H90C92 37 94 35 94 33S92 28 90 28H58H38Z"/>
   <path     id="GLYPH_F" d="M37 28 C34 28 32 30 32 33 V37 V73 V82 V95 C32 98 34 100 37 100 H55 C57 100 59 98 59 95 V87 C59 84 61 82 64 82 H91 C94 82 96 80 96 78 C96 75 94 73 91 73 H64 C61 73 59 71 59 68 V42 C59 39 61 37 64 37 H91 C94 37 96 35 96 33 C96 30 94 28 91 28 H59 H37 Z"/>
+
   <path     id="GLYPH_G" d="M37 28C35 28 33 30 33 33V37V73V82V91V96C33 98 35 100 37 100H60H87H91C93 100 96 98 96 96V91V82V78C96 75 93 73 91 73H87H64C62 73 60 71 60 69V42C60 39 62 37 64 37H91C93 37 96 35 96 33S93 28 91 28H60H37Z M89 84C89 87 87 89 84 89H66C64 89 62 87 62 84S64 80 66 80H84C87 80 89 82 89 84Z"/>
   <path     id="GLYPH_I" d="M72.62 28H55.37C52.64 28 50.42 30.22 50.42 32.95V95.05C50.42 97.78 52.64 100 55.37 100H72.62C75.35 100 77.57 97.78 77.57 95.05V32.95C77.57 30.22 75.35 28 72.62 28Z"/>
+  <path     id="GLYPH_K" d="M83.459 73.036H62.611C60.707 73.036 59.161 71.493 59.161 69.586V31.447C59.161 29.543 57.618 27.997 55.711 27.997H36.727C34.126 27.997 32.018 30.105 32.018 32.706V73.033V82.106V95.287C32.018 97.888 34.126 99.996 36.727 99.996H55.711C57.615 99.996 59.161 98.453 59.161 96.546V85.555C59.161 83.651 60.704 82.105 62.611 82.105H74.535C75.835 82.105 77.025 82.836 77.612 83.995L84.759 98.105C85.347 99.265 86.536 99.995 87.836 99.995H90.369C92.94 99.995 94.608 97.281 93.446 94.988L86.921 82.106H92.533C94.437 82.106 95.983 80.563 95.983 78.656V73.03V31.441C95.983 29.537 94.44 27.991 92.533 27.991H90.357C88.453 27.991 86.907 29.534 86.907 31.441V69.58C86.906 71.493 85.363 73.036 83.459 73.036Z"/>
   <path     id="GLYPH_L" d="M55 28H37C35 28 33 30 33 33V91V96C33 98 35 100 37 100H60H91C93 100 96 98 96 96S93 91 91 91H64C62 91 60 89 60 87V33C60 30 57 28 55 28Z"/>
   <path     id="GLYPH_M" d="M37 28C35 28 33 30 33 33V37V96C33 98 35 100 37 100H55C57 100 60 98 60 96V42C60 39 62 37 64 37C66 37 69 39 69 42V96C69 98 71 100 73 100S78 98 78 96V42C78 39 80 37 82 37C84 37 87 39 87 42V96C87 98 89 100 91 100S96 98 96 96V37V33C96 30 93 28 91 28H60H37Z"/>
+  <path     id="GLYPH_N" d="M63.699 37.073H82.37C84.876 37.073 86.907 39.104 86.907 41.61V95.463C86.907 97.969 88.938 100 91.444 100C93.95 100 95.981 97.969 95.981 95.463V37.073V33.553C95.981 30.485 93.494 28 90.428 28H59.163H36.559C34.053 28 32.022 30.031 32.022 32.537V37.074V95.464C32.022 97.97 34.053 100.001 36.559 100.001H54.627C57.133 100.001 59.164 97.97 59.164 95.464V41.611C59.16 39.105 61.191 37.073 63.699 37.073Z"/>
   <path     id="GLYPH_O" d="M42 28C37 28 33 33 33 37V91C33 96 37 100 42 100H60H87C91 100 96 96 96 91V37C96 33 91 28 87 28H60H42Z M89 46V82C89 87 84 91 80 91H71C66 91 62 87 62 82V46C62 42 66 37 71 37H80C84 37 89 42 89 46Z"/>
   <path     id="GLYPH_P" d="M42 28C37 28 33 33 33 37V73V82V91C33 96 37 100 42 100H51C55 100 60 96 60 91S64 82 69 82H87C91 82 96 78 96 73V37C96 33 91 28 87 28H60H42Z M89 46V64C89 69 84 73 80 73H71C66 73 62 69 62 64V46C62 42 66 37 71 37H80C84 37 89 42 89 46Z"/>
+  <path     id="GLYPH_R" d="M59.16 28H35.466C33.562 28 32.016 29.543 32.016 31.45V37.076V73.039V82.112V96.553C32.016 98.457 33.559 100.003 35.466 100.003H55.71C57.614 100.003 59.16 98.46 59.16 96.553V85.562C59.16 83.658 60.703 82.112 62.61 82.112H74.534C75.834 82.112 77.024 82.843 77.611 84.002L84.758 98.112C85.346 99.272 86.535 100.002 87.835 100.002H90.368C92.939 100.002 94.607 97.288 93.445 94.995L89.455 87.12C88.293 84.826 89.961 82.111 92.532 82.111C94.436 82.111 95.982 80.568 95.982 78.661V73.035V37.072V31.446C95.982 29.542 94.439 27.996 92.532 27.996H86.906H59.16Z M83.455 73.036H62.607C60.703 73.036 59.157 71.493 59.157 69.586V40.52C59.157 38.616 60.7 37.07 62.607 37.07H83.455C85.359 37.07 86.905 38.613 86.905 40.52V69.586C86.905 71.493 85.359 73.036 83.455 73.036Z"/>
   <path     id="GLYPH_S" d="M36 28 C34 28 32 30 32 32 V37 V73 V78 C32 80 34 82 36 82 H59 H82 C85 82 87 84 87 87 C87 89 85 91 82 91 H36 C34 91 32 93 32 95 V96 C32 98 34 100 36 100 H92 C94 100 96 98 96 96 V91 V82 V77 C96 75 94 73 92 73 H87 H64 C61 73 59 71 59 69 V41 C59 39 61 37 64 37 H92 C94 37 96 35 96 33 V32 C96 30 94 28 92 28 H59 H36 Z"/>
   <path     id="GLYPH_T" d="M51 28H37C35 28 33 30 33 33S35 37 37 37H46C48 37 51 39 51 42V96C51 98 53 100 55 100H73C75 100 78 98 78 96V42C78 39 80 37 82 37H91C93 37 96 35 96 33S93 28 91 28H78H51Z"/>
+  <path     id="GLYPH_U" d="M82.369 90.927H63.698C61.192 90.927 59.161 88.896 59.161 86.39V32.537C59.161 30.031 57.13 28 54.624 28H36.556C34.05 28 32.019 30.031 32.019 32.537V90.927V95.464C32.019 97.97 34.05 100.001 36.556 100.001H59.16H86.905H91.442C93.948 100.001 95.979 97.97 95.979 95.464V90.927V32.537C95.979 30.031 93.948 28 91.442 28C88.936 28 86.905 30.031 86.905 32.537V86.39C86.905 88.895 84.877 90.927 82.369 90.927Z"/>
   <path     id="GLYPH_X" d="M81 73H70L90 35C93 33 90 28 86 28H70C68 28 68 28 66 30L57 46C54 48 50 48 50 46L43 30C43 28 41 28 39 28C36 28 34 33 34 35L48 62C48 64 48 64 48 66L34 93C32 96 34 100 39 100H54C57 100 57 100 59 98L66 84C66 82 68 82 70 82H75C77 82 77 82 79 84L86 98C86 100 88 100 90 100C93 100 95 96 95 93L88 82L81 73Z"/>
 
   <rect     id="GLYPH_DOT" x="56" y="76" width="24" height="24" rx="8" ry="8"/>
@@ -86,7 +91,7 @@
     <circle id="COMMON_MODE_TOP_CUTOUT" cx="64" cy="26" r="14"/>
     <circle id="COMMON_MODE_BOTTOM_CUTOUT" cx="64" cy="102" r="14"/>
     <!-- Audio-mode cutout primitives. -->
-    <line id="AUDIO_CUTOUT_LINE" x1="64" y1="54" x2="64" y2="74"/>
+    <line id="AUDIO_CUTOUT_LINE" x1="64" y1="48" x2="64" y2="80"/>
     <path id="AUDIO_CUTOUT_WAVE_DOUBLE"
           d="M44 64 C47.3 58.7 50.7 56 54 56 C57.3 56 60.7 58.7 64 64 C67.3 69.3 70.7 72 74 72 C77.3 72 80.7 69.3 84 64"/>
     <path id="AUDIO_CUTOUT_WAVE_TRIPLE" d="M44 64 C46 60 48 58 50 58 C52 58 54 60 56 64 C58 68 60 70 62 70 C64 70 66 68 68 64 C70 60 72 58 74 58 C76 58 78 60 80 64 C82 68 84 70 84 70"/>
@@ -119,7 +124,10 @@
   <polyline id="WAVE_TRIANGLE" points="24,85 64,44 104,85"/>
   <polyline id="WAVE_RANDOM" points="24,77 40,77 40,53 56,53 56,81 72,81 72,61 88,61 88,73 104,73"/>  
 <!-- in progress !!! -->
-  <line     id="INDICATOR_BAR_LINE_A" x1="32" y1="0" x2="96" y2="0"/>
+  <line     id="INDICATOR_BAR_LINE_CENTER" x1="44" y1="0" x2="96" y2="0"/>
+  <line     id="INDICATOR_BAR_LINE_LEFT" x1="36" y1="0" x2="80" y2="0"/>    
+  <line     id="INDICATOR_BAR_LINE_RIGHT" x1="48" y1="0" x2="92" y2="0"/>
+
     <!-- ================================================================ -->
     <!-- DEFINITIONS: EDITING GRID                                       -->
     <!-- ================================================================ -->
@@ -140,8 +148,6 @@
   <!--  <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/> -->
 <use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(64 64) scale(0.5) translate(-64 -64)"/>   
 <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/>     
-  <!--  <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>  -->
-  <!--  <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>  -->
       </g>      
     </mask>
 
@@ -150,13 +156,9 @@
       <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
       <g class="audio-cutout-stroke">
-<!--    <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>       -->
-<!--    <use href="#AUDIO_CUTOUT_LINE" transform="translate(20 0)"/>        -->
-<!--    <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/> -->
 <use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(64 64) scale(0.5) translate(-64 -64)"/>    
 <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/>  
 <rect x="36" y="48" width="8" height="32" rx="4" ry="4" fill="black"/>      
-  <!--  <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>  -->
       </g>         
     </mask>
 
@@ -165,7 +167,7 @@
       <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
         <g class="audio-cutout-stroke">
-                  <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
         <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
 <use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(52 64) scale(0.5) translate(-64 -64)"/>
       <rect x="82" y="48" width="16" height="32" rx="6" fill="black"/> 
@@ -195,12 +197,12 @@
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
 
       <g class="audio-cutout-stroke">
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
-        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
-        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
+        <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
       </g>
-      <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+      
     </mask>
 
     <mask id="MODE_MASK_AB1" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
@@ -210,12 +212,12 @@
 
       <g transform="rotate(180 64 64)">
         <g class="audio-cutout-stroke">
-          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
-          <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
-          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
-          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
+          <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
         </g>
-        <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+
       </g>
     </mask>
 
@@ -225,12 +227,12 @@
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
 
       <g class="audio-cutout-stroke">
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
-        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
-        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
+        <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
       </g>
-      <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+
     </mask>
 
     <mask id="MODE_MASK_AB3" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
@@ -240,12 +242,12 @@
 
       <g transform="rotate(180 64 64)">
         <g class="audio-cutout-stroke">
-          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
-          <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
-          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-12 0)"/>
-          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-12 0)"/>
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
+          <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
         </g>
-        <use href="#AUDIO_CUTOUT_WINDOW" fill="black"/>
+
       </g>
     </mask>
 
@@ -363,21 +365,21 @@
     <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
   </svg>
   <svg id="MODE_AB0" class="atlas-tile" data-cell="5,0">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB1)"/>
+    <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
+  </svg>  
+  <svg id="MODE_AB1" class="atlas-tile" data-cell="6,0">
     <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB0)"/>
     <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
   </svg>
-  <svg id="MODE_AB1" class="atlas-tile" data-cell="6,0">
-    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB1)"/>
-    <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
-  </svg>
   <svg id="MODE_AB2" class="atlas-tile" data-cell="7,0">
-    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB2)"/>
-    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
-  </svg>
-  <svg id="MODE_AB3" class="atlas-tile" data-cell="0,1">
     <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB3)"/>
     <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
   </svg>
+  <svg id="MODE_AB3" class="atlas-tile" data-cell="0,1">
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB2)"/>
+    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
+  </svg>  
   <svg id="MODE_09" class="atlas-tile" data-cell="1,1">
   <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_08)"/>
   </svg>
@@ -431,7 +433,7 @@
   </svg>
   <svg      id="TARGET_MODE_PICK_GL_PROGRAM" class="glyph-tile" data-cell="4,2">
             <g mask="url(#MASK_TARGET_MODE_BR_GL)">
-              <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
+            <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
             </g>
   </svg>
 
@@ -443,14 +445,23 @@
   <svg      id="SYSTEM_STORE" class="glyph-tile" data-cell="4,7">
             <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
             <use href="#LOAD_ARROW" transform="translate(64 92) scale(0.75) translate(-64 -64)"/>
+            <use href="#GLYPH_U" transform="translate(44 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_S" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_R" transform="translate(84 64) scale(0.25) translate(-64 -64)"/>                
   </svg>
   <svg      id="SYSTEM_LOAD" class="glyph-tile" data-cell="5,7">
             <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
             <use href="#LOAD_ARROW" transform="translate(64 92) scale(0.75) rotate (180) translate(-64 -64)"/>
+            <use href="#GLYPH_U" transform="translate(44 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_S" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_R" transform="translate(84 64) scale(0.25) translate(-64 -64)"/>                
   </svg>
   <svg      id="SYSTEM_UPDATE" class="glyph-tile" data-cell="6,7">
             <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
-            <use href="#GLYPH_GEAR" transform="translate(64 80) rotate (32) scale(.75) translate(-64 -64)"/>
+            <use href="#GLYPH_GEAR" transform="translate(64 92) rotate (32) scale(.50) translate(-64 -64)"/>
+            <use href="#GLYPH_K" transform="translate(44 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_L" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
+            <use href="#GLYPH_N" transform="translate(84 64) scale(0.25) translate(-64 -64)"/>                
   </svg>
   <svg      id="SYSTEM_LOG" class="glyph-tile" data-cell="7,7">
             <use href="#LOAD_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
@@ -531,48 +542,48 @@
             <use href="#GLYPH_DOT" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
   </svg>  
 <!-- FRACTION GLYPHS POSITIONING  --> 
-  <svg      id="FRAC_1_64" class="glyph-tile" data-cell="0,4">  <!-- !ONLY FOR DEMO PURPOSES! -->
+  <svg      id="FRAC_1_64" class="glyph-tile" data-cell="0,4">
             <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
               <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_32" class="glyph-tile" data-cell="1,4">  <!-- 1/32 -->
             <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_3" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
               <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_16" class="glyph-tile" data-cell="2,4">  <!-- 1/16 -->
             <g transform="rotate(90 64 64)">
-          <!--- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_1" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
               <use href="#GLYPH_6" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_8" class="glyph-tile" data-cell="3,4">   <!-- 1/8 -->
             <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_8" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_4" class="glyph-tile" data-cell="4,4">   <!-- 1/4 -->
             <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_2" class="glyph-tile" data-cell="5,4">   <!-- 1/2 -->
             <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_1" class="glyph-tile" data-cell="6,4">   <!-- 1/1 -->
             <g transform="rotate(90 64 64)">
-          <!-- <use class="line" href="#DIVIDER"/> -->
+
               <use href="#GLYPH_1" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>    
@@ -596,14 +607,18 @@
       <use href="#GLYPH_P" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
       <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
 </svg>
-
-
 <!-- in progress !!! -->
-    <svg      id="INDICATOR_BAR_A" class="glyph-tile" data-cell="0,5">  <!-- LFO PLACEMENT -->
-       <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
-            <use href="#INDICATOR_BAR_LINE_A" class="glyph-stroke-4" transform="translate(64 140) translate( -64 -64) "/>
+    <svg      id="INDICATOR_BAR_CENTER" class="glyph-tile" data-cell="0,5">  <!-- for mode adc MODE_ADC -->
+            <use href="#INDICATOR_BAR_LINE_CENTER" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
   </svg>
 
+    <svg      id="INDICATOR_BAR_LEFT" class="glyph-tile" data-cell="1,5">  <!-- LFO PLACEMENT  6,0 0,1 -->
+            <use href="#INDICATOR_BAR_LINE_LEFT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
+  </svg>
+
+    <svg      id="INDICATOR_BAR_RIGHT" class="glyph-tile" data-cell="2,5">  <!-- LFO PLACEMENT -->
+            <use href="#INDICATOR_BAR_LINE_RIGHT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
+  </svg>
 
 
   <!-- ==================================================================== -->
