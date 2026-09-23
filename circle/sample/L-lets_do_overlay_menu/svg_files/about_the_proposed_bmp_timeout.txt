@@ -1,0 +1,74 @@
+Starting from zero. The rejected bool updateTimeout(uint32_t& p_hold) proposal is discarded.
+
+Q.1: Can the timeout logic be moved out of adc_ProcessAudio()?
+
+Yes.
+
+Use one function only to gather the complete audio-A, audio-B, and BPM-A timeout functionality.
+
+BEFORE — timeout logic inside adc_ProcessAudio():
+
+if (m_audio_hold_A > 0) --m_audio_hold_A;
+g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A] = (m_audio_hold_A > 0);
+
+if (m_audio_hold_B > 0) --m_audio_hold_B;
+g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B] = (m_audio_hold_B > 0);
+This is the existing mechanism. 
+
+AFTER — one gathered function in code_util.cpp:
+
+void CKernel::updateTimeouts()
+{
+    if (m_audio_hold_A > 0) --m_audio_hold_A;
+    g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A] = (m_audio_hold_A > 0);
+
+    if (m_audio_hold_B > 0) --m_audio_hold_B;
+    g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B] = (m_audio_hold_B > 0);
+
+    if (m_BPM_hold_A > 0) --m_BPM_hold_A;
+    if (m_BPM_hold_A == 0)
+    {
+    // here we handle the flag if or if not the bpm is displayed!
+    }
+}
+BEFORE — calculate1BPMnew():
+
+g_lfoBpmMatrix[p_source][BPM]  = 60000 / f_intervalAverage;
+g_lfoBpmMatrix[p_source][INTV] = f_intervalAverage;
+g_lfoBpmMatrix[p_source][LBC]  = p_triggerTimeClock;
+AFTER — calculate1BPMnew():
+
+g_lfoBpmMatrix[p_source][BPM]  = 60000 / f_intervalAverage;
+g_lfoBpmMatrix[p_source][INTV] = f_intervalAverage;
+g_lfoBpmMatrix[p_source][LBC]  = p_triggerTimeClock;
+
+m_BPM_hold_A = BPM_HOLD_TIMEOUT;
+The timeout starts only when calculate1BPMnew() accepts a valid interval and writes the BPM. 
+
+BEFORE — runtime loop:
+
+buttonConsumer(0,1);
+
+dispatchLayer();
+AFTER — runtime loop:
+
+buttonConsumer(0,1);
+
+updateTimeouts();
+
+dispatchLayer();
+This location processes the timeout after buttonConsumer() has executed the BPM calculation. 
+
+Required declaration:
+
+void updateTimeouts();
+Required member:
+
+uint32_t m_BPM_hold_A = 0;
+Required timeout value:
+
+#define BPM_HOLD_TIMEOUT 300
+Exactly one function gathers the timeout functionality:
+
+void CKernel::updateTimeouts()
+No generic helper. No second function. No repository changes were made.

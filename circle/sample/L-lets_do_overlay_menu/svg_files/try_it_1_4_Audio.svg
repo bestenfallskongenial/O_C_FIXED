@@ -84,6 +84,7 @@
   
   <path     id="ARROW_HEAD" d=" M 64 48 Q 65.5 48 67 49 L 120 77 Q 123 78.5 121 80 Q 120 81 117 81 L 11 81 Q 8 81 7 80 Q 5 78.5 8 77 L 61 49 Q 62.5 48 64 48 Z"/>
 
+
     <circle id="COMMON_MODE_BODY" cx="64" cy="64" r="44"/>
 
     <!-- Shared mask primitives. Black geometry cuts windows from a mode. -->
@@ -192,13 +193,12 @@
       <use href="#COMMON_MODE_BODY" fill="white"/>
       <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
-      <g transform="rotate(180 64 64)">
-        <g class="audio-cutout-stroke">
-          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
-          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
-          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
-          <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
-        </g>
+
+      <g class="audio-cutout-stroke">
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
+        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
+        <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
       </g>
     </mask>
 
@@ -207,11 +207,13 @@
       <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
 
-      <g class="audio-cutout-stroke">
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
-        <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
-        <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
-        <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
+      <g transform="rotate(180 64 64)">
+        <g class="audio-cutout-stroke">
+          <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_DOUBLE" transform="translate(-0 0)"/>
+          <use href="#AUDIO_CUTOUT_WAVE_TRIPLE" transform="translate(-0 0)"/>
+          <rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
+        </g>
       </g>
     </mask>
 
@@ -332,16 +334,16 @@
     <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
   </svg>  
   <svg id="MODE_AB1" class="atlas-tile" data-cell="6,0">
-    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB1)"/>
-    <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB0)"/>
+    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>    
   </svg>
   <svg id="MODE_AB2" class="atlas-tile" data-cell="7,0">
     <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB0)"/>
-    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
+    <use href="#GLYPH_2" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
   </svg>
   <svg id="MODE_AB3" class="atlas-tile" data-cell="0,1">
-    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB1)"/>
-    <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
+    <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_AB0)"/>
+    <use href="#GLYPH_3" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>      
   </svg>  
   <svg id="MODE_09" class="atlas-tile" data-cell="1,1">
   <use href="#COMMON_MODE_BODY" mask="url(#MODE_MASK_08)"/>
@@ -399,6 +401,7 @@
             <use href="#TARGET_MODE_CORNER" fill="black" transform="rotate(180 64 64)"/>
             </g>
   </svg>
+
 <!-- SYSTEM ICON POSITIONING -->
   <svg      id="SYSTEM_TIME" class="glyph-tile" data-cell="3,7">
             <use href="#TIME_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
@@ -432,6 +435,7 @@
             <use href="#GLYPH_O" transform="translate(64 64) scale(0.25) translate(-64 -64)"/>
             <use href="#GLYPH_G" transform="translate(84 64) scale(0.25) translate(-64 -64)"/>
   </svg>
+
 <!-- LFO POSITIONING  --> 
   <svg      id="LFO_WAVE_SINE" class="glyph-tile" data-cell="0,3">  <!-- LFO PLACEMENT -->
        <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
@@ -450,6 +454,11 @@
         <!-- <use href="#COMMON_FRAME" transform="translate(64 64) scale(0.5) translate(-64 -64)"/> -->
             <use href="#WAVE_RAMP_DOWN" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
   </svg>
+<!--
+  <svg      id="LFO_WAVE_TRAPEZOID" class="glyph-tile" data-cell="5,3">
+            <use href="#WAVE_TRAPEZOID" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
+  </svg>
+-->
   <svg      id="LFO_WAVE_SMOOTH_UP" class="glyph-tile" data-cell="4,3">
             <use href="#WAVE_SMOOTH_UP" class="glyph-stroke-8" transform="translate(54 64) scale(0.5) translate(-64 -64)"/>
   </svg>
@@ -500,39 +509,46 @@
 <!-- FRACTION GLYPHS POSITIONING  --> 
   <svg      id="FRAC_1_64" class="glyph-tile" data-cell="0,4">
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_6" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
               <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_32" class="glyph-tile" data-cell="1,4">  <!-- 1/32 -->
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_3" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
               <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_16" class="glyph-tile" data-cell="2,4">  <!-- 1/16 -->
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_1" transform="translate(57 38) scale(0.15) translate(-64 -64)"/>
               <use href="#GLYPH_6" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_8" class="glyph-tile" data-cell="3,4">   <!-- 1/8 -->
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_8" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_4" class="glyph-tile" data-cell="4,4">   <!-- 1/4 -->
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_4" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_2" class="glyph-tile" data-cell="5,4">   <!-- 1/2 -->
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_2" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>
   <svg      id="FRAC_1_1" class="glyph-tile" data-cell="6,4">   <!-- 1/1 -->
             <g transform="rotate(90 64 64)">
+
               <use href="#GLYPH_1" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>    
@@ -560,12 +576,31 @@
     <svg      id="INDICATOR_BAR_LEFT" class="glyph-tile" data-cell="0,5">  <!-- LFO PLACEMENT  6,0 0,1 -->
             <use href="#INDICATOR_BAR_LINE_LEFT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
   </svg>
+
     <svg      id="INDICATOR_BAR_RIGHT" class="glyph-tile" data-cell="1,5">  <!-- LFO PLACEMENT -->
             <use href="#INDICATOR_BAR_LINE_RIGHT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
   </svg>
+
+    <svg      id="INDICATOR_NUMBER_0" class="glyph-tile" data-cell="2,5">  <!-- LFO PLACEMENT -->
+                <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+  </svg>
+  
+    <svg      id="INDICATOR_NUMBER_1" class="glyph-tile" data-cell="3,5">  <!-- LFO PLACEMENT -->
+                <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+  </svg>
+  
+    <svg      id="INDICATOR_NUMBER_2" class="glyph-tile" data-cell="4,5">  <!-- LFO PLACEMENT -->
+                <use href="#GLYPH_2" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+  </svg>
+  
+    <svg      id="INDICATOR_NUMBER_3" class="glyph-tile" data-cell="5,5">  <!-- LFO PLACEMENT -->
+                <use href="#GLYPH_3" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
+  </svg>
+
   <svg      id="EXTERN_INPUT" class="glyph-tile" data-cell="7,4">
             <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>
   </svg>
+    
   <!-- ==================================================================== -->
   <!-- ATLAS TILES: 64 x 64 OVERLAYS                                        -->
   <!-- Add waveform, multiplier, number, and label tiles here.              -->
