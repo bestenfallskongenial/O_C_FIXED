@@ -60,9 +60,9 @@ enum AtlasTileIndex
     ATLAS_TILE_39,                  // 39
 
     // Row 5: labels and reserved tiles
-    ATLAS_TILE_INDICATOR_BAR_C,     // 40   // unused 
-    ATLAS_TILE_INDICATOR_BAR_L,     // 41   // used for ATLAS_TILE_MODE_TRG ( THRESHOLD_L ), ATLAS_TILE_MODE_AU_XL ( SENS_A / SENS_C )
-    ATLAS_TILE_INDICATOR_BAR_R,     // 42   // used for ATLAS_TILE_MODE_ADC ( g_inOutMatrixInt[0][RAW] ), ATLAS_TILE_MODE_TRG ( THRESHOLD_H ), ATLAS_TILE_MODE_AU_XH ( SENS_B / SENS_D )
+    ATLAS_TILE_INDICATOR_BAR_L,     // 40   // used for ATLAS_TILE_MODE_TRG ( THRESHOLD_L ), ATLAS_TILE_MODE_AU_XL ( SENS_A / SENS_C )
+    ATLAS_TILE_INDICATOR_BAR_R,     // 41   // used for ATLAS_TILE_MODE_ADC ( g_inOutMatrixInt[0][RAW] ), ATLAS_TILE_MODE_TRG ( THRESHOLD_H ), ATLAS_TILE_MODE_AU_XH ( SENS_B / SENS_D )
+    ATLAS_TILE_42,                  // 42   // 
     ATLAS_TILE_43,                  // 43
     ATLAS_TILE_44,                  // 44
     ATLAS_TILE_45,                  // 45
