@@ -178,9 +178,9 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.875f, 0.375f }, // ATLAS_TILE_39
 
     // SVG row 5
-    { 0.000f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_C
-    { 0.125f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_L
-    { 0.250f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_R
+    { 0.000f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_L
+    { 0.125f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_R
+    { 0.250f, 0.250f }, // ATLAS_TILE_42
     { 0.375f, 0.250f }, // ATLAS_TILE_43
     { 0.500f, 0.250f }, // ATLAS_TILE_44
     { 0.625f, 0.250f }, // ATLAS_TILE_45

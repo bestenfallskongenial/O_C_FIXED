@@ -403,7 +403,7 @@
   </svg>
 
 <!-- SYSTEM ICON POSITIONING -->
-  <svg      id="SYSTEM_TIME" class="glyph-tile" data-cell="3,7">
+  <svg      id="SYSTEM_IDLE" class="glyph-tile" data-cell="3,7">
             <use href="#TIME_BODY" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
             <use href="#TIME_HAND" transform="translate(64 64) scale(0.75) translate(-64 -64)"/>
   </svg>  
