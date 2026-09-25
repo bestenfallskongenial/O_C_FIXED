@@ -39,21 +39,12 @@ struct glsl_state
     GLint                       u_tile_count[MAX_OMF];
     GLint                       u_tile_rect[MAX_OMF];
     GLint                       u_tile_index[MAX_OMF];
-    // overlay data
-    float                       kMenuOrigin[2];
-    float                       kMenuTileSize[2];
-    float                       kMenuBackgroundScale[2];
+    // Overlay atlas sampler
+    GLint                       u_atlas[MAX_OMF];
 
-    float                       kMenuRelPos[MAX_TILES][2];
-    float                       kMenuRelSize[MAX_TILES][2];
-
-    float                       tile_rect_x[MAX_TILES];
-    float                       tile_rect_y[MAX_TILES];
-    float                       tile_rect_w[MAX_TILES];
-    float                       tile_rect_h[MAX_TILES];
-
-    GLfloat                     tile_rect[MAX_TILES * 4];
-    GLfloat                     tile_index[MAX_TILES];
+    // CPU-resolved overlay data:
+    // [tile][atlas_x, atlas_y, screen_x, screen_y]
+    GLfloat                     overlay_tile[21][4];
 };
 
 struct tex_state

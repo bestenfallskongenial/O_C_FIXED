@@ -33,7 +33,7 @@ enum AtlasTileIndex
     ATLAS_TILE_TARGET_FRAME,        // 19
     ATLAS_TILE_TARGET_GL_PROGRAM,   // 20
 
-    ATLAS_TILE_21,                  // 21
+    ATLAS_TILE_BLANK,               // 21 - placeholder
 
     ATLAS_TILE_ARROW_UP,            // 22 - arrow up
     ATLAS_TILE_ARROW_DOWN,          // 23 - arrow down
@@ -57,7 +57,7 @@ enum AtlasTileIndex
     ATLAS_TILE_DIVIDER_1_2,         // 37
     ATLAS_TILE_DIVIDER_1_1,         // 38
 
-    ATLAS_TILE_39,                  // 39
+    ATLAS_TILE_EXTERN_SELECTOR,     // 39 - "X" for external input mode selected
 
     // Row 5: labels and reserved tiles
     ATLAS_TILE_INDICATOR_BAR_L,     // 40   // used for ATLAS_TILE_MODE_TRG ( THRESHOLD_L ), ATLAS_TILE_MODE_AU_XL ( SENS_A / SENS_C )
@@ -136,7 +136,6 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.625f, 0.875f }, // ATLAS_TILE_MODE_AU_AL
     { 0.750f, 0.875f }, // ATLAS_TILE_MODE_AU_AH
     { 0.875f, 0.875f }, // ATLAS_TILE_MODE_AU_BL
-
     // SVG row 1
     { 0.000f, 0.750f }, // ATLAS_TILE_MODE_AU_BH
     { 0.125f, 0.750f }, // ATLAS_TILE_MODE_MIDI_NOTE
@@ -146,17 +145,15 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.625f, 0.750f }, // ATLAS_TILE_MODE_13
     { 0.750f, 0.750f }, // ATLAS_TILE_MODE_14
     { 0.875f, 0.750f }, // ATLAS_TILE_MODE_15
-
     // SVG row 2
     { 0.000f, 0.625f }, // ATLAS_TILE_TARGET_TIME
     { 0.125f, 0.625f }, // ATLAS_TILE_TARGET_TEXTURE
     { 0.250f, 0.625f }, // ATLAS_TILE_TARGET_VIDEO
     { 0.375f, 0.625f }, // ATLAS_TILE_TARGET_FRAME
     { 0.500f, 0.625f }, // ATLAS_TILE_TARGET_GL_PROGRAM
-    { 0.625f, 0.625f }, // ATLAS_TILE_21
+    { 0.625f, 0.625f }, // ATLAS_TILE_BLANK
     { 0.750f, 0.625f }, // ATLAS_TILE_ARROW_UP
     { 0.875f, 0.625f }, // ATLAS_TILE_ARROW_DOWN
-
     // SVG row 3
     { 0.000f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SINE
     { 0.125f, 0.500f }, // ATLAS_TILE_LFO_WAVE_TRIANGLE
@@ -166,7 +163,6 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.625f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN
     { 0.750f, 0.500f }, // ATLAS_TILE_LFO_WAVE_EXPONENTIAL
     { 0.875f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RANDOM
-
     // SVG row 4
     { 0.000f, 0.375f }, // ATLAS_TILE_DIVIDER_1_64
     { 0.125f, 0.375f }, // ATLAS_TILE_DIVIDER_1_32
@@ -175,8 +171,7 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.500f, 0.375f }, // ATLAS_TILE_DIVIDER_1_4
     { 0.625f, 0.375f }, // ATLAS_TILE_DIVIDER_1_2
     { 0.750f, 0.375f }, // ATLAS_TILE_DIVIDER_1_1
-    { 0.875f, 0.375f }, // ATLAS_TILE_39
-
+    { 0.875f, 0.375f }, // ATLAS_TILE_EXTERN_SELECTOR
     // SVG row 5
     { 0.000f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_L
     { 0.125f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_R
@@ -186,7 +181,6 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.625f, 0.250f }, // ATLAS_TILE_45
     { 0.750f, 0.250f }, // ATLAS_TILE_LABEL_FPS
     { 0.875f, 0.250f }, // ATLAS_TILE_LABEL_BPM
-
     // SVG row 6
     { 0.000f, 0.125f }, // ATLAS_TILE_NUMBER_0
     { 0.125f, 0.125f }, // ATLAS_TILE_NUMBER_1
@@ -196,7 +190,6 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     { 0.625f, 0.125f }, // ATLAS_TILE_NUMBER_5
     { 0.750f, 0.125f }, // ATLAS_TILE_NUMBER_6
     { 0.875f, 0.125f }, // ATLAS_TILE_NUMBER_7
-
     // SVG row 7
     { 0.000f, 0.000f }, // ATLAS_TILE_NUMBER_8
     { 0.125f, 0.000f }, // ATLAS_TILE_NUMBER_9
@@ -215,8 +208,8 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] =
     { -128,    0 }, // MENU_COORD_MODE_2
     {    0,    0 }, // MENU_COORD_MODE_3
 
-    { - 64, -256 },       // MENU_COORD_ARROW_UP
-    { - 64,  128 },       // MENU_COORD_ARROW_DOWN
+    { - 64, -256 }, // MENU_COORD_ARROW_UP
+    { - 64,  128 }, // MENU_COORD_ARROW_DOWN
 
     { 0, 0 },       // MENU_COORD_BPM_STRING
 

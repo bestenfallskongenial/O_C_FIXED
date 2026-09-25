@@ -19,8 +19,8 @@ enum centralModeBuffer
 // block 03 / layer 4
     THRESHOLD_L,            // NEW - the threshold low for IN_MODE_TRG
     THRESHOLD_H,            // NEW - the threshold heigh for IN_MODE_TRG
-    SEL_EXT,                // NEW - extern clock input
-//  EFFECT,                 // NEW - hypothetical "strength" for the randomizer - not implemented
+    SEL_EXT,                // NEW - a) extern clock input
+//  EFFECT,                 // NEW - b) hypothetical "strength" for the randomizer - not implemented
     ATTENUATION,            // New - attenuation for the readAndConvertADC() 
 // block 04 / layer 5
     SENS_A,                 // stores the sensitivity for the audio mode ( available if enabled ) bandA0
@@ -52,6 +52,7 @@ enum centralModeBuffer
     FLAG_EXT,
     LAST_EXT,
     IS_STORED,              // needs to be the last position as far as i remember
+
     MODETABLE_COUNT         // theoretical i can now define BLOCK_COUNT as MODETABLE_COUNT / 4 correct????
 };
 
@@ -144,11 +145,10 @@ enum waveTableNames
     waveTriangle,
     waveRampUp,
     waveRampDown,
-    waveTrapezoid,
     waveSmoothUp,
     waveSmoothDown,
     waveExponential,
-
+    WaveRandom,
     waveTableCount
 };
 //------------------------------------------------- // unsigned int g_buttons_states[BTN_COUNT][5] = {0} !!!
