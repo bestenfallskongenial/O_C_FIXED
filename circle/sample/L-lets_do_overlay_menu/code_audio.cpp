@@ -128,12 +128,13 @@ void            CKernel::adc_ProcessAudio           (   void    )   // Model 1 -
                     g_inOutMatrixFlt[0][AU3] = (float)g_inOutMatrixInt[0][AU3] / 1023.0f;
                     if (++m_idx3 >= w3) m_idx3 = 0;
                 }
-
+/*
                 if (m_audio_hold_A > 0) --m_audio_hold_A;
                 g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A] = (m_audio_hold_A > 0);
 
                 if (m_audio_hold_B > 0) --m_audio_hold_B;
                 g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B] = (m_audio_hold_B > 0);
+*/
 }
 
 void            CKernel::adc_ProcessAudio_1_2           (   void    )   // Model 2 — one pipeline, two bands
@@ -257,9 +258,10 @@ void            CKernel::adc_ProcessAudio_1_2           (   void    )   // Model
                     g_inOutMatrixFlt[0][AU1] = (float)g_inOutMatrixInt[0][AU1] / 1023.0f;
                     if (++m_idx1 >= w1) m_idx1 = 0;
                 }
-
+/*
                 if (m_audio_hold_A > 0) --m_audio_hold_A;
                 g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A] = (m_audio_hold_A > 0);
+*/
 }
 
 void            CKernel::adc_ProcessAudio_1_4           (   void    )   // Model 3 — one pipeline, four bands
@@ -449,7 +451,8 @@ void            CKernel::adc_ProcessAudio_1_4           (   void    )   // Model
                     g_inOutMatrixFlt[0][AU3] = (float)g_inOutMatrixInt[0][AU3] / 1023.0f;
                     if (++m_idx3 >= w3) m_idx3 = 0;
                 }
-
-                if (m_audio_hold_A > 0) --m_audio_hold_A;
+/*
+                if (m_audio_hold_A > 0) --m_audio_hold_A;       // look at code_util.cpp -> CKernel::updateTimeouts()
                 g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A] = (m_audio_hold_A > 0);
+*/
 }

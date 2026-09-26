@@ -573,30 +573,30 @@
       <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
 </svg>
 <!-- in progress !!! -->
-    <svg      id="INDICATOR_BAR_LEFT" class="glyph-tile" data-cell="0,5">  <!-- LFO PLACEMENT  6,0 0,1 -->
+    <svg      id="INDICATOR_BAR_LEFT" class="glyph-tile" data-cell="0,5">
             <use href="#INDICATOR_BAR_LINE_LEFT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
   </svg>
 
-    <svg      id="INDICATOR_BAR_RIGHT" class="glyph-tile" data-cell="1,5">  <!-- LFO PLACEMENT -->
+    <svg      id="INDICATOR_BAR_RIGHT" class="glyph-tile" data-cell="1,5">
             <use href="#INDICATOR_BAR_LINE_RIGHT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
   </svg>
-
-    <svg      id="INDICATOR_NUMBER_0" class="glyph-tile" data-cell="2,5">  <!-- LFO PLACEMENT -->
+<!--
+    <svg      id="INDICATOR_NUMBER_0" class="glyph-tile" data-cell="2,5"> 
                 <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
   </svg>
   
-    <svg      id="INDICATOR_NUMBER_1" class="glyph-tile" data-cell="3,5">  <!-- LFO PLACEMENT -->
+    <svg      id="INDICATOR_NUMBER_1" class="glyph-tile" data-cell="3,5">
                 <use href="#GLYPH_1" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
   </svg>
   
-    <svg      id="INDICATOR_NUMBER_2" class="glyph-tile" data-cell="4,5">  <!-- LFO PLACEMENT -->
+    <svg      id="INDICATOR_NUMBER_2" class="glyph-tile" data-cell="4,5"> 
                 <use href="#GLYPH_2" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
   </svg>
   
-    <svg      id="INDICATOR_NUMBER_3" class="glyph-tile" data-cell="5,5">  <!-- LFO PLACEMENT -->
+    <svg      id="INDICATOR_NUMBER_3" class="glyph-tile" data-cell="5,5">
                 <use href="#GLYPH_3" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
   </svg>
-
+-->
   <svg      id="EXTERN_INPUT" class="glyph-tile" data-cell="7,4">
             <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>
   </svg>

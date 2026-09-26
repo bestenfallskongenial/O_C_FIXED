@@ -22,6 +22,21 @@ bool            CKernel::checkUpdate                (   )
                     }
 }
 
+void            CKernel::updateTimeouts()
+{
+                if (m_audio_hold_A > 0) --m_audio_hold_A;
+                g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A] = (m_audio_hold_A > 0);
+
+                if (m_audio_hold_B > 0) --m_audio_hold_B;
+                g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_B] = (m_audio_hold_B > 0);
+
+                if (m_BPM_hold_A > 0) --m_BPM_hold_A;           // NEW 
+                if (m_BPM_hold_A == 0)
+                {
+                // here we handle the flag if or if not the bpm is displayed!
+                }
+}
+
 void            CKernel::randomVec8                 (   uint32_t            p_seed )
 {
                 const int       f_max_int   = 1023; // 1024;
@@ -84,6 +99,8 @@ void            CKernel::calculate1BPMnew           (   int             p_source
                         g_lfoBpmMatrix[p_source][BPM]     =   60000 / f_intervalAverage; // 60000000 / f_intervalAverage;
                         g_lfoBpmMatrix[p_source][INTV]    =   f_intervalAverage;
                         g_lfoBpmMatrix[p_source][LBC]     =   p_triggerTimeClock; // m_Timer.GetClockTicks();
+
+                        m_BPM_hold_A = BPM_HOLD_TIMEOUT; // NEW - bpm display timeout
                         }
                     g_lfoBpmMatrix[p_source][LTIME]       =   p_triggerTimeClock;
                     g_lfoBpmMatrix[p_source][TIDX]        =   (g_lfoBpmMatrix[p_source][TIDX] + 1) % 4;

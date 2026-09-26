@@ -441,4 +441,4 @@ float g_currentFPS       = 0.0f;
 
 bool  g_limitFPS         = true;
 
-    
+uint32_t m_BPM_hold_A = 0;    

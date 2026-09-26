@@ -67,6 +67,8 @@ TShutdownMode CKernel::Run(void)
 
                     buttonConsumer(0,1);                                              //  here goes the button consumer and menu code
 
+                    updateTimeouts();   // NEW - common timeout
+
                     dispatchLayer();
 
                     applyTargetModes();  // <- correct place here?

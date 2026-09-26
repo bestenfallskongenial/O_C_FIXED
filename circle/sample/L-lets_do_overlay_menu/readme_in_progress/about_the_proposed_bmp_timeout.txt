@@ -1,3 +1,5 @@
+// guess i implemented this correctly
+
 Starting from zero. The rejected bool updateTimeout(uint32_t& p_hold) proposal is discarded.
 
 Q.1: Can the timeout logic be moved out of adc_ProcessAudio()?

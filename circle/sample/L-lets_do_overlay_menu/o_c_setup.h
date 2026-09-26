@@ -109,7 +109,9 @@
 // AUDIO
     #define         AUDIO_BUFFER_COUNT      64
     #define         AUDIO_THRESHOLD         160
-    #define         AUDIO_HOLD_TIMEOUT      300
+    #define         AUDIO_HOLD_TIMEOUT      300 // not milsec but frames ( 24ps )
+
+    #define         BPM_HOLD_TIMEOUT        300
 
     #define 		CHUNK_SIZE				1024                                // for the file load 
 
