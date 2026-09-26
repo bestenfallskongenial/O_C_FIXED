@@ -413,6 +413,7 @@ public:
 // code_util.cpp
                 bool        setSystemVariables          ();                
                 bool        checkUpdate                 ();
+                void        updateTimeouts              ();
                 void        get_gl_time                 (               unsigned                        sys_time );                
 
 

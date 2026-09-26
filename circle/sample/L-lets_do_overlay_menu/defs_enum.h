@@ -191,6 +191,133 @@ enum FileField
     FLD_SIZE,                                       		// maximal size of the files / buffer-size
     FLD_COUNT
 };
+
+
+enum AtlasTileIndex
+{
+    // Row 0: mode tiles
+    ATLAS_TILE_MODE_ADC,            // 00 - first of modes 
+    ATLAS_TILE_MODE_TRG,            // 01
+    ATLAS_TILE_MODE_BMP,            // 02
+
+    ATLAS_TILE_MODE_LF0,            // 03
+    ATLAS_TILE_MODE_LF1,            // 04
+
+    ATLAS_TILE_MODE_AU_AL,          // 05
+    ATLAS_TILE_MODE_AU_AH,          // 06
+    ATLAS_TILE_MODE_AU_BL,          // 07
+
+    // Row 1: remaining mode tiles
+    ATLAS_TILE_MODE_AU_BH,          // 08
+
+    ATLAS_TILE_MODE_MIDI_NOTE,      // 09
+    ATLAS_TILE_MODE_MIDI_CC0,       // 10
+    ATLAS_TILE_MODE_MIDI_CC1,       // 11
+
+    ATLAS_TILE_MODE_12,             // 12
+    ATLAS_TILE_MODE_13,             // 13
+    ATLAS_TILE_MODE_14,             // 14
+    ATLAS_TILE_MODE_15,             // 15
+
+    // Row 2: target and navigation tiles
+    ATLAS_TILE_TARGET_TIME,         // 16 - first of target modes
+    ATLAS_TILE_TARGET_TEXTURE,      // 17
+    ATLAS_TILE_TARGET_VIDEO,        // 18
+    ATLAS_TILE_TARGET_FRAME,        // 19
+    ATLAS_TILE_TARGET_GL_PROGRAM,   // 20
+
+    ATLAS_TILE_BLANK,               // 21 - placeholder
+
+    ATLAS_TILE_ARROW_UP,            // 22 - arrow up
+    ATLAS_TILE_ARROW_DOWN,          // 23 - arrow down
+
+    // Row 3: LFO waveform tiles
+    ATLAS_TILE_LFO_WAVE_SINE,       // 24 - first of waveforms
+    ATLAS_TILE_LFO_WAVE_TRIANGLE,   // 25
+    ATLAS_TILE_LFO_WAVE_RAMP_UP,    // 26
+    ATLAS_TILE_LFO_WAVE_RAMP_DOWN,  // 27
+    ATLAS_TILE_LFO_WAVE_SMOOTH_UP,  // 28
+    ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN,// 29
+    ATLAS_TILE_LFO_WAVE_EXPONENTIAL,// 30
+    ATLAS_TILE_LFO_WAVE_RANDOM,     // 31
+
+    // Row 4: divider tiles
+    ATLAS_TILE_DIVIDER_1_64,        // 32 - first of dividers 
+    ATLAS_TILE_DIVIDER_1_32,        // 33
+    ATLAS_TILE_DIVIDER_1_16,        // 34
+    ATLAS_TILE_DIVIDER_1_8,         // 35
+    ATLAS_TILE_DIVIDER_1_4,         // 36
+    ATLAS_TILE_DIVIDER_1_2,         // 37
+    ATLAS_TILE_DIVIDER_1_1,         // 38
+
+    ATLAS_TILE_EXTERN_SELECTOR,     // 39 - "X" for external input mode selected
+
+    // Row 5: labels and reserved tiles
+    ATLAS_TILE_INDICATOR_BAR_L,     // 40   // used for ATLAS_TILE_MODE_TRG ( THRESHOLD_L ), ATLAS_TILE_MODE_AU_XL ( SENS_A / SENS_C )
+    ATLAS_TILE_INDICATOR_BAR_R,     // 41   // used for ATLAS_TILE_MODE_ADC ( g_inOutMatrixInt[0][RAW] ), ATLAS_TILE_MODE_TRG ( THRESHOLD_H ), ATLAS_TILE_MODE_AU_XH ( SENS_B / SENS_D )
+    ATLAS_TILE_42,                  // 42   // 
+    ATLAS_TILE_43,                  // 43
+    ATLAS_TILE_44,                  // 44
+    ATLAS_TILE_45,                  // 45
+
+    ATLAS_TILE_LABEL_FPS,           // 46 - "fps"
+    ATLAS_TILE_LABEL_BPM,           // 47 - "bpm"
+
+    // Row 6: number glyphs 0-7
+    ATLAS_TILE_NUMBER_0,            // 48 - first of numbers ( 0 )
+    ATLAS_TILE_NUMBER_1,            // 49
+    ATLAS_TILE_NUMBER_2,            // 50
+    ATLAS_TILE_NUMBER_3,            // 51
+    ATLAS_TILE_NUMBER_4,            // 52
+    ATLAS_TILE_NUMBER_5,            // 53
+    ATLAS_TILE_NUMBER_6,            // 54
+    ATLAS_TILE_NUMBER_7,            // 55
+
+    // Row 7: number glyphs, decimal point, and system tiles
+    ATLAS_TILE_NUMBER_8,            // 56
+    ATLAS_TILE_NUMBER_9,            // 57
+    ATLAS_TILE_NUMBER_DOT,          // 58
+
+    ATLAS_TILE_SYSTEM_IDLE,         // 59 
+    ATLAS_TILE_SYSTEM_STORE,        // 60 - fist of sys-layer
+    ATLAS_TILE_SYSTEM_LOAD,         // 61
+    ATLAS_TILE_SYSTEM_UPDATE,       // 62
+    ATLAS_TILE_SYSTEM_LOG,          // 63
+
+    ATLAS_TILE_COUNT
+};
+
+enum OverlayScreenCoordinates
+{
+    MENU_COORD_MODE_0,
+    MENU_COORD_MODE_1,
+    MENU_COORD_MODE_2,
+    MENU_COORD_MODE_3,
+
+    MENU_COORD_TARGET_TIME,
+    MENU_COORD_TARGET_TEXTURE,
+    MENU_COORD_TARGET_VIDEO,
+    MENU_COORD_TARGET_FRAME,
+
+    MENU_COORD_TARGET_PROGRAM,
+
+    MENU_COORD_ARROW_UP,
+    MENU_COORD_ARROW_DOWN,
+
+    MENU_COORD_BPM_STRING,
+
+    MENU_COORD_BPM_100,
+    MENU_COORD_BPM_010,
+    MENU_COORD_BPM_001,
+
+    MENU_COORD_BPM_DOT,
+
+    MENU_COORD_BPM_10D,
+    MENU_COORD_BPM_01D,
+
+    MENU_COORD_COUNT
+};
+
 // my vcsm dirver
 enum vc_sm_msg_type 										// Message types supported for HOST->VC direction //			
 	{				
