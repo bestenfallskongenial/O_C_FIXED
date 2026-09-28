@@ -375,7 +375,7 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
     // SVG row 5
     { 0.000f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_L
     { 0.125f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_R
-    { 0.250f, 0.250f }, // ATLAS_TILE_42
+    { 0.250f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_BPM
     { 0.375f, 0.250f }, // ATLAS_TILE_43
     { 0.500f, 0.250f }, // ATLAS_TILE_44
     { 0.625f, 0.250f }, // ATLAS_TILE_45
@@ -403,24 +403,46 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
 
 const int g_menuCoordinates[MENU_COORD_COUNT][2] =
 {
-    { -128, -128 }, // MENU_COORD_MODE_0
-    {    0, -128 }, // MENU_COORD_MODE_1
-    { -128,    0 }, // MENU_COORD_MODE_2
-    {    0,    0 }, // MENU_COORD_MODE_3
+    { -128, -128 }, //  0 MENU_COORD_MODE_04
 
-    { - 64, -256 }, // MENU_COORD_ARROW_UP
-    { - 64,  128 }, // MENU_COORD_ARROW_DOWN
+    { -128, -128 }, //  1 MENU_COORD_DETAIL_0
+    { -128, -128 }, //  2 MENU_COORD_DETAIL_1 
 
-    { 0, 0 },       // MENU_COORD_BPM_STRING
+    {    0, -128 }, //  3 MENU_COORD_MODE_15
 
-    { 0, 0 },       // MENU_COORD_BPM_100
-    { 0, 0 },       // MENU_COORD_BPM_010
-    { 0, 0 },       // MENU_COORD_BPM_001
+    {    0, -128 }, //  4 MENU_COORD_DETAIL_2
+    {    0, -128 }, //  5 MENU_COORD_DETAIL_3
 
-    { 0, 0 },       // MENU_COORD_BPM_DOT
+    { -128,    0 }, //  6 MENU_COORD_MODE_26
 
-    { 0, 0 },       // MENU_COORD_BPM_10D
-    { 0, 0 }        // MENU_COORD_BPM_01D
+    { -128,    0 }, //  7 MENU_COORD_DETAIL_4
+    { -128,    0 }, //  8 MENU_COORD_DETAIL_5
+
+    {    0,    0 }, //  9 MENU_COORD_MODE_37
+
+    {    0,    0 }, // 10 MENU_COORD_DETAIL_6
+    {    0,    0 }, // 11 MENU_COORD_DETAIL_7
+
+    {    0,    0 }, // 12 MENU_COORD_TARGET_TIME
+    {    0,    0 }, // 13 MENU_COORD_TARGET_TEXTURE
+    {    0,    0 }, // 14 MENU_COORD_TARGET_VIDEO
+    {    0,    0 }, // 15 MENU_COORD_TARGET_FRAME
+
+    {    0,    0 }, // 16 MENU_COORD_TARGET_PROGRAM
+
+    { - 64, -256 }, // 17 MENU_COORD_ARROW_UP
+    { - 64,  128 }, // 18 MENU_COORD_ARROW_DOWN
+
+    {    0, 160 },       // 19 MENU_COORD_BPM_STRING
+
+    {    0, 160 },       // 20 MENU_COORD_BPM_100
+    {    0, 160 },       // 21 MENU_COORD_BPM_010
+    {    0, 160 },       // 22 MENU_COORD_BPM_001
+
+    {    0, 160 },       // 23 MENU_COORD_BPM_DOT
+
+    {    0, 160 },       // 24 MENU_COORD_BPM_10D
+    {    0, 160 }        // 25 MENU_COORD_BPM_01D
 };
 
 private:

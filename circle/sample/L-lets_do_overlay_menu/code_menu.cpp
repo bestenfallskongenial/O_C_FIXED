@@ -327,8 +327,7 @@ void            CKernel::modeTRG(int p_channel)
 
                     g_inOutMatrixInt[p_channel][TRF] = true;
                     }
-                else if (g_inOutMatrixInt[p_channel][VAL] <= g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] + 1       // new- hight is never <= low!
-                                                           + g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H])
+                else if (g_inOutMatrixInt[p_channel][VAL] <= 512 + g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H]) // we use <512 for low and >512 for high 
                     {
                     g_inOutMatrixInt[p_channel][TRF] = false;
                     }

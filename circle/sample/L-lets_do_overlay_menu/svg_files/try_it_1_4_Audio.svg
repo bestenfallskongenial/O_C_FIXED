@@ -92,6 +92,9 @@
     <circle id="COMMON_MODE_BOTTOM_CUTOUT" cx="64" cy="102" r="14"/>
     <!-- Audio-mode cutout primitives. -->
     <line id="AUDIO_CUTOUT_LINE" x1="64" y1="48" x2="64" y2="80"/>
+<line id="AUDIO_CUTOUT_LINE2" x1="64" y1="56" x2="64" y2="72"/>
+
+
     <path id="AUDIO_CUTOUT_WAVE_DOUBLE"
           d="M44 64 C47.3 58.7 50.7 56 54 56 C57.3 56 60.7 58.7 64 64 C67.3 69.3 70.7 72 74 72 C77.3 72 80.7 69.3 84 64"/>
     <path id="AUDIO_CUTOUT_WAVE_TRIPLE" d="M44 64 C46 60 48 58 50 58 C52 58 54 60 56 64 C58 68 60 70 62 70 C64 70 66 68 68 64 C70 60 72 58 74 58 C76 58 78 60 80 64 C82 68 84 70 84 70"/>
@@ -126,7 +129,7 @@
 <!-- in progress !!! -->
   <line     id="INDICATOR_BAR_LINE_LEFT" x1="36" y1="0" x2="80" y2="0"/>    
   <line     id="INDICATOR_BAR_LINE_RIGHT" x1="48" y1="0" x2="92" y2="0"/>
-
+  <line     id="INDICATOR_BAR_LINE_BPM" x1="44" y1="0" x2="92" y2="0"/>
     <!-- ================================================================ -->
     <!-- DEFINITIONS: EDITING GRID                                       -->
     <!-- ================================================================ -->
@@ -166,10 +169,13 @@
       <use href="#COMMON_MODE_TOP_CUTOUT" fill="black"/>
       <use href="#COMMON_MODE_BOTTOM_CUTOUT" fill="black"/>
         <g class="audio-cutout-stroke">
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-32 0)"/>
-        <use href="#AUDIO_CUTOUT_LINE" transform="translate(8 0)"/>
-<use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(52 64) scale(0.5) translate(-64 -64)"/>
-      <rect x="82" y="48" width="16" height="32" rx="6" fill="black"/> 
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(-20 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE2" transform="translate(-10 0)"/>        
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(0 0)"/>        
+        <use href="#AUDIO_CUTOUT_LINE2" transform="translate(10 0)"/>
+        <use href="#AUDIO_CUTOUT_LINE" transform="translate(22 0)"/>        
+<!-- <use href="#WAVE_RANDOM" class="glyph-stroke-8" transform="translate(56 64) scale(0.5) translate(-64 -64)"/> -->
+<rect x="84" y="48" width="8" height="32" rx="4" ry="4" fill="black"/> 
         </g>
     </mask>
 <!-- LFO mask model: waveform window on the left, multiplier on the right. -->
@@ -574,12 +580,15 @@
 </svg>
 <!-- in progress !!! -->
     <svg      id="INDICATOR_BAR_LEFT" class="glyph-tile" data-cell="0,5">
-            <use href="#INDICATOR_BAR_LINE_LEFT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
+            <use href="#INDICATOR_BAR_LINE_LEFT" class="glyph-stroke-4" transform="translate(64 144) translate( -64 -64) "/>
   </svg>
 
     <svg      id="INDICATOR_BAR_RIGHT" class="glyph-tile" data-cell="1,5">
-            <use href="#INDICATOR_BAR_LINE_RIGHT" class="glyph-stroke-4" transform="translate(64 148) translate( -64 -64) "/>
+            <use href="#INDICATOR_BAR_LINE_RIGHT" class="glyph-stroke-4" transform="translate(64 144) translate( -64 -64) "/>
   </svg>
+    <svg      id="INDICATOR_BAR_BPM" class="glyph-tile" data-cell="2,5">
+            <use href="#INDICATOR_BAR_LINE_BPM" class="glyph-stroke-4" transform="translate(64 144) translate( -64 -64) "/>
+  </svg>  
 <!--
     <svg      id="INDICATOR_NUMBER_0" class="glyph-tile" data-cell="2,5"> 
                 <use href="#GLYPH_0" transform="translate(64 28) scale(0.2) translate(-64 -64)"/>
