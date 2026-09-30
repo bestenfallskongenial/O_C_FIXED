@@ -79,7 +79,7 @@ enum inModeNames
 
 enum targetModeNames
 {
-    dummy
+    dummytarget
 }
 
 enum MapType
