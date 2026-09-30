@@ -44,45 +44,45 @@ struct glsl_state
 														// ever wondered why i use the same strucs for tex and shaders 
 														// and why i have gl_tex_id[MAX_TEXTURE] or u_tex_id[MAX_SHADER][MAX_TEXTURE]; ???
 
-	GLfloat						u_q00_coord[4];			// MENU_COORD_MODE_0
+	GLfloat						u_q00[4];			// MENU_COORD_MODE_0
 
-	GLfloat						u_d00_coord[4];			// MENU_COORD_DETAIL_0
-	GLfloat						u_d01_coord[4];			// MENU_COORD_DETAIL_1
+	GLfloat						u_d00[4];			// MENU_COORD_DETAIL_0
+	GLfloat						u_d01[4];			// MENU_COORD_DETAIL_1
 
-	GLfloat						u_q01_coord[4];			// MENU_COORD_MODE_1
+	GLfloat						u_q01[4];			// MENU_COORD_MODE_1
 
-	GLfloat						u_d02_coord[4];			// MENU_COORD_DETAIL_2
-	GLfloat						u_d03_coord[4];			// MENU_COORD_DETAIL_3
+	GLfloat						u_d02[4];			// MENU_COORD_DETAIL_2
+	GLfloat						u_d03[4];			// MENU_COORD_DETAIL_3
 
-	GLfloat						u_q02_coord[4];			// MENU_COORD_MODE_2
+	GLfloat						u_q02[4];			// MENU_COORD_MODE_2
 
-	GLfloat						u_d04_coord[4];			// MENU_COORD_DETAIL_4
-	GLfloat						u_d05_coord[4];			// MENU_COORD_DETAIL_5
+	GLfloat						u_d04[4];			// MENU_COORD_DETAIL_4
+	GLfloat						u_d05[4];			// MENU_COORD_DETAIL_5
 
-	GLfloat						u_q03_coord[4];			// MENU_COORD_MODE_3
+	GLfloat						u_q03[4];			// MENU_COORD_MODE_3
 
-	GLfloat						u_d06_coord[4];			// MENU_COORD_DETAIL_6
-	GLfloat						u_d07_coord[4];			// MENU_COORD_DETAIL_7
+	GLfloat						u_d06[4];			// MENU_COORD_DETAIL_6
+	GLfloat						u_d07[4];			// MENU_COORD_DETAIL_7
 
-	GLfloat						u_t00_coord[4];			// MENU_COORD_TARGET_TIME
-	GLfloat						u_t01_coord[4];			// MENU_COORD_TARGET_TEXTURE
-	GLfloat						u_t02_coord[4];			// MENU_COORD_TARGET_VIDEO
-	GLfloat						u_t03_coord[4];			// MENU_COORD_TARGET_FRAME
+	GLfloat						u_t00[4];			// MENU_COORD_TARGET_TIME
+	GLfloat						u_t01[4];			// MENU_COORD_TARGET_TEXTURE
+	GLfloat						u_t02[4];			// MENU_COORD_TARGET_VIDEO
+	GLfloat						u_t03[4];			// MENU_COORD_TARGET_FRAME
 	
-	GLfloat						u_t05_coord[4];			// MENU_COORD_TARGET_PROGRAM
+	GLfloat						u_t05[4];			// MENU_COORD_TARGET_PROGRAM
 
-	GLfloat						u_x00_coord[4];			// MENU_COORD_EXTERN_SELECTOR
+	GLfloat						u_x00[4];			// MENU_COORD_EXTERN_SELECTOR
 
-	GLfloat						u_up_coord[4];			// MENU_COORD_ARROW_UP
-	GLfloat						u_dw_coord[4];			// MENU_COORD_ARROW_DOWN
+	GLfloat						u_up[4];			// MENU_COORD_ARROW_UP
+	GLfloat						u_dw[4];			// MENU_COORD_ARROW_DOWN
 
-	GLfloat						u_bpm_coord[4];			// MENU_COORD_BPM_STRING
-	GLfloat						u_100_coord[4];			// MENU_COORD_BPM_100
-	GLfloat						u_010_coord[4];			// MENU_COORD_BPM_010
-	GLfloat						u_001_coord[4];			// MENU_COORD_BPM_001
-	GLfloat						u_dot_coord[4];			// MENU_COORD_BPM_DOT
-	GLfloat						u_10d_coord[4];			// MENU_COORD_BPM_10D
-	GLfloat						u_01d_coord[4];			// MENU_COORD_BPM_01D
+	GLfloat						u_bpm[4];			// MENU_COORD_BPM_STRING
+	GLfloat						u_100[4];			// MENU_COORD_BPM_100
+	GLfloat						u_010[4];			// MENU_COORD_BPM_010
+	GLfloat						u_001[4];			// MENU_COORD_BPM_001
+	GLfloat						u_dot[4];			// MENU_COORD_BPM_DOT
+	GLfloat						u_10d[4];			// MENU_COORD_BPM_10D
+	GLfloat						u_01d[4];			// MENU_COORD_BPM_01D
 };
 
 struct tex_state
