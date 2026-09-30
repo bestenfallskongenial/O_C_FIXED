@@ -5,7 +5,7 @@
 
 void            CKernel::provideTileCoordForMode(   int     mode,
                                                     int     matrixIndex,
-
+                                                //  int     local,
                                                     float*  qCoord,
                                                     float*  d0Coord,
                                                     float*  d1Coord,
@@ -17,6 +17,8 @@ void            CKernel::provideTileCoordForMode(   int     mode,
                                                     int     detail0Coord,
                                                     int     detail1Coord )
 {
+                const int local = (matrixIndex / 4) * 4;
+
                 qCoord[0] = g_atlasTileMap[ATLAS_TILE_MODE_ADC + mode][0];
                 qCoord[1] = g_atlasTileMap[ATLAS_TILE_MODE_ADC + mode][1];
                 qCoord[2] = g_menuCoordinates[modeCoord][0];
