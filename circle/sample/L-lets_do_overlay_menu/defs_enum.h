@@ -77,11 +77,6 @@ enum inModeNames
     IN_MODE_NAME_COUNT
 };
 
-enum targetModeNames
-{
-    dummytarget
-}
-
 enum MapType
 {
     MAP_MODE = 0,
