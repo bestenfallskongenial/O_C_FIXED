@@ -50,7 +50,6 @@ public:
 
                 void        adc_ProcessAudio_1_4        (               void );
 
-
 // code_debug.cpp               !! TESTED AND APPROVED !!
                 void        logButtonStatesRuntime      (               int                             row ); // +++
                 void        logModesRuntime             (               int                             row );
@@ -334,7 +333,6 @@ public:
                 void        checkSystemFlags            ();
 
 // code_midi.cpp
-
                 bool        updateMIDI                  ();
         static  void        removeMIDI                  (               CDevice*                        pDevice,
                                                                         void*                           pContext);
@@ -343,7 +341,22 @@ public:
                                                                         unsigned                        nLength,
                                                                         unsigned                        nDevice,
                                                                         void*                           pParam);
-
+// code_overlay.cpp         
+                void        provideTileCoordForMode     (               int                             mode,
+                                                                        int                             matrixIndex,
+                                                                        int                             local,
+                                                                        float*                          qCoord,
+                                                                        float*                          d0Coord,
+                                                                        float*                          d1Coord,
+                                                                        float*                          t00Coord,
+                                                                        float*                          t01Coord,
+                                                                        float*                          t02Coord,
+                                                                        float*                          t03Coord,
+                                                                        int                             modeCoord,
+                                                                        int                             detail0Coord,
+                                                                        int                             detail1Coord );
+                void        provideTileCoordByLayer     (               glsl_state*                     s, 
+                                                                        int                             layer);                                                        
 // code_parser.cpp              !! TESTED AND APPROVED !!
                 bool        BMPparser                   (               tex_state*                      t,
                                                                         char*                           p_buffer_array[],

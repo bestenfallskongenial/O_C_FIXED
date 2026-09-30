@@ -22,6 +22,7 @@ OBJS  = main.o \
         code_log.o \
         code_menu.o \
         code_midi.o \
+        code_overlay.o \
         code_parser.o \
         code_user_file.o \
         code_util.o \
