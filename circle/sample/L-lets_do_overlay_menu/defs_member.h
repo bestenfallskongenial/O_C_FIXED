@@ -114,7 +114,9 @@ public:         // Logging
                 int                             m_sum[4]                                        =           { 0 };  
 
                 uint32_t                        m_audio_hold_A                                  = 0;
-                uint32_t                        m_audio_hold_B                                  = 0;      
+                uint32_t                        m_audio_hold_B                                  = 0;
+                   
+                uint32_t                        m_BPM_hold_A                                    = 0;       
 
                 uint8_t                         m_idx0                                          = 0;
                 uint8_t                         m_idx1                                          = 0;
@@ -325,125 +327,134 @@ public:         // Logging
                                                                                                             { 45, 125, 215},   // IN_MODE_MIDI_CC0      - azure
                                                                                                             {205,  75,  35}    // IN_MODE_MIDI_CC1      - vermilion
                                                                                                         };
-const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] =
-{
-    // SVG row 0
-    { 0.000f, 0.875f }, // ATLAS_TILE_MODE_ADC
-    { 0.125f, 0.875f }, // ATLAS_TILE_MODE_TRG
-    { 0.250f, 0.875f }, // ATLAS_TILE_MODE_BMP
-    { 0.375f, 0.875f }, // ATLAS_TILE_MODE_LF0
-    { 0.500f, 0.875f }, // ATLAS_TILE_MODE_LF1
-    { 0.625f, 0.875f }, // ATLAS_TILE_MODE_AU_AL
-    { 0.750f, 0.875f }, // ATLAS_TILE_MODE_AU_AH
-    { 0.875f, 0.875f }, // ATLAS_TILE_MODE_AU_BL
-    // SVG row 1
-    { 0.000f, 0.750f }, // ATLAS_TILE_MODE_AU_BH
-    { 0.125f, 0.750f }, // ATLAS_TILE_MODE_MIDI_NOTE
-    { 0.250f, 0.750f }, // ATLAS_TILE_MODE_MIDI_CC0
-    { 0.375f, 0.750f }, // ATLAS_TILE_MODE_MIDI_CC1
-    { 0.500f, 0.750f }, // ATLAS_TILE_MODE_12
-    { 0.625f, 0.750f }, // ATLAS_TILE_MODE_13
-    { 0.750f, 0.750f }, // ATLAS_TILE_MODE_14
-    { 0.875f, 0.750f }, // ATLAS_TILE_MODE_15
-    // SVG row 2
-    { 0.000f, 0.625f }, // ATLAS_TILE_TARGET_TIME
-    { 0.125f, 0.625f }, // ATLAS_TILE_TARGET_TEXTURE
-    { 0.250f, 0.625f }, // ATLAS_TILE_TARGET_VIDEO
-    { 0.375f, 0.625f }, // ATLAS_TILE_TARGET_FRAME
-    { 0.500f, 0.625f }, // ATLAS_TILE_TARGET_GL_PROGRAM
-    { 0.625f, 0.625f }, // ATLAS_TILE_BLANK
-    { 0.750f, 0.625f }, // ATLAS_TILE_ARROW_UP
-    { 0.875f, 0.625f }, // ATLAS_TILE_ARROW_DOWN
-    // SVG row 3
-    { 0.000f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SINE
-    { 0.125f, 0.500f }, // ATLAS_TILE_LFO_WAVE_TRIANGLE
-    { 0.250f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RAMP_UP
-    { 0.375f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RAMP_DOWN
-    { 0.500f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SMOOTH_UP
-    { 0.625f, 0.500f }, // ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN
-    { 0.750f, 0.500f }, // ATLAS_TILE_LFO_WAVE_EXPONENTIAL
-    { 0.875f, 0.500f }, // ATLAS_TILE_LFO_WAVE_RANDOM
-    // SVG row 4
-    { 0.000f, 0.375f }, // ATLAS_TILE_DIVIDER_1_64
-    { 0.125f, 0.375f }, // ATLAS_TILE_DIVIDER_1_32
-    { 0.250f, 0.375f }, // ATLAS_TILE_DIVIDER_1_16
-    { 0.375f, 0.375f }, // ATLAS_TILE_DIVIDER_1_8
-    { 0.500f, 0.375f }, // ATLAS_TILE_DIVIDER_1_4
-    { 0.625f, 0.375f }, // ATLAS_TILE_DIVIDER_1_2
-    { 0.750f, 0.375f }, // ATLAS_TILE_DIVIDER_1_1
-    { 0.875f, 0.375f }, // ATLAS_TILE_EXTERN_SELECTOR
-    // SVG row 5
-    { 0.000f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_L
-    { 0.125f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_R
-    { 0.250f, 0.250f }, // ATLAS_TILE_INDICATOR_BAR_BPM
-    { 0.375f, 0.250f }, // ATLAS_TILE_43
-    { 0.500f, 0.250f }, // ATLAS_TILE_44
-    { 0.625f, 0.250f }, // ATLAS_TILE_45
-    { 0.750f, 0.250f }, // ATLAS_TILE_LABEL_FPS
-    { 0.875f, 0.250f }, // ATLAS_TILE_LABEL_BPM
-    // SVG row 6
-    { 0.000f, 0.125f }, // ATLAS_TILE_NUMBER_0
-    { 0.125f, 0.125f }, // ATLAS_TILE_NUMBER_1
-    { 0.250f, 0.125f }, // ATLAS_TILE_NUMBER_2
-    { 0.375f, 0.125f }, // ATLAS_TILE_NUMBER_3
-    { 0.500f, 0.125f }, // ATLAS_TILE_NUMBER_4
-    { 0.625f, 0.125f }, // ATLAS_TILE_NUMBER_5
-    { 0.750f, 0.125f }, // ATLAS_TILE_NUMBER_6
-    { 0.875f, 0.125f }, // ATLAS_TILE_NUMBER_7
-    // SVG row 7
-    { 0.000f, 0.000f }, // ATLAS_TILE_NUMBER_8
-    { 0.125f, 0.000f }, // ATLAS_TILE_NUMBER_9
-    { 0.250f, 0.000f }, // ATLAS_TILE_NUMBER_DOT
-    { 0.375f, 0.000f }, // ATLAS_TILE_SYSTEM_IDLE
-    { 0.500f, 0.000f }, // ATLAS_TILE_SYSTEM_STORE
-    { 0.625f, 0.000f }, // ATLAS_TILE_SYSTEM_LOAD
-    { 0.750f, 0.000f }, // ATLAS_TILE_SYSTEM_UPDATE
-    { 0.875f, 0.000f }  // ATLAS_TILE_SYSTEM_LOG
-};
 
-const int g_menuCoordinates[MENU_COORD_COUNT][2] =
-{
-    { -128, -128 }, //  0 MENU_COORD_MODE_04
+        const   GLfloat                     g_atlasTileMap[ATLAS_TILE_COUNT][2]                 =       {
+                                                                                                            // SVG row 0
+                                                                                                            { 0.000f, 0.875f },         // ATLAS_TILE_MODE_ADC
+                                                                                                            { 0.125f, 0.875f },         // ATLAS_TILE_MODE_TRG
+                                                                                                            { 0.250f, 0.875f },         // ATLAS_TILE_MODE_BMP
+                                                                                                            { 0.375f, 0.875f },         // ATLAS_TILE_MODE_LF0
+                                                                                                            { 0.500f, 0.875f },         // ATLAS_TILE_MODE_LF1
+                                                                                                            { 0.625f, 0.875f },         // ATLAS_TILE_MODE_AU_AL
+                                                                                                            { 0.750f, 0.875f },         // ATLAS_TILE_MODE_AU_AH
+                                                                                                            { 0.875f, 0.875f },         // ATLAS_TILE_MODE_AU_BL
+                                                                                                            // SVG row 1
+                                                                                                            { 0.000f, 0.750f },         // ATLAS_TILE_MODE_AU_BH
+                                                                                                            { 0.125f, 0.750f },         // ATLAS_TILE_MODE_MIDI_NOTE
+                                                                                                            { 0.250f, 0.750f },         // ATLAS_TILE_MODE_MIDI_CC0
+                                                                                                            { 0.375f, 0.750f },         // ATLAS_TILE_MODE_MIDI_CC1
+                                                                                                            { 0.500f, 0.750f },         // ATLAS_TILE_MODE_12
+                                                                                                            { 0.625f, 0.750f },         // ATLAS_TILE_MODE_13
+                                                                                                            { 0.750f, 0.750f },         // ATLAS_TILE_MODE_14
+                                                                                                            { 0.875f, 0.750f },         // ATLAS_TILE_MODE_15
+                                                                                                            // SVG row 2
+                                                                                                            { 0.000f, 0.625f },         // ATLAS_TILE_TARGET_TIME
+                                                                                                            { 0.125f, 0.625f },         // ATLAS_TILE_TARGET_TEXTURE
+                                                                                                            { 0.250f, 0.625f },         // ATLAS_TILE_TARGET_VIDEO
+                                                                                                            { 0.375f, 0.625f },         // ATLAS_TILE_TARGET_FRAME
+                                                                                                            { 0.500f, 0.625f },         // ATLAS_TILE_TARGET_GL_PROGRAM
+                                                                                                            { 0.625f, 0.625f },         // ATLAS_TILE_BLANK
+                                                                                                            { 0.750f, 0.625f },         // ATLAS_TILE_ARROW_UP
+                                                                                                            { 0.875f, 0.625f },         // ATLAS_TILE_ARROW_DOWN
+                                                                                                            // SVG row 3
+                                                                                                            { 0.000f, 0.500f },         // ATLAS_TILE_LFO_WAVE_SINE
+                                                                                                            { 0.125f, 0.500f },         // ATLAS_TILE_LFO_WAVE_TRIANGLE
+                                                                                                            { 0.250f, 0.500f },         // ATLAS_TILE_LFO_WAVE_RAMP_UP
+                                                                                                            { 0.375f, 0.500f },         // ATLAS_TILE_LFO_WAVE_RAMP_DOWN
+                                                                                                            { 0.500f, 0.500f },         // ATLAS_TILE_LFO_WAVE_SMOOTH_UP
+                                                                                                            { 0.625f, 0.500f },         // ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN
+                                                                                                            { 0.750f, 0.500f },         // ATLAS_TILE_LFO_WAVE_EXPONENTIAL
+                                                                                                            { 0.875f, 0.500f },         // ATLAS_TILE_LFO_WAVE_RANDOM
+                                                                                                            // SVG row 4
+                                                                                                            { 0.000f, 0.375f },         // ATLAS_TILE_DIVIDER_1_64
+                                                                                                            { 0.125f, 0.375f },         // ATLAS_TILE_DIVIDER_1_32
+                                                                                                            { 0.250f, 0.375f },         // ATLAS_TILE_DIVIDER_1_16
+                                                                                                            { 0.375f, 0.375f },         // ATLAS_TILE_DIVIDER_1_8
+                                                                                                            { 0.500f, 0.375f },         // ATLAS_TILE_DIVIDER_1_4
+                                                                                                            { 0.625f, 0.375f },         // ATLAS_TILE_DIVIDER_1_2
+                                                                                                            { 0.750f, 0.375f },         // ATLAS_TILE_DIVIDER_1_1
+                                                                                                            { 0.875f, 0.375f },         // ATLAS_TILE_EXTERN_SELECTOR
+                                                                                                            // SVG row 5
+                                                                                                            { 0.000f, 0.250f },         // ATLAS_TILE_INDICATOR_BAR_L
+                                                                                                            { 0.125f, 0.250f },         // ATLAS_TILE_INDICATOR_BAR_R
+                                                                                                            { 0.250f, 0.250f },         // ATLAS_TILE_INDICATOR_BAR_BPM
+                                                                                                            { 0.375f, 0.250f },         // ATLAS_TILE_43
+                                                                                                            { 0.500f, 0.250f },         // ATLAS_TILE_44
+                                                                                                            { 0.625f, 0.250f },         // ATLAS_TILE_45
+                                                                                                            { 0.750f, 0.250f },         // ATLAS_TILE_LABEL_FPS
+                                                                                                            { 0.875f, 0.250f },         // ATLAS_TILE_LABEL_BPM
+                                                                                                            // SVG row 6
+                                                                                                            { 0.000f, 0.125f },         // ATLAS_TILE_NUMBER_0
+                                                                                                            { 0.125f, 0.125f },         // ATLAS_TILE_NUMBER_1
+                                                                                                            { 0.250f, 0.125f },         // ATLAS_TILE_NUMBER_2
+                                                                                                            { 0.375f, 0.125f },         // ATLAS_TILE_NUMBER_3
+                                                                                                            { 0.500f, 0.125f },         // ATLAS_TILE_NUMBER_4
+                                                                                                            { 0.625f, 0.125f },         // ATLAS_TILE_NUMBER_5
+                                                                                                            { 0.750f, 0.125f },         // ATLAS_TILE_NUMBER_6
+                                                                                                            { 0.875f, 0.125f },         // ATLAS_TILE_NUMBER_7
+                                                                                                            // SVG row 7
+                                                                                                            { 0.000f, 0.000f },         // ATLAS_TILE_NUMBER_8
+                                                                                                            { 0.125f, 0.000f },         // ATLAS_TILE_NUMBER_9
+                                                                                                            { 0.250f, 0.000f },         // ATLAS_TILE_NUMBER_DOT
+                                                                                                            { 0.375f, 0.000f },         // ATLAS_TILE_SYSTEM_IDLE
+                                                                                                            { 0.500f, 0.000f },         // ATLAS_TILE_SYSTEM_STORE
+                                                                                                            { 0.625f, 0.000f },         // ATLAS_TILE_SYSTEM_LOAD
+                                                                                                            { 0.750f, 0.000f },         // ATLAS_TILE_SYSTEM_UPDATE
+                                                                                                            { 0.875f, 0.000f }  };      // ATLAS_TILE_SYSTEM_LOG
+                                                                                                        
 
-    { -128, -128 }, //  1 MENU_COORD_DETAIL_0
-    { -128, -128 }, //  2 MENU_COORD_DETAIL_1 
+        const   int                         g_menuCoordinates[MENU_COORD_COUNT][2]              =       {
+                                                                                                            { -128, -128 },             //  0 MENU_COORD_MODE_04			*
 
-    {    0, -128 }, //  3 MENU_COORD_MODE_15
+                                                                                                            { -128, -128 },             //  1 MENU_COORD_DETAIL_0			**
+                                                                                                            { -128, -128 },             //  2 MENU_COORD_DETAIL_1 			**
 
-    {    0, -128 }, //  4 MENU_COORD_DETAIL_2
-    {    0, -128 }, //  5 MENU_COORD_DETAIL_3
+                                                                                                            {    0, -128 },             //  3 MENU_COORD_MODE_15			*
 
-    { -128,    0 }, //  6 MENU_COORD_MODE_26
+                                                                                                            {    0, -128 },             //  4 MENU_COORD_DETAIL_2 			**
+                                                                                                            {    0, -128 },             //  5 MENU_COORD_DETAIL_3 			**
 
-    { -128,    0 }, //  7 MENU_COORD_DETAIL_4
-    { -128,    0 }, //  8 MENU_COORD_DETAIL_5
+                                                                                                            { -128,    0 },             //  6 MENU_COORD_MODE_26			*
 
-    {    0,    0 }, //  9 MENU_COORD_MODE_37
+                                                                                                            { -128,    0 },             //  7 MENU_COORD_DETAIL_4 			**
+                                                                                                            { -128,    0 },             //  8 MENU_COORD_DETAIL_5 			**
 
-    {    0,    0 }, // 10 MENU_COORD_DETAIL_6
-    {    0,    0 }, // 11 MENU_COORD_DETAIL_7
+                                                                                                            {    0,    0 },             //  9 MENU_COORD_MODE_37			*
 
-    {    0,    0 }, // 12 MENU_COORD_TARGET_TIME
-    {    0,    0 }, // 13 MENU_COORD_TARGET_TEXTURE
-    {    0,    0 }, // 14 MENU_COORD_TARGET_VIDEO
-    {    0,    0 }, // 15 MENU_COORD_TARGET_FRAME
+                                                                                                            {    0,    0 },             // 10 MENU_COORD_DETAIL_6 			**
+                                                                                                            {    0,    0 },             // 11 MENU_COORD_DETAIL_7 			**
 
-    {    0,    0 }, // 16 MENU_COORD_TARGET_PROGRAM
+                                                                                                            {    0,    0 },             // 12 MENU_COORD_TARGET_TIME 		***
+                                                                                                            {    0,    0 },             // 13 MENU_COORD_TARGET_TEXTURE		***
+                                                                                                            {    0,    0 },             // 14 MENU_COORD_TARGET_VIDEO		***
+                                                                                                            {    0,    0 },             // 15 MENU_COORD_TARGET_FRAME		***
 
-    { - 64, -256 }, // 17 MENU_COORD_ARROW_UP
-    { - 64,  128 }, // 18 MENU_COORD_ARROW_DOWN
+                                                                                                            {    0,    0 },             // 16 MENU_COORD_TARGET_PROGRAM		Y
 
-    {    0, 160 },       // 19 MENU_COORD_BPM_STRING
+                                                                                                            {    0,    0 },             // 17 MENU_COORD_EXTERN_SELECTOR	X
 
-    {    0, 160 },       // 20 MENU_COORD_BPM_100
-    {    0, 160 },       // 21 MENU_COORD_BPM_010
-    {    0, 160 },       // 22 MENU_COORD_BPM_001
 
-    {    0, 160 },       // 23 MENU_COORD_BPM_DOT
+                                                                                                            { - 64, -256 },             // 18 MENU_COORD_ARROW_UP
+                                                                                                            { - 64,  128 },             // 19 MENU_COORD_ARROW_DOWN
 
-    {    0, 160 },       // 24 MENU_COORD_BPM_10D
-    {    0, 160 }        // 25 MENU_COORD_BPM_01D
-};
+                                                                                                            {    0, 160 },              // 20 MENU_COORD_BPM_STRING	****
+
+                                                                                                            {    0, 160 },	        // 21 MENU_COORD_BPM_100		****
+                                                                                                            {    0, 160 },	        // 22 MENU_COORD_BPM_010		****
+                                                                                                            {    0, 160 },	        // 23 MENU_COORD_BPM_001		****
+
+                                                                                                            {    0, 160 },	        // 24 MENU_COORD_BPM_DOT		****
+
+                                                                                                            {    0, 160 },	        // 25 MENU_COORD_BPM_10D		****
+                                                                                                            {    0, 160 }  };	        // 26 MENU_COORD_BPM_01D		****
+                                                                                                        
+
+// * 	= 	the coordinates for the four quadrants ( q0 for mode 0 in layer 1, mode 4 in layer 2, q1 for mode 1 in layer 1, mode 5 in layer 2, etc. )
+// **	= 	is usually the same as the coordinates for the quadrant for the mode pair of 0/4, 1/5, 2/6. 3/7 ( depending on the layer 1 or 2)
+// ***	= 	is shown depending on block 7/ layer 8 either < 4 ( layer 1 ) or > 3 ( layer 2 )
+// **** = 	the "bmp" xyz.xy numeric display, depending on m_BPM_hold_A ( will be shown after changes in bpm ) 
+// Y	=	is shown if layer 2 on the fixed position q3 !
+// X	= 	same logic as **** taken from g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT]
 
 private:
                 VCHI_INSTANCE_T                 m_VCHIInstance                                  = 0;
@@ -561,4 +572,3 @@ float g_currentFPS       = 0.0f;
 
 bool  g_limitFPS         = true;
 
-uint32_t m_BPM_hold_A = 0;    

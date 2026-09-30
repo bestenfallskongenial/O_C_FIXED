@@ -428,22 +428,30 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                     switch ( q0 ) // by the mode 
                         {
                         case IN_MODE_ADC: // adc
-                        int Va = g_inOutMatrixInt[local + 0][RAW];                         // how i dispatch the mode X correctly here?
+                        int Va = g_inOutMatrixInt[local + 0][RAW] >> 5;                         // how i dispatch the mode X correctly here?
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;                        
                         break;
                         case IN_MODE_TRG: // trg
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L];
-                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 4;
+                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 4;
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
                         s->u_d01_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][0];
                         s->u_d01_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][1];
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Vb;
+                        s->u_d01_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_1][0];
+                        s->u_d01_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_1][1] + Va;                        
                         break;
                         case IN_MODE_BMP: // bmp
-                        int Va = g_inOutMatrixInt[local + 0][RAW];
+                        int Va = g_inOutMatrixInt[local + 0][RAW] >> 5;
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][0];
-                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];                    
+                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;                                      
                         break;
                         case IN_MODE_LF_0: // lfo 0
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE]][0];
@@ -458,24 +466,32 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                         s->u_d01_coord[1] = g_atlasTileMap[ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT]][1];
                         break;                    
                         case IN_MODE_AU_AL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 1;
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];    
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;
                         break;
                         case IN_MODE_AU_AH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 1;
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];   
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;                                         
                         break;
                         case IN_MODE_AU_BL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 1;
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1]; 
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;                                           
                         break;
                         case IN_MODE_AU_BH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 1;
                         s->u_d00_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d00_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1]; 
+                        s->u_d00_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d00_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;                                           
                         break;
                         case 9: // we ignore the midi modes for now!
                         break;
@@ -490,22 +506,33 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                     switch ( q1 ) // by the mode 
                         {
                         case IN_MODE_ADC: // adc
-                        int Va = g_inOutMatrixInt[local + 1][RAW];                         // how i dispatch the mode X correctly here?
+                        int Va = g_inOutMatrixInt[local + 1][RAW] >> 5;                         // how i dispatch the mode X correctly here?
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_2][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_2][1] + Va;                        
                         break;
                         case IN_MODE_TRG: // trg
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L];
-                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 4;
+                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 4;
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
                         s->u_d03_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][0];
                         s->u_d03_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][1];
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Vb;     
+                        s->u_d03_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_1][0];
+                        s->u_d03_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_1][1] + Va;                                           
                         break;
                         case IN_MODE_BMP: // bmp
-                        int Va = g_inOutMatrixInt[local + 1][RAW];
+                        int Va = g_inOutMatrixInt[local + 1][RAW] >> 5;
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][0];
-                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];                    
+                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];      
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_0][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_0][1] + Va;                                      
                         break;
                         case IN_MODE_LF_0: // lfo 0
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE]][0];
@@ -520,24 +547,36 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                         s->u_d03_coord[1] = g_atlasTileMap[ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT]][1];
                         break;                    
                         case IN_MODE_AU_AL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 1;
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];    
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_2][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_2][1] + Va;                                     
                         break;
                         case IN_MODE_AU_AH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 1;
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];   
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_2][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_2][1] + Va;                                            
                         break;
                         case IN_MODE_AU_BL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 1;
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];       
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_2][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_2][1] + Va;                                      
                         break;
                         case IN_MODE_AU_BH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 1;
                         s->u_d02_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d02_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];     
+
+                        s->u_d02_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_2][0];
+                        s->u_d02_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_2][1] + Va;                                         
                         break;
                         case 9: // we ignore the midi modes for now!
                         break;
@@ -552,22 +591,34 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                     switch ( q2 ) // by the mode 
                         {
                         case IN_MODE_ADC: // adc
-                        int Va = g_inOutMatrixInt[local + 2][RAW];                         // how i dispatch the mode X correctly here?
+                        int Va = g_inOutMatrixInt[local + 2][RAW] >> 5;                         // how i dispatch the mode X correctly here?
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
+
+    s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+
+    s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Va;                        
                         break;
                         case IN_MODE_TRG: // trg
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L];
-                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 4;
+                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 4;
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
                         s->u_d05_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][0];
                         s->u_d05_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][1];
+
+                        s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+                        s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Vb; 
+                        s->u_d05_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_5][0];
+                        s->u_d05_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_5][1] + Va;        
                         break;
                         case IN_MODE_BMP: // bmp
-                        int Va = g_inOutMatrixInt[local + 2][RAW];
+                        int Va = g_inOutMatrixInt[local + 2][RAW] >> 5;
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][0];
-                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];                    
+                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];      
+                        
+                        s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+                        s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Va;
                         break;
                         case IN_MODE_LF_0: // lfo 0
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE]][0];
@@ -582,24 +633,36 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                         s->u_d05_coord[1] = g_atlasTileMap[ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT]][1];
                         break;                    
                         case IN_MODE_AU_AL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 1;
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];     
+
+                        s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+                        s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Va;                                       
                         break;
                         case IN_MODE_AU_AH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 1;
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];        
+
+                        s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+                        s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Va;                                    
                         break;
                         case IN_MODE_AU_BL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 1;
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1]; 
+
+                        s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+                        s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Va;                                           
                         break;
                         case IN_MODE_AU_BH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 1;
                         s->u_d04_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d04_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1]; 
+
+                        s->u_d04_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_4][0];
+                        s->u_d04_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_4][1] + Va;                                           
                         break;
                         case 9: // we ignore the midi modes for now!
                         break;
@@ -614,22 +677,33 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                     switch ( q3 ) // by the mode 
                         {
                         case IN_MODE_ADC: // adc
-                        int Va = g_inOutMatrixInt[local + 3][RAW];                         // how i dispatch the mode X correctly here?
+                        int Va = g_inOutMatrixInt[local + 3][RAW] >> 5;                         // how i dispatch the mode X correctly here?
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
+
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Va;                        
                         break;
                         case IN_MODE_TRG: // trg
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L];
-                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 4;
+                        int Vb = g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 4;
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
                         s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];
                         s->u_d07_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][0];
                         s->u_d07_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_L][1];
+
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Vb;
+                        s->u_d07_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_7][0];
+                        s->u_d07_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_7][1] + Va;        
                         break;
                         case IN_MODE_BMP: // bmp
-                        int Va = g_inOutMatrixInt[local + 3][RAW];
+                        int Va = g_inOutMatrixInt[local + 3][RAW] >> 5;
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][0];
-                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];                    
+                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_BPM][1];           
+                        
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Va;                        
                         break;
                         case IN_MODE_LF_0: // lfo 0
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE]][0];
@@ -644,24 +718,36 @@ void            provideTileCoordByLayer( glsl_state* s, int layer )
                         s->u_d07_coord[1] = g_atlasTileMap[ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT]][1];
                         break;                    
                         case IN_MODE_AU_AL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 1;
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];       
+                        
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Va;                        
                         break;
                         case IN_MODE_AU_AH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 1;
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];   
+                        
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Va;                                            
                         break;
                         case IN_MODE_AU_BL:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 1;
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];      
+                        
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Va;                                         
                         break;
                         case IN_MODE_AU_BH:
-                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D];
+                        int Va = g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 1;
                         s->u_d06_coord[0] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][0];
-                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];                    
+                        s->u_d06_coord[1] = g_atlasTileMap[ATLAS_TILE_INDICATOR_BAR_R][1];        
+                        
+                        s->u_d06_coord[2] = g_menuCoordinates[MENU_COORD_DETAIL_6][0];
+                        s->u_d06_coord[3] = g_menuCoordinates[MENU_COORD_DETAIL_6][1] + Va;                                       
                         break;
                         case 9: // we ignore the midi modes for now!
                         break;

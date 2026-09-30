@@ -247,14 +247,14 @@ void            CKernel::setUniOvl                  (   olg_state*  o,
 #endif
 }
 
-void            CKernel::setTexOvl                  (   olg_state*  o, 
-                                                        glsl_state* s, 
+void            CKernel::setTexOvl                  (   olg_state*  o,
+                                                        glsl_state* s,
                                                         tex_state*  t )
 {
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[0]);
 
-                if (s->u_atlas[0] != -1) glUniform1i(s->u_atlas[0], 0);
+                if (t->u_tex_id[0][0] != -1) glUniform1i(t->u_tex_id[0][0], 0);
 #ifdef __DEBUG_GL__
                 debug_gl();
 #endif
@@ -263,8 +263,8 @@ void            CKernel::setTexOvl                  (   olg_state*  o,
 void            CKernel::drawGLsOvl                 (   )
 {
                 glEnable(GL_BLEND);
-                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            //  glBlendFunc(GL_ZERO, GL_SRC_COLOR);                 // shall fix the "no alfa in my 24bit bmp texture bitmap" issue
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  // shall fix the "no alfa in my 24bit bmp texture bitmap" issue
+            //  glBlendFunc(GL_ZERO, GL_SRC_COLOR);                 // Because the atlas texture is uploaded as GL_RGB, use multiplicative blending. The current upload uses GL_RGB
                 glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
                 glDisable(GL_BLEND);

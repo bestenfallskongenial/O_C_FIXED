@@ -40,7 +40,7 @@ struct glsl_state
     GLint                       u_tile_rect[MAX_OMF];
     GLint                       u_tile_index[MAX_OMF];
     // Overlay atlas sampler
-    GLint                       u_atlas[MAX_OMF]; 		// retarded shit, only shows that you have not read my gfx code or have no understanding anyway!
+//  GLint                       u_atlas[MAX_OMF]; 		// retarded shit, only shows that you have not read my gfx code or have no understanding anyway!
 														// ever wondered why i use the same strucs for tex and shaders 
 														// and why i have gl_tex_id[MAX_TEXTURE] or u_tex_id[MAX_SHADER][MAX_TEXTURE]; ???
 
@@ -70,6 +70,8 @@ struct glsl_state
 	GLfloat						u_t03_coord[4];			// MENU_COORD_TARGET_FRAME
 	
 	GLfloat						u_t05_coord[4];			// MENU_COORD_TARGET_PROGRAM
+
+	GLfloat						u_x00_coord[4];			// MENU_COORD_EXTERN_SELECTOR
 
 	GLfloat						u_up_coord[4];			// MENU_COORD_ARROW_UP
 	GLfloat						u_dw_coord[4];			// MENU_COORD_ARROW_DOWN

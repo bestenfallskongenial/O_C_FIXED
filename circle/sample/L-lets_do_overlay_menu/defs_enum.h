@@ -77,6 +77,11 @@ enum inModeNames
     IN_MODE_NAME_COUNT
 };
 
+enum targetModeNames
+{
+    dummy
+}
+
 enum MapType
 {
     MAP_MODE = 0,
@@ -191,7 +196,6 @@ enum FileField
     FLD_SIZE,                                       		// maximal size of the files / buffer-size
     FLD_COUNT
 };
-
 
 enum AtlasTileIndex
 {
@@ -308,6 +312,8 @@ enum OverlayScreenCoordinates
     MENU_COORD_TARGET_FRAME,
 
     MENU_COORD_TARGET_PROGRAM,
+
+	MENU_COORD_EXTERN_SELECTOR,
 
     MENU_COORD_ARROW_UP,
     MENU_COORD_ARROW_DOWN,
