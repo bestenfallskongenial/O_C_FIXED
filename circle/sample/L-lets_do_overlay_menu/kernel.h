@@ -342,8 +342,8 @@ public:
                                                                         unsigned                        nDevice,
                                                                         void*                           pParam);
 // code_overlay.cpp         
-                void        provideTileCoordForMode     (               int                             mode,
-                                                                        int                             matrixIndex,
+                void        provideTileCoordForMode     (               unsigned                        mode,
+                                                                        unsigned                        matrixIndex,
 
                                                                         float*                          qCoord,
                                                                         float*                          d0Coord,

@@ -3,21 +3,21 @@
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
     #define MY_IDX   m_logKernelIndex 
 
-void            CKernel::provideTileCoordForMode(   int     mode,
-                                                    int     matrixIndex,
+void            CKernel::provideTileCoordForMode(   unsigned    mode,
+                                                    unsigned    matrixIndex,
                                                 //  int     local,
-                                                    float*  qCoord,
-                                                    float*  d0Coord,
-                                                    float*  d1Coord,
-                                                    float*  t00Coord,
-                                                    float*  t01Coord,
-                                                    float*  t02Coord,
-                                                    float*  t03Coord,
-                                                    int     modeCoord,
-                                                    int     detail0Coord,
-                                                    int     detail1Coord )
+                                                    float*      qCoord,
+                                                    float*      d0Coord,
+                                                    float*      d1Coord,
+                                                    float*      t00Coord,
+                                                    float*      t01Coord,
+                                                    float*      t02Coord,
+                                                    float*      t03Coord,
+                                                    int         modeCoord,
+                                                    int         detail0Coord,
+                                                    int         detail1Coord )
 {
-                const int local = (matrixIndex / 4) * 4;
+                const unsigned local = (matrixIndex / 4) * 4;
 
                 qCoord[0] = g_atlasTileMap[ATLAS_TILE_MODE_ADC + mode][0];
                 qCoord[1] = g_atlasTileMap[ATLAS_TILE_MODE_ADC + mode][1];
@@ -151,7 +151,7 @@ void            CKernel::provideTileCoordForMode(   int     mode,
 void            CKernel::provideTileCoordByLayer    (   glsl_state* s, 
                                                         int         layer)
 {
-                int local = (layer - 1) * 4;
+                unsigned local = (layer - 1) * 4;
                 // quadrants
                 switch (layer)
                     {
