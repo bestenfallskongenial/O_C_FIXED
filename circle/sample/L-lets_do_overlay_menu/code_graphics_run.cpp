@@ -242,26 +242,26 @@ void            CKernel::setUniOvl                  (   olg_state*  o,
                 if (s->u_tres[0] != -1) { glUniform2f( s->u_tres[0], o->screen_width, o->screen_height); }
 
 
-                if (s->u_q00[0] != -1) { glUniform4fv( s->u_q00[0], 1, s->u_q00_coord); }
-                if (s->u_d00[0] != -1) { glUniform4fv( s->u_d00[0], 1, s->u_d00_coord); }
-                if (s->u_d01[0] != -1) { glUniform4fv( s->u_d01[0], 1, s->u_d01_coord); }
+                if (s->u_q00[0] != -1) { glUniform4fv( s->u_q00[0], 1, s->u_q00); }
+                if (s->u_d00[0] != -1) { glUniform4fv( s->u_d00[0], 1, s->u_d00); }
+                if (s->u_d01[0] != -1) { glUniform4fv( s->u_d01[0], 1, s->u_d01); }
 
-                if (s->u_q01[0] != -1) { glUniform4fv( s->u_q01[0], 1, s->u_q01_coord); }
-                if (s->u_d02[0] != -1) { glUniform4fv( s->u_d02[0], 1, s->u_d02_coord); }
-                if (s->u_d03[0] != -1) { glUniform4fv( s->u_d03[0], 1, s->u_d03_coord); }
+                if (s->u_q01[0] != -1) { glUniform4fv( s->u_q01[0], 1, s->u_q01); }
+                if (s->u_d02[0] != -1) { glUniform4fv( s->u_d02[0], 1, s->u_d02); }
+                if (s->u_d03[0] != -1) { glUniform4fv( s->u_d03[0], 1, s->u_d03); }
 
-                if (s->u_q02[0] != -1) { glUniform4fv( s->u_q02[0], 1, s->u_q02_coord); }
-                if (s->u_d04[0] != -1) { glUniform4fv( s->u_d04[0], 1, s->u_d04_coord); }
-                if (s->u_d05[0] != -1) { glUniform4fv( s->u_d05[0], 1, s->u_d05_coord); }
+                if (s->u_q02[0] != -1) { glUniform4fv( s->u_q02[0], 1, s->u_q02); }
+                if (s->u_d04[0] != -1) { glUniform4fv( s->u_d04[0], 1, s->u_d04); }
+                if (s->u_d05[0] != -1) { glUniform4fv( s->u_d05[0], 1, s->u_d05); }
 
-                if (s->u_q03[0] != -1) { glUniform4fv( s->u_q03[0], 1, s->u_q03_coord); }
-                if (s->u_d06[0] != -1) { glUniform4fv( s->u_d06[0], 1, s->u_d06_coord); }
-                if (s->u_d07[0] != -1) { glUniform4fv( s->u_d07[0], 1, s->u_d07_coord); }
+                if (s->u_q03[0] != -1) { glUniform4fv( s->u_q03[0], 1, s->u_q03); }
+                if (s->u_d06[0] != -1) { glUniform4fv( s->u_d06[0], 1, s->u_d06); }
+                if (s->u_d07[0] != -1) { glUniform4fv( s->u_d07[0], 1, s->u_d07); }
 
-                if (s->u_t00[0] != -1) { glUniform4fv( s->u_t00[0], 1, s->u_t00_coord); }
-                if (s->u_t01[0] != -1) { glUniform4fv( s->u_t01[0], 1, s->u_t01_coord); }
-                if (s->u_t02[0] != -1) { glUniform4fv( s->u_t02[0], 1, s->u_t02_coord); }
-                if (s->u_t03[0] != -1) { glUniform4fv( s->u_t03[0], 1, s->u_t03_coord); }
+                if (s->u_t00[0] != -1) { glUniform4fv( s->u_t00[0], 1, s->u_t00); }
+                if (s->u_t01[0] != -1) { glUniform4fv( s->u_t01[0], 1, s->u_t01); }
+                if (s->u_t02[0] != -1) { glUniform4fv( s->u_t02[0], 1, s->u_t02); }
+                if (s->u_t03[0] != -1) { glUniform4fv( s->u_t03[0], 1, s->u_t03); }
 
 #ifdef __DEBUG_GL__
                 debug_gl();
