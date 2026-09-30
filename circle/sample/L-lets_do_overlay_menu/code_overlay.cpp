@@ -5,7 +5,7 @@
 
 void            CKernel::provideTileCoordForMode(   int     mode,
                                                     int     matrixIndex,
-                                                    int     local,
+
                                                     float*  qCoord,
                                                     float*  d0Coord,
                                                     float*  d1Coord,
