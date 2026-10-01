@@ -242,26 +242,26 @@ void            CKernel::setUniOvl                  (   olg_state*  o,
                 if (s->u_tres[0] != -1) { glUniform2f( s->u_tres[0], o->screen_width, o->screen_height); }
 
 
-                if (s->u_q00[0] != -1) { glUniform4fv( s->u_q00[0], 1, s->u_q00); }
-                if (s->u_d00[0] != -1) { glUniform4fv( s->u_d00[0], 1, s->u_d00); }
-                if (s->u_d01[0] != -1) { glUniform4fv( s->u_d01[0], 1, s->u_d01); }
+                if (s->u_q00[0] != -1) { glUniform4f( s->u_q00[0], g_menuTarget[MENU_COORD_MODE_0][0], g_menuTarget[MENU_COORD_MODE_0][1], g_menuTarget[MENU_COORD_MODE_0][2], g_menuTarget[MENU_COORD_MODE_0][3]); }
+                if (s->u_d00[0] != -1) { glUniform4f( s->u_d00[0], g_menuTarget[MENU_COORD_DETAIL_0][0], g_menuTarget[MENU_COORD_DETAIL_0][1], g_menuTarget[MENU_COORD_DETAIL_0][2], g_menuTarget[MENU_COORD_DETAIL_0][3]); }
+                if (s->u_d01[0] != -1) { glUniform4f( s->u_d01[0], g_menuTarget[MENU_COORD_DETAIL_1][0], g_menuTarget[MENU_COORD_DETAIL_1][1], g_menuTarget[MENU_COORD_DETAIL_1][2], g_menuTarget[MENU_COORD_DETAIL_1][3]); }
 
-                if (s->u_q01[0] != -1) { glUniform4fv( s->u_q01[0], 1, s->u_q01); }
-                if (s->u_d02[0] != -1) { glUniform4fv( s->u_d02[0], 1, s->u_d02); }
-                if (s->u_d03[0] != -1) { glUniform4fv( s->u_d03[0], 1, s->u_d03); }
+                if (s->u_q01[0] != -1) { glUniform4f( s->u_q01[0], g_menuTarget[MENU_COORD_MODE_1][0], g_menuTarget[MENU_COORD_MODE_1][1], g_menuTarget[MENU_COORD_MODE_1][2], g_menuTarget[MENU_COORD_MODE_1][3]); }
+                if (s->u_d02[0] != -1) { glUniform4f( s->u_d02[0], g_menuTarget[MENU_COORD_DETAIL_2][0], g_menuTarget[MENU_COORD_DETAIL_2][1], g_menuTarget[MENU_COORD_DETAIL_2][2], g_menuTarget[MENU_COORD_DETAIL_2][3]); }
+                if (s->u_d03[0] != -1) { glUniform4f( s->u_d03[0], g_menuTarget[MENU_COORD_DETAIL_3][0], g_menuTarget[MENU_COORD_DETAIL_3][1], g_menuTarget[MENU_COORD_DETAIL_3][2], g_menuTarget[MENU_COORD_DETAIL_3][3]); }
 
-                if (s->u_q02[0] != -1) { glUniform4fv( s->u_q02[0], 1, s->u_q02); }
-                if (s->u_d04[0] != -1) { glUniform4fv( s->u_d04[0], 1, s->u_d04); }
-                if (s->u_d05[0] != -1) { glUniform4fv( s->u_d05[0], 1, s->u_d05); }
+                if (s->u_q02[0] != -1) { glUniform4f( s->u_q02[0], g_menuTarget[MENU_COORD_MODE_2][0], g_menuTarget[MENU_COORD_MODE_2][1], g_menuTarget[MENU_COORD_MODE_2][2], g_menuTarget[MENU_COORD_MODE_2][3]); }
+                if (s->u_d04[0] != -1) { glUniform4f( s->u_d04[0], g_menuTarget[MENU_COORD_DETAIL_4][0], g_menuTarget[MENU_COORD_DETAIL_4][1], g_menuTarget[MENU_COORD_DETAIL_4][2], g_menuTarget[MENU_COORD_DETAIL_4][3]); }
+                if (s->u_d05[0] != -1) { glUniform4f( s->u_d05[0], g_menuTarget[MENU_COORD_DETAIL_5][0], g_menuTarget[MENU_COORD_DETAIL_5][1], g_menuTarget[MENU_COORD_DETAIL_5][2], g_menuTarget[MENU_COORD_DETAIL_5][3]); }
 
-                if (s->u_q03[0] != -1) { glUniform4fv( s->u_q03[0], 1, s->u_q03); }
-                if (s->u_d06[0] != -1) { glUniform4fv( s->u_d06[0], 1, s->u_d06); }
-                if (s->u_d07[0] != -1) { glUniform4fv( s->u_d07[0], 1, s->u_d07); }
+                if (s->u_q03[0] != -1) { glUniform4f( s->u_q03[0], g_menuTarget[MENU_COORD_MODE_3][0], g_menuTarget[MENU_COORD_MODE_3][1], g_menuTarget[MENU_COORD_MODE_3][2], g_menuTarget[MENU_COORD_MODE_3][3]); }
+                if (s->u_d06[0] != -1) { glUniform4f( s->u_d06[0], g_menuTarget[MENU_COORD_DETAIL_6][0], g_menuTarget[MENU_COORD_DETAIL_6][1], g_menuTarget[MENU_COORD_DETAIL_6][2], g_menuTarget[MENU_COORD_DETAIL_6][3]); }
+                if (s->u_d07[0] != -1) { glUniform4f( s->u_d07[0], g_menuTarget[MENU_COORD_DETAIL_7][0], g_menuTarget[MENU_COORD_DETAIL_7][1], g_menuTarget[MENU_COORD_DETAIL_7][2], g_menuTarget[MENU_COORD_DETAIL_7][3]); }
 
-                if (s->u_t00[0] != -1) { glUniform4fv( s->u_t00[0], 1, s->u_t00); }
-                if (s->u_t01[0] != -1) { glUniform4fv( s->u_t01[0], 1, s->u_t01); }
-                if (s->u_t02[0] != -1) { glUniform4fv( s->u_t02[0], 1, s->u_t02); }
-                if (s->u_t03[0] != -1) { glUniform4fv( s->u_t03[0], 1, s->u_t03); }
+                if (s->u_t00[0] != -1) { glUniform4f( s->u_t00[0], g_menuTarget[MENU_COORD_TARGET_TIME][0], g_menuTarget[MENU_COORD_TARGET_TIME][1], g_menuTarget[MENU_COORD_TARGET_TIME][2], g_menuTarget[MENU_COORD_TARGET_TIME][3]); }
+                if (s->u_t01[0] != -1) { glUniform4f( s->u_t01[0], g_menuTarget[MENU_COORD_TARGET_TEXTURE][0], g_menuTarget[MENU_COORD_TARGET_TEXTURE][1], g_menuTarget[MENU_COORD_TARGET_TEXTURE][2], g_menuTarget[MENU_COORD_TARGET_TEXTURE][3]); }
+                if (s->u_t02[0] != -1) { glUniform4f( s->u_t02[0], g_menuTarget[MENU_COORD_TARGET_VIDEO][0], g_menuTarget[MENU_COORD_TARGET_VIDEO][1], g_menuTarget[MENU_COORD_TARGET_VIDEO][2], g_menuTarget[MENU_COORD_TARGET_VIDEO][3]); }
+                if (s->u_t03[0] != -1) { glUniform4f( s->u_t03[0], g_menuTarget[MENU_COORD_TARGET_FRAME][0], g_menuTarget[MENU_COORD_TARGET_FRAME][1], g_menuTarget[MENU_COORD_TARGET_FRAME][2], g_menuTarget[MENU_COORD_TARGET_FRAME][3]); }
 
 #ifdef __DEBUG_GL__
                 debug_gl();

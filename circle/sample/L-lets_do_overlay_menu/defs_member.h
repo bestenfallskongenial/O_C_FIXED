@@ -456,6 +456,8 @@ public:         // Logging
 // Y	=	is shown if layer 2 on the fixed position q3 !
 // X	= 	same logic as **** taken from g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT]
 
+                GLfloat                         g_menuTarget[MENU_COORD_COUNT][4]               =           { 0.0f };
+
 private:
                 VCHI_INSTANCE_T                 m_VCHIInstance                                  = 0;
                 VCHI_CONNECTION_T*              m_Connection                                    = 0;

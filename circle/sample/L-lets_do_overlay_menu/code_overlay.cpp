@@ -148,6 +148,7 @@ void            CKernel::provideTileCoordForMode(   unsigned    mode,
                         break;
                     }
 }
+
 void            CKernel::provideTileCoordByLayer    (   glsl_state* s, 
                                                         int         layer)
 {
@@ -159,74 +160,74 @@ void            CKernel::provideTileCoordByLayer    (   glsl_state* s,
                     case 2:
                         provideTileCoordForMode(    g_centralModeBuffer[g_gl_program_current][local + 0],
                                                     local + 0,
-                                                    s->u_q00,
-                                                    s->u_d00,
-                                                    s->u_d01,
-                                                    s->u_t00,
-                                                    s->u_t01,
-                                                    s->u_t02,
-                                                    s->u_t03,
+                                                    g_menuTarget[MENU_COORD_MODE_0],
+                                                    g_menuTarget[MENU_COORD_DETAIL_0],
+                                                    g_menuTarget[MENU_COORD_DETAIL_1],
+                                                    g_menuTarget[MENU_COORD_TARGET_TIME],
+                                                    g_menuTarget[MENU_COORD_TARGET_TEXTURE],
+                                                    g_menuTarget[MENU_COORD_TARGET_VIDEO],
+                                                    g_menuTarget[MENU_COORD_TARGET_FRAME],
                                                     MENU_COORD_MODE_0,
                                                     MENU_COORD_DETAIL_0,
                                                     MENU_COORD_DETAIL_1);
                         provideTileCoordForMode(    g_centralModeBuffer[g_gl_program_current][local + 1],
                                                     local + 1,
-                                                    s->u_q01,
-                                                    s->u_d02,
-                                                    s->u_d03,
-                                                    s->u_t00,
-                                                    s->u_t01,
-                                                    s->u_t02,
-                                                    s->u_t03,
+                                                    g_menuTarget[MENU_COORD_MODE_1],
+                                                    g_menuTarget[MENU_COORD_DETAIL_2],
+                                                    g_menuTarget[MENU_COORD_DETAIL_3],
+                                                    g_menuTarget[MENU_COORD_TARGET_TIME],
+                                                    g_menuTarget[MENU_COORD_TARGET_TEXTURE],
+                                                    g_menuTarget[MENU_COORD_TARGET_VIDEO],
+                                                    g_menuTarget[MENU_COORD_TARGET_FRAME],
                                                     MENU_COORD_MODE_1,
                                                     MENU_COORD_DETAIL_2,
                                                     MENU_COORD_DETAIL_3);
                         provideTileCoordForMode(    g_centralModeBuffer[g_gl_program_current][local + 2],
                                                     local + 2,
-                                                    s->u_q02,
-                                                    s->u_d04,
-                                                    s->u_d05,
-                                                    s->u_t00,
-                                                    s->u_t01,
-                                                    s->u_t02,
-                                                    s->u_t03,
+                                                    g_menuTarget[MENU_COORD_MODE_2],
+                                                    g_menuTarget[MENU_COORD_DETAIL_4],
+                                                    g_menuTarget[MENU_COORD_DETAIL_5],
+                                                    g_menuTarget[MENU_COORD_TARGET_TIME],
+                                                    g_menuTarget[MENU_COORD_TARGET_TEXTURE],
+                                                    g_menuTarget[MENU_COORD_TARGET_VIDEO],
+                                                    g_menuTarget[MENU_COORD_TARGET_FRAME],
                                                     MENU_COORD_MODE_2,
                                                     MENU_COORD_DETAIL_4,
                                                     MENU_COORD_DETAIL_5);
                         provideTileCoordForMode(    g_centralModeBuffer[g_gl_program_current][local + 3],
                                                     local + 3,
-                                                    s->u_q03,
-                                                    s->u_d06,
-                                                    s->u_d07,
-                                                    s->u_t00,
-                                                    s->u_t01,
-                                                    s->u_t02,
-                                                    s->u_t03,
+                                                    g_menuTarget[MENU_COORD_MODE_3],
+                                                    g_menuTarget[MENU_COORD_DETAIL_6],
+                                                    g_menuTarget[MENU_COORD_DETAIL_7],
+                                                    g_menuTarget[MENU_COORD_TARGET_TIME],
+                                                    g_menuTarget[MENU_COORD_TARGET_TEXTURE],
+                                                    g_menuTarget[MENU_COORD_TARGET_VIDEO],
+                                                    g_menuTarget[MENU_COORD_TARGET_FRAME],
                                                     MENU_COORD_MODE_3,
                                                     MENU_COORD_DETAIL_6,
                                                     MENU_COORD_DETAIL_7);
                             break;
                     // system modes            
                     case 8:
-                        s->u_q00[0] = g_atlasTileMap[ATLAS_TILE_TARGET_TIME][0];
-                        s->u_q00[1] = g_atlasTileMap[ATLAS_TILE_TARGET_TIME][1];
-                        s->u_q00[2] = g_menuCoordinates[MENU_COORD_MODE_0][0];
-                        s->u_q00[3] = g_menuCoordinates[MENU_COORD_MODE_0][1];
+                        g_menuTarget[MENU_COORD_MODE_0][0] = g_atlasTileMap[ATLAS_TILE_TARGET_TIME][0];
+                        g_menuTarget[MENU_COORD_MODE_0][1] = g_atlasTileMap[ATLAS_TILE_TARGET_TIME][1];
+                        g_menuTarget[MENU_COORD_MODE_0][2] = g_menuCoordinates[MENU_COORD_MODE_0][0];
+                        g_menuTarget[MENU_COORD_MODE_0][3] = g_menuCoordinates[MENU_COORD_MODE_0][1];
 
-                        s->u_q01[0] = g_atlasTileMap[ATLAS_TILE_TARGET_TEXTURE][0];
-                        s->u_q01[1] = g_atlasTileMap[ATLAS_TILE_TARGET_TEXTURE][1];
-                        s->u_q01[2] = g_menuCoordinates[MENU_COORD_MODE_1][0];
-                        s->u_q01[3] = g_menuCoordinates[MENU_COORD_MODE_1][1];
+                        g_menuTarget[MENU_COORD_MODE_1][0] = g_atlasTileMap[ATLAS_TILE_TARGET_TEXTURE][0];
+                        g_menuTarget[MENU_COORD_MODE_1][1] = g_atlasTileMap[ATLAS_TILE_TARGET_TEXTURE][1];
+                        g_menuTarget[MENU_COORD_MODE_1][2] = g_menuCoordinates[MENU_COORD_MODE_1][0];
+                        g_menuTarget[MENU_COORD_MODE_1][3] = g_menuCoordinates[MENU_COORD_MODE_1][1];
 
-                        s->u_q02[0] = g_atlasTileMap[ATLAS_TILE_TARGET_VIDEO][0];
-                        s->u_q02[1] = g_atlasTileMap[ATLAS_TILE_TARGET_VIDEO][1];
-                        s->u_q02[2] = g_menuCoordinates[MENU_COORD_MODE_2][0];
-                        s->u_q02[3] = g_menuCoordinates[MENU_COORD_MODE_2][1];
+                        g_menuTarget[MENU_COORD_MODE_2][0] = g_atlasTileMap[ATLAS_TILE_TARGET_VIDEO][0];
+                        g_menuTarget[MENU_COORD_MODE_2][1] = g_atlasTileMap[ATLAS_TILE_TARGET_VIDEO][1];
+                        g_menuTarget[MENU_COORD_MODE_2][2] = g_menuCoordinates[MENU_COORD_MODE_2][0];
+                        g_menuTarget[MENU_COORD_MODE_2][3] = g_menuCoordinates[MENU_COORD_MODE_2][1];
 
-                        s->u_q03[0] = g_atlasTileMap[ATLAS_TILE_TARGET_FRAME][0];
-                        s->u_q03[1] = g_atlasTileMap[ATLAS_TILE_TARGET_FRAME][1];
-                        s->u_q03[2] = g_menuCoordinates[MENU_COORD_MODE_3][0];
-                        s->u_q03[3] = g_menuCoordinates[MENU_COORD_MODE_3][1];
+                        g_menuTarget[MENU_COORD_MODE_3][0] = g_atlasTileMap[ATLAS_TILE_TARGET_FRAME][0];
+                        g_menuTarget[MENU_COORD_MODE_3][1] = g_atlasTileMap[ATLAS_TILE_TARGET_FRAME][1];
+                        g_menuTarget[MENU_COORD_MODE_3][2] = g_menuCoordinates[MENU_COORD_MODE_3][0];
+                        g_menuTarget[MENU_COORD_MODE_3][3] = g_menuCoordinates[MENU_COORD_MODE_3][1];
                         break;
                     default:
                         break;

@@ -35,54 +35,45 @@ struct glsl_state
     GLint                       u_par_b[MAX_SHADER];
     GLint                       u_tex_l[MAX_SHADER];
     // overlay uniforms
-    GLint                       u_atlas[MAX_OMF];
-    GLint                       u_tile_count[MAX_OMF];
-    GLint                       u_tile_rect[MAX_OMF];
-    GLint                       u_tile_index[MAX_OMF];
-    // Overlay atlas sampler
-//  GLint                       u_atlas[MAX_OMF]; 		// retarded shit, only shows that you have not read my gfx code or have no understanding anyway!
-														// ever wondered why i use the same strucs for tex and shaders 
-														// and why i have gl_tex_id[MAX_TEXTURE] or u_tex_id[MAX_SHADER][MAX_TEXTURE]; ???
+	GLint						u_q00[MAX_OMF];			// MENU_COORD_MODE_0
 
-	GLfloat						u_q00[4];			// MENU_COORD_MODE_0
+	GLint						u_d00[MAX_OMF];			// MENU_COORD_DETAIL_0
+	GLint						u_d01[MAX_OMF];			// MENU_COORD_DETAIL_1
 
-	GLfloat						u_d00[4];			// MENU_COORD_DETAIL_0
-	GLfloat						u_d01[4];			// MENU_COORD_DETAIL_1
+	GLint						u_q01[MAX_OMF];			// MENU_COORD_MODE_1
 
-	GLfloat						u_q01[4];			// MENU_COORD_MODE_1
+	GLint						u_d02[MAX_OMF];			// MENU_COORD_DETAIL_2
+	GLint						u_d03[MAX_OMF];			// MENU_COORD_DETAIL_3
 
-	GLfloat						u_d02[4];			// MENU_COORD_DETAIL_2
-	GLfloat						u_d03[4];			// MENU_COORD_DETAIL_3
+	GLint						u_q02[MAX_OMF];			// MENU_COORD_MODE_2
 
-	GLfloat						u_q02[4];			// MENU_COORD_MODE_2
+	GLint						u_d04[MAX_OMF];			// MENU_COORD_DETAIL_4
+	GLint						u_d05[MAX_OMF];			// MENU_COORD_DETAIL_5
 
-	GLfloat						u_d04[4];			// MENU_COORD_DETAIL_4
-	GLfloat						u_d05[4];			// MENU_COORD_DETAIL_5
+	GLint						u_q03[MAX_OMF];			// MENU_COORD_MODE_3
 
-	GLfloat						u_q03[4];			// MENU_COORD_MODE_3
+	GLint						u_d06[MAX_OMF];			// MENU_COORD_DETAIL_6
+	GLint						u_d07[MAX_OMF];			// MENU_COORD_DETAIL_7
 
-	GLfloat						u_d06[4];			// MENU_COORD_DETAIL_6
-	GLfloat						u_d07[4];			// MENU_COORD_DETAIL_7
+	GLint						u_t00[MAX_OMF];			// MENU_COORD_TARGET_TIME
+	GLint						u_t01[MAX_OMF];			// MENU_COORD_TARGET_TEXTURE
+	GLint						u_t02[MAX_OMF];			// MENU_COORD_TARGET_VIDEO
+	GLint						u_t03[MAX_OMF];			// MENU_COORD_TARGET_FRAME
+		
+	GLint						u_t05[MAX_OMF];			// MENU_COORD_TARGET_PROGRAM
 
-	GLfloat						u_t00[4];			// MENU_COORD_TARGET_TIME
-	GLfloat						u_t01[4];			// MENU_COORD_TARGET_TEXTURE
-	GLfloat						u_t02[4];			// MENU_COORD_TARGET_VIDEO
-	GLfloat						u_t03[4];			// MENU_COORD_TARGET_FRAME
-	
-	GLfloat						u_t05[4];			// MENU_COORD_TARGET_PROGRAM
+	GLint						u_x00[MAX_OMF];			// MENU_COORD_EXTERN_SELECTOR
 
-	GLfloat						u_x00[4];			// MENU_COORD_EXTERN_SELECTOR
+	GLint						u_up[MAX_OMF];			// MENU_COORD_ARROW_UP
+	GLint						u_dw[MAX_OMF];			// MENU_COORD_ARROW_DOWN
 
-	GLfloat						u_up[4];			// MENU_COORD_ARROW_UP
-	GLfloat						u_dw[4];			// MENU_COORD_ARROW_DOWN
-
-	GLfloat						u_bpm[4];			// MENU_COORD_BPM_STRING
-	GLfloat						u_100[4];			// MENU_COORD_BPM_100
-	GLfloat						u_010[4];			// MENU_COORD_BPM_010
-	GLfloat						u_001[4];			// MENU_COORD_BPM_001
-	GLfloat						u_dot[4];			// MENU_COORD_BPM_DOT
-	GLfloat						u_10d[4];			// MENU_COORD_BPM_10D
-	GLfloat						u_01d[4];			// MENU_COORD_BPM_01D
+	GLint						u_bpm[MAX_OMF];			// MENU_COORD_BPM_STRING
+	GLint						u_100[MAX_OMF];			// MENU_COORD_BPM_100
+	GLint						u_010[MAX_OMF];			// MENU_COORD_BPM_010
+	GLint						u_001[MAX_OMF];			// MENU_COORD_BPM_001
+	GLint						u_dot[MAX_OMF];			// MENU_COORD_BPM_DOT
+	GLint						u_10d[MAX_OMF];			// MENU_COORD_BPM_10D
+	GLint						u_01d[MAX_OMF];			// MENU_COORD_BPM_01D
 };
 
 struct tex_state
