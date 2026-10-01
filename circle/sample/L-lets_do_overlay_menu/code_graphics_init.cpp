@@ -291,10 +291,11 @@ void            CKernel::initUniform                (   vtx_state*  v,
                         s->u_t01[i]    = glGetUniformLocation(s->gl_program_id[i], "t01_coord");
                         s->u_t02[i]    = glGetUniformLocation(s->gl_program_id[i], "t02_coord");
                         s->u_t03[i]    = glGetUniformLocation(s->gl_program_id[i], "t03_coord");
+                    // we still need here the uniforms for the other possible tiles, but for now, im fine                         
                     //  }
-
-                    // we still need here the uniforms for the other posible tiles, but for now, im fine 
-
+#ifdef __DEBUG_GL__
+                    debug_gl();     // really?!?!?!
+#endif
                 for (int j = 0; j < MAX_TEXTURE; ++j)
                     {
                     char name[8];
