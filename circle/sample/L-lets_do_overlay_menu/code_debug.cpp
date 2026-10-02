@@ -82,7 +82,7 @@ void            CKernel::logInfosRuntime( int row )
 
                 f_logBuffer[0] = '\0';
 
-                storeLogHex(    f_logBuffer, f_logIndex, "g_menuLayer", g_menuLayer, "CTRL_PIN", GPIO_Read(CTRL_PIN), "bpm 0",  g_lfoBpmMatrix[0][BPM], "bpm 1", g_lfoBpmMatrix[1][BPM]);
+                storeLogHex(    f_logBuffer, f_logIndex, "g_menuLayer", g_menuLayer, "CTRL_PIN", GPIO_Read(CTRL_PIN), "bpm 0", ( g_lfoBpmMatrix[0][BPM] / 100 ), "bpm 1", ( g_lfoBpmMatrix[1][BPM] / 100 );
                 storeLogHex(    f_logBuffer, f_logIndex, "[FLD_LOADED]", filecounter[FT_FSH][FLD_LOADED], "[FLD_VALID]", filecounter[FT_FSH][FLD_VALID], "g_gl_program_current", g_gl_program_current, "g_currentProgramBuffer", g_currentProgramBuffer);
                 storeLogHex(    f_logBuffer, f_logIndex, "[FLD_LOADED]", filecounter[FT_TEX][FLD_LOADED], "[FLD_VALID]", filecounter[FT_TEX][FLD_VALID], "active texture", m_activeTex);
                 storeLogHex(    f_logBuffer, f_logIndex, "AUDIO 0", g_centralModeBuffer[g_currentProgramBuffer][FLAG_AUDIO_A]);
