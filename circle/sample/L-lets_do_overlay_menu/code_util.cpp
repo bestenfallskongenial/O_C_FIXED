@@ -96,7 +96,7 @@ void            CKernel::calculate1BPMnew           (   int             p_source
                         {
                         f_intervalAverage                 = ( g_lfoBpmMatrix[0][p_deltaBuffer] + g_lfoBpmMatrix[1][p_deltaBuffer] + g_lfoBpmMatrix[2][p_deltaBuffer] ) / 3;
 
-                        g_lfoBpmMatrix[p_source][BPM]     =   60000 / f_intervalAverage; // 60000000 / f_intervalAverage;
+                        g_lfoBpmMatrix[p_source][BPM]     =   6000000 / f_intervalAverage; // 60000 / f_intervalAverage;
                         g_lfoBpmMatrix[p_source][INTV]    =   f_intervalAverage;
                         g_lfoBpmMatrix[p_source][LBC]     =   p_triggerTimeClock; // m_Timer.GetClockTicks();
 

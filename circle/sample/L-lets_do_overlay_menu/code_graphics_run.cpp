@@ -263,6 +263,15 @@ void            CKernel::setUniOvl                  (   olg_state*  o,
                 if (s->u_t02[0] != -1) { glUniform4f( s->u_t02[0], g_menuTarget[MENU_COORD_TARGET_VIDEO][0], g_menuTarget[MENU_COORD_TARGET_VIDEO][1], g_menuTarget[MENU_COORD_TARGET_VIDEO][2], g_menuTarget[MENU_COORD_TARGET_VIDEO][3]); }
                 if (s->u_t03[0] != -1) { glUniform4f( s->u_t03[0], g_menuTarget[MENU_COORD_TARGET_FRAME][0], g_menuTarget[MENU_COORD_TARGET_FRAME][1], g_menuTarget[MENU_COORD_TARGET_FRAME][2], g_menuTarget[MENU_COORD_TARGET_FRAME][3]); }
 
+                if (s->u_bpm[0] != -1) { glUniform4f(s->u_bpm[0], g_menuTarget[MENU_COORD_BPM_STRING][0], g_menuTarget[MENU_COORD_BPM_STRING][1], g_menuTarget[MENU_COORD_BPM_STRING][2], g_menuTarget[MENU_COORD_BPM_STRING][3]); }
+                if (s->u_100[0] != -1) { glUniform4f(s->u_100[0], g_menuTarget[MENU_COORD_BPM_100][0], g_menuTarget[MENU_COORD_BPM_100][1], g_menuTarget[MENU_COORD_BPM_100][2], g_menuTarget[MENU_COORD_BPM_100][3]); }
+                if (s->u_010[0] != -1) { glUniform4f(s->u_010[0], g_menuTarget[MENU_COORD_BPM_010][0], g_menuTarget[MENU_COORD_BPM_010][1], g_menuTarget[MENU_COORD_BPM_010][2], g_menuTarget[MENU_COORD_BPM_010][3]); }
+                if (s->u_001[0] != -1) { glUniform4f(s->u_001[0], g_menuTarget[MENU_COORD_BPM_001][0], g_menuTarget[MENU_COORD_BPM_001][1], g_menuTarget[MENU_COORD_BPM_001][2], g_menuTarget[MENU_COORD_BPM_001][3]); }
+                if (s->u_dot[0] != -1) { glUniform4f(s->u_dot[0], g_menuTarget[MENU_COORD_BPM_DOT][0], g_menuTarget[MENU_COORD_BPM_DOT][1], g_menuTarget[MENU_COORD_BPM_DOT][2], g_menuTarget[MENU_COORD_BPM_DOT][3]); }
+                if (s->u_10d[0] != -1) { glUniform4f(s->u_10d[0], g_menuTarget[MENU_COORD_BPM_10D][0], g_menuTarget[MENU_COORD_BPM_10D][1], g_menuTarget[MENU_COORD_BPM_10D][2], g_menuTarget[MENU_COORD_BPM_10D][3]); }
+                if (s->u_01d[0] != -1) { glUniform4f(s->u_01d[0], g_menuTarget[MENU_COORD_BPM_01D][0], g_menuTarget[MENU_COORD_BPM_01D][1], g_menuTarget[MENU_COORD_BPM_01D][2], g_menuTarget[MENU_COORD_BPM_01D][3]); }
+
+                
 #ifdef __DEBUG_GL__
                 debug_gl();
 #endif

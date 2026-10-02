@@ -152,6 +152,8 @@ void            CKernel::provideTileCoordForMode(   unsigned    mode,
 void            CKernel::provideTileCoordByLayer    (   glsl_state* s, 
                                                         int         layer)
 {
+                memset(g_menuTarget, 0, sizeof(g_menuTarget));
+
                 unsigned local = (layer - 1) * 4;
                 // quadrants
                 switch (layer)
@@ -232,4 +234,49 @@ void            CKernel::provideTileCoordByLayer    (   glsl_state* s,
                     default:
                         break;
                     }
+                if (m_BPM_hold_A)
+                    {
+                    unsigned bpm = g_lfoBpmMatrix[g_activeBpmChannel][BPM];
+
+                    unsigned digit100 = (bpm / 10000) % 10;
+                    unsigned digit010 = (bpm / 1000)  % 10;
+                    unsigned digit001 = (bpm / 100)   % 10;
+                    unsigned digit10d = (bpm / 10)    % 10;
+                    unsigned digit01d =  bpm          % 10;
+
+                    g_menuTarget[MENU_COORD_BPM_STRING][0] = g_atlasTileMap[ATLAS_TILE_LABEL_BPM][0];
+                    g_menuTarget[MENU_COORD_BPM_STRING][1] = g_atlasTileMap[ATLAS_TILE_LABEL_BPM][1];
+                    g_menuTarget[MENU_COORD_BPM_STRING][2] = g_menuCoordinates[MENU_COORD_BPM_STRING][0];
+                    g_menuTarget[MENU_COORD_BPM_STRING][3] = g_menuCoordinates[MENU_COORD_BPM_STRING][1];
+
+                    g_menuTarget[MENU_COORD_BPM_100][0] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit100][0];
+                    g_menuTarget[MENU_COORD_BPM_100][1] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit100][1];
+                    g_menuTarget[MENU_COORD_BPM_100][2] = g_menuCoordinates[MENU_COORD_BPM_100][0];
+                    g_menuTarget[MENU_COORD_BPM_100][3] = g_menuCoordinates[MENU_COORD_BPM_100][1];
+
+                    g_menuTarget[MENU_COORD_BPM_010][0] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit010][0];
+                    g_menuTarget[MENU_COORD_BPM_010][1] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit010][1];
+                    g_menuTarget[MENU_COORD_BPM_010][2] = g_menuCoordinates[MENU_COORD_BPM_010][0];
+                    g_menuTarget[MENU_COORD_BPM_010][3] = g_menuCoordinates[MENU_COORD_BPM_010][1];
+
+                    g_menuTarget[MENU_COORD_BPM_001][0] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit001][0];
+                    g_menuTarget[MENU_COORD_BPM_001][1] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit001][1];
+                    g_menuTarget[MENU_COORD_BPM_001][2] = g_menuCoordinates[MENU_COORD_BPM_001][0];
+                    g_menuTarget[MENU_COORD_BPM_001][3] = g_menuCoordinates[MENU_COORD_BPM_001][1];
+
+                    g_menuTarget[MENU_COORD_BPM_DOT][0] = g_atlasTileMap[ATLAS_TILE_NUMBER_DOT][0];
+                    g_menuTarget[MENU_COORD_BPM_DOT][1] = g_atlasTileMap[ATLAS_TILE_NUMBER_DOT][1];
+                    g_menuTarget[MENU_COORD_BPM_DOT][2] = g_menuCoordinates[MENU_COORD_BPM_DOT][0];
+                    g_menuTarget[MENU_COORD_BPM_DOT][3] = g_menuCoordinates[MENU_COORD_BPM_DOT][1];
+
+                    g_menuTarget[MENU_COORD_BPM_10D][0] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit10d][0];
+                    g_menuTarget[MENU_COORD_BPM_10D][1] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit10d][1];
+                    g_menuTarget[MENU_COORD_BPM_10D][2] = g_menuCoordinates[MENU_COORD_BPM_10D][0];
+                    g_menuTarget[MENU_COORD_BPM_10D][3] = g_menuCoordinates[MENU_COORD_BPM_10D][1];
+
+                    g_menuTarget[MENU_COORD_BPM_01D][0] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit01d][0];
+                    g_menuTarget[MENU_COORD_BPM_01D][1] = g_atlasTileMap[ATLAS_TILE_NUMBER_0 + digit01d][1];
+                    g_menuTarget[MENU_COORD_BPM_01D][2] = g_menuCoordinates[MENU_COORD_BPM_01D][0];
+                    g_menuTarget[MENU_COORD_BPM_01D][3] = g_menuCoordinates[MENU_COORD_BPM_01D][1];
+                    }                    
 }

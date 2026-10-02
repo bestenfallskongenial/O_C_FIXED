@@ -194,94 +194,92 @@ enum FileField
 
 enum AtlasTileIndex
 {
-    // Row 0: mode tiles
-    ATLAS_TILE_MODE_ADC,            // 00 - first of modes 
-    ATLAS_TILE_MODE_TRG,            // 01
-    ATLAS_TILE_MODE_BMP,            // 02
+    // Row 0: mode tiles 0–7
+    ATLAS_TILE_MODE_ADC,             // 00 - first of modes
+    ATLAS_TILE_MODE_TRG,             // 01
+    ATLAS_TILE_MODE_BMP,             // 02
+    ATLAS_TILE_MODE_LF0,             // 03
+    ATLAS_TILE_MODE_LF1,             // 04
+    ATLAS_TILE_MODE_AU_AL,           // 05
+    ATLAS_TILE_MODE_AU_AH,           // 06
+    ATLAS_TILE_MODE_AU_BL,           // 07
 
-    ATLAS_TILE_MODE_LF0,            // 03
-    ATLAS_TILE_MODE_LF1,            // 04
+    // Row 1: remaining mode tiles and system tiles
+    ATLAS_TILE_MODE_AU_BH,           // 08
+    ATLAS_TILE_MODE_MIDI_NOTE,       // 09
+    ATLAS_TILE_MODE_MIDI_CC0,        // 10
+    ATLAS_TILE_MODE_MIDI_CC1,        // 11
 
-    ATLAS_TILE_MODE_AU_AL,          // 05
-    ATLAS_TILE_MODE_AU_AH,          // 06
-    ATLAS_TILE_MODE_AU_BL,          // 07
+    ATLAS_TILE_SYSTEM_STORE,         // 12 - first of system actions
+    ATLAS_TILE_SYSTEM_LOAD,          // 13
+    ATLAS_TILE_SYSTEM_UPDATE,        // 14
+    ATLAS_TILE_SYSTEM_LOG,           // 15
 
-    // Row 1: remaining mode tiles
-    ATLAS_TILE_MODE_AU_BH,          // 08
+    // Row 2: LFO waveform tiles
+    ATLAS_TILE_LFO_WAVE_SINE,        // 16 - first of waveforms
+    ATLAS_TILE_LFO_WAVE_TRIANGLE,    // 17
+    ATLAS_TILE_LFO_WAVE_RAMP_UP,     // 18
+    ATLAS_TILE_LFO_WAVE_RAMP_DOWN,   // 19
+    ATLAS_TILE_LFO_WAVE_SMOOTH_UP,   // 20
+    ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN, // 21
+    ATLAS_TILE_LFO_WAVE_EXPONENTIAL, // 22
+    ATLAS_TILE_LFO_WAVE_RANDOM,      // 23
 
-    ATLAS_TILE_MODE_MIDI_NOTE,      // 09
-    ATLAS_TILE_MODE_MIDI_CC0,       // 10
-    ATLAS_TILE_MODE_MIDI_CC1,       // 11
+    // Row 3: divider tiles and external selector
+    ATLAS_TILE_DIVIDER_1_64,         // 24 - first of dividers
+    ATLAS_TILE_DIVIDER_1_32,         // 25
+    ATLAS_TILE_DIVIDER_1_16,         // 26
+    ATLAS_TILE_DIVIDER_1_8,          // 27
+    ATLAS_TILE_DIVIDER_1_4,          // 28
+    ATLAS_TILE_DIVIDER_1_2,          // 29
+    ATLAS_TILE_DIVIDER_1_1,          // 30
 
-    ATLAS_TILE_MODE_12,             // 12
-    ATLAS_TILE_MODE_13,             // 13
-    ATLAS_TILE_MODE_14,             // 14
-    ATLAS_TILE_MODE_15,             // 15
+    ATLAS_TILE_EXTERN_SELECTOR,      // 31 - "X" for external input mode selected
 
-    // Row 2: target and navigation tiles
-    ATLAS_TILE_TARGET_TIME,         // 16 - first of target modes
-    ATLAS_TILE_TARGET_TEXTURE,      // 17
-    ATLAS_TILE_TARGET_VIDEO,        // 18
-    ATLAS_TILE_TARGET_FRAME,        // 19
-    ATLAS_TILE_TARGET_GL_PROGRAM,   // 20
+    // Row 4: number glyphs 0–7
+    ATLAS_TILE_NUMBER_0,             // 32 - first of numbers
+    ATLAS_TILE_NUMBER_1,             // 33
+    ATLAS_TILE_NUMBER_2,             // 34
+    ATLAS_TILE_NUMBER_3,             // 35
+    ATLAS_TILE_NUMBER_4,             // 36
+    ATLAS_TILE_NUMBER_5,             // 37
+    ATLAS_TILE_NUMBER_6,             // 38
+    ATLAS_TILE_NUMBER_7,             // 39
 
-    ATLAS_TILE_BLANK,               // 21 - placeholder
+    // Row 5: remaining number glyphs and target tiles
+    ATLAS_TILE_NUMBER_8,             // 40
+    ATLAS_TILE_NUMBER_9,             // 41
+    ATLAS_TILE_NUMBER_DOT,           // 42
 
-    ATLAS_TILE_ARROW_UP,            // 22 - arrow up
-    ATLAS_TILE_ARROW_DOWN,          // 23 - arrow down
+    ATLAS_TILE_TARGET_TIME,          // 43 - first of target modes
+    ATLAS_TILE_TARGET_TEXTURE,       // 44
+    ATLAS_TILE_TARGET_VIDEO,         // 45
+    ATLAS_TILE_TARGET_FRAME,         // 46
+    ATLAS_TILE_TARGET_GL_PROGRAM,    // 47
 
-    // Row 3: LFO waveform tiles
-    ATLAS_TILE_LFO_WAVE_SINE,       // 24 - first of waveforms
-    ATLAS_TILE_LFO_WAVE_TRIANGLE,   // 25
-    ATLAS_TILE_LFO_WAVE_RAMP_UP,    // 26
-    ATLAS_TILE_LFO_WAVE_RAMP_DOWN,  // 27
-    ATLAS_TILE_LFO_WAVE_SMOOTH_UP,  // 28
-    ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN,// 29
-    ATLAS_TILE_LFO_WAVE_EXPONENTIAL,// 30
-    ATLAS_TILE_LFO_WAVE_RANDOM,     // 31
+    // Row 6: indicators, navigation and labels
+    ATLAS_TILE_INDICATOR_BAR_L,      // 48
+    ATLAS_TILE_INDICATOR_BAR_R,      // 49
+    ATLAS_TILE_INDICATOR_BAR_BPM,    // 50
 
-    // Row 4: divider tiles
-    ATLAS_TILE_DIVIDER_1_64,        // 32 - first of dividers 
-    ATLAS_TILE_DIVIDER_1_32,        // 33
-    ATLAS_TILE_DIVIDER_1_16,        // 34
-    ATLAS_TILE_DIVIDER_1_8,         // 35
-    ATLAS_TILE_DIVIDER_1_4,         // 36
-    ATLAS_TILE_DIVIDER_1_2,         // 37
-    ATLAS_TILE_DIVIDER_1_1,         // 38
+    ATLAS_TILE_SYSTEM_IDLE,          // 51
 
-    ATLAS_TILE_EXTERN_SELECTOR,     // 39 - "X" for external input mode selected
+    ATLAS_TILE_ARROW_UP,             // 52
+    ATLAS_TILE_ARROW_DOWN,           // 53
 
-    // Row 5: labels and reserved tiles
-    ATLAS_TILE_INDICATOR_BAR_L,     // 40   // used for ATLAS_TILE_MODE_TRG ( THRESHOLD_L )
-    ATLAS_TILE_INDICATOR_BAR_R,     // 41   // used for ATLAS_TILE_MODE_ADC ( g_inOutMatrixInt[0][RAW] ), ATLAS_TILE_MODE_TRG ( THRESHOLD_H ), ATLAS_TILE_MODE_AU_XH ( SENS_B / SENS_D )
-    ATLAS_TILE_INDICATOR_BAR_BPM,   // 42   // 
-    ATLAS_TILE_43,                  // 43
-    ATLAS_TILE_44,                  // 44
-    ATLAS_TILE_45,                  // 45
+    ATLAS_TILE_LABEL_FPS,            // 54
+    ATLAS_TILE_LABEL_BPM,            // 55
 
-    ATLAS_TILE_LABEL_FPS,           // 46 - "fps"
-    ATLAS_TILE_LABEL_BPM,           // 47 - "bpm"
+    // Row 7: blank and reserved tiles
+    ATLAS_TILE_BLANK,                // 56 - bottom-left / zero coordinate
 
-    // Row 6: number glyphs 0-7
-    ATLAS_TILE_NUMBER_0,            // 48 - first of numbers ( 0 )
-    ATLAS_TILE_NUMBER_1,            // 49
-    ATLAS_TILE_NUMBER_2,            // 50
-    ATLAS_TILE_NUMBER_3,            // 51
-    ATLAS_TILE_NUMBER_4,            // 52
-    ATLAS_TILE_NUMBER_5,            // 53
-    ATLAS_TILE_NUMBER_6,            // 54
-    ATLAS_TILE_NUMBER_7,            // 55
-
-    // Row 7: number glyphs, decimal point, and system tiles
-    ATLAS_TILE_NUMBER_8,            // 56
-    ATLAS_TILE_NUMBER_9,            // 57
-    ATLAS_TILE_NUMBER_DOT,          // 58
-
-    ATLAS_TILE_SYSTEM_IDLE,         // 59 
-    ATLAS_TILE_SYSTEM_STORE,        // 60 - fist of sys-layer
-    ATLAS_TILE_SYSTEM_LOAD,         // 61
-    ATLAS_TILE_SYSTEM_UPDATE,       // 62
-    ATLAS_TILE_SYSTEM_LOG,          // 63
+    ATLAS_TILE_57,                   // 57
+    ATLAS_TILE_58,                   // 58
+    ATLAS_TILE_59,                   // 59
+    ATLAS_TILE_60,                   // 60
+    ATLAS_TILE_61,                   // 61
+    ATLAS_TILE_62,                   // 62
+    ATLAS_TILE_63,                   // 63
 
     ATLAS_TILE_COUNT
 };
