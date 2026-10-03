@@ -1,0 +1,99 @@
+precision mediump float;
+
+varying vec2 tcoord;
+
+uniform vec2 tres;
+
+uniform sampler2D tex[8];
+
+uniform vec4 q00_coord;
+uniform vec4 d00_coord;
+uniform vec4 d01_coord;
+
+uniform vec4 q01_coord;
+uniform vec4 d02_coord;
+uniform vec4 d03_coord;
+
+uniform vec4 q02_coord;
+uniform vec4 d04_coord;
+uniform vec4 d05_coord;
+
+uniform vec4 q03_coord;
+uniform vec4 d06_coord;
+uniform vec4 d07_coord;
+
+uniform vec4 t00_coord;
+uniform vec4 t01_coord;
+uniform vec4 t02_coord;
+uniform vec4 t03_coord;
+
+uniform vec4 bpm_coord;
+uniform vec4 bpm_100_coord;
+uniform vec4 bpm_010_coord;
+uniform vec4 bpm_001_coord;
+uniform vec4 bpm_dot_coord;
+uniform vec4 bpm_10d_coord;
+uniform vec4 bpm_01d_coord;
+
+const float TILE_SIZE  = 128.0;
+const float ATLAS_SIZE = 1024.0;
+
+void composeTile(in vec4 tileCoord, inout float coverage)
+{
+    vec2 screenOrigin = tres * 0.5 + tileCoord.zw;
+    vec2 tilePixel    = gl_FragCoord.xy - screenOrigin;
+
+    float inside =
+        step(0.0, tilePixel.x) *
+        step(0.0, tilePixel.y) *
+        step(tilePixel.x, TILE_SIZE - 1.0) *
+        step(tilePixel.y, TILE_SIZE - 1.0);
+
+    vec2 atlasUV =
+        tileCoord.xy +
+        clamp(tilePixel, 0.0, TILE_SIZE - 1.0) / ATLAS_SIZE;
+
+    vec3 atlasColor = texture2D(tex[0], atlasUV).rgb;
+
+    float tileCoverage =
+        1.0 -
+        dot(atlasColor, vec3(0.299, 0.587, 0.114));
+
+    coverage = max(coverage, tileCoverage * inside);
+}
+
+void main()
+{
+    float coverage = 0.0;
+
+    composeTile(q00_coord, coverage);
+    composeTile(d00_coord, coverage);
+    composeTile(d01_coord, coverage);
+
+    composeTile(q01_coord, coverage);
+    composeTile(d02_coord, coverage);
+    composeTile(d03_coord, coverage);
+
+    composeTile(q02_coord, coverage);
+    composeTile(d04_coord, coverage);
+    composeTile(d05_coord, coverage);
+
+    composeTile(q03_coord, coverage);
+    composeTile(d06_coord, coverage);
+    composeTile(d07_coord, coverage);
+
+    composeTile(t00_coord, coverage);
+    composeTile(t01_coord, coverage);
+    composeTile(t02_coord, coverage);
+    composeTile(t03_coord, coverage);
+
+    composeTile(bpm_coord,     coverage);
+    composeTile(bpm_100_coord, coverage);
+    composeTile(bpm_010_coord, coverage);
+    composeTile(bpm_001_coord, coverage);
+    composeTile(bpm_dot_coord, coverage);
+    composeTile(bpm_10d_coord, coverage);
+    composeTile(bpm_01d_coord, coverage);
+
+    gl_FragColor = vec4(0.0, 0.0, 0.0, coverage);
+}

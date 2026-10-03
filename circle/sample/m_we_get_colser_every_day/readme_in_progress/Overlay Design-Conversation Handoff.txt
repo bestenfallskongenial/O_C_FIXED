@@ -1,0 +1,414 @@
+Overlay Design — Conversation Handoff
+1. Authoritative model
+The overlay is assembled entirely on the CPU from two deterministic lookup systems:
+
+AtlasTileIndex
+g_atlasTileMap[ATLAS_TILE_COUNT][2]
+and:
+
+OverlayScreenCoordinates
+g_menuCoordinates[MENU_COORD_COUNT][2]
+For every tile that must be displayed, the CPU resolves:
+
+atlas x
+atlas y
+screen x
+screen y
+Nothing else is required to identify and position that tile.
+
+The GPU does not need:
+
+layer
+channel
+mode
+central-buffer index
+atlas tile enum
+screen-coordinate enum
+tile size
+atlas size
+ending UV coordinates
+Those relationships are resolved before the GL handoff.
+
+2. Atlas conclusions
+The supplied AtlasTileIndex and g_atlasTileMap are the authoritative atlas definition.
+
+The following ranges are intentionally contiguous and are used directly:
+
+ATLAS_TILE_MODE_ADC + mode
+ATLAS_TILE_LFO_WAVE_SINE + waveform
+ATLAS_TILE_DIVIDER_1_64 + divider
+ATLAS_TILE_NUMBER_0 + digit
+No second table should duplicate these enum relationships.
+
+Only the origin is stored for every atlas tile:
+
+g_atlasTileMap[tile][0]
+g_atlasTileMap[tile][1]
+There are no stored end coordinates or per-tile dimensions.
+
+3. Screen-coordinate conclusions
+The four mode-sector entries are:
+
+MENU_COORD_MODE_0
+MENU_COORD_MODE_1
+MENU_COORD_MODE_2
+MENU_COORD_MODE_3
+with:
+
+{ -128, -128 }
+{    0, -128 }
+{ -128,    0 }
+{    0,    0 }
+Additional components of one mode icon reuse the exact same coordinate.
+
+Example:
+
+LF0 base
+LF0 waveform
+LF0 divider
+all use one MENU_COORD_MODE_X.
+
+No separate coordinate entries are created for:
+
+base
+detail 0
+detail 1
+The coordinate enum also contains:
+
+five target positions
+two arrow positions
+seven BPM positions
+The latest pasted g_menuCoordinates initializer does not currently contain the five target entries. Consequently, the entries commented as arrows and BPM positions do not line up with the supplied enum yet. No values for the missing target entries were agreed.
+
+4. Four-sector representation
+Layers 1, 2, and 8 each populate four sectors simultaneously.
+
+Fixed association:
+
+sector 0 → MENU_COORD_MODE_0
+sector 1 → MENU_COORD_MODE_1
+sector 2 → MENU_COORD_MODE_2
+sector 3 → MENU_COORD_MODE_3
+Layer 1
+Reads:
+
+MODE_CH0
+MODE_CH1
+MODE_CH2
+MODE_CH3
+Layer 2
+Reads:
+
+MODE_CH4
+MODE_CH5
+MODE_CH6
+MODE_CH7
+Layer 8
+Reads:
+
+SET_STORE
+SET_LOAD
+KLN_LOAD
+LOG_STORE
+and represents:
+
+ATLAS_TILE_SYSTEM_STORE
+ATLAS_TILE_SYSTEM_LOAD
+ATLAS_TILE_SYSTEM_UPDATE
+ATLAS_TILE_SYSTEM_LOG
+5. Dispatcher conclusions
+There are two representation dispatchers:
+
+mode dispatcher:
+    layers 1 and 2
+
+system dispatcher:
+    layer 8
+Overlay_dispatcher() remains the layer switch.
+
+Its relevant behavior is:
+
+case 0:
+    no four-sector representation
+
+case 1:
+case 2:
+    call the common mode dispatcher using g_menuLayer
+
+case 8:
+    call the separate system dispatcher
+The shared mode dispatcher receives or uses the layer—not an invented MODE_CH0 or MODE_CH4 parameter.
+
+It performs the common four-sector work:
+
+1. use the layer to select the applicable central-buffer block;
+2. read the four values;
+3. associate them with sectors 0–3;
+4. obtain the four base atlas origins;
+5. obtain the four fixed screen origins;
+6. dispatch every sector to its semantic mode helper.
+The exact arithmetic or statement used to derive the channel block from the layer was not finalized and must not be invented.
+
+The layer dispatcher must not contain four complete duplicated mode switches.
+
+The separate semantic mode-dispatch stage selects helpers such as:
+
+Overlay_ADC(channel, coordinate)
+Overlay_TRG(channel, coordinate)
+Overlay_BMP(channel, coordinate)
+Overlay_LF0(channel, coordinate)
+Overlay_LF1(channel, coordinate)
+The helper interface established in the draft is:
+
+unsigned channel
+unsigned coordinate
+6. Per-mode compositions
+ADC
+Composition:
+
+ADC base
+right indicator
+Tiles:
+
+ATLAS_TILE_MODE_ADC
+ATLAS_TILE_INDICATOR_BAR_R
+Indicator input:
+
+g_inOutMatrixInt[channel][RAW] / 32
+The final coordinate adjustment for the indicator has not been completed.
+
+TRG
+Composition:
+
+TRG base
+left threshold indicator
+right threshold indicator
+Tiles:
+
+ATLAS_TILE_MODE_TRG
+ATLAS_TILE_INDICATOR_BAR_L
+ATLAS_TILE_INDICATOR_BAR_R
+Inputs:
+
+THRESHOLD_L
+THRESHOLD_H
+The final indicator coordinate adjustments have not been completed.
+
+BMP
+Current composition:
+
+ATLAS_TILE_MODE_BMP
+LF0
+Exactly three tiles at the same sector coordinate:
+
+ATLAS_TILE_MODE_LF0
+ATLAS_TILE_LFO_WAVE_SINE +
+g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE]
+ATLAS_TILE_DIVIDER_1_64 +
+g_centralModeBuffer[g_currentProgramBuffer][LF1_MULT]
+LF1
+Exactly three tiles at the same sector coordinate:
+
+ATLAS_TILE_MODE_LF1
+ATLAS_TILE_LFO_WAVE_SINE +
+g_centralModeBuffer[g_currentProgramBuffer][LF2_WAVE]
+ATLAS_TILE_DIVIDER_1_64 +
+g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT]
+Audio modes
+Base tiles:
+
+ATLAS_TILE_MODE_AU_AL
+ATLAS_TILE_MODE_AU_AH
+ATLAS_TILE_MODE_AU_BL
+ATLAS_TILE_MODE_AU_BH
+Indicator relationship discussed:
+
+low variants  → left indicator  → SENS_A / SENS_C
+high variants → right indicator → SENS_B / SENS_D
+The complete helper bodies were not finalized.
+
+MIDI modes
+Current compositions are their base tiles:
+
+ATLAS_TILE_MODE_MIDI_NOTE
+ATLAS_TILE_MODE_MIDI_CC0
+ATLAS_TILE_MODE_MIDI_CC1
+7. BPM composition
+Any LFO mode also requires the separate BPM representation.
+
+Composition:
+
+BPM label
+hundreds digit
+tens digit
+ones digit
+decimal point
+first fractional digit
+second fractional digit
+Atlas lookup:
+
+ATLAS_TILE_LABEL_BPM
+ATLAS_TILE_NUMBER_0 + digit
+ATLAS_TILE_NUMBER_DOT
+The seven components use their seven dedicated screen-coordinate entries.
+
+BPM visibility is separate from the layer dispatcher and follows the timeout principle discussed using m_audio_hold_A.
+
+8. Arrow representation
+The arrows indicate whether layer 1 or layer 2 is displayed:
+
+ATLAS_TILE_ARROW_UP
+ATLAS_TILE_ARROW_DOWN
+They use:
+
+MENU_COORD_ARROW_UP
+MENU_COORD_ARROW_DOWN
+The arrows were deferred until after the core mode implementation.
+
+9. Target representation
+Target tiles occupy:
+
+ATLAS_TILE_TARGET_TIME
+ATLAS_TILE_TARGET_TEXTURE
+ATLAS_TILE_TARGET_VIDEO
+ATLAS_TILE_TARGET_FRAME
+ATLAS_TILE_TARGET_GL_PROGRAM
+The target position is connected to the selected mode position modulo four.
+
+This representation was deferred and is not part of the current mode/system implementation.
+
+10. prepareModeOverlay()
+The function itself was never rejected.
+
+What was rejected were the mechanisms repeatedly invented inside or around it.
+
+Its agreed position in the design is:
+
+per-mode or per-system helper
+    resolves a concrete atlas tile
+    resolves a concrete screen coordinate
+        ↓
+prepareModeOverlay
+        ↓
+GL overlay code
+Its input information is the resolved per-tile data:
+
+atlas x
+atlas y
+screen x
+screen y
+No exact function signature was accepted.
+
+No exact decision was accepted on whether it:
+
+submits one tile immediately
+or:
+
+participates in one combined overlay submission
+That decision must be made before declaring the final uniforms or final glsl_state members.
+
+11. GL-side conclusions
+The old overlay representation is discarded completely:
+
+u_tile_count
+u_tile_rect
+u_tile_index
+
+kMenuOrigin
+kMenuTileSize
+kMenuBackgroundScale
+
+kMenuRelPos
+kMenuRelSize
+
+tile_rect_x
+tile_rect_y
+tile_rect_w
+tile_rect_h
+
+tile_rect
+tile_index
+None of those fields should be retained, renamed, reshaped, flattened, or otherwise recreated.
+
+No final replacement uniform declaration has been accepted.
+
+No final CPU-side overlay storage array has been accepted.
+
+In particular, none of these prior proposals is authoritative:
+
+GLfloat overlay_tile[MAX_TILES_PER_SCREEN * 4];
+GLfloat overlayTile
+    [MENU_COORD_COUNT]
+    [MAX_TILES_PER_ICON]
+    [4];
+GLint u_atlas_origin[MAX_OMF];
+GLint u_screen_origin[MAX_OMF];
+GLint u_atlas_origin[MAX_TILES_PER_SCREEN];
+GLint u_screen_origin[MAX_TILES_PER_SCREEN];
+GLint u_atlas[MAX_OMF];
+GLint u_tile[MAX_OMF];
+The only established GL payload fact is:
+
+four resolved values per displayed tile
+The exact GLES 2.0 transport remains undecided.
+
+12. Counts and capacity
+Per-coordinate or per-icon runtime counts were rejected.
+
+Do not add:
+
+iconCount
+overlayTileCount
+active[]
+enabled[]
+The number of components belonging to a semantic icon is explicit in that helper.
+
+The discussed maximum before considering an additional simultaneous arrow was:
+
+four sectors × maximum three components = 12
+BPM representation                      =  7
+                                        -----
+                                          19
+No revised final capacity including the arrow was agreed.
+
+13. Still unresolved — do not answer by assumption
+The following points were not concluded:
+
+exact GLES 2.0 uniform/submission mechanism;
+final overlay members in glsl_state;
+final sampler-location ownership;
+exact prepareModeOverlay() signature;
+exact common mode-dispatcher signature;
+exact system-dispatcher signature;
+exact layer-to-channel-block expression;
+whether the stored channel value is used directly or first resolved through g_modeMap;
+whether g_gl_program_current or g_currentProgramBuffer is authoritative for overlay selection;
+final target screen coordinates;
+final ADC/TRG/audio indicator offsets;
+final maximum if the arrow is simultaneous with the 19 other components.
+These points must be answered explicitly. None should be inferred from a prior assistant proposal.
+
+14. Binding rejected mechanisms
+Do not reintroduce:
+
+four atlas coordinates per tile;
+per-tile width or height;
+duplicate detail-coordinate entries;
+another prepared screen-coordinate table;
+runtime append counters;
+runtime count arrays;
+active/enabled arrays;
+generic packing lists;
+four repeated semantic switches inside the layer switch;
+dispatcher macros;
+member-function-pointer dispatch;
+position helpers such as Overlay_mode_0;
+a new outer dispatcher;
+an additional layer safeguard in the render loop;
+shader-side layer or mode interpretation;
+shader-side reconstruction of the four sectors;
+changes to the vertex shader;
+automatic preservation of the old overlay batching design;
+moving prepareModeOverlay() without an explicit decision;
+modifying unrelated cases or runtime code.
+This is the complete established state of the conversation without selecting an unapproved GL implementation.
