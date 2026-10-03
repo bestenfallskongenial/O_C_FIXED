@@ -94,17 +94,21 @@ TShutdownMode CKernel::Run(void)
                             &m_tex,
                             filecounter[FT_FSH][FLD_VALID]);
                             
-                    setTexPrg(&m_ogl,
-                            &m_fsh,
-                            &m_tex,
-                            m_activeTex,
-                            filecounter[FT_TEX][FLD_VALID]);                            
+                    setTexPrg(&m_ogl, &m_fsh, &m_tex, m_activeTex, filecounter[FT_TEX][FLD_VALID]);                            
 
                     setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
 
                     drawGLsPrg();
 
                     captureBackbuffer( &m_ogl, &m_tex );
+// lets see...
+                    provideTileCoordByLayer( &m_osh, g_menuLayer );
+
+                    setUniOvl( &m_ogl, &m_osh, &m_omt );
+
+                    setTexOvl( &m_ogl, &m_osh, &m_omt );
+
+                    drawGLsOvl();                    
                       
                 fpsBreak();
 

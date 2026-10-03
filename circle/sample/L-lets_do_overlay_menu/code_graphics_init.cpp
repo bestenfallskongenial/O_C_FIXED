@@ -262,7 +262,7 @@ void            CKernel::initUniform                (   vtx_state*  v,
 
                     s->u_time[i]       = glGetUniformLocation(s->gl_program_id[i], "time");
                     s->u_tres[i]       = glGetUniformLocation(s->gl_program_id[i], "tres");
-                    s->u_seed[i]       = glGetUniformLocation(s->gl_program_id[i], "p_seed");
+                    s->u_seed[i]       = glGetUniformLocation(s->gl_program_id[i], "seed");
                     s->u_aud[i]        = glGetUniformLocation(s->gl_program_id[i], "audio");
                     s->u_col[i]        = glGetUniformLocation(s->gl_program_id[i], "color");
                     s->u_par_a[i]      = glGetUniformLocation(s->gl_program_id[i], "par_a");
@@ -270,7 +270,7 @@ void            CKernel::initUniform                (   vtx_state*  v,
 
                     s->u_tex_l[i]      = glGetUniformLocation(s->gl_program_id[i], "tex_l");
 
-                    t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "backbuffer");
+                    t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "bfr");
 
                 //  if (s == &m_osh)
                 //      {
@@ -294,6 +294,14 @@ void            CKernel::initUniform                (   vtx_state*  v,
                         s->u_t01[i]    = glGetUniformLocation(s->gl_program_id[i], "t01_coord");
                         s->u_t02[i]    = glGetUniformLocation(s->gl_program_id[i], "t02_coord");
                         s->u_t03[i]    = glGetUniformLocation(s->gl_program_id[i], "t03_coord");
+
+                        s->u_bpm[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_coord");
+                        s->u_100[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_100_coord");
+                        s->u_010[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_010_coord");
+                        s->u_001[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_001_coord");
+                        s->u_dot[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_dot_coord");
+                        s->u_10d[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_10d_coord");
+                        s->u_01d[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_01d_coord");                        
                     // we still need here the uniforms for the other possible tiles, but for now, im fine                         
                     //  }
 #ifdef __DEBUG_GL__

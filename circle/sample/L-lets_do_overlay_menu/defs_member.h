@@ -439,16 +439,16 @@ public:         // Logging
                                                                                                             { - 64, -256 },             // 18 MENU_COORD_ARROW_UP
                                                                                                             { - 64,  128 },             // 19 MENU_COORD_ARROW_DOWN
 
-                                                                                                            {    0, 160 },              // 20 MENU_COORD_BPM_STRING	****
+                                                                                                            { -128, 160 },              // 20 MENU_COORD_BPM_STRING	****
 
                                                                                                             {    0, 160 },	        // 21 MENU_COORD_BPM_100		****
-                                                                                                            {    0, 160 },	        // 22 MENU_COORD_BPM_010		****
-                                                                                                            {    0, 160 },	        // 23 MENU_COORD_BPM_001		****
+                                                                                                            {   20, 160 },	        // 22 MENU_COORD_BPM_010		****
+                                                                                                            {   40, 160 },	        // 23 MENU_COORD_BPM_001		****
 
-                                                                                                            {    0, 160 },	        // 24 MENU_COORD_BPM_DOT		****
+                                                                                                            {   60, 160 },	        // 24 MENU_COORD_BPM_DOT		****
 
-                                                                                                            {    0, 160 },	        // 25 MENU_COORD_BPM_10D		****
-                                                                                                            {    0, 160 }  };	        // 26 MENU_COORD_BPM_01D		****
+                                                                                                            {    80, 160 },	        // 25 MENU_COORD_BPM_10D		****
+                                                                                                            {   100, 160 }  };	        // 26 MENU_COORD_BPM_01D		****
                                                                                                         
 
 // * 	= 	the coordinates for the four quadrants ( q0 for mode 0 in layer 1, mode 4 in layer 2, q1 for mode 1 in layer 1, mode 5 in layer 2, etc. )
