@@ -307,10 +307,12 @@
   <!-- EDITING GUIDE: 128 x 128 CELL GRID                                   -->
   <!-- Remove or hide this group when exporting the production atlas.      -->
   <!-- ==================================================================== -->
+<!--
    <g id="ATLAS_GRID" class="atlas-grid">
           <use href="#ATLAS_GRID_VERTICAL"/>
           <use href="#ATLAS_GRID_HORIZONTAL"/>
         </g>
+-->        
   <!-- ==================================================================== -->
   <!-- ATLAS TILES: MODES 00-12                                             -->
   <!--                                                                      -->
