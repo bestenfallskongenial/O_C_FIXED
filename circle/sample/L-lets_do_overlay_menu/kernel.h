@@ -99,17 +99,20 @@ public:
                 void        initShader                  (               vtx_state*                      v,
                                                                         glsl_state*                     s,
                                                                         tex_state*                      t,
-                                                                        char**                          p_bufferArray,
+                                                                        char**                          p_buffer,
+                                                                        char**                          p_fileName,
                                                                         int                             p_fromFile,
                                                                         int                             p_toFile,
-                                                                        GLenum                          type);
+                                                                        GLenum                          type );
                 void        initProgram                 (               vtx_state*                      v,
                                                                         glsl_state*                     vsh,
                                                                         glsl_state*                     fsh,
                                                                         tex_state*                      t,
+                                                                        char**                          p_fileName,
+                                                                        unsigned*                       p_fileSize,                                                                        
                                                                         int                             p_fromFile,
                                                                         int                             p_toFile,
-                                                                        unsigned&                       valid_count);
+                                                                        unsigned&                       valid_count );
                 void        initTexture                 (               vtx_state*                      v,
                                                                         glsl_state*                     s,
                                                                         tex_state*                      t,
@@ -129,9 +132,12 @@ public:
                                                                         int                             p_toFile);
 // code_graphics_log.cpp        !! TESTED AND APPROVED - EXCEPT gfx_check() - does it actually put out log before the crash or should i use CLooger there instead ??
                 bool        shaderLog                   (               GLint                           shader, 
-                                                                        int                             shaderIndex);
+                                                                        int                             shaderIndex,
+                                                                const   char*                           fileName );
                 bool        programLog                  (               GLint                           program, 
-                                                                        int                             program_index);
+                                                                        int                             program_index,
+                                                                const   char*                           fileName,
+                                                                        unsigned                        fileSize );
                 void        gfx_check                   (       const   char*                           file, 
                                                                         unsigned                        line);
 // code_graphics_run.cpp        !! NEED TO TEST THE OVERLAY PART HERE !!

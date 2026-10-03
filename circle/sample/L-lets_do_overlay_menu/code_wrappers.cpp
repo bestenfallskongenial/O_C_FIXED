@@ -305,11 +305,11 @@ void            CKernel::wrapper_parser_usb()
 void            CKernel::wrapper_init_gl_sd         (   )
 {
                 initVbuffer     (   &m_ogl, &m_vtx );
-                initShader      (   &m_vtx, &m_vsh, &m_tex, m_bufferVsh, filecounter[FT_VSH][FLD_PREV], filecounter[FT_VSH][FLD_LOADED], GL_VERTEX_SHADER);
-                initShader      (   &m_vtx, &m_fsh, &m_tex, m_bufferFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], GL_FRAGMENT_SHADER);          
-                initShader      (   &m_vtx, &m_osh, &m_omt, m_bufferOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], GL_FRAGMENT_SHADER);
-                initProgram     (   &m_vtx, &m_vsh, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_VALID]);
-                initProgram     (   &m_vtx, &m_vsh, &m_osh, &m_omt, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], filecounter[FT_OMF][FLD_VALID]);
+                initShader      (   &m_vtx, &m_vsh, &m_tex, m_bufferVsh, g_ScnVsh, filecounter[FT_VSH][FLD_PREV], filecounter[FT_VSH][FLD_LOADED], GL_VERTEX_SHADER);
+                initShader      (   &m_vtx, &m_fsh, &m_tex, m_bufferFsh, g_ScnFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], GL_FRAGMENT_SHADER);
+                initShader      (   &m_vtx, &m_osh, &m_omt, m_bufferOmf, g_ScnOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], GL_FRAGMENT_SHADER);
+                initProgram     (   &m_vtx, &m_vsh, &m_fsh, &m_tex, g_ScnFsh, g_bytFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_VALID]);
+                initProgram     (   &m_vtx, &m_vsh, &m_osh, &m_omt, g_ScnOmf, g_bytOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], filecounter[FT_OMF][FLD_VALID]);
                 initUniform     (   &m_vtx, &m_osh, &m_omt, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_VALID]);
                 initUniform     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_VALID]);
                 initTexture     (   &m_vtx, &m_osh, &m_omt, filecounter[FT_OMT][FLD_PREV], filecounter[FT_OMT][FLD_LOADED], filecounter[FT_OMT][FLD_VALID], GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
@@ -321,8 +321,8 @@ void            CKernel::wrapper_init_gl_sd         (   )
 
 void            CKernel::wrapper_init_gl_usb        (   )
 {
-                initShader      (   &m_vtx, &m_fsh, &m_tex, m_bufferFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], GL_FRAGMENT_SHADER);    
-                initProgram     (   &m_vtx, &m_vsh, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_VALID]);            
+                initShader      (   &m_vtx, &m_fsh, &m_tex, m_bufferFsh, g_ScnFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], GL_FRAGMENT_SHADER); 
+                initProgram     (   &m_vtx, &m_vsh, &m_fsh, &m_tex, g_ScnFsh, g_bytFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_VALID]);            
                 initUniform     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_VALID]);            
                 initTexture     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_TEX][FLD_PREV], filecounter[FT_TEX][FLD_LOADED], filecounter[FT_TEX][FLD_VALID], GL_REPEAT, GL_REPEAT);
 

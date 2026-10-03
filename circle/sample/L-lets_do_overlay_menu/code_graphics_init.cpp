@@ -120,6 +120,7 @@ void            CKernel::initShader                 (   vtx_state*  v,
                                                         glsl_state* s,
                                                         tex_state*  t,
                                                         char**      p_buffer,
+                                                        char**      p_fileName,                                                        
                                                         int         p_fromFile,
                                                         int         p_toFile,
                                                         GLenum      type)
@@ -132,7 +133,7 @@ void            CKernel::initShader                 (   vtx_state*  v,
                     glShaderSource(s->gl_shader_id[i], 1, &src, 0);
                     glCompileShader(s->gl_shader_id[i]);
 
-                    s->shader_valid[i] = shaderLog(s->gl_shader_id[i], i);
+                    s->shader_valid[i] = shaderLog(s->gl_shader_id[i], i, p_fileName[i]);
 #ifdef __DEBUG_GL__
                     debug_gl();
 #endif
@@ -143,6 +144,8 @@ void            CKernel::initProgram                (   vtx_state*  v,
                                                         glsl_state* vsh,
                                                         glsl_state* fsh,
                                                         tex_state*  t,
+                                                        char**      p_fileName,
+                                                        unsigned*   p_fileSize,                                                        
                                                         int         p_fromFile,
                                                         int         p_toFile,
                                                         unsigned&   valid_count)
@@ -157,7 +160,7 @@ void            CKernel::initProgram                (   vtx_state*  v,
 
                         glLinkProgram(fsh->gl_program_id[valid_count]);
                         }
-                    if (programLog(fsh->gl_program_id[valid_count], i))
+                    if (programLog( fsh->gl_program_id[valid_count], valid_count, p_fileName[i], p_fileSize[i] ))
                         {
                         valid_count++;
                         }

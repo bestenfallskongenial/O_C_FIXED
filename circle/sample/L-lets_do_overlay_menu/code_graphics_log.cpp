@@ -7,11 +7,12 @@
 //  #define MY_IDX  m_bufferLogIndex[LOG_GLSL_0]
 
 bool            CKernel::shaderLog                  (   GLint       shader,
-                                                        int         shaderIndex )
+                                                        int         shaderIndex,
+                                                        const char* fileName )
 {
-                GLint success         = 0;
-                GLint shaderType      = 0;
-                GLint sourceLength    = 0;
+                GLint success      = 0;
+                GLint shaderType   = 0;
+                GLint sourceLength = 0;
 
                 char log[1024];
 
@@ -30,45 +31,57 @@ bool            CKernel::shaderLog                  (   GLint       shader,
 #endif
 
 #ifdef __LOG_GLSL__
-                storeLogHex(    MY_BFR, MY_IDX, g_ScnFsh[shaderIndex], X_VAL, "buffer       [", (u32)shaderIndex, "] handle      ", (u32)shader );
+                storeLogHex(    MY_BFR, MY_IDX, fileName, X_VAL, "buffer       [", (u32)shaderIndex, "] handle      ", (u32)shader );
 
-                storeLogHex(    MY_BFR, MY_IDX, (shaderType == 0x00008B31) ? "Vertex       " : "Fragment     ", X_VAL, "Source Length ", (u32)sourceLength, "[Buffer] + '0'" );
+                storeLogHex(    MY_BFR, MY_IDX, (shaderType == GL_VERTEX_SHADER) ? "Vertex       " : "Fragment     ", X_VAL, "Source Length ", (u32)sourceLength, "[Buffer] + '0'" );
 
                 storeLogHex(    MY_BFR, MY_IDX, "Status ->    ", X_VAL, (success == GL_TRUE) ? "SUCCESS      " : "FAILED       ", X_VAL, log, X_VAL );
 
 #ifdef __DUMP_GLSL__
-                nextline(   MY_BFR, MY_IDX );
+                nextline(       MY_BFR, MY_IDX );
 
-                storeLogHex(   MY_BFR, MY_IDX, "Source ->    ", X_VAL, source, X_VAL );
+                storeLogHex(    MY_BFR, MY_IDX, "Source ->    ", X_VAL, source, X_VAL );
 #endif
 
-                nextline( MY_BFR, MY_IDX );
+                nextline(       MY_BFR, MY_IDX );
 #endif
 
                 return success == GL_TRUE;
 }
 
 bool            CKernel::programLog                 (   GLint       program,
-                                                        int         program_index )
+                                                        int         programIndex,
+                                                        const char* fileName,
+                                                        unsigned    fileSize )
 {
                 GLint success;
+
                 glGetProgramiv(program, GL_LINK_STATUS, &success);
+
 #ifdef __LOG_GLSL__
-                storeLogHex(    MY_BFR, MY_IDX, g_ScnFsh[program_index], X_VAL, "Status Prg.  [", (u32)program_index, "] Size        ", (u32)g_bytFsh[program_index], (success == GL_TRUE) ? "Link SUCCESS  " : "Link FAILED   ", X_VAL); 
-#endif 
+                storeLogHex(    MY_BFR, MY_IDX, fileName, X_VAL,
+                                "Status Prg.  [", (u32)programIndex,
+                                "] Size        ", (u32)fileSize,
+                                (success == GL_TRUE) ? "Link SUCCESS  " : "Link FAILED   ",
+                                X_VAL );
+#endif
+
                 char log[1024];
 
                 GLsizei logLength = 0;
 
                 glGetProgramInfoLog(program, sizeof(log), &logLength, log);
-#ifdef __LOG_GLSL__                 
+
+#ifdef __LOG_GLSL__
                 if (logLength > 0)
                     {
                     storeLogHex(    MY_BFR, MY_IDX, "Prg. InfoLog  ", X_VAL );
                     storeLogHex(    MY_BFR, MY_IDX, log, X_VAL );
                     }
-#endif 
+#endif
+
                 GLint numUniforms;
+
                 glGetProgramiv(program, GL_ACTIVE_UNIFORMS, &numUniforms);
 
                 for (GLint i = 0; i < numUniforms; ++i)
@@ -79,14 +92,20 @@ bool            CKernel::programLog                 (   GLint       program,
                     GLenum type;
 
                     glGetActiveUniform(program, i, sizeof(uname), &length, &size, &type, uname);
-#ifdef __LOG_GLSL__ 
+
+#ifdef __LOG_GLSL__
                     GLint location = glGetUniformLocation(program, uname);
 
                     storeLogHex(    MY_BFR, MY_IDX, "Uniform:  ", X_VAL, uname );
-                    storeLogHex(    MY_BFR, MY_IDX, "index     ", (u32)i, "size      ", (u32)size, "type      ", (u32)type, "location  ", (u32)location);
-#endif                     
+                    storeLogHex(    MY_BFR, MY_IDX, "index     ", (u32)i,
+                                    "size      ", (u32)size,
+                                    "type      ", (u32)type,
+                                    "location  ", (u32)location );
+#endif
                     }
+
                 GLint numAttributes;
+
                 glGetProgramiv(program, GL_ACTIVE_ATTRIBUTES, &numAttributes);
 
                 for (GLint i = 0; i < numAttributes; ++i)
@@ -97,16 +116,21 @@ bool            CKernel::programLog                 (   GLint       program,
                     GLenum type;
 
                     glGetActiveAttrib(program, i, sizeof(aname), &length, &size, &type, aname);
-#ifdef __LOG_GLSL__ 
+
+#ifdef __LOG_GLSL__
                     GLint location = glGetAttribLocation(program, aname);
 
                     storeLogHex(    MY_BFR, MY_IDX, "Attribute:", X_VAL, aname );
-                    storeLogHex(    MY_BFR, MY_IDX, "index     ", (u32)i, "size      ", (u32)size, "type      ", (u32)type, "location  ", (u32)location );
-#endif                     
+                    storeLogHex(    MY_BFR, MY_IDX, "index     ", (u32)i,
+                                    "size      ", (u32)size,
+                                    "type      ", (u32)type,
+                                    "location  ", (u32)location );
+#endif
                     }
+
 #ifdef __LOG_GLSL__
-                nextline(   MY_BFR, MY_IDX); 
-#endif 
+                nextline(           MY_BFR, MY_IDX );
+#endif
 
                 return success == GL_TRUE;
 }
