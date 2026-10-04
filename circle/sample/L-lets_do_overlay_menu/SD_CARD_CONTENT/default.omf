@@ -40,18 +40,25 @@ const float ATLAS_SIZE = 1024.0;
 
 void composeTile(in vec4 tileCoord, inout float coverage)
 {
+    if (all(equal(tileCoord, vec4(0.0))))
+        {
+        return;
+        }
+
     vec2 screenOrigin = tres * 0.5 + tileCoord.zw;
     vec2 tilePixel    = gl_FragCoord.xy - screenOrigin;
 
-    float inside =
-        step(0.0, tilePixel.x) *
-        step(0.0, tilePixel.y) *
-        step(tilePixel.x, TILE_SIZE - 1.0) *
-        step(tilePixel.y, TILE_SIZE - 1.0);
+    if (tilePixel.x < 0.0 ||
+        tilePixel.y < 0.0 ||
+        tilePixel.x >= TILE_SIZE ||
+        tilePixel.y >= TILE_SIZE)
+        {
+        return;
+        }
 
     vec2 atlasUV =
         tileCoord.xy +
-        clamp(tilePixel, 0.0, TILE_SIZE - 1.0) / ATLAS_SIZE;
+        tilePixel / ATLAS_SIZE;
 
     vec3 atlasColor = texture2D(tex[0], atlasUV).rgb;
 
@@ -59,7 +66,7 @@ void composeTile(in vec4 tileCoord, inout float coverage)
         1.0 -
         dot(atlasColor, vec3(0.299, 0.587, 0.114));
 
-    coverage = max(coverage, tileCoverage * inside);
+    coverage = max(coverage, tileCoverage);
 }
 
 void main()
