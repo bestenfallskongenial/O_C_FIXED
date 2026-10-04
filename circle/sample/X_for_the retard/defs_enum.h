@@ -1,0 +1,453 @@
+//------------------------------------------------- // for the array unsigned g_centralModeBuffer[SLOTS][MODETABLE_COUNT]
+enum centralModeBuffer
+{
+// block 00 / layer 1
+    MODE_CH0 = 0,           // store the mode ( from g_modeTable[] ) for cannel 0
+    MODE_CH1,				// store the mode ( from g_modeTable[] ) for cannel 1
+    MODE_CH2,               // store the mode ( from g_modeTable[] ) for cannel 2
+    MODE_CH3,               // store the mode ( from g_modeTable[] ) for cannel 3
+// block 01 / layer 2
+    MODE_CH4,               // store the mode ( from g_modeTable[] ) for cannel 4
+    MODE_CH5,               // store the mode ( from g_modeTable[] ) for cannel 5
+    MODE_CH6,               // store the mode ( from g_modeTable[] ) for cannel 6
+    MODE_CH7,               // store the mode ( from g_modeTable[] ) for cannel 7
+// block 02 / layer 3
+    LF1_WAVE,               // stores waveform for lfo1 from m_bufferLfo[waveTableCount][LFO_SAMPLES]
+    LF2_WAVE,               // stores waveform for lfo2 from m_bufferLfo[waveTableCount][LFO_SAMPLES]
+    LF1_MULT,               // stores the multiplier for lfo1 ( from g_lfoMultiplier[LFO_MULTIPLIERS_COUNT] )
+    LF2_MULT,               // stores the multiplier for lfo1 ( from g_lfoMultiplier[LFO_MULTIPLIERS_COUNT] )
+// block 03 / layer 4
+    THRESHOLD_L,            // NEW - the threshold low for IN_MODE_TRG
+    THRESHOLD_H,            // NEW - the threshold heigh for IN_MODE_TRG
+    SEL_EXT,                // NEW - a) extern clock input
+//  EFFECT,                 // NEW - b) hypothetical "strength" for the randomizer - not implemented
+    ATTENUATION,            // New - attenuation for the readAndConvertADC() 
+// block 04 / layer 5
+    SENS_A,                 // stores the sensitivity for the audio mode ( available if enabled ) bandA0
+    SENS_B,                 // stores the sensitivity for the audio mode ( available if enabled ) bandA1
+    SENS_C,                 // stores the sensitivity for the audio mode ( available if enabled ) bandB0
+    SENS_D,                 // stores the sensitivity for the audio mode ( available if enabled ) bandB1
+// block 05 / layer 6 
+    MIDI_CHANNEL,
+    MIDI_CC0,
+    MIDI_CC1,
+    MIDI_RANGE,
+// block 06 / layer 7
+    SEL_TIME,               // SEL_TIME & FLAG_TIME should be unified by count any SEL_TIME < MAX as true
+    SEL_TEX,
+    SEL_VID,
+    SEL_FRM,
+// block 07 / layer 8 -
+    SET_STORE,
+    SET_LOAD,
+    KLN_LOAD,    
+    LOG_STORE,
+// block 08 / layer  9  - "mute" block
+    SEL_PRG,
+    FLAG_AUDIO_A,           // for internal use only! 
+    FLAG_AUDIO_B,
+    FLAG_MIDI,
+// block 09 / layer 10  - "mute" block
+    FLAG_DUMMY_B,            // instead of an additional "allow prg changes" global flag - what if this will never be released again!?!
+    FLAG_EXT,
+    LAST_EXT,
+    IS_STORED,              // needs to be the last position as far as i remember
+
+    MODETABLE_COUNT         // theoretical i can now define BLOCK_COUNT as MODETABLE_COUNT / 4 correct????
+};
+
+enum inModeNames
+{
+    IN_MODE_ADC,
+    IN_MODE_TRG,
+    IN_MODE_BMP,    
+
+    IN_MODE_LF_0,
+    IN_MODE_LF_1,
+
+    IN_MODE_AU_AL,
+    IN_MODE_AU_AH,
+    IN_MODE_AU_BL,
+    IN_MODE_AU_BH,
+
+    IN_MODE_MIDI_NOTE,
+    IN_MODE_MIDI_CC0,
+    IN_MODE_MIDI_CC1,
+
+    IN_MODE_NAME_COUNT
+};
+
+enum MapType
+{
+    MAP_MODE = 0,
+    MAP_VALUE
+};
+
+enum ModeFlags
+{
+    GROUP_BASE,         // standard in modes    - adc, trg, lf0, fl1
+    GROUP_FLAG1,        // extra audio 0 modes  - aud0 band lo, aud0 band hi 
+    GROUP_FLAG2,        // extra audio 1 modes  - aud1 band lo, aud1 band hi
+   
+    GROUP_FLAG3,        // extra modes midi     - midi note, midi cc0, midi cc1
+     
+    GROUP_COUNT
+};
+//------------------------------------------------- // for the array unsigned/float g_inOutMatrix*[CHANNEL][IO_TYPE_COUNT]
+enum io_types                               
+{
+    RAW = 0,                                    		//  the position the dampened adc values per channels are stored *
+    VAL,                                        		//  either the calculated/normalized int or flt value *
+    OUT,                                        		//  here lands the processed ( after mode ) for the glsl uniforms      
+    RND,                                        		//  either the per-p_channel random int or flt value *
+    LF1,                                        		//  either the lfo one int or flt value
+    LF2,                                        		//  either the lfo two int or flt value
+    AU0,                                        		//  the audio band 0 flt value
+    AU1,                                        		//  the audio band 1 flt value
+    AU2,                                        		//  the audio band 2 flt value
+    AU3,                                        		//  the audio band 3 flt value
+    TRL,                                        		//  per p_channel threshold low !!! dont forget to copy the values in here    128
+    TRH,                                        		//  per p_channel threshold high                                              320
+    TRF,                                        		//  per p_channel threshold "flag" - where do i need you again?
+
+    IO_TYPE_COUNT 										// 13	*means i have a unique value for each p_channel - the other values are singular, and/or only int/flt
+};
+//------------------------------------------------- // for the array unsigned (long?) g_lfoBpmMatrix[4][LFO_BPM_COUNT]; <- no float needed here - its stores in the io matrix
+enum lfo_bpm_types
+{
+    BPM =0,         								// result BPM
+    INTV,           								// intervalCalculated
+    NBT,            								// nextBeatTime
+    LCB,            								// lastCircleBuffer
+   	NCB,            								// nextCircleBuffer
+    LBC,            								// lastBpmCalculation
+    LBCT,           								// lastBpmCalculationTMP
+    LLCB,                                           // remembered last LCB per source
+    LMT,            								// lfoMultiplierTMP - lfoMultiplierCurrent
+    NLMT,                                           // last - lfoMultiplierTMP
+    ELP,            								// elapsedMicroseconds
+    CYL,            								// cycleLength
+    SMPA,            								// sampleIndex A
+    SMPB,                                           // samppleIndex B NEW for smoothing
+    LTIME,          							    // lastTime
+    TIDX,           							    // timeIndex
+    TB0,             							    // timeBuffer bpm 0
+    TB1,             							    // timeBuffer bpm 1    
+    DB0,             							    // deltaBuffer bpm 0
+    DB1,             							    // deltaBuffer bpm 1    
+    IREG,                                           // irregularity ... is not really bpm/lfo but audio therefore... it fits so nicely here
+    LFO_BPM_COUNT								    // 15
+};
+
+enum waveTableNames
+{
+    waveSinus,
+    waveTriangle,
+    waveRampUp,
+    waveRampDown,
+    waveSmoothUp,
+    waveSmoothDown,
+    waveExponential,
+    WaveRandom,
+    waveTableCount
+};
+//------------------------------------------------- // unsigned int g_buttons_states[BTN_COUNT][5] = {0} !!!
+enum ButtonTSIndex  
+{
+    BTN_PRESS_START = 0,
+    BTN_DOUBLE      = 1,
+    BTN_RELEASE     = 2,
+    BTN_SINGLE      = 3,
+    BTN_HOLD_TICK   = 4,                            // COUNTER: increases while held ( runtime loop iterations - unstable but sufficient - needs measurement )
+    BTN_INDEX_COUNT = 5
+};
+//------------------------------------------------- // for unsigned filecounter[FT_COUNT][FLD_COUNT]
+enum FileType
+{
+    FT_VSH = 0,                                     // vertex shader 
+    FT_OMF,                                         // overlay fragment shader 
+    FT_FSH,                                         // user fragment shader
+
+    FT_LFO,
+
+    FT_OMT,                                         // overlay texture
+    FT_TEX,                                         // user texture
+    FT_VID,                                         		// user video 
+    FT_KLN,                                         		// kernel
+    FRM_BF,                                         		// output-frames A & B
+    FT_LOG,                                         		// log-buffer
+    
+    FT_COUNT
+};
+enum FileField
+{
+    FLD_MAXSD = 0,                                  		// number of maximal files on sd
+    FLD_MAXUSB,                                     		// number of maximal files on usb
+    FLD_EXTCNT,                                     		// number of possible file extensions const char *g_Suf*[]
+    FLD_SCANNED,                                    		// number of files scanned via scanRoot(...)  
+    FLD_LOADED,                                     		// number of actual loaded files after bulkLoad(...)
+    FLD_PREV,                                       		// number of actual loaded files before bulkLoad(...)
+    FLD_VALID,                                      		// number of valid files after gfx_init / parsing
+    FLD_SIZE,                                       		// maximal size of the files / buffer-size
+    FLD_COUNT
+};
+
+enum AtlasTileIndex
+{
+    // Row 0: mode tiles 0–7
+    ATLAS_TILE_MODE_ADC,             // 00 - first of modes
+    ATLAS_TILE_MODE_TRG,             // 01
+    ATLAS_TILE_MODE_BMP,             // 02
+    ATLAS_TILE_MODE_LF0,             // 03
+    ATLAS_TILE_MODE_LF1,             // 04
+    ATLAS_TILE_MODE_AU_AL,           // 05
+    ATLAS_TILE_MODE_AU_AH,           // 06
+    ATLAS_TILE_MODE_AU_BL,           // 07
+
+    // Row 1: remaining mode tiles and system tiles
+    ATLAS_TILE_MODE_AU_BH,           // 08
+    ATLAS_TILE_MODE_MIDI_NOTE,       // 09
+    ATLAS_TILE_MODE_MIDI_CC0,        // 10
+    ATLAS_TILE_MODE_MIDI_CC1,        // 11
+
+    ATLAS_TILE_SYSTEM_STORE,         // 12 - first of system actions
+    ATLAS_TILE_SYSTEM_LOAD,          // 13
+    ATLAS_TILE_SYSTEM_UPDATE,        // 14
+    ATLAS_TILE_SYSTEM_LOG,           // 15
+
+    // Row 2: LFO waveform tiles
+    ATLAS_TILE_LFO_WAVE_SINE,        // 16 - first of waveforms
+    ATLAS_TILE_LFO_WAVE_TRIANGLE,    // 17
+    ATLAS_TILE_LFO_WAVE_RAMP_UP,     // 18
+    ATLAS_TILE_LFO_WAVE_RAMP_DOWN,   // 19
+    ATLAS_TILE_LFO_WAVE_SMOOTH_UP,   // 20
+    ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN, // 21
+    ATLAS_TILE_LFO_WAVE_EXPONENTIAL, // 22
+    ATLAS_TILE_LFO_WAVE_RANDOM,      // 23
+
+    // Row 3: divider tiles and external selector
+    ATLAS_TILE_DIVIDER_1_64,         // 24 - first of dividers
+    ATLAS_TILE_DIVIDER_1_32,         // 25
+    ATLAS_TILE_DIVIDER_1_16,         // 26
+    ATLAS_TILE_DIVIDER_1_8,          // 27
+    ATLAS_TILE_DIVIDER_1_4,          // 28
+    ATLAS_TILE_DIVIDER_1_2,          // 29
+    ATLAS_TILE_DIVIDER_1_1,          // 30
+
+    ATLAS_TILE_EXTERN_SELECTOR,      // 31 - "X" for external input mode selected
+
+    // Row 4: number glyphs 0–7
+    ATLAS_TILE_NUMBER_0,             // 32 - first of numbers
+    ATLAS_TILE_NUMBER_1,             // 33
+    ATLAS_TILE_NUMBER_2,             // 34
+    ATLAS_TILE_NUMBER_3,             // 35
+    ATLAS_TILE_NUMBER_4,             // 36
+    ATLAS_TILE_NUMBER_5,             // 37
+    ATLAS_TILE_NUMBER_6,             // 38
+    ATLAS_TILE_NUMBER_7,             // 39
+
+    // Row 5: remaining number glyphs and target tiles
+    ATLAS_TILE_NUMBER_8,             // 40
+    ATLAS_TILE_NUMBER_9,             // 41
+    ATLAS_TILE_NUMBER_DOT,           // 42
+
+    ATLAS_TILE_TARGET_TIME,          // 43 - first of target modes
+    ATLAS_TILE_TARGET_TEXTURE,       // 44
+    ATLAS_TILE_TARGET_VIDEO,         // 45
+    ATLAS_TILE_TARGET_FRAME,         // 46
+    ATLAS_TILE_TARGET_GL_PROGRAM,    // 47
+
+    // Row 6: indicators, navigation and labels
+    ATLAS_TILE_INDICATOR_BAR_L,      // 48
+    ATLAS_TILE_INDICATOR_BAR_R,      // 49
+    ATLAS_TILE_INDICATOR_BAR_BPM,    // 50
+
+    ATLAS_TILE_SYSTEM_IDLE,          // 51
+
+    ATLAS_TILE_ARROW_UP,             // 52
+    ATLAS_TILE_ARROW_DOWN,           // 53
+
+    ATLAS_TILE_LABEL_FPS,            // 54
+    ATLAS_TILE_LABEL_BPM,            // 55
+
+    // Row 7: blank and reserved tiles
+    ATLAS_TILE_BLANK,                // 56 - bottom-left / zero coordinate
+
+    ATLAS_TILE_57,                   // 57
+    ATLAS_TILE_58,                   // 58
+    ATLAS_TILE_59,                   // 59
+    ATLAS_TILE_60,                   // 60
+    ATLAS_TILE_61,                   // 61
+    ATLAS_TILE_62,                   // 62
+    ATLAS_TILE_63,                   // 63
+
+    ATLAS_TILE_COUNT
+};
+
+enum OverlayScreenCoordinates
+{
+    MENU_COORD_MODE_0,
+    MENU_COORD_DETAIL_0,        // literally NOT NEEDED but seemingly importent that you retard can understand my model!
+    MENU_COORD_DETAIL_1,        // 
+    MENU_COORD_MODE_1,
+    MENU_COORD_DETAIL_2,
+    MENU_COORD_DETAIL_3,        
+    MENU_COORD_MODE_2,
+    MENU_COORD_DETAIL_4,
+    MENU_COORD_DETAIL_5,        
+    MENU_COORD_MODE_3,
+    MENU_COORD_DETAIL_6,
+    MENU_COORD_DETAIL_7,        
+
+    MENU_COORD_TARGET_TIME,
+    MENU_COORD_TARGET_TEXTURE,
+    MENU_COORD_TARGET_VIDEO,
+    MENU_COORD_TARGET_FRAME,
+
+    MENU_COORD_TARGET_PROGRAM,
+
+	MENU_COORD_EXTERN_SELECTOR,
+
+    MENU_COORD_ARROW_UP,
+    MENU_COORD_ARROW_DOWN,
+
+    MENU_COORD_BPM_STRING,
+
+    MENU_COORD_BPM_100,
+    MENU_COORD_BPM_010,
+    MENU_COORD_BPM_001,
+
+    MENU_COORD_BPM_DOT,
+
+    MENU_COORD_BPM_10D,
+    MENU_COORD_BPM_01D,
+
+    MENU_COORD_COUNT
+};
+
+// my vcsm dirver
+enum vc_sm_msg_type 										// Message types supported for HOST->VC direction //			
+	{				
+	VC_SM_MSG_TYPE_ALLOC,									// Allocate shared memory block //
+	VC_SM_MSG_TYPE_LOCK,									// Lock allocated shared memory block //
+	VC_SM_MSG_TYPE_UNLOCK,									// Unlock allocated shared memory block //
+	VC_SM_MSG_TYPE_UNLOCK_NOANS,							// Unlock allocated shared memory block, do not answer command //
+	VC_SM_MSG_TYPE_FREE,									// Free shared memory block //
+	VC_SM_MSG_TYPE_RESIZE,									// Resize a shared memory block //
+	VC_SM_MSG_TYPE_WALK_ALLOC,								// Walk the allocated shared memory block(s) //
+	VC_SM_MSG_TYPE_ACTION_CLEAN,							// A previously applied action will need to be reverted //
+	VC_SM_MSG_TYPE_IMPORT,									// Import a physical address and wrap into a MEM_HANDLE_T - Release with VC_SM_MSG_TYPE_FREE.
+	VC_SM_MSG_TYPE_CLIENT_VERSION,							// Tells VC the protocol version supported by this client. 2 supports the async/cmd messages from the VPU for final release of memory, and for VC allocations.
+	VC_SM_MSG_TYPE_VC_MEM_REQUEST_REPLY,					// Response to VC request for memory //
+															// Asynchronous/cmd messages supported for VC->HOST direction.
+															// Signalled by setting the top bit in vc_sm_result_t trans_id.
+															// VC has finished with an imported memory allocation.
+															// Release any Linux reference counts on the underlying block.
+	VC_SM_MSG_TYPE_RELEASED,
+	VC_SM_MSG_TYPE_VC_MEM_REQUEST,							// VC request for memory //
+	VC_SM_MSG_TYPE_MAX
+	};
+enum vc_sm_alloc_type_t 									// Type of memory to be allocated //
+	{
+	VC_SM_ALLOC_CACHED,
+	VC_SM_ALLOC_NON_CACHED,
+	};
+//              FROM MMAL-VCHIQ.H
+enum vchiq_mmal_es_type 
+{
+	MMAL_ES_TYPE_UNKNOWN,     								// Unknown elementary stream type //
+	MMAL_ES_TYPE_CONTROL,     								// Elementary stream of control commands //
+	MMAL_ES_TYPE_AUDIO,       								// Audio elementary stream //
+	MMAL_ES_TYPE_VIDEO,       								// Video elementary stream //
+	MMAL_ES_TYPE_SUBPICTURE   								// Sub-picture elementary stream //
+};
+//              FROM MMAL-MSG-COMMON.H
+enum mmal_msg_status 
+{
+	MMAL_MSG_STATUS_SUCCESS = 0, 							// Success //
+	MMAL_MSG_STATUS_ENOMEM,      							// Out of memory //
+	MMAL_MSG_STATUS_ENOSPC,      							// Out of resources other than memory //
+	MMAL_MSG_STATUS_EINVAL,      							// Argument is invalid //
+	MMAL_MSG_STATUS_ENOSYS,      							// Function not implemented //
+	MMAL_MSG_STATUS_ENOENT,      							// No such file or directory //
+	MMAL_MSG_STATUS_ENXIO,       							// No such device or address //
+	MMAL_MSG_STATUS_EIO,         							// I/O error //
+	MMAL_MSG_STATUS_ESPIPE,      							// Illegal seek //
+	MMAL_MSG_STATUS_ECORRUPT,    							// Data is corrupt \attention //
+	MMAL_MSG_STATUS_ENOTREADY,   							// Component is not ready //
+	MMAL_MSG_STATUS_ECONFIG,     							// Component is not configured //
+	MMAL_MSG_STATUS_EISCONN,     							// Port is already connected //
+	MMAL_MSG_STATUS_ENOTCONN,    							// Port is disconnected //
+	MMAL_MSG_STATUS_EAGAIN,      							// Resource temporarily unavailable. //
+	MMAL_MSG_STATUS_EFAULT,      							// Bad address //
+};
+//              FROM MMAL-PARAMETERS.H
+enum mmal_parameter_common_type 	/* Common parameters */
+{
+	
+	MMAL_PARAMETER_UNUSED = MMAL_PARAMETER_GROUP_COMMON,	/**< Never a valid parameter ID */
+	MMAL_PARAMETER_SUPPORTED_ENCODINGS,						/**< MMAL_PARAMETER_ENCODING_T */
+	MMAL_PARAMETER_URI,										/**< MMAL_PARAMETER_URI_T */
+	MMAL_PARAMETER_CHANGE_EVENT_REQUEST,					/** MMAL_PARAMETER_CHANGE_EVENT_REQUEST_T */
+	MMAL_PARAMETER_ZERO_COPY,								/** MMAL_PARAMETER_BOOLEAN_T */
+	MMAL_PARAMETER_BUFFER_REQUIREMENTS,						/**< MMAL_PARAMETER_BUFFER_REQUIREMENTS_T */
+	MMAL_PARAMETER_STATISTICS,								/**< MMAL_PARAMETER_STATISTICS_T */
+	MMAL_PARAMETER_CORE_STATISTICS,							/**< MMAL_PARAMETER_CORE_STATISTICS_T */
+	MMAL_PARAMETER_MEM_USAGE,								/**< MMAL_PARAMETER_MEM_USAGE_T */
+	MMAL_PARAMETER_BUFFER_FLAG_FILTER,						/**< MMAL_PARAMETER_UINT32_T */
+	MMAL_PARAMETER_SEEK,									/**< MMAL_PARAMETER_SEEK_T */
+	MMAL_PARAMETER_POWERMON_ENABLE,							/**< MMAL_PARAMETER_BOOLEAN_T */
+	MMAL_PARAMETER_LOGGING,									/**< MMAL_PARAMETER_LOGGING_T */
+	MMAL_PARAMETER_SYSTEM_TIME,								/**< MMAL_PARAMETER_UINT64_T */
+	MMAL_PARAMETER_NO_IMAGE_PADDING,						/**< MMAL_PARAMETER_BOOLEAN_T */
+};
+//              FROM MMAL-MSG-PORT.H
+enum mmal_port_type 										// MMAL_PORT_TYPE_T //
+{
+	MMAL_PORT_TYPE_UNKNOWN = 0,								// Unknown port type //
+	MMAL_PORT_TYPE_CONTROL,									// Control port //
+	MMAL_PORT_TYPE_INPUT,									// Input port //
+	MMAL_PORT_TYPE_OUTPUT,									// Output port //
+	MMAL_PORT_TYPE_CLOCK,									// Clock port //
+};
+//              FROM MMAL-MSG.H
+enum mmal_msg_type 
+{
+	MMAL_MSG_TYPE_QUIT = 1,
+	MMAL_MSG_TYPE_SERVICE_CLOSED,
+	MMAL_MSG_TYPE_GET_VERSION,
+	MMAL_MSG_TYPE_COMPONENT_CREATE,
+	MMAL_MSG_TYPE_COMPONENT_DESTROY,						// 5 //
+	MMAL_MSG_TYPE_COMPONENT_ENABLE,
+	MMAL_MSG_TYPE_COMPONENT_DISABLE,
+	MMAL_MSG_TYPE_PORT_INFO_GET,
+	MMAL_MSG_TYPE_PORT_INFO_SET,
+	MMAL_MSG_TYPE_PORT_ACTION,								// 10 //
+	MMAL_MSG_TYPE_BUFFER_FROM_HOST,
+	MMAL_MSG_TYPE_BUFFER_TO_HOST,
+	MMAL_MSG_TYPE_GET_STATS,
+	MMAL_MSG_TYPE_PORT_PARAMETER_SET,
+	MMAL_MSG_TYPE_PORT_PARAMETER_GET,						// 15 //
+	MMAL_MSG_TYPE_EVENT_TO_HOST,
+	MMAL_MSG_TYPE_GET_CORE_STATS_FOR_PORT,
+	MMAL_MSG_TYPE_OPAQUE_ALLOCATOR,
+	MMAL_MSG_TYPE_CONSUME_MEM,
+	MMAL_MSG_TYPE_LMK,										// 20 //
+	MMAL_MSG_TYPE_OPAQUE_ALLOCATOR_DESC,
+	MMAL_MSG_TYPE_DRM_GET_LHS32,
+	MMAL_MSG_TYPE_DRM_GET_TIME,
+	MMAL_MSG_TYPE_BUFFER_FROM_HOST_ZEROLEN,
+	MMAL_MSG_TYPE_PORT_FLUSH,								// 25 //
+	MMAL_MSG_TYPE_HOST_LOG,
+	MMAL_MSG_TYPE_MSG_LAST
+};
+enum mmal_msg_port_action_type 								// port action request messages differ depending on the action type //
+{
+	MMAL_MSG_PORT_ACTION_TYPE_UNKNOWN = 0,					// Unknown action //
+	MMAL_MSG_PORT_ACTION_TYPE_ENABLE,						// Enable a port //
+	MMAL_MSG_PORT_ACTION_TYPE_DISABLE,						// Disable a port //
+	MMAL_MSG_PORT_ACTION_TYPE_FLUSH,						// Flush a port //
+	MMAL_MSG_PORT_ACTION_TYPE_CONNECT,						// Connect ports //
+	MMAL_MSG_PORT_ACTION_TYPE_DISCONNECT,					// Disconnect ports //
+	MMAL_MSG_PORT_ACTION_TYPE_SET_REQUIREMENTS, 			// Set buffer requirements//
+};
