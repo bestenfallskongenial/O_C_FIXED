@@ -102,13 +102,16 @@ TShutdownMode CKernel::Run(void)
 
                     captureBackbuffer( &m_ogl, &m_tex );
 // lets see...
-                    provideTileCoordByLayer( &m_osh, g_menuLayer );
+                    if (g_menuLayer != 0 || m_BPM_hold_A)
+                        {
+                        provideTileCoordByLayer( &m_osh, g_menuLayer );
 
-                    setUniOvl( &m_ogl, &m_osh, &m_omt );
+                        setUniOvl( &m_ogl, &m_osh, &m_omt );
 
-                    setTexOvl( &m_ogl, &m_osh, &m_omt );
+                        setTexOvl( &m_ogl, &m_osh, &m_omt );
 
-                    drawGLsOvl();                    
+                        drawGLsOvl();
+                        }                 
                       
                 fpsBreak();
 
