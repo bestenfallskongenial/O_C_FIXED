@@ -35,6 +35,7 @@
 
 // to prepare filecounter[FT_COUNT][FLD_COUNT] for sd
     #define         VSH_SD             		1	// max number of u_vertex shader on sd
+    #define         OVS_SD                     1   // overlay vertex shader on sd    
     #define         OMF_SD             		1	// max number of fragment shader on sd
     #define         FSH_SD             		1	// max number of fragment shader on sd
     #define         LFO_SD                  16    
@@ -63,6 +64,7 @@
         #define     LOG_VID_7               15
 // to prepare filecounter[FT_COUNT][FLD_COUNT] for usb
     #define         VSH_USB                 0	// max number of u_vertex shader on sd
+    #define         OVS_USB                 0   // overlay vertex shader is supplied by sd    
     #define         OMF_USB            		0	// max number of fragment shader on sd
     #define         FSH_USB            		32	// max number of fragment shader on sd
     #define         LFO_USB                 0    
@@ -74,6 +76,7 @@
     #define         LOG_USB                 0   // no additional log "files"
 // to define the number of filenames per filetype    
     #define         VSH_EXT                 1   // the file extensions 
+    #define         OVS_EXT                 1    
     #define         OMF_EXT                 1
     #define         FSH_EXT                 1
     #define         OMT_EXT                 1
@@ -82,6 +85,7 @@
     #define         KLN_EXT                 1
 // the allocated buffer size per file / data type  
     #define         VSH_SIZ                 (1024*32)           // 32kb
+    #define         OVS_SIZ                 (1024*32)           // dedicated overlay vertex shader
     #define         OMF_SIZ                 (1024*32)           // 32kb
     #define         FSH_SIZ                 (1024*32)           // 32kb
     #define         OMT_SIZ                 (1024*1024*4)       // 4mb

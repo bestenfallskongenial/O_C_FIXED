@@ -58,6 +58,7 @@ public:         // Logging
                 olg_state                       m_ogl                                           =       {};           
                 vtx_state                       m_vtx                                           =       {};
                 glsl_state                      m_vsh                                           =       {};
+                glsl_state                      m_ovs                                           =       {};
                 glsl_state                      m_fsh                                           =       {};
                 glsl_state                      m_osh                                           =       {};
                 tex_state                       m_tex                                           =       {};
@@ -152,12 +153,14 @@ public:         // Logging
                 char**				m_bufferLog                                     = nullptr;
 
                 char** 				m_bufferVsh                                     = nullptr;
+                char**                          m_bufferOvs                                     = nullptr;                
                 char** 				m_bufferOmf                                     = nullptr;                
                 char** 				m_bufferFsh                                     = nullptr; 
 
                 char**                          m_bufferLfo                                     = nullptr;
 // the populated filecounter array - source and truth and hub for init and load                                MAXSD   MAXUSB    EXTCNT     SCANNED   LOADED  PREV    V_CNT    SIZE  
                 unsigned                        filecounter[FT_COUNT][FLD_COUNT]                =       {   { VSH_SD, VSH_USB,  VSH_EXT,    0,        0,      0,      0,       VSH_SIZ },  // VSH vertex shader
+                                                                                                            { OVS_SD, OVS_USB,  OVS_EXT,    0,        0,      0,      0,       OVS_SIZ },  // OVS overlay vertex shader                
                                                                                                             { OMF_SD, OMF_USB,  OMF_EXT,    0,        0,      0,      0,       OMF_SIZ },  // OMF overlay fragment shader
                                                                                                             { FSH_SD, FSH_USB,  FSH_EXT,    0,        0,      0,      0,       FSH_SIZ },  // FSH user fragment shader
 
@@ -171,6 +174,7 @@ public:         // Logging
                                                                                                             { LOG_SD, LOG_USB,        0,    0,        0,      0,      0,       LOG_SIZ }}; // LOG logging buffers
 // lists of extensions possible in my scanroot directory function per filetype 
         const   char*                           g_SufVsh[VSH_EXT]			        =           { "vsh" };    // vertex shaders
+        const   char*                           g_SufOvs[OVS_EXT]                               =           { "ovs" };    // overlay vertex shader        
         const   char*                           g_SufOmf[OMF_EXT]			        =           { "omf" };	// is a fsh file but used for the overlay atlas
         const   char*                           g_SufFsh[FSH_EXT]			        =           { "fsh" };    // fragment shaders 
         const   char*                           g_SufOmt[OMT_EXT]			        =           { "omt" };    // is a bpm file but used for the overlay atlas
@@ -178,7 +182,8 @@ public:         // Logging
         const   char*                           g_SufVid[VID_EXT]			        =           { "264" };    // video in raw h264 annex b encoded 
         const   char*                           g_SufKln[KLN_EXT]			        =           { "img" };    // kernel.img for the update mechanism
 // array to store the scanned filenames
-                char*                           g_ScnVsh[VSH_SD + VSH_USB]     	                =           { 0 };    
+                char*                           g_ScnVsh[VSH_SD + VSH_USB]     	                =           { 0 }; 
+	        char*                           g_ScnOvs[OVS_SD + OVS_USB]                      =           { 0 };                  
         	char*				g_ScnOmf[OMF_SD + OMF_USB] 		        =           { 0 };
                 char*                           g_ScnFsh[FSH_SD + FSH_USB]     	                =           { 0 };
         	char*				g_ScnOmt[OMT_SD + OMT_USB] 		        =           { 0 };
@@ -187,6 +192,7 @@ public:         // Logging
                 char*                           g_ScnKln[KLN_SD + KLN_USB]     	                =           { 0 };
 // array to store the length of the loaded files
                 unsigned                        g_bytVsh[VSH_SD + VSH_USB]                      =           { 0 };
+                unsigned                        g_bytOvs[OVS_SD + OVS_USB]                      =           { 0 };                
                 unsigned                        g_bytOmf[OMF_SD + OMF_USB]                      =           { 0 };
                 unsigned                        g_bytFsh[FSH_SD + FSH_USB]                      =           { 0 };
                 unsigned                        g_bytOmt[OMT_SD + OMT_USB]                      =           { 0 };
@@ -458,7 +464,14 @@ public:         // Logging
 // Y	=	is shown if layer 2 on the fixed position q3 !
 // X	= 	same logic as **** taken from g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT]
 
-                GLfloat                         g_menuTarget[MENU_COORD_COUNT][4]               =           { 0.0f };
+		enum                            {   OVERLAY_TILE_COUNT       = 23,
+		                                    OVERLAY_VERTEX_PER_TILE  = 6,
+		                                    OVERLAY_FLOAT_PER_VERTEX = 4,
+		                                    OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
+
+		GLfloat                         g_overlayVertices[OVERLAY_FLOAT_COUNT]           =           { 0.0f };
+		unsigned                        g_overlayVertexCount                            = 0;
+
 
 private:
                 VCHI_INSTANCE_T                 m_VCHIInstance                                  = 0;

@@ -165,6 +165,7 @@ enum ButtonTSIndex
 enum FileType
 {
     FT_VSH = 0,                                     // vertex shader 
+    FT_OVS,                                         // overlay vertex shader    
     FT_OMF,                                         // overlay fragment shader 
     FT_FSH,                                         // user fragment shader
 

@@ -111,6 +111,11 @@ void            CKernel::initVbuffer                (   olg_state*  o,
                 glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data), vertex_data, GL_STATIC_DRAW);
                 glVertexAttribPointer(v->gl_vtx[0], 4, GL_FLOAT, 0, 16, 0);
                 glEnableVertexAttribArray(v->gl_vtx[0]);
+
+                glGenBuffers(1, &v->gl_overlay_buf);
+                glBindBuffer(GL_ARRAY_BUFFER, v->gl_overlay_buf);
+                glBufferData(GL_ARRAY_BUFFER, sizeof(g_overlayVertices), 0, GL_DYNAMIC_DRAW);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);                
 #ifdef __DEBUG_GL__
                 debug_gl();
 #endif  
@@ -271,39 +276,6 @@ void            CKernel::initUniform                (   vtx_state*  v,
                     s->u_tex_l[i]      = glGetUniformLocation(s->gl_program_id[i], "tex_l");
 
                     t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "bfr");
-
-                //  if (s == &m_osh)
-                //      {
-                        s->u_q00[i]    = glGetUniformLocation(s->gl_program_id[i], "q00_coord");
-                        s->u_d00[i]    = glGetUniformLocation(s->gl_program_id[i], "d00_coord");
-                        s->u_d01[i]    = glGetUniformLocation(s->gl_program_id[i], "d01_coord");
-
-                        s->u_q01[i]    = glGetUniformLocation(s->gl_program_id[i], "q01_coord");
-                        s->u_d02[i]    = glGetUniformLocation(s->gl_program_id[i], "d02_coord");
-                        s->u_d03[i]    = glGetUniformLocation(s->gl_program_id[i], "d03_coord");
-
-                        s->u_q02[i]    = glGetUniformLocation(s->gl_program_id[i], "q02_coord");
-                        s->u_d04[i]    = glGetUniformLocation(s->gl_program_id[i], "d04_coord");
-                        s->u_d05[i]    = glGetUniformLocation(s->gl_program_id[i], "d05_coord");
-
-                        s->u_q03[i]    = glGetUniformLocation(s->gl_program_id[i], "q03_coord");
-                        s->u_d06[i]    = glGetUniformLocation(s->gl_program_id[i], "d06_coord");
-                        s->u_d07[i]    = glGetUniformLocation(s->gl_program_id[i], "d07_coord");
-
-                        s->u_t00[i]    = glGetUniformLocation(s->gl_program_id[i], "t00_coord");
-                        s->u_t01[i]    = glGetUniformLocation(s->gl_program_id[i], "t01_coord");
-                        s->u_t02[i]    = glGetUniformLocation(s->gl_program_id[i], "t02_coord");
-                        s->u_t03[i]    = glGetUniformLocation(s->gl_program_id[i], "t03_coord");
-
-                        s->u_bpm[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_coord");
-                        s->u_100[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_100_coord");
-                        s->u_010[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_010_coord");
-                        s->u_001[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_001_coord");
-                        s->u_dot[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_dot_coord");
-                        s->u_10d[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_10d_coord");
-                        s->u_01d[i] = glGetUniformLocation(s->gl_program_id[i], "bpm_01d_coord");                        
-                    // we still need here the uniforms for the other possible tiles, but for now, im fine                         
-                    //  }
 #ifdef __DEBUG_GL__
                     debug_gl();     // really?!?!?!
 #endif

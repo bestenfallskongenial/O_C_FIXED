@@ -22,6 +22,7 @@ bool            CKernel::wrapperInitMEM             (   )
                 if (bOK) { bOK = (m_bufferKnl = allocBufferMEM( filecounter[FT_KLN][FLD_MAXSD]+filecounter[FT_KLN][FLD_MAXUSB], filecounter[FT_KLN][FLD_SIZE], "m_bufferKnl")); }
                 if (bOK) { bOK = (m_bufferLog = allocBufferMEM( filecounter[FT_LOG][FLD_MAXSD]+filecounter[FT_LOG][FLD_MAXUSB], filecounter[FT_LOG][FLD_SIZE], "m_bufferLog")); }                   
                 if (bOK) { bOK = (m_bufferVsh = allocBufferMEM( filecounter[FT_VSH][FLD_MAXSD]+filecounter[FT_VSH][FLD_MAXUSB], filecounter[FT_VSH][FLD_SIZE], "m_bufferVsh")); }
+                if (bOK) { bOK = (m_bufferOvs = allocBufferMEM( filecounter[FT_OVS][FLD_MAXSD]+filecounter[FT_OVS][FLD_MAXUSB], filecounter[FT_OVS][FLD_SIZE], "m_bufferOvs")); }
                 if (bOK) { bOK = (m_bufferOmf = allocBufferMEM( filecounter[FT_OMF][FLD_MAXSD]+filecounter[FT_OMF][FLD_MAXUSB], filecounter[FT_OMF][FLD_SIZE], "m_bufferOmf")); }
                 if (bOK) { bOK = (m_bufferFsh = allocBufferMEM( filecounter[FT_FSH][FLD_MAXSD]+filecounter[FT_FSH][FLD_MAXUSB], filecounter[FT_FSH][FLD_SIZE], "m_bufferFsh")); }
 
@@ -44,6 +45,7 @@ void            CKernel::wrapperMEMcleanUp          (   )
                     clearBufferMEM( m_bufferKnl, filecounter[FT_KLN][FLD_MAXSD]+filecounter[FT_KLN][FLD_MAXUSB] ); 
                     clearBufferMEM( m_bufferLog, filecounter[FT_LOG][FLD_MAXSD]+filecounter[FT_LOG][FLD_MAXUSB] ); 
                     clearBufferMEM( m_bufferVsh, filecounter[FT_VSH][FLD_MAXSD]+filecounter[FT_VSH][FLD_MAXUSB] ); 
+                    clearBufferMEM( m_bufferOvs, filecounter[FT_OVS][FLD_MAXSD]+filecounter[FT_OVS][FLD_MAXUSB] );                    
                     clearBufferMEM( m_bufferOmf, filecounter[FT_OMF][FLD_MAXSD]+filecounter[FT_OMF][FLD_MAXUSB] ); 
                     clearBufferMEM( m_bufferFsh, filecounter[FT_FSH][FLD_MAXSD]+filecounter[FT_FSH][FLD_MAXUSB] );
 
@@ -251,6 +253,7 @@ void            CKernel::wrapper_load_sd            (   )
                 if(Mount( PARTITION_NAME_SD ))
                     {
                     scanRoot                (   g_ScnVsh, g_SufVsh, filecounter[FT_VSH][FLD_EXTCNT], filecounter[FT_VSH][FLD_SCANNED], filecounter[FT_VSH][FLD_MAXSD], filecounter[FT_VSH][FLD_LOADED]);
+                    scanRoot                (   g_ScnOvs, g_SufOvs, filecounter[FT_OVS][FLD_EXTCNT], filecounter[FT_OVS][FLD_SCANNED], filecounter[FT_OVS][FLD_MAXSD], filecounter[FT_OVS][FLD_LOADED]);
                     scanRoot                (   g_ScnOmf, g_SufOmf, filecounter[FT_OMF][FLD_EXTCNT], filecounter[FT_OMF][FLD_SCANNED], filecounter[FT_OMF][FLD_MAXSD], filecounter[FT_OMF][FLD_LOADED]);                
                     scanRoot                (   g_ScnOmt, g_SufOmt, filecounter[FT_OMT][FLD_EXTCNT], filecounter[FT_OMT][FLD_SCANNED], filecounter[FT_OMT][FLD_MAXSD], filecounter[FT_OMT][FLD_LOADED]);
                     scanRoot                (   g_ScnFsh, g_SufFsh, filecounter[FT_FSH][FLD_EXTCNT], filecounter[FT_FSH][FLD_SCANNED], filecounter[FT_FSH][FLD_MAXSD], filecounter[FT_FSH][FLD_LOADED]);
@@ -259,6 +262,7 @@ void            CKernel::wrapper_load_sd            (   )
                     scanRoot                (   g_ScnKln, g_SufKln, filecounter[FT_KLN][FLD_EXTCNT], filecounter[FT_KLN][FLD_SCANNED], filecounter[FT_KLN][FLD_MAXSD], filecounter[FT_KLN][FLD_LOADED]);   
 
                     bulkLoad                (   g_ScnVsh, g_bytVsh, m_bufferVsh, filecounter[FT_VSH][FLD_SCANNED], filecounter[FT_VSH][FLD_LOADED], filecounter[FT_VSH][FLD_PREV], filecounter[FT_VSH][FLD_SIZE]);
+                    bulkLoad                (   g_ScnOvs, g_bytOvs, m_bufferOvs, filecounter[FT_OVS][FLD_SCANNED], filecounter[FT_OVS][FLD_LOADED], filecounter[FT_OVS][FLD_PREV], filecounter[FT_OVS][FLD_SIZE]);
                     bulkLoad                (   g_ScnOmf, g_bytOmf, m_bufferOmf, filecounter[FT_OMF][FLD_SCANNED], filecounter[FT_OMF][FLD_LOADED], filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_SIZE]);
                     bulkLoad                (   g_ScnOmt, g_bytOmt, m_bufferOmt, filecounter[FT_OMT][FLD_SCANNED], filecounter[FT_OMT][FLD_LOADED], filecounter[FT_OMT][FLD_PREV], filecounter[FT_OMT][FLD_SIZE]);
                     bulkLoad                (   g_ScnFsh, g_bytFsh, m_bufferFsh, filecounter[FT_FSH][FLD_SCANNED], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_SIZE]);
@@ -306,11 +310,17 @@ void            CKernel::wrapper_init_gl_sd         (   )
 {
                 initVbuffer     (   &m_ogl, &m_vtx );
                 initShader      (   &m_vtx, &m_vsh, &m_tex, m_bufferVsh, g_ScnVsh, filecounter[FT_VSH][FLD_PREV], filecounter[FT_VSH][FLD_LOADED], GL_VERTEX_SHADER);
+                initShader      (   &m_vtx, &m_ovs, &m_omt, m_bufferOvs, g_ScnOvs, filecounter[FT_OVS][FLD_PREV], filecounter[FT_OVS][FLD_LOADED], GL_VERTEX_SHADER);                
                 initShader      (   &m_vtx, &m_fsh, &m_tex, m_bufferFsh, g_ScnFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], GL_FRAGMENT_SHADER);
                 initShader      (   &m_vtx, &m_osh, &m_omt, m_bufferOmf, g_ScnOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], GL_FRAGMENT_SHADER);
                 initProgram     (   &m_vtx, &m_vsh, &m_fsh, &m_tex, g_ScnFsh, g_bytFsh, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_LOADED], filecounter[FT_FSH][FLD_VALID]);
-                initProgram     (   &m_vtx, &m_vsh, &m_osh, &m_omt, g_ScnOmf, g_bytOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], filecounter[FT_OMF][FLD_VALID]);
-                initUniform     (   &m_vtx, &m_osh, &m_omt, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_VALID]);
+            //  initProgram     (   &m_vtx, &m_vsh, &m_osh, &m_omt, g_ScnOmf, g_bytOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], filecounter[FT_OMF][FLD_VALID]);
+            //  initUniform     (   &m_vtx, &m_osh, &m_omt, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_VALID]);
+
+                initProgram     (   &m_vtx, &m_ovs, &m_osh, &m_omt, g_ScnOmf, g_bytOmf, filecounter[FT_OMF][FLD_PREV], filecounter[FT_OMF][FLD_LOADED], filecounter[FT_OMF][FLD_VALID]);
+                initUniform     (   &m_vtx, &m_osh, &m_omt, 0, filecounter[FT_OMF][FLD_VALID]);
+                m_vtx.gl_overlay_vtx = m_vtx.gl_vtx[0];
+
                 initUniform     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_FSH][FLD_PREV], filecounter[FT_FSH][FLD_VALID]);
                 initTexture     (   &m_vtx, &m_osh, &m_omt, filecounter[FT_OMT][FLD_PREV], filecounter[FT_OMT][FLD_LOADED], filecounter[FT_OMT][FLD_VALID], GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
                 initTexture     (   &m_vtx, &m_fsh, &m_tex, filecounter[FT_TEX][FLD_PREV], filecounter[FT_TEX][FLD_LOADED], filecounter[FT_TEX][FLD_VALID], GL_REPEAT, GL_REPEAT);
