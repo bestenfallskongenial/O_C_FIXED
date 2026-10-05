@@ -14,11 +14,15 @@ struct olg_state
 
 struct vtx_state
 {
-    // shared attrib/buffer
-    GLuint                      gl_buf;
-    GLint                       gl_vtx[MAX_SHADER];    
-};
+    // Existing full-screen vertex buffer.
+    GLuint gl_buf;
+    GLint  gl_vtx[MAX_SHADER];
 
+    // Dedicated overlay vertex state.
+    GLuint gl_overlay_buf;
+    GLuint gl_overlay_shader;
+    GLint  gl_overlay_vtx;
+};
 struct glsl_state
 {
     GLuint                      gl_shader_id[MAX_SHADER];
