@@ -16,9 +16,9 @@ void            CKernel::appendOverlayTile           (   unsigned    atlasTile,
                 const GLfloat height = static_cast<GLfloat>(m_ogl.screen_height);
 
                 const GLfloat pixelX0 = width  * 0.5f + static_cast<GLfloat>(g_menuCoordinates[coordinate][0]);
-                const GLfloat pixelY0 = height * 0.5f - static_cast<GLfloat>(g_menuCoordinates[coordinate][1] + yOffset) - 128.0f;
-                const GLfloat pixelX1 = pixelX0 + 128.0f;
-                const GLfloat pixelY1 = pixelY0 + 128.0f;
+                const GLfloat pixelY0 = height * 0.5f - static_cast<GLfloat>(g_menuCoordinates[coordinate][1] + yOffset) - 64.0f;
+                const GLfloat pixelX1 = pixelX0 + 64.0f;
+                const GLfloat pixelY1 = pixelY0 + 64.0f;
 
                 const GLfloat x0 = pixelX0 * 2.0f / width  - 1.0f;
                 const GLfloat y0 = pixelY0 * 2.0f / height - 1.0f;
@@ -71,16 +71,16 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                 switch (mode)
                     {
                     case IN_MODE_ADC:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 5));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 6));
                         break;
 
                     case IN_MODE_TRG:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_L, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 4));
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail1Coord, -(g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 4));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_L, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 5));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail1Coord, -(g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 5));
                         break;
 
                     case IN_MODE_BMP:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 5));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 6));
                         break;
 
                     case IN_MODE_LF_0:
@@ -94,19 +94,19 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                         break;
 
                     case IN_MODE_AU_AL:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 1));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 2));
                         break;
 
                     case IN_MODE_AU_AH:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 1));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 2));
                         break;
 
                     case IN_MODE_AU_BL:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 1));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 2));
                         break;
 
                     case IN_MODE_AU_BH:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 1));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 2));
                         break;
 
                     default:
