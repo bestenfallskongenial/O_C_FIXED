@@ -16,7 +16,7 @@ void            CKernel::appendOverlayTile           (   unsigned    atlasTile,
                 const GLfloat height = static_cast<GLfloat>(m_ogl.screen_height);
 
                 const GLfloat pixelX0 = width  * 0.5f + static_cast<GLfloat>(g_menuCoordinates[coordinate][0]);
-                const GLfloat pixelY0 = height * 0.5f + static_cast<GLfloat>(g_menuCoordinates[coordinate][1] + yOffset);
+                const GLfloat pixelY0 = height * 0.5f - static_cast<GLfloat>(g_menuCoordinates[coordinate][1] + yOffset) - 128.0f;
                 const GLfloat pixelX1 = pixelX0 + 128.0f;
                 const GLfloat pixelY1 = pixelY0 + 128.0f;
 
