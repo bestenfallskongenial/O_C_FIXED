@@ -459,7 +459,7 @@ bool            CKernel::wrapperGenerateWaveTables(char** p_buffer, int p_count)
                 generateWaveTriangle             (p_buffer, 1, p_count);
                 generateWaveRampUp               (p_buffer, 2, p_count);
                 generateWaveRampDown             (p_buffer, 3, p_count);
-                generateWaveTrapezoid            (p_buffer, 4, p_count);
+            /*  generateWaveTrapezoid            (p_buffer, 4, p_count); */
                 generateWaveSmoothUp             (p_buffer, 5, p_count);
                 generateWaveSmoothDown           (p_buffer, 6, p_count);
                 generateWaveExponential          (p_buffer, 7, p_count);

@@ -79,7 +79,7 @@ void CKernel::generateWaveRampDown(char** p_buffer, int p_index, int p_count)
             (((last - i) * (uint32_t)LFO_AMPLITUDE) / last);
     }
 }
-
+/*
 void CKernel::generateWaveTrapezoid(char** p_buffer, int p_index, int p_count)
 {
     uint16_t* f_buffer = (uint16_t*)p_buffer[p_index];
@@ -107,7 +107,7 @@ void CKernel::generateWaveTrapezoid(char** p_buffer, int p_index, int p_count)
         }
     }
 }
-
+*/
 void CKernel::generateWaveSmoothUp(char** p_buffer, int p_index, int p_count)
 {
     uint16_t* f_buffer = (uint16_t*)p_buffer[p_index];
