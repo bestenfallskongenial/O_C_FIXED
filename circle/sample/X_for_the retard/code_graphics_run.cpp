@@ -264,7 +264,7 @@ void            CKernel::drawGLsOvl                 (   vtx_state* v )
                                 g_overlayVertices);
 
                 glEnable(GL_BLEND);
-                glBlendFuncSeparate(GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
                 glDisable(GL_BLEND);
 #ifdef __DEBUG_GL__
