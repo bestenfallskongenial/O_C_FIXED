@@ -167,7 +167,7 @@ void CKernel::sample1WaveTable(int p_source, int p_lfoIn, int p_lfoOut, int p_sa
 */
 void CKernel::sample1WaveTable(char** p_buffer, int p_source, int p_lfoIn, int p_lfoOut, int p_samples)
 {
-    if (g_centralModeBuffer[g_currentProgramBuffer][p_lfoIn] >= waveTableCount)
+    if (g_centralModeBuffer[g_currentProgramBuffer][p_lfoIn] == WaveRandom)
     {
         if (g_lfoBpmMatrix[p_source][LCB] != g_lfoBpmMatrix[p_source][LLCB])
             {
