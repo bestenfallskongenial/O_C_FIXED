@@ -23,7 +23,6 @@
     
     #define         __DEBUG_TIMING__                                            // shows the framerates
 
-    #define         OVERLAY_INVERT                                              // either inverted overlay menu or black 
 //  #define         __DUMP_HEADER__    
 //  #define         __DUMP_GLSL__                                               // dump shader source from GL
 //  #define         __DUMP_FRAMES__                                             // dump the parsed per frame data from per video
