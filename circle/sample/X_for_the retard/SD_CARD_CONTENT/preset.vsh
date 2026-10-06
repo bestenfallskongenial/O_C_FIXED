@@ -18,7 +18,7 @@ void main(void) // entry point for the vertex shader.
 // This is typically done to apply transformations or manipulations
 // to the vertex position before assigning it to gl_Position.
 
-vec4 pos = vertex;
+vec4 pos = vec4(vertex.xy, 0.0, 1.0);
 
 // Sets the final position of the vertex in homogeneous coordinates.
 // This is a required step in the vertex shader to determine where the
@@ -30,5 +30,5 @@ gl_Position = pos;
 // and shifting the xy coordinates of the vertex.
 // This step ensures that the texture coordinates are in the range [0,1],
 
-tcoord = vertex.xy * 0.5 + 0.5;
+tcoord = vertex.zw;
 }

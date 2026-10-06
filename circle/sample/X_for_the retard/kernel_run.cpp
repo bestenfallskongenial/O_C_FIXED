@@ -104,14 +104,14 @@ TShutdownMode CKernel::Run(void)
 // lets see...
                     if (g_menuLayer != 0 || m_BPM_hold_A)
                         {
-                        provideTileCoordByLayer( &m_osh, g_menuLayer );
+                        provideTileCoordByLayer( g_menuLayer );
 
                         setUniOvl( &m_ogl, &m_osh, &m_omt );
 
                         setTexOvl( &m_ogl, &m_osh, &m_omt );
 
-                        drawGLsOvl();
-                        }                 
+                        drawGLsOvl( &m_vtx );
+                        }                               
                       
                 fpsBreak();
 

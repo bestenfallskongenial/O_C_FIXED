@@ -93,6 +93,14 @@ enum ModeFlags
      
     GROUP_COUNT
 };
+
+		enum                            {   OVERLAY_FIRST_VERTEX      = 4,
+		                                    OVERLAY_TILE_COUNT       = 23,
+		                                    OVERLAY_VERTEX_PER_TILE  = 6,
+		                                    OVERLAY_FLOAT_PER_VERTEX = 4,
+		                                    OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
+
+                                            
 //------------------------------------------------- // for the array unsigned/float g_inOutMatrix*[CHANNEL][IO_TYPE_COUNT]
 enum io_types                               
 {

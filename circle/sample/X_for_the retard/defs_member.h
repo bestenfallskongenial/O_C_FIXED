@@ -458,7 +458,8 @@ public:         // Logging
 // Y	=	is shown if layer 2 on the fixed position q3 !
 // X	= 	same logic as **** taken from g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT]
 
-                GLfloat                         g_menuTarget[MENU_COORD_COUNT][4]               =           { 0.0f };
+		GLfloat                         g_overlayVertices[OVERLAY_FLOAT_COUNT]           =           { 0.0f };
+		unsigned                        g_overlayVertexCount                            = 0;
 
 private:
                 VCHI_INSTANCE_T                 m_VCHIInstance                                  = 0;

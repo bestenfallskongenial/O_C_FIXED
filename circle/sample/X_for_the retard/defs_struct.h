@@ -35,45 +35,6 @@ struct glsl_state
     GLint                       u_par_b[MAX_SHADER];
     GLint                       u_tex_l[MAX_SHADER];
     // overlay uniforms
-	GLint						u_q00[MAX_OMF];			// MENU_COORD_MODE_0
-
-	GLint						u_d00[MAX_OMF];			// MENU_COORD_DETAIL_0
-	GLint						u_d01[MAX_OMF];			// MENU_COORD_DETAIL_1
-
-	GLint						u_q01[MAX_OMF];			// MENU_COORD_MODE_1
-
-	GLint						u_d02[MAX_OMF];			// MENU_COORD_DETAIL_2
-	GLint						u_d03[MAX_OMF];			// MENU_COORD_DETAIL_3
-
-	GLint						u_q02[MAX_OMF];			// MENU_COORD_MODE_2
-
-	GLint						u_d04[MAX_OMF];			// MENU_COORD_DETAIL_4
-	GLint						u_d05[MAX_OMF];			// MENU_COORD_DETAIL_5
-
-	GLint						u_q03[MAX_OMF];			// MENU_COORD_MODE_3
-
-	GLint						u_d06[MAX_OMF];			// MENU_COORD_DETAIL_6
-	GLint						u_d07[MAX_OMF];			// MENU_COORD_DETAIL_7
-
-	GLint						u_t00[MAX_OMF];			// MENU_COORD_TARGET_TIME
-	GLint						u_t01[MAX_OMF];			// MENU_COORD_TARGET_TEXTURE
-	GLint						u_t02[MAX_OMF];			// MENU_COORD_TARGET_VIDEO
-	GLint						u_t03[MAX_OMF];			// MENU_COORD_TARGET_FRAME
-		
-	GLint						u_t05[MAX_OMF];			// MENU_COORD_TARGET_PROGRAM
-
-	GLint						u_x00[MAX_OMF];			// MENU_COORD_EXTERN_SELECTOR
-
-	GLint						u_up[MAX_OMF];			// MENU_COORD_ARROW_UP
-	GLint						u_dw[MAX_OMF];			// MENU_COORD_ARROW_DOWN
-
-	GLint						u_bpm[MAX_OMF];			// MENU_COORD_BPM_STRING
-	GLint						u_100[MAX_OMF];			// MENU_COORD_BPM_100
-	GLint						u_010[MAX_OMF];			// MENU_COORD_BPM_010
-	GLint						u_001[MAX_OMF];			// MENU_COORD_BPM_001
-	GLint						u_dot[MAX_OMF];			// MENU_COORD_BPM_DOT
-	GLint						u_10d[MAX_OMF];			// MENU_COORD_BPM_10D
-	GLint						u_01d[MAX_OMF];			// MENU_COORD_BPM_01D
 };
 
 struct tex_state

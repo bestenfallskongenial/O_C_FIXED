@@ -169,7 +169,7 @@ public:
                 void        setTexOvl                   (               olg_state*                      o, 
                                                                         glsl_state*                     s, 
                                                                         tex_state*                      t);
-                void        drawGLsOvl                  ();                  
+                void        drawGLsOvl                  (               vtx_state*                      v);                
 
                 void        fpsBegin                    ();
                 void        fpsBreak                    ();
@@ -348,21 +348,16 @@ public:
                                                                         unsigned                        nDevice,
                                                                         void*                           pParam);
 // code_overlay.cpp         
+// code_overlay.cpp         
+                void        appendOverlayTile           (               unsigned                        atlasTile,
+                                                                        int                             coordinate,
+                                                                        int                             yOffset = 0);
                 void        provideTileCoordForMode     (               unsigned                        mode,
                                                                         unsigned                        matrixIndex,
-
-                                                                        float*                          qCoord,
-                                                                        float*                          d0Coord,
-                                                                        float*                          d1Coord,
-                                                                        float*                          t00Coord,
-                                                                        float*                          t01Coord,
-                                                                        float*                          t02Coord,
-                                                                        float*                          t03Coord,
                                                                         int                             modeCoord,
                                                                         int                             detail0Coord,
                                                                         int                             detail1Coord );
-                void        provideTileCoordByLayer     (               glsl_state*                     s, 
-                                                                        int                             layer);                                                        
+                void        provideTileCoordByLayer     (               int                             layer);                                                    
 // code_parser.cpp              !! TESTED AND APPROVED !!
                 bool        BMPparser                   (               tex_state*                      t,
                                                                         char*                           p_buffer_array[],
