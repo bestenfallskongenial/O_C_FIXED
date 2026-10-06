@@ -276,7 +276,7 @@ public:         // Logging
                                                                                                             {    5,    5,    5,    5  },
                                                                                                             {    5,    5,    5,    5  },
 
-                                                                                                            {    9,    9,    7,    7  },                        // layer  3 for IN_MODE_LF_X            ( wave 0, wave 1, mult 0, mult 1 )
+                                                                                                            {    waveTableCount,    waveTableCount,    7,    7  },                        // layer  3 for IN_MODE_LF_X            ( wave 0, wave 1, mult 0, mult 1 )
                                                                                                             {  511,  511,    8,    3  },                        // layer  4 for IN_MODE_TRG             ( thr_low, thr_hi, ext_selector, attenuation? )
 
                                                                                                             {   64,   64,   64,   64  },                        // layer  5 for IN_MODE_AU_X            ( aud 0 low, aud o hi, aud 1 low, aud 1 hi )
