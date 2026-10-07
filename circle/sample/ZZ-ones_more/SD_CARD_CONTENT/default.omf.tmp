@@ -3,12 +3,11 @@ precision mediump float;
 varying vec2 tcoord;
 
 uniform sampler2D tex[8];
-uniform vec4 color;
 
 void main()
 {
     vec3 atlasColor = texture2D(tex[0], tcoord).rgb;
     float coverage = 1.0 - dot(atlasColor, vec3(0.299, 0.587, 0.114));
 
-    gl_FragColor = vec4(color.rgb, coverage * color.a);
+    gl_FragColor = vec4(vec3(coverage), coverage);
 }
