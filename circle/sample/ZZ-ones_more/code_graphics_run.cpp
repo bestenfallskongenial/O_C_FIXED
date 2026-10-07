@@ -252,7 +252,7 @@ void            CKernel::setTexOvl                  (   olg_state*  o,
                 debug_gl();
 #endif
 }
-
+/*
 void            CKernel::drawGLsOvl                 (   vtx_state* v )
 {
                 if (g_overlayVertexCount == 0) return;
@@ -266,6 +266,52 @@ void            CKernel::drawGLsOvl                 (   vtx_state* v )
                 glEnable(GL_BLEND);
                 glBlendFuncSeparate(GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE);
                 glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
+                glDisable(GL_BLEND);
+#ifdef __DEBUG_GL__
+                debug_gl();
+#endif
+}
+*/
+void            CKernel::drawGLsOvl                 (   vtx_state* v )
+{
+                if (g_overlayVertexCount == 0) return;
+
+                const GLfloat scale = 98.0f / 96.0f;
+                GLfloat greyVertices[OVERLAY_FLOAT_COUNT];
+
+                for (unsigned i = 0; i < g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX; i += OVERLAY_FLOAT_PER_VERTEX)
+                    {
+                    greyVertices[i + 0] = g_overlayVertices[i + 0] * scale;
+                    greyVertices[i + 1] = g_overlayVertices[i + 1] * scale;
+                    greyVertices[i + 2] = g_overlayVertices[i + 2];
+                    greyVertices[i + 3] = g_overlayVertices[i + 3];
+                    }
+
+                glBindBuffer(GL_ARRAY_BUFFER, v->gl_buf);
+
+                glEnable(GL_BLEND);
+                glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE);
+
+                // Grey copy: 98-pixel tiles.
+                glBufferSubData(GL_ARRAY_BUFFER,
+                                OVERLAY_FIRST_VERTEX * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
+                                g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
+                                greyVertices);
+
+                if (m_osh.u_col[0] != -1) glUniform4f(m_osh.u_col[0], 0.5f, 0.5f, 0.5f, 1.0f);
+
+                glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
+
+                // Original overlay: 96-pixel tiles, black.
+                glBufferSubData(GL_ARRAY_BUFFER,
+                                OVERLAY_FIRST_VERTEX * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
+                                g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
+                                g_overlayVertices);
+
+                if (m_osh.u_col[0] != -1) glUniform4f(m_osh.u_col[0], 0.0f, 0.0f, 0.0f, 1.0f);
+
+                glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
+
                 glDisable(GL_BLEND);
 #ifdef __DEBUG_GL__
                 debug_gl();
