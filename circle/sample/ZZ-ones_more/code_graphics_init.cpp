@@ -189,8 +189,8 @@ void            CKernel::initTexture                (   vtx_state*  v,
 
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrap_s);
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrap_t);
-                    //  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, t == &m_omt ? GL_NEAREST : GL_LINEAR);                        
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                    //  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, t == &m_omt ? GL_NEAREST : GL_LINEAR);                        
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
                         GLvoid* bitmapData = &t->data[i][t->offset[i]];
