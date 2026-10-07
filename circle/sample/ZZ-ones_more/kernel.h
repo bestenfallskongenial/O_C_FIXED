@@ -347,11 +347,16 @@ public:
                                                                         unsigned                        nLength,
                                                                         unsigned                        nDevice,
                                                                         void*                           pParam);
-// code_overlay.cpp         
-// code_overlay.cpp         
+// code_overlay.cpp   
+/*      
                 void        appendOverlayTile           (               unsigned                        atlasTile,
                                                                         int                             coordinate,
                                                                         int                             yOffset = 0);
+*/
+                void        appendOverlayTile           (               unsigned                        atlasTile,
+                                                                        int                             coordinate,
+                                                                        int                             yOffset = 0,
+                                                                        GLfloat                         scale = 1.0f);
                 void        provideTileCoordForMode     (               unsigned                        mode,
                                                                         unsigned                        matrixIndex,
                                                                         int                             modeCoord,
