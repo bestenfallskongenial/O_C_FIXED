@@ -194,7 +194,7 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                         break;
                     }
 }
-
+/*
 void            CKernel::provideTileCoordByLayer     (   int layer )
 {
                 g_overlayVertexCount = 0;
@@ -220,6 +220,41 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
 
                     default:
                         break;
+                    }
+
+                if (m_BPM_hold_A)
+                    {
+                    const unsigned bpm      = g_lfoBpmMatrix[g_activeBpmChannel][BPM];
+                    const unsigned digit100 = (bpm / 10000) % 10;
+                    const unsigned digit010 = (bpm / 1000)  % 10;
+                    const unsigned digit001 = (bpm / 100)   % 10;
+                    const unsigned digit10d = (bpm / 10)    % 10;
+                    const unsigned digit01d =  bpm          % 10;
+
+                    appendOverlayTile(ATLAS_TILE_LABEL_BPM,                 MENU_COORD_BPM_STRING);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit100,       MENU_COORD_BPM_100);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit010,       MENU_COORD_BPM_010);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit001,       MENU_COORD_BPM_001);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_DOT,                MENU_COORD_BPM_DOT);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit10d,       MENU_COORD_BPM_10D);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit01d,       MENU_COORD_BPM_01D);
+                    }
+}
+*/
+void            CKernel::provideTileCoordByLayer     (   int layer )
+{
+                g_overlayVertexCount = 0;
+
+                if (layer != 0)
+                    {
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][0], 0, MENU_COORD_MODE_0, MENU_COORD_DETAIL_0, MENU_COORD_DETAIL_1);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][1], 1, MENU_COORD_MODE_1, MENU_COORD_DETAIL_2, MENU_COORD_DETAIL_3);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][2], 2, MENU_COORD_MODE_2, MENU_COORD_DETAIL_4, MENU_COORD_DETAIL_5);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][3], 3, MENU_COORD_MODE_3, MENU_COORD_DETAIL_6, MENU_COORD_DETAIL_7);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][4], 4, MENU_COORD_MODE_4, MENU_COORD_DETAIL_8, MENU_COORD_DETAIL_9);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
+                    provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
                     }
 
                 if (m_BPM_hold_A)
