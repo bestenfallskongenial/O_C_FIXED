@@ -405,8 +405,7 @@ public:         // Logging
 
                                                                                         
 /*
-        const   int                         g_menuCoordinates[MENU_COORD_COUNT][2]              =       {
-                                                                                                            { -128, -128 },             //  0 MENU_COORD_MODE_04			*
+        const   int                         g_menuCoordinates[MENU_COORD_COUNT][2]              =       {   { -128, -128 },             //  0 MENU_COORD_MODE_04			*  100% 128px
 
                                                                                                             { -128, -128 },             //  1 MENU_COORD_DETAIL_0			**
                                                                                                             { -128, -128 },             //  2 MENU_COORD_DETAIL_1 			**
@@ -449,8 +448,9 @@ public:         // Logging
 
                                                                                                             {    80, 160 },	        // 25 MENU_COORD_BPM_10D		****
                                                                                                             {   100, 160 }  };	        // 26 MENU_COORD_BPM_01D		****
-*/                                                               
-const int g_menuCoordinates[MENU_COORD_COUNT][2] = {                                                        { -64, -64 }, // line 409:  0 MENU_COORD_MODE_04
+*/                                
+/*                               
+const int g_menuCoordinates[MENU_COORD_COUNT][2] =                                                      {   { -64, -64 }, // line 409:  0 MENU_COORD_MODE_04               50% 64px                                                     
                                                                                                             { -64, -64 }, // line 411:  1 MENU_COORD_DETAIL_0
                                                                                                             { -64, -64 }, // line 412:  2 MENU_COORD_DETAIL_1
 
@@ -483,7 +483,50 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] = {                            
                                                                                                             {  30, 80 }, // line 448: 24 MENU_COORD_BPM_DOT
                                                                                                             {  40, 80 }, // line 450: 25 MENU_COORD_BPM_10D
                                                                                                             {  50, 80 }};  // line 451: 26 MENU_COORD_BPM_01D
-                                                                                                            
+*/                                                                                          
+        const   int                         g_menuCoordinates[MENU_COORD_COUNT][2]              =       {   {  -96,  -96 },             //  0 MENU_COORD_MODE_04			* 75% 96px
+
+                                                                                                            {  -96,  -96 },             //  1 MENU_COORD_DETAIL_0			**
+                                                                                                            {  -96,  -96 },             //  2 MENU_COORD_DETAIL_1 			**
+
+                                                                                                            {    0,  -96 },             //  3 MENU_COORD_MODE_15			*
+
+                                                                                                            {    0,  -96 },             //  4 MENU_COORD_DETAIL_2 			**
+                                                                                                            {    0,  -96 },             //  5 MENU_COORD_DETAIL_3 			**
+
+                                                                                                            {  -96,    0 },             //  6 MENU_COORD_MODE_26			*
+
+                                                                                                            {  -96,    0 },             //  7 MENU_COORD_DETAIL_4 			**
+                                                                                                            {  -96,    0 },             //  8 MENU_COORD_DETAIL_5 			**
+
+                                                                                                            {    0,    0 },             //  9 MENU_COORD_MODE_37			*
+
+                                                                                                            {    0,    0 },             // 10 MENU_COORD_DETAIL_6 			**
+                                                                                                            {    0,    0 },             // 11 MENU_COORD_DETAIL_7 			**
+
+                                                                                                            {    0,    0 },             // 12 MENU_COORD_TARGET_TIME 		***
+                                                                                                            {    0,    0 },             // 13 MENU_COORD_TARGET_TEXTURE		***
+                                                                                                            {    0,    0 },             // 14 MENU_COORD_TARGET_VIDEO		***
+                                                                                                            {    0,    0 },             // 15 MENU_COORD_TARGET_FRAME		***
+
+                                                                                                            {    0,    0 },             // 16 MENU_COORD_TARGET_PROGRAM		Y
+
+                                                                                                            {    0,    0 },             // 17 MENU_COORD_EXTERN_SELECTOR	X
+
+
+                                                                                                            { - 48, -192 },             // 18 MENU_COORD_ARROW_UP
+                                                                                                            { - 48,   96 },             // 19 MENU_COORD_ARROW_DOWN
+
+                                                                                                            {  -96, 120 },              // 20 MENU_COORD_BPM_STRING	****
+
+                                                                                                            {    0, 120 },	        // 21 MENU_COORD_BPM_100		****
+                                                                                                            {   15, 120 },	        // 22 MENU_COORD_BPM_010		****
+                                                                                                            {   30, 120 },	        // 23 MENU_COORD_BPM_001		****
+
+                                                                                                            {   45, 120 },	        // 24 MENU_COORD_BPM_DOT		****
+
+                                                                                                            {    60, 120 },	        // 25 MENU_COORD_BPM_10D		****
+                                                                                                            {    75, 120 }  };	        // 26 MENU_COORD_BPM_01D		****                                                                                                            
 
 // * 	= 	the coordinates for the four quadrants ( q0 for mode 0 in layer 1, mode 4 in layer 2, q1 for mode 1 in layer 1, mode 5 in layer 2, etc. )
 // **	= 	is usually the same as the coordinates for the quadrant for the mode pair of 0/4, 1/5, 2/6. 3/7 ( depending on the layer 1 or 2)
