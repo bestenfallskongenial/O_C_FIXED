@@ -276,13 +276,14 @@ void            CKernel::drawGLsOvl                 (   vtx_state* v )
 {
                 if (g_overlayVertexCount == 0) return;
 
-                const GLfloat scale = 98.0f / 96.0f;
+                const GLfloat offsetX = 2.0f / static_cast<GLfloat>(m_ogl.screen_width);
+                const GLfloat offsetY = 2.0f / static_cast<GLfloat>(m_ogl.screen_height);
                 GLfloat greyVertices[OVERLAY_FLOAT_COUNT];
 
                 for (unsigned i = 0; i < g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX; i += OVERLAY_FLOAT_PER_VERTEX)
                     {
-                    greyVertices[i + 0] = g_overlayVertices[i + 0] * scale;
-                    greyVertices[i + 1] = g_overlayVertices[i + 1] * scale;
+                    greyVertices[i + 0] = g_overlayVertices[i + 0] + offsetX;
+                    greyVertices[i + 1] = g_overlayVertices[i + 1] - offsetY;
                     greyVertices[i + 2] = g_overlayVertices[i + 2];
                     greyVertices[i + 3] = g_overlayVertices[i + 3];
                     }
@@ -292,7 +293,7 @@ void            CKernel::drawGLsOvl                 (   vtx_state* v )
                 glEnable(GL_BLEND);
                 glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE);
 
-                // Grey copy: 98-pixel tiles.
+                // Grey copy: 96-pixel tiles, one pixel right and down.
                 glBufferSubData(GL_ARRAY_BUFFER,
                                 OVERLAY_FIRST_VERTEX * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
                                 g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
