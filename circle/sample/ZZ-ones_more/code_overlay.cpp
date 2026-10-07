@@ -2,7 +2,7 @@
 
     #define MY_BFR   m_logKernel
     #define MY_IDX   m_logKernelIndex
-
+/*
 void            CKernel::appendOverlayTile           (   unsigned    atlasTile,
                                                         int         coordinate,
                                                         int         yOffset )
@@ -19,6 +19,46 @@ void            CKernel::appendOverlayTile           (   unsigned    atlasTile,
                 const GLfloat pixelY0 = height * 0.5f - static_cast<GLfloat>(g_menuCoordinates[coordinate][1] + yOffset) - 128.0f;
                 const GLfloat pixelX1 = pixelX0 + 128.0f;
                 const GLfloat pixelY1 = pixelY0 + 128.0f;
+
+                const GLfloat x0 = pixelX0 * 2.0f / width  - 1.0f;
+                const GLfloat y0 = pixelY0 * 2.0f / height - 1.0f;
+                const GLfloat x1 = pixelX1 * 2.0f / width  - 1.0f;
+                const GLfloat y1 = pixelY1 * 2.0f / height - 1.0f;
+
+                const GLfloat u0 = g_atlasTileMap[atlasTile][0];
+                const GLfloat v0 = g_atlasTileMap[atlasTile][1];
+                const GLfloat u1 = u0 + 0.125f;
+                const GLfloat v1 = v0 + 0.125f;
+
+                GLfloat* out = &g_overlayVertices[g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX];
+
+                out[0]  = x0; out[1]  = y0; out[2]  = u0; out[3]  = v0;
+                out[4]  = x1; out[5]  = y0; out[6]  = u1; out[7]  = v0;
+                out[8]  = x1; out[9]  = y1; out[10] = u1; out[11] = v1;
+
+                out[12] = x0; out[13] = y0; out[14] = u0; out[15] = v0;
+                out[16] = x1; out[17] = y1; out[18] = u1; out[19] = v1;
+                out[20] = x0; out[21] = y1; out[22] = u0; out[23] = v1;
+
+                g_overlayVertexCount += OVERLAY_VERTEX_PER_TILE;
+}
+*/
+void            CKernel::appendOverlayTile           (   unsigned    atlasTile,
+                                                        int         coordinate,
+                                                        int         yOffset )
+{
+                if (g_overlayVertexCount + OVERLAY_VERTEX_PER_TILE > OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE)
+                    {
+                    return;
+                    }
+
+                const GLfloat width  = static_cast<GLfloat>(m_ogl.screen_width);
+                const GLfloat height = static_cast<GLfloat>(m_ogl.screen_height);
+
+                const GLfloat pixelX0 = width  * 0.5f + static_cast<GLfloat>(g_menuCoordinates[coordinate][0]);
+                const GLfloat pixelY0 = height * 0.5f - (static_cast<GLfloat>(g_menuCoordinates[coordinate][1]) + static_cast<GLfloat>(yOffset) * 0.5f) - 64.0f;
+                const GLfloat pixelX1 = pixelX0 + 64.0f;
+                const GLfloat pixelY1 = pixelY0 + 64.0f;
 
                 const GLfloat x0 = pixelX0 * 2.0f / width  - 1.0f;
                 const GLfloat y0 = pixelY0 * 2.0f / height - 1.0f;

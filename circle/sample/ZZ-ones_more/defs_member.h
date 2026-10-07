@@ -404,7 +404,7 @@ public:         // Logging
                                                                                                             { 0.875f, 0.000f } };   // 63 ATLAS_TILE_63
 
                                                                                         
-
+/*
         const   int                         g_menuCoordinates[MENU_COORD_COUNT][2]              =       {
                                                                                                             { -128, -128 },             //  0 MENU_COORD_MODE_04			*
 
@@ -449,7 +449,41 @@ public:         // Logging
 
                                                                                                             {    80, 160 },	        // 25 MENU_COORD_BPM_10D		****
                                                                                                             {   100, 160 }  };	        // 26 MENU_COORD_BPM_01D		****
-                                                                                                        
+*/                                                               
+const int g_menuCoordinates[MENU_COORD_COUNT][2] = {                                                        { -64, -64 }, // line 409:  0 MENU_COORD_MODE_04
+                                                                                                            { -64, -64 }, // line 411:  1 MENU_COORD_DETAIL_0
+                                                                                                            { -64, -64 }, // line 412:  2 MENU_COORD_DETAIL_1
+
+                                                                                                            {   0, -64 }, // line 414:  3 MENU_COORD_MODE_15
+                                                                                                            {   0, -64 }, // line 416:  4 MENU_COORD_DETAIL_2
+                                                                                                            {   0, -64 }, // line 417:  5 MENU_COORD_DETAIL_3
+
+                                                                                                            { -64,   0 }, // line 419:  6 MENU_COORD_MODE_26
+                                                                                                            { -64,   0 }, // line 421:  7 MENU_COORD_DETAIL_4
+                                                                                                            { -64,   0 }, // line 422:  8 MENU_COORD_DETAIL_5
+
+                                                                                                            {   0,   0 }, // line 424:  9 MENU_COORD_MODE_37
+                                                                                                            {   0,   0 }, // line 426: 10 MENU_COORD_DETAIL_6
+                                                                                                            {   0,   0 }, // line 427: 11 MENU_COORD_DETAIL_7
+
+                                                                                                            {   0,   0 }, // line 429: 12 MENU_COORD_TARGET_TIME
+                                                                                                            {   0,   0 }, // line 430: 13 MENU_COORD_TARGET_TEXTURE
+                                                                                                            {   0,   0 }, // line 431: 14 MENU_COORD_TARGET_VIDEO
+                                                                                                            {   0,   0 }, // line 432: 15 MENU_COORD_TARGET_FRAME
+                                                                                                            {   0,   0 }, // line 434: 16 MENU_COORD_TARGET_PROGRAM
+                                                                                                            {   0,   0 }, // line 436: 17 MENU_COORD_EXTERN_SELECTOR
+
+                                                                                                            { -32, -128 }, // line 439: 18 MENU_COORD_ARROW_UP
+                                                                                                            { -32,   64 }, // line 440: 19 MENU_COORD_ARROW_DOWN
+
+                                                                                                            { -64, 80 }, // line 442: 20 MENU_COORD_BPM_STRING
+                                                                                                            {   0, 80 }, // line 444: 21 MENU_COORD_BPM_100
+                                                                                                            {  10, 80 }, // line 445: 22 MENU_COORD_BPM_010
+                                                                                                            {  20, 80 }, // line 446: 23 MENU_COORD_BPM_001
+                                                                                                            {  30, 80 }, // line 448: 24 MENU_COORD_BPM_DOT
+                                                                                                            {  40, 80 }, // line 450: 25 MENU_COORD_BPM_10D
+                                                                                                            {  50, 80 }};  // line 451: 26 MENU_COORD_BPM_01D
+                                                                                                            
 
 // * 	= 	the coordinates for the four quadrants ( q0 for mode 0 in layer 1, mode 4 in layer 2, q1 for mode 1 in layer 1, mode 5 in layer 2, etc. )
 // **	= 	is usually the same as the coordinates for the quadrant for the mode pair of 0/4, 1/5, 2/6. 3/7 ( depending on the layer 1 or 2)
