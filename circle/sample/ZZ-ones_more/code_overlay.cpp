@@ -474,9 +474,9 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_UPPER_TOP);
-                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_UPPER_BOTTOM);
-                        appendOverlayTile(ATLAS_TILE_LABEL_ADC, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_1);
+                        appendOverlayTile(ATLAS_TILE_LABEL_ADC, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 2:
@@ -488,9 +488,9 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_LOWER_TOP);
-                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_LOWER_BOTTOM);
-                        appendOverlayTile(ATLAS_TILE_LABEL_ADC, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_2);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
+                        appendOverlayTile(ATLAS_TILE_LABEL_ADC, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 3:
@@ -502,7 +502,11 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_LABEL_LFO, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_1);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_2);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
+                        appendOverlayTile(ATLAS_TILE_LABEL_LFO, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 4:
@@ -514,7 +518,11 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_LABEL_TRG, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_1);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_2);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
+                        appendOverlayTile(ATLAS_TILE_LABEL_TRG, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 5:
@@ -526,7 +534,11 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_LABEL_AUD, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_1);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_2);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
+                        appendOverlayTile(ATLAS_TILE_LABEL_AUD, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 6:
@@ -538,7 +550,11 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_LABEL_MID, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_1);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_2);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
+                        appendOverlayTile(ATLAS_TILE_LABEL_MID, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 7:
@@ -550,15 +566,19 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][5], 5, MENU_COORD_MODE_5, MENU_COORD_DETAIL_10, MENU_COORD_DETAIL_11);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][6], 6, MENU_COORD_MODE_6, MENU_COORD_DETAIL_12, MENU_COORD_DETAIL_13);
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
-                        appendOverlayTile(ATLAS_TILE_LABEL_SYS, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_1);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_2);
+                        appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
+                        appendOverlayTile(ATLAS_TILE_LABEL_SYS, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 8:
-                        appendOverlayTile(ATLAS_TILE_SYSTEM_STORE,  MENU_COORD_MODE_0, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] ? 1.125f : 1.0f);
-                        appendOverlayTile(ATLAS_TILE_SYSTEM_LOAD,   MENU_COORD_MODE_1, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD]  ? 1.125f : 1.0f);
-                        appendOverlayTile(ATLAS_TILE_SYSTEM_UPDATE, MENU_COORD_MODE_2, 0, g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD]  ? 1.125f : 1.0f);
-                        appendOverlayTile(ATLAS_TILE_SYSTEM_LOG,    MENU_COORD_MODE_3, 0, g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] ? 1.125f : 1.0f);
-                        appendOverlayTile(ATLAS_TILE_LABEL_SYS, MENU_COORD_BRACKET_UPPER_TOP);
+                        appendOverlayTile(ATLAS_TILE_SYSTEM_STORE,  MENU_COORD_MODE_4, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] ? 1.125f : 1.0f);
+                        appendOverlayTile(ATLAS_TILE_SYSTEM_LOAD,   MENU_COORD_MODE_5, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD]  ? 1.125f : 1.0f);
+                        appendOverlayTile(ATLAS_TILE_SYSTEM_UPDATE, MENU_COORD_MODE_6, 0, g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD]  ? 1.125f : 1.0f);
+                        appendOverlayTile(ATLAS_TILE_SYSTEM_LOG,    MENU_COORD_MODE_7, 0, g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] ? 1.125f : 1.0f);
+                        appendOverlayTile(ATLAS_TILE_LABEL_SYS, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     default:

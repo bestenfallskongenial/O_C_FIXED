@@ -130,6 +130,9 @@
     H20 C25 110 28 108 28 104
     V0 Z"/>
 
+  <path id="GLYPH_BRACKET_RIGHT_BRIDGE" d="
+    M28 0 H38 V128 H28 Z"/>
+
     <circle id="COMMON_MODE_BODY" cx="64" cy="64" r="44"/>
 
     <!-- Shared mask primitives. Black geometry cuts windows from a mode. -->
@@ -684,6 +687,10 @@
     <use href="#GLYPH_BRACKET_RIGHT_BOTTOM" transform="translate(64 51) scale(0.80) translate(-64 -64)"/>
   </svg>
     
+  <svg id="BRACKET_BRIDGE" class="glyph-tile" data-cell="7,7">
+    <use href="#GLYPH_BRACKET_RIGHT_BRIDGE"
+         transform="translate(64 64) scale(0.80 1) translate(-64 -64)"/>
+  </svg>    
   <!-- ==================================================================== -->
   <!-- ATLAS TILES: 64 x 64 OVERLAYS                                        -->
   <!-- Add waveform, multiplier, number, and label tiles here.              -->

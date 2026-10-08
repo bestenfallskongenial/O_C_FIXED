@@ -115,7 +115,7 @@ enum ModeFlags
                                             OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
 */
         enum                            {   OVERLAY_FIRST_VERTEX      = 4,
-                                            OVERLAY_TILE_COUNT       = 38,
+                                            OVERLAY_TILE_COUNT       = 41,
                                             OVERLAY_VERTEX_PER_TILE  = 6,
                                             OVERLAY_FLOAT_PER_VERTEX = 4,
                                             OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
@@ -260,7 +260,7 @@ enum AtlasTileIndex
     ATLAS_TILE_DIVIDER_1_2,          // 29
     ATLAS_TILE_DIVIDER_1_1,          // 30
 
-    ATLAS_TILE_EXTERN_SELECTOR,      // 31 - "X" for external input mode selected
+    ATLAS_TILE_EXTERN_SELECTOR,     // 31
 
     // Row 4: number glyphs 0–7
     ATLAS_TILE_NUMBER_0,             // 32 - first of numbers
@@ -296,8 +296,8 @@ enum AtlasTileIndex
     ATLAS_TILE_LABEL_FPS,            // 54
     ATLAS_TILE_LABEL_BPM,            // 55
 
-    // Row 7: blank, labels and reserved tile
-    ATLAS_TILE_BLANK,                // 56 - bottom-left / zero coordinate
+    // Row 7: blank, labels and bracket bridge
+    ATLAS_TILE_BLANK,                // 56
 
     ATLAS_TILE_LABEL_ADC,            // 57
     ATLAS_TILE_LABEL_TRG,            // 58
@@ -305,7 +305,7 @@ enum AtlasTileIndex
     ATLAS_TILE_LABEL_AUD,            // 60
     ATLAS_TILE_LABEL_MID,            // 61
     ATLAS_TILE_LABEL_SYS,            // 62
-    ATLAS_TILE_63,                   // 63
+    ATLAS_TILE_BRACKET_BRIDGE,       // 63
 
     ATLAS_TILE_COUNT
 };
@@ -455,9 +455,6 @@ enum OverlayScreenCoordinates
 
     MENU_COORD_EXTERN_SELECTOR,
 
-    MENU_COORD_ARROW_UP,
-    MENU_COORD_ARROW_DOWN,
-
     MENU_COORD_BPM_STRING,
 
     MENU_COORD_BPM_100,
@@ -469,10 +466,10 @@ enum OverlayScreenCoordinates
     MENU_COORD_BPM_10D,
     MENU_COORD_BPM_01D,
 
-    MENU_COORD_BRACKET_UPPER_TOP,
-    MENU_COORD_BRACKET_UPPER_BOTTOM,
-    MENU_COORD_BRACKET_LOWER_TOP,
-    MENU_COORD_BRACKET_LOWER_BOTTOM,
+    MENU_COORD_BRACKET_ROW_0,
+    MENU_COORD_BRACKET_ROW_1,
+    MENU_COORD_BRACKET_ROW_2,
+    MENU_COORD_BRACKET_ROW_3,
 
     MENU_COORD_COUNT
 };
