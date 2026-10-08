@@ -580,7 +580,7 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         appendOverlayTile(ATLAS_TILE_SYSTEM_LOG,    MENU_COORD_MODE_7, 0, g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] ? 1.125f : 1.0f);
                         appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_2);
                         appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
-                        appendOverlayTile(ATLAS_TILE_LABEL_SYS, MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_LABEL_SYS, MENU_COORD_BRACKET_ROW_2);
                         break;
 
                     default:
