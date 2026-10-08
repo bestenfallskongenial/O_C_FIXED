@@ -626,16 +626,16 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] = {
 
     {    0,    0 },  // 29 MENU_COORD_EXTERN_SELECTOR
 
-    {  -96,  216 },  // 30 MENU_COORD_BPM_STRING
+    {  122,  117 },  // 30 MENU_COORD_BPM_STRING
 
-    {    0,  216 },  // 31 MENU_COORD_BPM_100
-    {   15,  216 },  // 32 MENU_COORD_BPM_010
-    {   30,  216 },  // 33 MENU_COORD_BPM_001
+    {  162,  117 },  // 31 MENU_COORD_BPM_100
+    {  177,  117 },  // 32 MENU_COORD_BPM_010
+    {  192,  117 },  // 33 MENU_COORD_BPM_001
 
-    {   45,  216 },  // 34 MENU_COORD_BPM_DOT
+    {  207,  117 },  // 34 MENU_COORD_BPM_DOT
 
-    {   60,  216 },  // 35 MENU_COORD_BPM_10D
-    {   75,  216 },  // 36 MENU_COORD_BPM_01D
+    {  222,  117 },  // 35 MENU_COORD_BPM_10D
+    {  237,  117 },  // 36 MENU_COORD_BPM_01D
 
     {   96, -192 },  // 37 MENU_COORD_BRACKET_ROW_0
     {   96,  -96 },  // 38 MENU_COORD_BRACKET_ROW_1
