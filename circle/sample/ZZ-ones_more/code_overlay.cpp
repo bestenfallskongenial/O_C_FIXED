@@ -490,7 +490,7 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         provideTileCoordForMode(g_centralModeBuffer[g_currentProgramBuffer][7], 7, MENU_COORD_MODE_7, MENU_COORD_DETAIL_14, MENU_COORD_DETAIL_15);
                         appendOverlayTile(ATLAS_TILE_BRACKET_TOP,    MENU_COORD_BRACKET_ROW_2);
                         appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
-                        appendOverlayTile(ATLAS_TILE_LABEL_ADC, MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_LABEL_ADC, MENU_COORD_BRACKET_ROW_2);
                         break;
 
                     case 3:
