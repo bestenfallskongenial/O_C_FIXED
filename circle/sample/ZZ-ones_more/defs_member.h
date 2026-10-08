@@ -96,7 +96,7 @@ public:         // Logging
                 unsigned                        g_buttons_states[BTN_COUNT][BTN_INDEX_COUNT]    =           { 0 };      // the button state machine
                 unsigned                        g_centralModeBuffer[SLOTS][MODETABLE_COUNT]     =           { 0 };         // the general user settings, storable per program 
                 unsigned                        g_centralModeBufferTemp[SLOTS][MODETABLE_COUNT] =           { 0 };
-                unsigned                        g_lfoMultiplier[LFO_MULTIPLIERS_COUNT]          =           { 64, 32, 16, 8, 4, 2, 1 };
+                unsigned                        g_lfoMultiplier[LFO_MULTIPLIERS_COUNT]          =           { 32, 16, 8, 4, 2, 1 };
 
                 unsigned long                   g_lfoBpmMatrix[4][LFO_BPM_COUNT]                =           { 0 }; // was unsigned !
 // datamanagement.cpp
@@ -276,7 +276,7 @@ public:         // Logging
                                                                                                             {    5,    5,    5,    5  },
                                                                                                             {    5,    5,    5,    5  },
 
-                                                                                                            {    waveTableCount,    waveTableCount,    7,    7  },                        // layer  3 for IN_MODE_LF_X            ( wave 0, wave 1, mult 0, mult 1 )
+                                                                                                            {    waveTableCount,    waveTableCount,    LFO_MULTIPLIERS_COUNT,    LFO_MULTIPLIERS_COUNT  },                        // layer  3 for IN_MODE_LF_X            ( wave 0, wave 1, mult 0, mult 1 )
                                                                                                             {  511,  511,    8,    3  },                        // layer  4 for IN_MODE_TRG             ( thr_low, thr_hi, ext_selector, attenuation? )
 
                                                                                                             {   64,   64,   64,   64  },                        // layer  5 for IN_MODE_AU_X            ( aud 0 low, aud o hi, aud 1 low, aud 1 hi )

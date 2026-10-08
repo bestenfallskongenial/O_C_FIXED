@@ -105,7 +105,7 @@
     #define         LFO_SAMPLES             1024
     #define         LFO_AMPLITUDE           1023    
     #define         LFO_INSTANCES           2
-    #define         LFO_MULTIPLIERS_COUNT   7
+    #define         LFO_MULTIPLIERS_COUNT   6
 // AUDIO
     #define         AUDIO_BUFFER_COUNT      64
     #define         AUDIO_THRESHOLD         160
