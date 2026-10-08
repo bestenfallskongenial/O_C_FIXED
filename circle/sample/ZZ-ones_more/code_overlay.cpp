@@ -287,12 +287,12 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
 
                     case IN_MODE_LF_0:
                         appendOverlayTile(ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE], detail0Coord);
-                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF1_MULT], detail1Coord);
+                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_32 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT], detail1Coord);
                         break;
 
                     case IN_MODE_LF_1:
                         appendOverlayTile(ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF2_WAVE], detail0Coord);
-                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT], detail1Coord);
+                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_32 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT], detail1Coord);
                         break;
 
                     case IN_MODE_AU_AL:
@@ -570,7 +570,7 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                         appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_1);
                         appendOverlayTile(ATLAS_TILE_BRACKET_BRIDGE, MENU_COORD_BRACKET_ROW_2);
                         appendOverlayTile(ATLAS_TILE_BRACKET_BOTTOM, MENU_COORD_BRACKET_ROW_3);
-                        appendOverlayTile(ATLAS_TILE_BLANK, MENU_COORD_BRACKET_ROW_0);
+                        appendOverlayTile(ATLAS_TILE_LABEL_TGT, MENU_COORD_BRACKET_ROW_0);
                         break;
 
                     case 8:

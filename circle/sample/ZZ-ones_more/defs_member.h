@@ -356,13 +356,13 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] = {
     { 0.750f, 0.625f },  // 22 ATLAS_TILE_LFO_WAVE_EXPONENTIAL
     { 0.875f, 0.625f },  // 23 ATLAS_TILE_LFO_WAVE_RANDOM
 
-    { 0.000f, 0.500f },  // 24 ATLAS_TILE_DIVIDER_1_64
-    { 0.125f, 0.500f },  // 25 ATLAS_TILE_DIVIDER_1_32
-    { 0.250f, 0.500f },  // 26 ATLAS_TILE_DIVIDER_1_16
-    { 0.375f, 0.500f },  // 27 ATLAS_TILE_DIVIDER_1_8
-    { 0.500f, 0.500f },  // 28 ATLAS_TILE_DIVIDER_1_4
-    { 0.625f, 0.500f },  // 29 ATLAS_TILE_DIVIDER_1_2
-    { 0.750f, 0.500f },  // 30 ATLAS_TILE_DIVIDER_1_1
+    { 0.000f, 0.500f },  // 24 ATLAS_TILE_DIVIDER_1_32
+    { 0.125f, 0.500f },  // 25 ATLAS_TILE_DIVIDER_1_16
+    { 0.250f, 0.500f },  // 26 ATLAS_TILE_DIVIDER_1_8
+    { 0.375f, 0.500f },  // 27 ATLAS_TILE_DIVIDER_1_4
+    { 0.500f, 0.500f },  // 28 ATLAS_TILE_DIVIDER_1_2
+    { 0.625f, 0.500f },  // 29 ATLAS_TILE_DIVIDER_1_1
+    { 0.750f, 0.500f },  // 30 ATLAS_TILE_SYSTEM_IDLE
     { 0.875f, 0.500f },  // 31 ATLAS_TILE_EXTERN_SELECTOR
 
     { 0.000f, 0.375f },  // 32 ATLAS_TILE_NUMBER_0
@@ -386,8 +386,8 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] = {
     { 0.000f, 0.125f },  // 48 ATLAS_TILE_INDICATOR_BAR_L
     { 0.125f, 0.125f },  // 49 ATLAS_TILE_INDICATOR_BAR_R
     { 0.250f, 0.125f },  // 50 ATLAS_TILE_INDICATOR_BAR_BPM
-    { 0.375f, 0.125f },  // 51 ATLAS_TILE_SYSTEM_IDLE
-    { 0.500f, 0.125f },  // 52 ATLAS_TILE_BRACKET_TOP
+    { 0.375f, 0.125f },  // 51 ATLAS_TILE_BRACKET_TOP
+    { 0.500f, 0.125f },  // 52 ATLAS_TILE_BRACKET_BRIDGE
     { 0.625f, 0.125f },  // 53 ATLAS_TILE_BRACKET_BOTTOM
     { 0.750f, 0.125f },  // 54 ATLAS_TILE_LABEL_FPS
     { 0.875f, 0.125f },  // 55 ATLAS_TILE_LABEL_BPM
@@ -398,8 +398,8 @@ const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] = {
     { 0.375f, 0.000f },  // 59 ATLAS_TILE_LABEL_LFO
     { 0.500f, 0.000f },  // 60 ATLAS_TILE_LABEL_AUD
     { 0.625f, 0.000f },  // 61 ATLAS_TILE_LABEL_MID
-    { 0.750f, 0.000f },  // 62 ATLAS_TILE_LABEL_SYS
-    { 0.875f, 0.000f }   // 63 ATLAS_TILE_BRACKET_BRIDGE
+    { 0.750f, 0.000f },  // 62 ATLAS_TILE_LABEL_TGT
+    { 0.875f, 0.000f }   // 63 ATLAS_TILE_LABEL_SYS
 };
                                                                                         
 /*

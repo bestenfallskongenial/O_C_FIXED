@@ -220,8 +220,8 @@ enum FileField
 
 enum AtlasTileIndex
 {
-    // Row 0: mode tiles 0–7
-    ATLAS_TILE_MODE_ADC,             // 00 - first of modes
+    // Row 0: mode tiles
+    ATLAS_TILE_MODE_ADC,             // 00
     ATLAS_TILE_MODE_TRG,             // 01
     ATLAS_TILE_MODE_BMP,             // 02
     ATLAS_TILE_MODE_LF0,             // 03
@@ -235,14 +235,13 @@ enum AtlasTileIndex
     ATLAS_TILE_MODE_MIDI_NOTE,       // 09
     ATLAS_TILE_MODE_MIDI_CC0,        // 10
     ATLAS_TILE_MODE_MIDI_CC1,        // 11
-
-    ATLAS_TILE_SYSTEM_STORE,         // 12 - first of system actions
+    ATLAS_TILE_SYSTEM_STORE,         // 12
     ATLAS_TILE_SYSTEM_LOAD,          // 13
     ATLAS_TILE_SYSTEM_UPDATE,        // 14
     ATLAS_TILE_SYSTEM_LOG,           // 15
 
     // Row 2: LFO waveform tiles
-    ATLAS_TILE_LFO_WAVE_SINE,        // 16 - first of waveforms
+    ATLAS_TILE_LFO_WAVE_SINE,        // 16
     ATLAS_TILE_LFO_WAVE_TRIANGLE,    // 17
     ATLAS_TILE_LFO_WAVE_RAMP_UP,     // 18
     ATLAS_TILE_LFO_WAVE_RAMP_DOWN,   // 19
@@ -251,19 +250,18 @@ enum AtlasTileIndex
     ATLAS_TILE_LFO_WAVE_EXPONENTIAL, // 22
     ATLAS_TILE_LFO_WAVE_RANDOM,      // 23
 
-    // Row 3: divider tiles and external selector
-    ATLAS_TILE_DIVIDER_1_64,         // 24 - first of dividers
-    ATLAS_TILE_DIVIDER_1_32,         // 25
-    ATLAS_TILE_DIVIDER_1_16,         // 26
-    ATLAS_TILE_DIVIDER_1_8,          // 27
-    ATLAS_TILE_DIVIDER_1_4,          // 28
-    ATLAS_TILE_DIVIDER_1_2,          // 29
-    ATLAS_TILE_DIVIDER_1_1,          // 30
-
+    // Row 3: divider tiles, idle and external selector
+    ATLAS_TILE_DIVIDER_1_32,         // 24
+    ATLAS_TILE_DIVIDER_1_16,         // 25
+    ATLAS_TILE_DIVIDER_1_8,          // 26
+    ATLAS_TILE_DIVIDER_1_4,          // 27
+    ATLAS_TILE_DIVIDER_1_2,          // 28
+    ATLAS_TILE_DIVIDER_1_1,          // 29
+    ATLAS_TILE_SYSTEM_IDLE,          // 30
     ATLAS_TILE_EXTERN_SELECTOR,     // 31
 
     // Row 4: number glyphs 0–7
-    ATLAS_TILE_NUMBER_0,             // 32 - first of numbers
+    ATLAS_TILE_NUMBER_0,             // 32
     ATLAS_TILE_NUMBER_1,             // 33
     ATLAS_TILE_NUMBER_2,             // 34
     ATLAS_TILE_NUMBER_3,             // 35
@@ -272,12 +270,11 @@ enum AtlasTileIndex
     ATLAS_TILE_NUMBER_6,             // 38
     ATLAS_TILE_NUMBER_7,             // 39
 
-    // Row 5: remaining number glyphs and target tiles
+    // Row 5: remaining numbers and target tiles
     ATLAS_TILE_NUMBER_8,             // 40
     ATLAS_TILE_NUMBER_9,             // 41
     ATLAS_TILE_NUMBER_DOT,           // 42
-
-    ATLAS_TILE_TARGET_TIME,          // 43 - first of target modes
+    ATLAS_TILE_TARGET_TIME,          // 43
     ATLAS_TILE_TARGET_TEXTURE,       // 44
     ATLAS_TILE_TARGET_VIDEO,         // 45
     ATLAS_TILE_TARGET_FRAME,         // 46
@@ -287,25 +284,21 @@ enum AtlasTileIndex
     ATLAS_TILE_INDICATOR_BAR_L,      // 48
     ATLAS_TILE_INDICATOR_BAR_R,      // 49
     ATLAS_TILE_INDICATOR_BAR_BPM,    // 50
-
-    ATLAS_TILE_SYSTEM_IDLE,          // 51
-
-    ATLAS_TILE_BRACKET_TOP,          // 52
+    ATLAS_TILE_BRACKET_TOP,          // 51
+    ATLAS_TILE_BRACKET_BRIDGE,       // 52
     ATLAS_TILE_BRACKET_BOTTOM,       // 53
-
     ATLAS_TILE_LABEL_FPS,            // 54
     ATLAS_TILE_LABEL_BPM,            // 55
 
-    // Row 7: blank, labels and bracket bridge
+    // Row 7: blank and layer labels
     ATLAS_TILE_BLANK,                // 56
-
     ATLAS_TILE_LABEL_ADC,            // 57
     ATLAS_TILE_LABEL_TRG,            // 58
     ATLAS_TILE_LABEL_LFO,            // 59
     ATLAS_TILE_LABEL_AUD,            // 60
     ATLAS_TILE_LABEL_MID,            // 61
-    ATLAS_TILE_LABEL_SYS,            // 62
-    ATLAS_TILE_BRACKET_BRIDGE,       // 63
+    ATLAS_TILE_LABEL_TGT,            // 62
+    ATLAS_TILE_LABEL_SYS,            // 63
 
     ATLAS_TILE_COUNT
 };
