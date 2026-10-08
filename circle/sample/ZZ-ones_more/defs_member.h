@@ -626,7 +626,7 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] = {
 
     {    0,    0 },  // 29 MENU_COORD_EXTERN_SELECTOR
 
-    {  122,  117 },  // 30 MENU_COORD_BPM_STRING
+    {   96,   96 },  // 30 MENU_COORD_BPM_STRING
 
     {  157,  116 },  // 31 MENU_COORD_BPM_100
     {  172,  116 },  // 32 MENU_COORD_BPM_010
