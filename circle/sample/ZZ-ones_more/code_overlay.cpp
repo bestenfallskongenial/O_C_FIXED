@@ -287,7 +287,7 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
 
                     case IN_MODE_LF_0:
                         appendOverlayTile(ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE], detail0Coord);
-                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_32 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT], detail1Coord);
+                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_32 + g_centralModeBuffer[g_currentProgramBuffer][LF1_MULT], detail1Coord);
                         break;
 
                     case IN_MODE_LF_1:
