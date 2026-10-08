@@ -277,28 +277,28 @@ enum AtlasTileIndex
     ATLAS_TILE_TARGET_FRAME,         // 46
     ATLAS_TILE_TARGET_GL_PROGRAM,    // 47
 
-    // Row 6: indicators, navigation and labels
+    // Row 6: indicators, brackets and labels
     ATLAS_TILE_INDICATOR_BAR_L,      // 48
     ATLAS_TILE_INDICATOR_BAR_R,      // 49
     ATLAS_TILE_INDICATOR_BAR_BPM,    // 50
 
     ATLAS_TILE_SYSTEM_IDLE,          // 51
 
-    ATLAS_TILE_ARROW_UP,             // 52
-    ATLAS_TILE_ARROW_DOWN,           // 53
+    ATLAS_TILE_BRACKET_TOP,          // 52
+    ATLAS_TILE_BRACKET_BOTTOM,       // 53
 
     ATLAS_TILE_LABEL_FPS,            // 54
     ATLAS_TILE_LABEL_BPM,            // 55
 
-    // Row 7: blank and reserved tiles
+    // Row 7: blank, labels and reserved tile
     ATLAS_TILE_BLANK,                // 56 - bottom-left / zero coordinate
 
-    ATLAS_TILE_57,                   // 57
-    ATLAS_TILE_58,                   // 58
-    ATLAS_TILE_59,                   // 59
-    ATLAS_TILE_60,                   // 60
-    ATLAS_TILE_61,                   // 61
-    ATLAS_TILE_62,                   // 62
+    ATLAS_TILE_LABEL_ADC,            // 57
+    ATLAS_TILE_LABEL_TRG,            // 58
+    ATLAS_TILE_LABEL_LFO,            // 59
+    ATLAS_TILE_LABEL_AUD,            // 60
+    ATLAS_TILE_LABEL_MID,            // 61
+    ATLAS_TILE_LABEL_SYS,            // 62
     ATLAS_TILE_63,                   // 63
 
     ATLAS_TILE_COUNT

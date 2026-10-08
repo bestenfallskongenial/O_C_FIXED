@@ -328,7 +328,7 @@ public:         // Logging
                                                                                                             {205,  75,  35}    // IN_MODE_MIDI_CC1      - vermilion
                                                                                                         };
 
-        const   GLfloat                     g_atlasTileMap[ATLAS_TILE_COUNT][2]                 =       {   // SVG row 0: mode tiles 0–7
+const GLfloat g_atlasTileMap[ATLAS_TILE_COUNT][2] = {                                                       // SVG row 0: mode tiles 0–7
                                                                                                             { 0.000f, 0.875f },     // 00 ATLAS_TILE_MODE_ADC
                                                                                                             { 0.125f, 0.875f },     // 01 ATLAS_TILE_MODE_TRG
                                                                                                             { 0.250f, 0.875f },     // 02 ATLAS_TILE_MODE_BMP
@@ -357,6 +357,7 @@ public:         // Logging
                                                                                                             { 0.625f, 0.625f },     // 21 ATLAS_TILE_LFO_WAVE_SMOOTH_DOWN
                                                                                                             { 0.750f, 0.625f },     // 22 ATLAS_TILE_LFO_WAVE_EXPONENTIAL
                                                                                                             { 0.875f, 0.625f },     // 23 ATLAS_TILE_LFO_WAVE_RANDOM
+
                                                                                                             // SVG row 3: divider tiles and external selector
                                                                                                             { 0.000f, 0.500f },     // 24 ATLAS_TILE_DIVIDER_1_64
                                                                                                             { 0.125f, 0.500f },     // 25 ATLAS_TILE_DIVIDER_1_32
@@ -366,6 +367,7 @@ public:         // Logging
                                                                                                             { 0.625f, 0.500f },     // 29 ATLAS_TILE_DIVIDER_1_2
                                                                                                             { 0.750f, 0.500f },     // 30 ATLAS_TILE_DIVIDER_1_1
                                                                                                             { 0.875f, 0.500f },     // 31 ATLAS_TILE_EXTERN_SELECTOR
+
                                                                                                             // SVG row 4: number glyphs 0–7
                                                                                                             { 0.000f, 0.375f },     // 32 ATLAS_TILE_NUMBER_0
                                                                                                             { 0.125f, 0.375f },     // 33 ATLAS_TILE_NUMBER_1
@@ -375,6 +377,7 @@ public:         // Logging
                                                                                                             { 0.625f, 0.375f },     // 37 ATLAS_TILE_NUMBER_5
                                                                                                             { 0.750f, 0.375f },     // 38 ATLAS_TILE_NUMBER_6
                                                                                                             { 0.875f, 0.375f },     // 39 ATLAS_TILE_NUMBER_7
+
                                                                                                             // SVG row 5: remaining number glyphs and target tiles
                                                                                                             { 0.000f, 0.250f },     // 40 ATLAS_TILE_NUMBER_8
                                                                                                             { 0.125f, 0.250f },     // 41 ATLAS_TILE_NUMBER_9
@@ -384,23 +387,25 @@ public:         // Logging
                                                                                                             { 0.625f, 0.250f },     // 45 ATLAS_TILE_TARGET_VIDEO
                                                                                                             { 0.750f, 0.250f },     // 46 ATLAS_TILE_TARGET_FRAME
                                                                                                             { 0.875f, 0.250f },     // 47 ATLAS_TILE_TARGET_GL_PROGRAM
-                                                                                                            // SVG row 6: indicators, navigation and labels
+
+                                                                                                            // SVG row 6: indicators, brackets and labels
                                                                                                             { 0.000f, 0.125f },     // 48 ATLAS_TILE_INDICATOR_BAR_L
                                                                                                             { 0.125f, 0.125f },     // 49 ATLAS_TILE_INDICATOR_BAR_R
                                                                                                             { 0.250f, 0.125f },     // 50 ATLAS_TILE_INDICATOR_BAR_BPM
                                                                                                             { 0.375f, 0.125f },     // 51 ATLAS_TILE_SYSTEM_IDLE
-                                                                                                            { 0.500f, 0.125f },     // 52 ATLAS_TILE_ARROW_UP
-                                                                                                            { 0.625f, 0.125f },     // 53 ATLAS_TILE_ARROW_DOWN
+                                                                                                            { 0.500f, 0.125f },     // 52 ATLAS_TILE_BRACKET_TOP
+                                                                                                            { 0.625f, 0.125f },     // 53 ATLAS_TILE_BRACKET_BOTTOM
                                                                                                             { 0.750f, 0.125f },     // 54 ATLAS_TILE_LABEL_FPS
                                                                                                             { 0.875f, 0.125f },     // 55 ATLAS_TILE_LABEL_BPM
-                                                                                                            // SVG row 7: blank and reserved tiles
+
+                                                                                                            // SVG row 7: blank, labels and reserved tile
                                                                                                             { 0.000f, 0.000f },     // 56 ATLAS_TILE_BLANK
-                                                                                                            { 0.125f, 0.000f },     // 57 ATLAS_TILE_57
-                                                                                                            { 0.250f, 0.000f },     // 58 ATLAS_TILE_58
-                                                                                                            { 0.375f, 0.000f },     // 59 ATLAS_TILE_59
-                                                                                                            { 0.500f, 0.000f },     // 60 ATLAS_TILE_60
-                                                                                                            { 0.625f, 0.000f },     // 61 ATLAS_TILE_61
-                                                                                                            { 0.750f, 0.000f },     // 62 ATLAS_TILE_62
+                                                                                                            { 0.125f, 0.000f },     // 57 ATLAS_TILE_LABEL_ADC
+                                                                                                            { 0.250f, 0.000f },     // 58 ATLAS_TILE_LABEL_TRG
+                                                                                                            { 0.375f, 0.000f },     // 59 ATLAS_TILE_LABEL_LFO
+                                                                                                            { 0.500f, 0.000f },     // 60 ATLAS_TILE_LABEL_AUD
+                                                                                                            { 0.625f, 0.000f },     // 61 ATLAS_TILE_LABEL_MID
+                                                                                                            { 0.750f, 0.000f },     // 62 ATLAS_TILE_LABEL_SYS
                                                                                                             { 0.875f, 0.000f } };   // 63 ATLAS_TILE_63
 
                                                                                         
