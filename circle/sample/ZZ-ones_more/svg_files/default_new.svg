@@ -556,10 +556,10 @@
       <use href="#GLYPH_D" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
-<svg id="SYS" class="glyph-tile" data-cell="6,7">
+<svg id="TGT" class="glyph-tile" data-cell="6,7">
       <use href="#GLYPH_T" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_A" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_G" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_G" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_T" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
 <svg id="SYS" class="glyph-tile" data-cell="7,7">
