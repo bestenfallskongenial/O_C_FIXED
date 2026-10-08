@@ -107,12 +107,18 @@ enum ModeFlags
                                             OVERLAY_FLOAT_PER_VERTEX = 4,
                                             OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
 */
+/*
         enum                            {   OVERLAY_FIRST_VERTEX      = 4,
                                             OVERLAY_TILE_COUNT       = 36,
                                             OVERLAY_VERTEX_PER_TILE  = 6,
                                             OVERLAY_FLOAT_PER_VERTEX = 4,
                                             OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
-
+*/
+        enum                            {   OVERLAY_FIRST_VERTEX      = 4,
+                                            OVERLAY_TILE_COUNT       = 38,
+                                            OVERLAY_VERTEX_PER_TILE  = 6,
+                                            OVERLAY_FLOAT_PER_VERTEX = 4,
+                                            OVERLAY_FLOAT_COUNT      = OVERLAY_TILE_COUNT * OVERLAY_VERTEX_PER_TILE * OVERLAY_FLOAT_PER_VERTEX };
 //------------------------------------------------- // for the array unsigned/float g_inOutMatrix*[CHANNEL][IO_TYPE_COUNT]
 enum io_types                               
 {
@@ -345,6 +351,7 @@ enum OverlayScreenCoordinates
     MENU_COORD_COUNT
 };
 */
+/*
 enum OverlayScreenCoordinates
 {
     MENU_COORD_MODE_0,
@@ -404,6 +411,72 @@ enum OverlayScreenCoordinates
 
     MENU_COORD_COUNT
 };
+*/
+enum OverlayScreenCoordinates
+{
+    MENU_COORD_MODE_0,
+    MENU_COORD_DETAIL_0,
+    MENU_COORD_DETAIL_1,
+
+    MENU_COORD_MODE_1,
+    MENU_COORD_DETAIL_2,
+    MENU_COORD_DETAIL_3,
+
+    MENU_COORD_MODE_2,
+    MENU_COORD_DETAIL_4,
+    MENU_COORD_DETAIL_5,
+
+    MENU_COORD_MODE_3,
+    MENU_COORD_DETAIL_6,
+    MENU_COORD_DETAIL_7,
+
+    MENU_COORD_MODE_4,
+    MENU_COORD_DETAIL_8,
+    MENU_COORD_DETAIL_9,
+
+    MENU_COORD_MODE_5,
+    MENU_COORD_DETAIL_10,
+    MENU_COORD_DETAIL_11,
+
+    MENU_COORD_MODE_6,
+    MENU_COORD_DETAIL_12,
+    MENU_COORD_DETAIL_13,
+
+    MENU_COORD_MODE_7,
+    MENU_COORD_DETAIL_14,
+    MENU_COORD_DETAIL_15,
+
+    MENU_COORD_TARGET_TIME,
+    MENU_COORD_TARGET_TEXTURE,
+    MENU_COORD_TARGET_VIDEO,
+    MENU_COORD_TARGET_FRAME,
+
+    MENU_COORD_TARGET_PROGRAM,
+
+    MENU_COORD_EXTERN_SELECTOR,
+
+    MENU_COORD_ARROW_UP,
+    MENU_COORD_ARROW_DOWN,
+
+    MENU_COORD_BPM_STRING,
+
+    MENU_COORD_BPM_100,
+    MENU_COORD_BPM_010,
+    MENU_COORD_BPM_001,
+
+    MENU_COORD_BPM_DOT,
+
+    MENU_COORD_BPM_10D,
+    MENU_COORD_BPM_01D,
+
+    MENU_COORD_BRACKET_UPPER_TOP,
+    MENU_COORD_BRACKET_UPPER_BOTTOM,
+    MENU_COORD_BRACKET_LOWER_TOP,
+    MENU_COORD_BRACKET_LOWER_BOTTOM,
+
+    MENU_COORD_COUNT
+};
+
 // my vcsm dirver
 enum vc_sm_msg_type 										// Message types supported for HOST->VC direction //			
 	{				

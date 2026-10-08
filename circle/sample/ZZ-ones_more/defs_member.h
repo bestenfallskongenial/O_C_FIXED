@@ -534,6 +534,7 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] =                              
                                                                                                             {    60, 120 },	        // 25 MENU_COORD_BPM_10D		****
                                                                                                             {    75, 120 }  };	        // 26 MENU_COORD_BPM_01D		****                                                                                                            
 */
+/*
         const   int                         g_menuCoordinates[MENU_COORD_COUNT][2]              =       {
                                                                                                             {  -96, -192 },             //  0 MENU_COORD_MODE_0
                                                                                                             {  -96, -192 },             //  1 MENU_COORD_DETAIL_0
@@ -589,6 +590,70 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] =                              
 
                                                                                                             {   60,  216 },             // 37 MENU_COORD_BPM_10D
                                                                                                             {   75,  216 }  };          // 38 MENU_COORD_BPM_01D
+*/
+const int g_menuCoordinates[MENU_COORD_COUNT][2] = {
+    {  -96, -192 },  //  0 MENU_COORD_MODE_0
+    {  -96, -192 },  //  1 MENU_COORD_DETAIL_0
+    {  -96, -192 },  //  2 MENU_COORD_DETAIL_1
+
+    {    0, -192 },  //  3 MENU_COORD_MODE_1
+    {    0, -192 },  //  4 MENU_COORD_DETAIL_2
+    {    0, -192 },  //  5 MENU_COORD_DETAIL_3
+
+    {  -96,  -96 },  //  6 MENU_COORD_MODE_2
+    {  -96,  -96 },  //  7 MENU_COORD_DETAIL_4
+    {  -96,  -96 },  //  8 MENU_COORD_DETAIL_5
+
+    {    0,  -96 },  //  9 MENU_COORD_MODE_3
+    {    0,  -96 },  // 10 MENU_COORD_DETAIL_6
+    {    0,  -96 },  // 11 MENU_COORD_DETAIL_7
+
+    {  -96,    0 },  // 12 MENU_COORD_MODE_4
+    {  -96,    0 },  // 13 MENU_COORD_DETAIL_8
+    {  -96,    0 },  // 14 MENU_COORD_DETAIL_9
+
+    {    0,    0 },  // 15 MENU_COORD_MODE_5
+    {    0,    0 },  // 16 MENU_COORD_DETAIL_10
+    {    0,    0 },  // 17 MENU_COORD_DETAIL_11
+
+    {  -96,   96 },  // 18 MENU_COORD_MODE_6
+    {  -96,   96 },  // 19 MENU_COORD_DETAIL_12
+    {  -96,   96 },  // 20 MENU_COORD_DETAIL_13
+
+    {    0,   96 },  // 21 MENU_COORD_MODE_7
+    {    0,   96 },  // 22 MENU_COORD_DETAIL_14
+    {    0,   96 },  // 23 MENU_COORD_DETAIL_15
+
+    {    0,    0 },  // 24 MENU_COORD_TARGET_TIME
+    {    0,    0 },  // 25 MENU_COORD_TARGET_TEXTURE
+    {    0,    0 },  // 26 MENU_COORD_TARGET_VIDEO
+    {    0,    0 },  // 27 MENU_COORD_TARGET_FRAME
+
+    {    0,    0 },  // 28 MENU_COORD_TARGET_PROGRAM
+
+    {    0,    0 },  // 29 MENU_COORD_EXTERN_SELECTOR
+
+    {  -48, -288 },  // 30 MENU_COORD_ARROW_UP
+    {  -48,  192 },  // 31 MENU_COORD_ARROW_DOWN
+
+    {  -96,  216 },  // 32 MENU_COORD_BPM_STRING
+
+    {    0,  216 },  // 33 MENU_COORD_BPM_100
+    {   15,  216 },  // 34 MENU_COORD_BPM_010
+    {   30,  216 },  // 35 MENU_COORD_BPM_001
+
+    {   45,  216 },  // 36 MENU_COORD_BPM_DOT
+
+    {   60,  216 },  // 37 MENU_COORD_BPM_10D
+    {   75,  216 },  // 38 MENU_COORD_BPM_01D
+
+    {   96, -192 },  // 39 MENU_COORD_BRACKET_UPPER_TOP
+    {   96,  -96 },  // 40 MENU_COORD_BRACKET_UPPER_BOTTOM
+
+    {   96,    0 },  // 41 MENU_COORD_BRACKET_LOWER_TOP
+    {   96,   96 }   // 42 MENU_COORD_BRACKET_LOWER_BOTTOM
+};
+
 // * 	= 	the coordinates for the four quadrants ( q0 for mode 0 in layer 1, mode 4 in layer 2, q1 for mode 1 in layer 1, mode 5 in layer 2, etc. )
 // **	= 	is usually the same as the coordinates for the quadrant for the mode pair of 0/4, 1/5, 2/6. 3/7 ( depending on the layer 1 or 2)
 // ***	= 	is shown depending on block 7/ layer 8 either < 4 ( layer 1 ) or > 3 ( layer 2 )
