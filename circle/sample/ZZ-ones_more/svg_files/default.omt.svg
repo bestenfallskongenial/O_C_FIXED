@@ -593,6 +593,7 @@
             </g>
   </svg>    
 
+
 <!-- STRING POSITIONING  -->
   <svg      id="BPM" class="glyph-tile" data-cell="7,6">
             <use href="#GLYPH_B" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
@@ -607,39 +608,39 @@
 </svg>
 
 <svg id="TRG" class="glyph-tile" data-cell="2,7">
-      <use href="#GLYPH_T" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_R" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_G" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_T" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_R" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_G" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
 <svg id="ADC" class="glyph-tile" data-cell="1,7">
-      <use href="#GLYPH_A" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_D" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_C" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_A" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_D" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_C" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
 <svg id="LFO" class="glyph-tile" data-cell="3,7">
-      <use href="#GLYPH_L" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_F" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_O" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_L" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_F" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_O" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
 <svg id="AUD" class="glyph-tile" data-cell="4,7">
-      <use href="#GLYPH_A" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_U" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_D" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_A" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_U" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_D" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
 <svg id="AUD" class="glyph-tile" data-cell="5,7">
-      <use href="#GLYPH_M" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_I" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_D" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_M" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_I" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_D" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 
 <svg id="SYS" class="glyph-tile" data-cell="6,7">
-      <use href="#GLYPH_S" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_Y" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
-      <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_S" transform="translate(64 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_Y" transform="translate(88 40) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_S" transform="translate(112 40) scale(0.3) translate(-64 -64)"/>
 </svg>
 <!-- in progress !!! -->
     <svg      id="INDICATOR_BAR_LEFT" class="glyph-tile" data-cell="0,6">
