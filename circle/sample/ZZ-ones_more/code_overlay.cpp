@@ -168,7 +168,7 @@ void            CKernel::appendOverlayTile           (   unsigned    atlasTile, 
 
                 g_overlayVertexCount += OVERLAY_VERTEX_PER_TILE;
 }
-
+/*
 void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                                                         unsigned    matrixIndex,
                                                         int         modeCoord,
@@ -190,6 +190,82 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                     appendOverlayTile(ATLAS_TILE_TARGET_VIDEO, modeCoord);
                     }
                 if (g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] == matrixIndex)
+                    {
+                    appendOverlayTile(ATLAS_TILE_TARGET_FRAME, modeCoord);
+                    }
+
+                switch (mode)
+                    {
+                    case IN_MODE_ADC:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 5));
+                        break;
+
+                    case IN_MODE_TRG:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_L, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_L] >> 4));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail1Coord, -(g_centralModeBuffer[g_currentProgramBuffer][THRESHOLD_H] >> 4));
+                        break;
+
+                    case IN_MODE_BMP:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 5));
+                        break;
+
+                    case IN_MODE_LF_0:
+                        appendOverlayTile(ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF1_WAVE], detail0Coord);
+                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF1_MULT], detail1Coord);
+                        break;
+
+                    case IN_MODE_LF_1:
+                        appendOverlayTile(ATLAS_TILE_LFO_WAVE_SINE + g_centralModeBuffer[g_currentProgramBuffer][LF2_WAVE], detail0Coord);
+                        appendOverlayTile(ATLAS_TILE_DIVIDER_1_64 + g_centralModeBuffer[g_currentProgramBuffer][LF2_MULT], detail1Coord);
+                        break;
+
+                    case IN_MODE_AU_AL:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_A] >> 1));
+                        break;
+
+                    case IN_MODE_AU_AH:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_B] >> 1));
+                        break;
+
+                    case IN_MODE_AU_BL:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_C] >> 1));
+                        break;
+
+                    case IN_MODE_AU_BH:
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_centralModeBuffer[g_currentProgramBuffer][SENS_D] >> 1));
+                        break;
+
+                    default:
+                        break;
+                    }
+}
+*/
+void            CKernel::provideTileCoordForMode     (   unsigned    mode,
+                                                        unsigned    matrixIndex,
+                                                        int         modeCoord,
+                                                        int         detail0Coord,
+                                                        int         detail1Coord )
+{
+                appendOverlayTile(ATLAS_TILE_MODE_ADC + mode, modeCoord);
+
+                if (matrixIndex == ADC_SELECT_PRG)
+                    {
+                    appendOverlayTile(ATLAS_TILE_TARGET_GL_PROGRAM, modeCoord);
+                    }
+
+                if (matrixIndex < FLAG_THRESHOLD && g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME] == matrixIndex)
+                    {
+                    appendOverlayTile(ATLAS_TILE_TARGET_TIME, modeCoord);
+                    }
+                if (matrixIndex < FLAG_THRESHOLD && g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] == matrixIndex)
+                    {
+                    appendOverlayTile(ATLAS_TILE_TARGET_TEXTURE, modeCoord);
+                    }
+                if (matrixIndex < FLAG_THRESHOLD && g_centralModeBuffer[g_currentProgramBuffer][SEL_VID] == matrixIndex)
+                    {
+                    appendOverlayTile(ATLAS_TILE_TARGET_VIDEO, modeCoord);
+                    }
+                if (matrixIndex < FLAG_THRESHOLD && g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] == matrixIndex)
                     {
                     appendOverlayTile(ATLAS_TILE_TARGET_FRAME, modeCoord);
                     }
@@ -292,10 +368,10 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
 
                 if (layer == 8)
                     {
-                    appendOverlayTile(ATLAS_TILE_SYSTEM_STORE,  MENU_COORD_MODE_2, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] ? 1.0f : 1.1f);
-                    appendOverlayTile(ATLAS_TILE_SYSTEM_LOAD,   MENU_COORD_MODE_3, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD]  ? 1.0f : 1.1f);
-                    appendOverlayTile(ATLAS_TILE_SYSTEM_UPDATE, MENU_COORD_MODE_4, 0, g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD]  ? 1.0f : 1.1f);
-                    appendOverlayTile(ATLAS_TILE_SYSTEM_LOG,    MENU_COORD_MODE_5, 0, g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] ? 1.0f : 1.1f);
+                    appendOverlayTile(ATLAS_TILE_SYSTEM_STORE,  MENU_COORD_MODE_2, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_STORE] ? 1.125f : 1.0f);
+                    appendOverlayTile(ATLAS_TILE_SYSTEM_LOAD,   MENU_COORD_MODE_3, 0, g_centralModeBuffer[g_currentProgramBuffer][SET_LOAD]  ? 1.125f : 1.0f);
+                    appendOverlayTile(ATLAS_TILE_SYSTEM_UPDATE, MENU_COORD_MODE_4, 0, g_centralModeBuffer[g_currentProgramBuffer][KLN_LOAD]  ? 1.125f : 1.0f);
+                    appendOverlayTile(ATLAS_TILE_SYSTEM_LOG,    MENU_COORD_MODE_5, 0, g_centralModeBuffer[g_currentProgramBuffer][LOG_STORE] ? 1.125f : 1.0f);
                     }
                 else if (layer != 0)
                     {
