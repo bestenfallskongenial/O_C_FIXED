@@ -79,11 +79,56 @@
   <path     id="GLYPH_T" d="M51 28H37C35 28 33 30 33 33S35 37 37 37H46C48 37 51 39 51 42V96C51 98 53 100 55 100H73C75 100 78 98 78 96V42C78 39 80 37 82 37H91C93 37 96 35 96 33S93 28 91 28H78H51Z"/>
   <path     id="GLYPH_U" d="M82.369 90.927H63.698C61.192 90.927 59.161 88.896 59.161 86.39V32.537C59.161 30.031 57.13 28 54.624 28H36.556C34.05 28 32.019 30.031 32.019 32.537V90.927V95.464C32.019 97.97 34.05 100.001 36.556 100.001H59.16H86.905H91.442C93.948 100.001 95.979 97.97 95.979 95.464V90.927V32.537C95.979 30.031 93.948 28 91.442 28C88.936 28 86.905 30.031 86.905 32.537V86.39C86.905 88.895 84.877 90.927 82.369 90.927Z"/>
   <path     id="GLYPH_X" d="M81 73H70L90 35C93 33 90 28 86 28H70C68 28 68 28 66 30L57 46C54 48 50 48 50 46L43 30C43 28 41 28 39 28C36 28 34 33 34 35L48 62C48 64 48 64 48 66L34 93C32 96 34 100 39 100H54C57 100 57 100 59 98L66 84C66 82 68 82 70 82H75C77 82 77 82 79 84L86 98C86 100 88 100 90 100C93 100 95 96 95 93L88 82L81 73Z"/>
+  <path id="GLYPH_Y" d="
+    M86.906 54.991
+    C86.906 57.497 84.875 59.528 82.369 59.528
+    H63.698
+    C61.193 59.528 59.161 57.497 59.161 54.991
+    V32.537
+    C59.161 30.031 57.13 28 54.625 28
+    H36.557
+    C34.052 28 32.02 30.031 32.02 32.537
+    V64.065
+    C32.02 66.57 34.052 68.601 36.557 68.601
+    H54.625
+    C57.13 68.601 59.161 70.633 59.161 73.138
+    V95.463
+    C59.161 97.969 61.193 100 63.698 100
+    C66.204 100 68.235 97.969 68.235 95.463
+    V73.138
+    C68.235 70.633 70.266 68.601 72.772 68.601
+    H91.443
+    C93.948 68.601 95.98 66.57 95.98 64.065
+    V32.666
+    C95.98 30.161 93.948 28.129 91.443 28.129
+    C88.937 28.129 86.906 30.161 86.906 32.666
+    V54.991 Z"/>
 
   <rect     id="GLYPH_DOT" x="56" y="76" width="24" height="24" rx="8" ry="8"/>
   
-  <path     id="ARROW_HEAD" d=" M 64 48 Q 65.5 48 67 49 L 120 77 Q 123 78.5 121 80 Q 120 81 117 81 L 11 81 Q 8 81 7 80 Q 5 78.5 8 77 L 61 49 Q 62.5 48 64 48 Z"/>
+  <path id="GLYPH_BRACKET_RIGHT_TOP" fill-rule="evenodd" d="
+    M8 0 H34
+    C41 0 46 4 46 9
+    V30 C46 33 44 35 42 37
+    L38 44 V128 H28
+    V30 C28 26 25 23 20 23
+    H8 C3 23 0 21 0 17
+    V6 C0 2 3 0 8 0 Z
 
+    M22 7 H32
+    C35 7 36 8 36 9
+    C36 11 35 12 32 12
+    H22 C19 12 18 11 18 9
+    C18 8 19 7 22 7 Z"/>
+
+  <path id="GLYPH_BRACKET_RIGHT_BOTTOM" d="
+    M28 0 H38 V88
+    C38 94 52 96 52 104
+    V120 C52 125 48 128 40 128
+    H8 C3 128 0 126 0 122
+    V116 C0 112 3 110 8 110
+    H20 C25 110 28 108 28 104
+    V0 Z"/>
 
     <circle id="COMMON_MODE_BODY" cx="64" cy="64" r="44"/>
 
@@ -547,14 +592,7 @@
               <use href="#GLYPH_1" transform="translate(70 38) scale(0.15) translate(-64 -64)"/>
             </g>
   </svg>    
-<!-- ARROW POSITIONING  --> 
-<svg id="ARROW_UP" class="glyph-tile" data-cell="4,6">
-    <use href="#ARROW_HEAD" transform="translate( 0 32 ) rotate(0 64 64)"/>
-</svg>
 
-<svg id="ARROW_DOWN" class="glyph-tile" data-cell="5,6">
-    <use href="#ARROW_HEAD" transform="translate( 0 -32 ) rotate(180 64 64)"/>
-</svg>
 <!-- STRING POSITIONING  -->
   <svg      id="BPM" class="glyph-tile" data-cell="7,6">
             <use href="#GLYPH_B" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
@@ -565,6 +603,42 @@
 <svg id="FPS" class="glyph-tile" data-cell="6,6">
       <use href="#GLYPH_F" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
       <use href="#GLYPH_P" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+<svg id="TRG" class="glyph-tile" data-cell="2,7">
+      <use href="#GLYPH_T" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_R" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_G" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+<svg id="ADC" class="glyph-tile" data-cell="1,7">
+      <use href="#GLYPH_A" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_D" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_C" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+<svg id="LFO" class="glyph-tile" data-cell="3,7">
+      <use href="#GLYPH_L" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_F" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_O" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+<svg id="AUD" class="glyph-tile" data-cell="4,7">
+      <use href="#GLYPH_A" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_U" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_D" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+<svg id="AUD" class="glyph-tile" data-cell="5,7">
+      <use href="#GLYPH_M" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_I" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_D" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
+</svg>
+
+<svg id="SYS" class="glyph-tile" data-cell="6,7">
+      <use href="#GLYPH_S" transform="translate(40 64) scale(0.3) translate(-64 -64)"/>
+      <use href="#GLYPH_Y" transform="translate(64 64) scale(0.3) translate(-64 -64)"/>
       <use href="#GLYPH_S" transform="translate(88 64) scale(0.3) translate(-64 -64)"/>
 </svg>
 <!-- in progress !!! -->
@@ -598,6 +672,14 @@
   <svg      id="EXTERN_INPUT" class="glyph-tile" data-cell="7,3">
             <use href="#GLYPH_X" transform="translate(64 100) scale(0.25) translate(-64 -64)"/>
   </svg>
+
+    <svg id="BRACKET_TOP" class="glyph-tile" data-cell="4,6">
+    <use href="#GLYPH_BRACKET_RIGHT_TOP" transform="translate(64 77) scale(0.80) translate(-64 -64)"/>
+  </svg>
+
+  <svg id="BRACKET_BOTTOM" class="glyph-tile" data-cell="5,6">
+    <use href="#GLYPH_BRACKET_RIGHT_BOTTOM" transform="translate(64 51) scale(0.80) translate(-64 -64)"/>
+  </svg>
     
   <!-- ==================================================================== -->
   <!-- ATLAS TILES: 64 x 64 OVERLAYS                                        -->
@@ -616,6 +698,7 @@
   <!-- POSITIONING SCRIPT                                                   -->
   <!-- Converts declarative cell metadata into physical atlas placement.    -->
   <!-- ==================================================================== -->
+
   <script><![CDATA[
   (() => {
       const CELL_SIZE = 128;

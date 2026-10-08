@@ -299,7 +299,7 @@ void            CKernel::drawGLsOvl                 (   vtx_state* v )
                                 g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
                                 greyVertices);
 
-                if (m_osh.u_col[0] != -1) glUniform4f(m_osh.u_col[0], 0.5f, 0.5f, 0.5f, 1.0f);
+                if (m_osh.u_col[0] != -1) glUniform4f(m_osh.u_col[0], 0.5f, 0.5f, 0.5f, 1.0f);      // last is the tile opacity
 
                 glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
 
@@ -309,7 +309,7 @@ void            CKernel::drawGLsOvl                 (   vtx_state* v )
                                 g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
                                 g_overlayVertices);
 
-                if (m_osh.u_col[0] != -1) glUniform4f(m_osh.u_col[0], 0.0f, 0.0f, 0.0f, 1.0f);
+                if (m_osh.u_col[0] != -1) glUniform4f(m_osh.u_col[0], 0.0f, 0.0f, 0.0f, 1.0f);      // last is the tile opacity 
 
                 glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
 
