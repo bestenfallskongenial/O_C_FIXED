@@ -67,7 +67,7 @@
     #define         FSH_USB            		32	// max number of fragment shader on sd
     #define         LFO_USB                 0    
     #define         OMT_USB            		0	// max number of fragment shader on sd
-    #define         TEX_USB            		7	// max number of textures on sd
+    #define         TEX_USB            		15	// max number of textures on sd
     #define         VID_USB            		8	// max number of videos on sd
     #define         KLN_USB                 1   // max number of kernel.img ( loaded if present for update ) 
     #define         FRM_USB                 0   // no additional frm "files"
