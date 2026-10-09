@@ -586,7 +586,7 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                     default:
                         break;
                     }
-
+/*
                 if (layer == 8)
                     {
                     const unsigned fps      = static_cast<unsigned>(g_currentFPS * 100.0f + 0.5f);
@@ -604,7 +604,42 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit10d,        MENU_COORD_BPM_10D);
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit01d,        MENU_COORD_BPM_01D);
                     }
+*/
+                if (layer == 8)
+                    {
+                    const unsigned fps      = static_cast<unsigned>(g_currentFPS * 100.0f + 0.5f);
+                    const unsigned digit100 = (fps / 10000) % 10;
+                    const unsigned digit010 = (fps / 1000)  % 10;
+                    const unsigned digit001 = (fps / 100)   % 10;
+                    const unsigned digit10d = (fps / 10)    % 10;
+                    const unsigned digit01d =  fps          % 10;
 
+                    appendOverlayTile(ATLAS_TILE_LABEL_FPS,                  MENU_COORD_BPM_STRING);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit100,        MENU_COORD_BPM_100);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit010,        MENU_COORD_BPM_010);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit001,        MENU_COORD_BPM_001);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_DOT,                 MENU_COORD_BPM_DOT);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit10d,        MENU_COORD_BPM_10D);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit01d,        MENU_COORD_BPM_01D);
+
+                    const unsigned pLeft  = filecounter[FT_FSH][FLD_LOADED];
+                    const unsigned pRight = g_gl_program_current;
+                    const unsigned tLeft  = filecounter[FT_TEX][FLD_VALID];
+                    const unsigned tRight = m_activeTex;
+
+                    appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, MENU_COORD_BRACKET_ROW_3);
+
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + (pLeft  / 10) % 10, MENU_COORD_SYSTEM_P_LEFT_10);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 +  pLeft        % 10, MENU_COORD_SYSTEM_P_LEFT_01);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + (pRight / 10) % 10, MENU_COORD_SYSTEM_P_RIGHT_10);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 +  pRight       % 10, MENU_COORD_SYSTEM_P_RIGHT_01);
+
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + (tLeft  / 10) % 10, MENU_COORD_SYSTEM_T_LEFT_10);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 +  tLeft        % 10, MENU_COORD_SYSTEM_T_LEFT_01);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 + (tRight / 10) % 10, MENU_COORD_SYSTEM_T_RIGHT_10);
+                    appendOverlayTile(ATLAS_TILE_NUMBER_0 +  tRight       % 10, MENU_COORD_SYSTEM_T_RIGHT_01);
+                    }
+                    
                 if (layer != 8 && m_BPM_hold_A)
                     {
                     const unsigned bpm      = g_lfoBpmMatrix[g_activeBpmChannel][BPM];
