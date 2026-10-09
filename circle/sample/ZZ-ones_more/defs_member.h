@@ -702,16 +702,17 @@ const int g_menuCoordinates[MENU_COORD_COUNT][2] = {
     {   96,    0 },  // 39 MENU_COORD_BRACKET_ROW_2
     {   96,   96 },  // 40 MENU_COORD_BRACKET_ROW_3
 
-    {  172,  102 },  // 41 MENU_COORD_SYSTEM_P_LEFT_10
-    {  187,  102 },  // 42 MENU_COORD_SYSTEM_P_LEFT_01
-    {  217,  102 },  // 43 MENU_COORD_SYSTEM_P_RIGHT_10
-    {  232,  102 },  // 44 MENU_COORD_SYSTEM_P_RIGHT_01
+    {  172,    6 },  // 41 MENU_COORD_SYSTEM_P_LEFT_10
+    {  187,    6 },  // 42 MENU_COORD_SYSTEM_P_LEFT_01
+    {  217,    6 },  // 43 MENU_COORD_SYSTEM_P_RIGHT_10
+    {  232,    6 },  // 44 MENU_COORD_SYSTEM_P_RIGHT_01
 
-    {  172,  125 },  // 45 MENU_COORD_SYSTEM_T_LEFT_10
-    {  187,  125 },  // 46 MENU_COORD_SYSTEM_T_LEFT_01
-    {  217,  125 },  // 47 MENU_COORD_SYSTEM_T_RIGHT_10
-    {  232,  125 }   // 48 MENU_COORD_SYSTEM_T_RIGHT_01
+    {  172,   29 },  // 45 MENU_COORD_SYSTEM_T_LEFT_10
+    {  187,   29 },  // 46 MENU_COORD_SYSTEM_T_LEFT_01
+    {  217,   29 },  // 47 MENU_COORD_SYSTEM_T_RIGHT_10
+    {  232,   29 }   // 48 MENU_COORD_SYSTEM_T_RIGHT_01
 };
+
 // * 	= 	the coordinates for the four quadrants ( q0 for mode 0 in layer 1, mode 4 in layer 2, q1 for mode 1 in layer 1, mode 5 in layer 2, etc. )
 // **	= 	is usually the same as the coordinates for the quadrant for the mode pair of 0/4, 1/5, 2/6. 3/7 ( depending on the layer 1 or 2)
 // ***	= 	is shown depending on block 7/ layer 8 either < 4 ( layer 1 ) or > 3 ( layer 2 )
