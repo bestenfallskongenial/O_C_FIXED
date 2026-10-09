@@ -3,6 +3,8 @@
 # !! I suggest to leave this file alone until you know exactly what to do !! 
 
 # remove # to disable the splash screen
+
+
 # disable_splash=1
 
   loglevel= 4   # 0: only panic 

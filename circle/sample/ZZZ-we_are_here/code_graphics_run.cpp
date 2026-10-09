@@ -252,26 +252,7 @@ void            CKernel::setTexOvl                  (   olg_state*  o,
                 debug_gl();
 #endif
 }
-/*
-void            CKernel::drawGLsOvl                 (   vtx_state* v )
-{
-                if (g_overlayVertexCount == 0) return;
 
-                glBindBuffer(GL_ARRAY_BUFFER, v->gl_buf);
-                glBufferSubData(GL_ARRAY_BUFFER,
-                                OVERLAY_FIRST_VERTEX * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
-                                g_overlayVertexCount * OVERLAY_FLOAT_PER_VERTEX * sizeof(GLfloat),
-                                g_overlayVertices);
-
-                glEnable(GL_BLEND);
-                glBlendFuncSeparate(GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE);
-                glDrawArrays(GL_TRIANGLES, OVERLAY_FIRST_VERTEX, g_overlayVertexCount);
-                glDisable(GL_BLEND);
-#ifdef __DEBUG_GL__
-                debug_gl();
-#endif
-}
-*/
 void            CKernel::drawGLsOvl                 (   vtx_state* v )
 {
                 if (g_overlayVertexCount == 0) return;

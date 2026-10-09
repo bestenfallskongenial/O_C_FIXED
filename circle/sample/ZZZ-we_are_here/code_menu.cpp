@@ -38,70 +38,7 @@ void            CKernel::storeModes()
                     g_currentProgramBuffer = DEFAULT_SLOT;
                     }
 }
-/*
-void            CKernel::buttonConsumer(int buttonA, int buttonB)
-{
-                static int stepLayer = 2;
 
-                if (!g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonB][BTN_HOLD_TICK])
-                    {
-                    stepLayer      = 2;
-                    g_menuLayer    = 0;
-                    g_lastLayerLED = 0;
-
-                    if (g_buttons_states[buttonA][BTN_SINGLE])
-                        {
-                        calculate1BPMnew(0, TB0, DB0, g_frameStart);
-                        g_buttons_states[buttonA][BTN_SINGLE] = 0;
-                        }
-                    if (g_buttons_states[buttonB][BTN_DOUBLE])
-                        {
-                        g_centralModeBuffer[g_gl_program_current][IS_STORED] = !g_centralModeBuffer[g_gl_program_current][IS_STORED];
-
-                        g_buttons_states[buttonB][BTN_DOUBLE] = 0;
-                        }
-                    return;
-                    }
-                if (g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonB][BTN_HOLD_TICK])
-                    {
-                    stepLayer      = 2;
-                    g_menuLayer    = 1;
-                    g_lastLayerLED = 1;
-
-                    return;
-                    }
-                if (g_buttons_states[buttonB][BTN_HOLD_TICK] && !g_buttons_states[buttonA][BTN_HOLD_TICK] && !g_buttons_states[buttonA][BTN_SINGLE])
-                    {
-                    g_menuLayer    = stepLayer;
-                    g_lastLayerLED = stepLayer;
-
-                    return;
-                    }
-                if (g_buttons_states[buttonB][BTN_HOLD_TICK] && g_buttons_states[buttonA][BTN_SINGLE])
-                    {
-                    bool layerAvailable = false;
-
-                    do  {
-                        ++stepLayer;
-
-                        if (stepLayer > ACCESSIBLE_LAYER) stepLayer = 3;
-
-                        layerAvailable =    (   layerModeMap[stepLayer] &   (   modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][0]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][1]] | 
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][2]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][3]] |
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][4]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][5]] | 
-                                                                                modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][6]] | modeMaskByValue[g_centralModeBuffer[g_currentProgramBuffer][7]] ) ) != 0;
-                        }
-                    while (!layerAvailable);
-
-                    g_menuLayer    = stepLayer;
-                    g_lastLayerLED = stepLayer;
-
-                    g_buttons_states[buttonA][BTN_SINGLE] = 0;
-
-                    return;
-                    }
-}
-*/
 void            CKernel::buttonConsumer(int buttonA, int buttonB)
 {
                 static int stepLayer = 2;
