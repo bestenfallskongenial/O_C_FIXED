@@ -627,7 +627,7 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                     const unsigned tLeft  = filecounter[FT_TEX][FLD_VALID];
                     const unsigned tRight = m_activeTex;
 
-                    appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, MENU_COORD_BRACKET_ROW_3);
+                    appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, MENU_COORD_BRACKET_ROW_2);
 
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 + (pLeft  / 10) % 10, MENU_COORD_SYSTEM_P_LEFT_10);
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 +  pLeft        % 10, MENU_COORD_SYSTEM_P_LEFT_01);
@@ -639,7 +639,7 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 + (tRight / 10) % 10, MENU_COORD_SYSTEM_T_RIGHT_10);
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 +  tRight       % 10, MENU_COORD_SYSTEM_T_RIGHT_01);
                     }
-                    
+
                 if (layer != 8 && m_BPM_hold_A)
                     {
                     const unsigned bpm      = g_lfoBpmMatrix[g_activeBpmChannel][BPM];

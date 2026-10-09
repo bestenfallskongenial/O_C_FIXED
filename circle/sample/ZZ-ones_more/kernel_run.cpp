@@ -83,11 +83,11 @@ TShutdownMode CKernel::Run(void)
                     predict1Beat( 0, LF1_MULT );
                     predict1Beat( 1, LF2_MULT ); 
                                        
-                    logModesRuntime( 0 );
+                //  logModesRuntime( 0 );
 
-                    logInfosRuntime( 10 );
+                //  logInfosRuntime( 10 );
 
-                    logInfoFrameRate( 20 );
+                //  logInfoFrameRate( 20 );
 
                     setUniPrg(&m_ogl,
                             &m_fsh,
