@@ -623,9 +623,9 @@ void            CKernel::provideTileCoordByLayer     (   int layer )
                     appendOverlayTile(ATLAS_TILE_NUMBER_0 + digit01d,        MENU_COORD_BPM_01D);
 
                     const unsigned pLeft  = filecounter[FT_FSH][FLD_LOADED];
-                    const unsigned pRight = g_gl_program_current;
+                    const unsigned pRight = g_gl_program_current + 1;
                     const unsigned tLeft  = filecounter[FT_TEX][FLD_VALID];
-                    const unsigned tRight = m_activeTex;
+                    const unsigned tRight = m_activeTex + 1;
 
                     appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, MENU_COORD_BRACKET_ROW_2);
 
