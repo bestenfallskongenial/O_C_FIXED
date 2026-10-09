@@ -54,8 +54,9 @@ struct tex_state
     size_t      				size[MAX_TEXTURE];
 
     GLuint      				gl_tex_id[MAX_TEXTURE];
-    GLint       				u_tex_id[MAX_SHADER][MAX_TEXTURE];
-
+//  GLint       				u_tex_id[MAX_SHADER][MAX_TEXTURE];
+    GLint                       u_tex_id[MAX_SHADER][MAX_TEXTURE_UNITS];
+	
     GLuint                      gl_tex_bfr;
     GLint                       u_tex_bfr[MAX_SHADER];	
 

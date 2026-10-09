@@ -154,11 +154,14 @@ public:
                                                                         tex_state*                      t,
                                                                         int                             gl_current_tex,
                                                                         unsigned                        p_validTextureCount);   // ?? UNTESTED ??
-                                                                      
+/*                                                                      
                 bool        setTexBackbuffer            (               glsl_state*                     s,
                                                                         tex_state*                      t,
                                                                         unsigned                        p_validTextureCount);
-
+*/
+                bool        setTexBackbuffer            (               glsl_state*                     s,
+                                                                        tex_state*                      t);
+                                                                        
                 void        captureBackbuffer           (               olg_state*                      o,
                                                                         tex_state*                      t);
                                                                                                                                               

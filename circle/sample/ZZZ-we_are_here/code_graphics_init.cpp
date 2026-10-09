@@ -282,7 +282,8 @@ void            CKernel::initUniform                (   vtx_state*  v,
 #ifdef __DEBUG_GL__
                     debug_gl();     // really?!?!?!
 #endif
-                for (int j = 0; j < MAX_TEXTURE; ++j)
+            //  for (int j = 0; j < MAX_TEXTURE; ++j)
+                for (int j = 0; j < MAX_TEXTURE_UNITS; ++j)
                     {
                     char name[8];
 

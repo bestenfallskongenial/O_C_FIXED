@@ -78,13 +78,14 @@ void            CKernel::setUniPrg                  (   olg_state*  o,
 #ifdef __DEBUG_GL__
                 debug_gl();
 #endif                                                                                                        
-                if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current],p_validTextureCount); 
+            //  if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current],p_validTextureCount); 
+                if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current], p_validTextureCount < MAX_USER_TEXTURE_UNITS ? p_validTextureCount : MAX_USER_TEXTURE_UNITS);
 
 #ifdef __DEBUG_GL__
                 debug_gl();
 #endif
 }
-
+/*
 void            CKernel::setTexPrg                  (   olg_state*  o, 
                                                         glsl_state* s, 
                                                         tex_state*  t,
@@ -154,7 +155,48 @@ void            CKernel::setTexPrg                  (   olg_state*  o,
                     }
 #endif   
 }
+*/
+void            CKernel::setTexPrg                  (   olg_state*  o,
+                                                        glsl_state* s,
+                                                        tex_state*  t,
+                                                        int         gl_current_tex,
+                                                        unsigned    p_validTextureCount )
+{
+#ifdef __H264_DEBUG_TEX__
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, m_TextureA);
 
+                if (t->u_tex_id[g_gl_program_current][0] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][0], 0);
+#ifdef __DEBUG_GL__
+                debug_gl();
+#endif
+
+#endif
+
+#ifndef __H264_DEBUG_TEX__
+                if (p_validTextureCount == 0)
+                    {
+                    return;
+                    }
+
+                const unsigned f_firstTexture = g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] == FLAG_THRESHOLD ? 0 : gl_current_tex;
+                const unsigned f_exposedTextureCount = p_validTextureCount < MAX_USER_TEXTURE_UNITS ? p_validTextureCount : MAX_USER_TEXTURE_UNITS;
+
+                for (unsigned i = 0; i < f_exposedTextureCount; i++)
+                    {
+                    const unsigned f_textureIndex = (f_firstTexture + i) % p_validTextureCount;
+
+                    glActiveTexture(GL_TEXTURE0 + i);
+                    glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[f_textureIndex]);
+
+                    if (t->u_tex_id[g_gl_program_current][i] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][i], i);
+#ifdef __DEBUG_GL__
+                    debug_gl();
+#endif
+                    }
+#endif
+}
+/*
 bool            CKernel::setTexBackbuffer           (   glsl_state* s,
                                                         tex_state*  t,
                                                         unsigned    p_validTextureCount )
@@ -198,7 +240,43 @@ bool            CKernel::setTexBackbuffer           (   glsl_state* s,
 
                 return true;
 }
+*/
+bool            CKernel::setTexBackbuffer           (   glsl_state* s,
+                                                        tex_state*  t )
+{
+                if (!t->gl_tex_bfr)
+                    {
+                    return false;
+                    }
 
+                GLint f_textureUnits = 0;
+                glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &f_textureUnits);
+
+                if (MAX_USER_TEXTURE_UNITS >= f_textureUnits)
+                    {
+                    return false;
+                    }
+
+                glActiveTexture(GL_TEXTURE0 + MAX_USER_TEXTURE_UNITS);
+                glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
+
+                if (t->u_tex_id[g_gl_program_current][MAX_USER_TEXTURE_UNITS] != -1)
+                    {
+                    glUniform1i(t->u_tex_id[g_gl_program_current][MAX_USER_TEXTURE_UNITS], MAX_USER_TEXTURE_UNITS);
+                    }
+
+                if (t->u_tex_bfr[g_gl_program_current] != -1)
+                    {
+                    glUniform1i(t->u_tex_bfr[g_gl_program_current], MAX_USER_TEXTURE_UNITS);
+                    }
+
+#ifdef __DEBUG_GL__
+                debug_gl();
+#endif
+
+                return true;
+}
+/*
 void            CKernel::captureBackbuffer          (   olg_state*  o,
                                                         tex_state*  t )
 {
@@ -207,6 +285,25 @@ void            CKernel::captureBackbuffer          (   olg_state*  o,
                     return;
                     }
 
+                glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
+
+                glCopyTexSubImage2D( GL_TEXTURE_2D, 0, 0, 0, 0, 0,
+                                    o->screen_width, o->screen_height);
+
+#ifdef __DEBUG_GL__
+                debug_gl();
+#endif
+}
+*/
+void            CKernel::captureBackbuffer          (   olg_state*  o,
+                                                        tex_state*  t )
+{
+                if (!t->gl_tex_bfr)
+                    {
+                    return;
+                    }
+
+                glActiveTexture(GL_TEXTURE0 + MAX_USER_TEXTURE_UNITS);
                 glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
 
                 glCopyTexSubImage2D( GL_TEXTURE_2D, 0, 0, 0, 0, 0,

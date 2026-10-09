@@ -52,7 +52,7 @@
         #define     LOG_GLSL_0              4   // m_bufferLog[] slot for GLSL - shader / texture init
         #define     LOG_VCSM_0              5   // m_bufferLog[] slot for VCSM
         #define     LOG_MMAL_0              6   // m_bufferLog[] slot for MMAL / Framedata
-        #define     LOG_TEX_0               7   // m_bufferLog[] slot for TEXTURES - parser
+        #define     LOG_TEX_0               15   // m_bufferLog[] slot for TEXTURES - parser
         #define     LOG_VID_0               8   // m_bufferLog[] slot for video 0 - parser  
         #define     LOG_VID_1               9
         #define     LOG_VID_2               10
@@ -138,6 +138,9 @@
     #define         MAX_SHADER              ( FSH_SD + FSH_USB )    // 33
     #define         MAX_VIDEOS              ( VID_SD + VID_USB )    // 8
     #define         MAX_TEXTURE             ( TEX_SD + TEX_USB )    // 8
+
+    #define         MAX_USER_TEXTURE_UNITS  7
+    #define         MAX_TEXTURE_UNITS       ( MAX_USER_TEXTURE_UNITS + 1 )    
 
     #define         MAX_FRAMES              2048
 
