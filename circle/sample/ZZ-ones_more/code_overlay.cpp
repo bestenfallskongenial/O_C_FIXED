@@ -273,7 +273,7 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                 switch (mode)
                     {
                     case IN_MODE_ADC:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 5));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_inOutMatrixInt[matrixIndex][OUT] >> 5));
                         break;
 
                     case IN_MODE_TRG:
@@ -282,7 +282,7 @@ void            CKernel::provideTileCoordForMode     (   unsigned    mode,
                         break;
 
                     case IN_MODE_BMP:
-                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_BPM, detail0Coord, -(g_inOutMatrixInt[matrixIndex][RAW] >> 5));
+                        appendOverlayTile(ATLAS_TILE_INDICATOR_BAR_R, detail0Coord, -(g_inOutMatrixInt[matrixIndex][OUT] >> 5));
                         break;
 
                     case IN_MODE_LF_0:
