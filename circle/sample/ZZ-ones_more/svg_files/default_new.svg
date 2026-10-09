@@ -576,7 +576,9 @@
             <use href="#INDICATOR_BAR_LINE_RIGHT" class="glyph-stroke-4" transform="translate(64 144) translate( -64 -64) "/>
   </svg>
     <svg      id="INDICATOR_BAR_BPM" class="glyph-tile" data-cell="2,6">
-            <use href="#INDICATOR_BAR_LINE_BPM" class="glyph-stroke-4" transform="translate(64 144) translate( -64 -64) "/>
+       <!-- <use href="#INDICATOR_BAR_LINE_BPM" class="glyph-stroke-4" transform="translate(64 144) translate( -64 -64) "/> -->
+      <use href="#GLYPH_P" transform="translate(56 72) scale(0.25) translate(-64 -64)"/>       
+      <use href="#GLYPH_T" transform="translate(56 102) scale(0.25) translate(-64 -64)"/>
   </svg>  
 
   <svg      id="EXTERN_INPUT" class="glyph-tile" data-cell="7,3">
