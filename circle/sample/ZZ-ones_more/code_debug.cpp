@@ -94,6 +94,21 @@ void            CKernel::logInfosRuntime( int row )
                 bufferScreenDraw(   f_logBuffer, 0, f_logIndex, 0, row, 0xFFFFFFFF );                
 }
 
+void            CKernel::logTextureUnitsRuntime( int row )
+{
+                char f_logBuffer[512];
+                u32  f_logIndex = 0;
+
+                f_logBuffer[0] = '\0';
+
+                GLint f_textureUnits = 0;
+                glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &f_textureUnits);
+
+                storeLogHex(    f_logBuffer, f_logIndex, "GL_MAX_TEXTURE_IMAGE_UNITS", (u32)f_textureUnits );
+
+                bufferScreenDraw(   f_logBuffer, 0, f_logIndex, 0, row, 0xFFFFFFFF );
+}
+
 bool            CKernel::startupScreen( void )
 {
                 const char* machineName =  m_MachineInfo.GetMachineName();

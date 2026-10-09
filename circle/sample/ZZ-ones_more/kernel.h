@@ -56,6 +56,7 @@ public:
                 void        logPickUpFlags              (               int                             row );
                 void        logInOutRuntime             (               int                             row );      // +++
                 void        logInfosRuntime             (               int                             row );
+                void        logTextureUnitsRuntime      (               int                             row );
                 void        logScreenUpdate             (               void );
                 bool        startupScreen               (               void ); /// +++      
                 void        logInfoFrameRate            (               int                             row,

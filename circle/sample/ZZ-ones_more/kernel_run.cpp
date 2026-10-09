@@ -89,6 +89,8 @@ TShutdownMode CKernel::Run(void)
 
                 //  logInfoFrameRate( 20 );
 
+                    logTextureUnitsRuntime( 22 );
+                    
                     setUniPrg(&m_ogl,
                             &m_fsh,
                             &m_tex,
