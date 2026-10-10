@@ -7,10 +7,15 @@ bool            CKernel::initTexturesMMAL         (   )
 {
                 int f_count = 0;
 
-                glGenTextures(1, &m_Texture);
+            //  glGenTextures(1, &m_Texture);
+            //  if(!checkGLerrorMMAL()) f_count++;
+            //  glBindTexture(GL_TEXTURE_2D, m_Texture);
+            //  if(!checkGLerrorMMAL()) f_count++;
+                glGenTextures(1, &m_tex.gl_tex_vid);
                 if(!checkGLerrorMMAL()) f_count++;
-                glBindTexture(GL_TEXTURE_2D, m_Texture);
+                glBindTexture(GL_TEXTURE_2D, m_tex.gl_tex_vid);
                 if(!checkGLerrorMMAL()) f_count++;
+                            
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
                 if(!checkGLerrorMMAL()) f_count++;
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

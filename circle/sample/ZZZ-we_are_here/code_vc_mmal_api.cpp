@@ -128,7 +128,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #endif 
                 return true;
 }
-
+/*
 bool            CKernel::bufferReadyMMAL            (   u32 handle)
 {
         //      if (handle != m_VCSMHandleA && handle != m_VCSMHandleB)         // Only react to our two output buffers
@@ -154,6 +154,34 @@ bool            CKernel::bufferReadyMMAL            (   u32 handle)
                     }
                 glBindTexture(GL_TEXTURE_2D, m_Texture);                    // Bind the EGLImage to the single public texture
                 glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, m_EGLimage);
+                glBindTexture(GL_TEXTURE_2D, 0);
+
+                return true;
+}
+*/
+bool            CKernel::bufferReadyMMAL            (   u32 handle)
+{
+                if (m_tex.m_EGLimage != EGL_NO_IMAGE_KHR)
+                    {
+                    eglDestroyImageKHR(m_ogl.display, m_tex.m_EGLimage);
+                    m_tex.m_EGLimage = EGL_NO_IMAGE_KHR;
+                    }
+                egl_image_brcm_vcsm_info info =
+                    {
+                    .width       = MIN_VID_H,
+                    .height      = MAX_VID_H,
+                    .vcsm_handle = handle
+                    };
+                m_tex.m_EGLimage = eglCreateImageKHR( m_ogl.display, m_ogl.context, EGL_IMAGE_BRCM_VCSM, (EGLClientBuffer)&info, nullptr );
+                if (m_tex.m_EGLimage == EGL_NO_IMAGE_KHR)
+                    {
+#ifdef __LOG_MMAL__
+                    storeLogHex( MY_BFR, MY_IDX, "EGLImage creation FAILED", handle);
+#endif
+                    return false;
+                    }
+                glBindTexture(GL_TEXTURE_2D, m_tex.gl_tex_vid);
+                glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, m_tex.m_EGLimage);
                 glBindTexture(GL_TEXTURE_2D, 0);
 
                 return true;
