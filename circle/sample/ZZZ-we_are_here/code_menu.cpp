@@ -13,6 +13,8 @@ void            CKernel::resetMenuPickUpFlags()
 
                     g_centralModeBuffer[g_currentProgramBuffer][SEL_PRG] = 0;
 
+                    set_pot_routing(CTRL_PIN, g_menuLayer != 0); // really here?!?!
+
                     g_lastLayer = g_menuLayer;
                     }
 }
