@@ -52,7 +52,7 @@
         #define     LOG_GLSL_0              4   // m_bufferLog[] slot for GLSL - shader / texture init
         #define     LOG_VCSM_0              5   // m_bufferLog[] slot for VCSM
         #define     LOG_MMAL_0              6   // m_bufferLog[] slot for MMAL / Framedata
-        #define     LOG_TEX_0               15   // m_bufferLog[] slot for TEXTURES - parser
+        #define     LOG_TEX_0               7   // m_bufferLog[] slot for TEXTURES - parser
         #define     LOG_VID_0               8   // m_bufferLog[] slot for video 0 - parser  
         #define     LOG_VID_1               9
         #define     LOG_VID_2               10
@@ -91,9 +91,9 @@
     #define         FRM_SIZ                 (1024*1024)         // 1mb
     #define         LOG_SIZ                 (1024*128)          // 128kb
     #define         LFO_SIZ                 (1024*32)           // 32kb
-    #define         LOG_KERNEL_SIZE         (1024*32) // bigger will break my code!!
+    #define         LOG_KERNEL_SIZE         (1024*32)           // bigger will break my code!!
 
-    #define         ADC_SELECT_PRG          7   // we will map this modes to input channels later
+    #define         ADC_SELECT_PRG          7                   // we will map this modes to input channels later
 
     #define         DEVICE_NAME_SD          "emmc1"
     #define         DEVICE_NAME_USB         "umsd1"

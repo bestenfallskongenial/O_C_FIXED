@@ -114,9 +114,16 @@ bool            CKernel::parse264                  (    h264_state* h,
                 /*  u8*    data = reinterpret_cast<u8*>(p_buffer_array[i]); */
                 /*  size_t size = size_array[i]; */
                     size_t i = 0;
+
+                    char* logBuffer = m_bufferLog[LOG_VID_0 + file_index];
+                    u32&  logIndex  = m_bufferLogIndex[LOG_VID_0 + file_index];
+
+                    logIndex = 0;
+                    logBuffer[0] = '\0';
+
 #ifdef __LOG_PARSER__
-                    storeLogHex(   MY_BFR, MY_IDX, 
-                                "Videofile    [", file_index, 
+                    storeLogHex(   logBuffer, logIndex,
+                                "Videofile    [", file_index,
                                 "] FileSize    ", (u32)size_array[file_index],
                                 "Bufferaddress ", (u32)p_buffer_array[file_index],
                                 filename_array[file_index], X_VAL );
@@ -167,12 +174,12 @@ bool            CKernel::parse264                  (    h264_state* h,
 
                         /* CHANGED: h->idr_offset[file_index] = idr_off[file_index][idx] - sps_off[file_index][idx]; - REPLACED BY: h->frame_offset[file_index][idx], because the old value was per-file and overwritten each idx */
 #ifdef __DUMP_FRAMES__
-                        storeLogHex(   MY_BFR, MY_IDX,
+                        storeLogHex(   logBuffer, logIndex,
                                     "67+68+65", X_VAL,
                                     "address ", (u32)h->nal_block_address[dst][idx],
                                     "length  ", (u32)h->nal_block_length[dst][idx],
                                     "offset  ", (u32)h->nal_block_offset[dst][idx]);
-                        storeLogHex(   MY_BFR, MY_IDX,                                                                          /* ADDED: log startcode+IDR runtime packet */
+                        storeLogHex(   logBuffer, logIndex,                                                                          /* ADDED: log startcode+IDR runtime packet */
                                     "65      ", X_VAL,
                                     "address ", (u32)h->frame_address[dst][idx],
                                     "length  ", (u32)h->frame_length[dst][idx],
@@ -235,28 +242,28 @@ bool            CKernel::parse264                  (    h264_state* h,
                         
                     if (h->vid_valid[dst]) valid_count++;
 #ifdef __LOG_PARSER__
-                    nextline(   MY_BFR, MY_IDX ); 
-                    storeLogHex(   MY_BFR, MY_IDX,
+                    nextline(   logBuffer, logIndex ); 
+                    storeLogHex(   logBuffer, logIndex,
                                 "min.  Width   ",          (u32)h->min_width,
                                 "min.  Height  ",          (u32)h->min_height,
                                 "min.  Profile ",          (u32)h->min_profile, 
                                 "min.  Level   ",          (u32)h->min_level );                    
-                    storeLogHex(   MY_BFR, MY_IDX,
+                    storeLogHex(   logBuffer, logIndex,
                                 "max.  Width   ",          (u32)h->max_width,
                                 "max.  Height  ",          (u32)h->max_height,
                                 "max.  Profile ",          (u32)h->max_profile,
                                 "max.  Level   ",          (u32)h->max_level );
-                    nextline(   MY_BFR, MY_IDX );    
-                    storeLogHex(   MY_BFR, MY_IDX,
+                    nextline(   logBuffer, logIndex );    
+                    storeLogHex(   logBuffer, logIndex,
                                 "Video Width   ",          (u32)h->video_width[dst],
                                 "Video Height  ",          (u32)h->video_height[dst],
                                 "Video Profile ",          (u32)h->vid_profile[dst],
                                 "Video Level   ",          (u32)h->vid_level[dst] );
-                    nextline(   MY_BFR, MY_IDX );
-                    storeLogHex(   MY_BFR, MY_IDX,
+                    nextline(   logBuffer, logIndex );
+                    storeLogHex(   logBuffer, logIndex,
                                 "Parsed Frames ", h->frame_count[dst]);
-                    nextline(   MY_BFR, MY_IDX );
-                    storeLogHex(   MY_BFR, MY_IDX,
+                    nextline(   logBuffer, logIndex );
+                    storeLogHex(   logBuffer, logIndex,
                                 "idr_sc_len  ",             X_VAL,
                                 (h->idr_sc_len[dst] == 3) ? 
                                 "    00 00 01" : 
@@ -265,10 +272,15 @@ bool            CKernel::parse264                  (    h264_state* h,
                                 (h->vid_valid[dst]) ? 
                                 "Header VALID  " : 
                                 "Header INVALID");
-                    nextline(   MY_BFR, MY_IDX );            
-                    storeMsg(   MY_BFR, MY_IDX, 
+                    nextline(   logBuffer, logIndex );            
+                    storeMsg(   logBuffer, logIndex, 
                                 "Extradata Dump",          h->extradata[dst], h->extradata_len[dst] );
-                    nextline(   MY_BFR, MY_IDX );
+                    nextline(   logBuffer, logIndex );
+
+                    saveFromBuffer  (   PARTITION_NAME_SD,
+                                        gen83FileName("txt"),
+                                        logBuffer,
+                                        logIndex );
 #endif // __LOG_PARSER__               
                     }
                 return true;
