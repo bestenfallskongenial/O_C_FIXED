@@ -33,7 +33,8 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 
     // Drain RX queue unconditionally (non-blocking)
 
-                while (vchi_msg_dequeue(m_ServiceHandleMMAL, &m_BufferFromHostTx_Output, sizeof(m_BufferFromHostTx_Output), &msg_len, VCHI_FLAGS_NONE) == 0)
+            //  while (vchi_msg_dequeue(m_ServiceHandleMMAL, &m_BufferFromHostTx_Output, sizeof(m_BufferFromHostTx_Output), &msg_len, VCHI_FLAGS_NONE) == 0)
+                while (vchi_msg_dequeue(m_ServiceHandleMMAL, m_BufferFromHostTx_Output, sizeof(*m_BufferFromHostTx_Output), &msg_len, VCHI_FLAGS_NONE) == 0)
                     {
                     switch (m_BufferFromHostTx_Output->hdr.type) // FIRST AXIS: message type (semantic meaning)
                         {
@@ -95,7 +96,8 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #ifdef __LOG_MMAL__   
                         //  nextline( MY_BFR, MY_IDX );
                             storeLogHex( MY_BFR, MY_IDX, message, X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
-                            storeMsg( MY_BFR, MY_IDX, "Poller ERROR (BUFFER_TO_HOST)", &m_BufferFromHostTx_Output, msg_len);
+                        //  storeMsg( MY_BFR, MY_IDX, "Poller ERROR (BUFFER_TO_HOST)", &m_BufferFromHostTx_Output, msg_len);
+                            storeMsg( MY_BFR, MY_IDX, "Poller ERROR (BUFFER_TO_HOST)", m_BufferFromHostTx_Output, msg_len);
 #endif               
                             return false;
                             }
@@ -107,7 +109,8 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
   
                         //  nextline( MY_BFR, MY_IDX );
                             storeLogHex( MY_BFR, MY_IDX, message,  X_VAL, "Frame offset", nal_block_offset, "Type",  m_BufferFromHostTx_Output->hdr.type, "Status", m_BufferFromHostTx_Output->hdr.status);
-                            storeMsg( MY_BFR, MY_IDX, "Poller ERROR (UNEXPECTED MESSAGE)", &m_BufferFromHostTx_Output, msg_len);
+                        //  storeMsg( MY_BFR, MY_IDX, "Poller ERROR (UNEXPECTED MESSAGE)", &m_BufferFromHostTx_Output, msg_len);
+                            storeMsg( MY_BFR, MY_IDX, "Poller ERROR (UNEXPECTED MESSAGE)", m_BufferFromHostTx_Output, msg_len);
 #endif 
                             break;
                             }
@@ -115,7 +118,8 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #ifdef __LOG_MMAL__ 
                 //  nextline( MY_BFR, MY_IDX );
                     storeLogHex( MY_BFR, MY_IDX, "Unexpected Reply", X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
-                    storeMsg( MY_BFR, MY_IDX, "Unexpected Reply", &m_BufferFromHostTx_Output, msg_len);
+                //  storeMsg( MY_BFR, MY_IDX, "Unexpected Reply", &m_BufferFromHostTx_Output, msg_len);
+                    storeMsg( MY_BFR, MY_IDX, "Unexpected Reply", m_BufferFromHostTx_Output, msg_len);
 #endif       
                     }
 #ifdef __LOG_MMAL__   

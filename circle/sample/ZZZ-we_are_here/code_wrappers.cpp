@@ -72,26 +72,44 @@ bool            CKernel::wrapperVCSM()
                 if (bOK)
                     {
                     bOK = importMemoryVCSM  (   m_videoBlockBase, m_videoBlockSize, m_input_buffer_handle, *m_importTxVCSM_A, *m_importRxVCSM_A );
-                    bOK = lockMemoryVCSM    (   m_input_buffer_handle, m_input_buffer_pointer, *m_lockTxVCSM, *m_lockRxVCSM ); 
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input allocation               DONE");
-#endif                                                                       
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input import                   DONE");
+#endif
                     }
                 if (bOK)
                     {
-                    bOK = importMemoryVCSM  (   m_frameBlockBaseA, m_frameBlockSizeA, m_output_buffer_handle_a, *m_importTxVCSM_B, *m_importRxVCSM_B );                    
+                    bOK = lockMemoryVCSM    (   m_input_buffer_handle, m_input_buffer_pointer, *m_lockTxVCSM, *m_lockRxVCSM );
+#ifdef __LOG_VCSM__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input lock                     DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = importMemoryVCSM  (   m_frameBlockBaseA, m_frameBlockSizeA, m_output_buffer_handle_a, *m_importTxVCSM_B, *m_importRxVCSM_B );
+#ifdef __LOG_VCSM__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A import                DONE");
+#endif
+                    }
+                if (bOK)
+                    {
                     bOK = lockMemoryVCSM    (   m_output_buffer_handle_a, m_output_buffer_pointer_a, *m_lockTxVCSM, *m_lockRxVCSM );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A allocation            DONE");
-#endif                                              
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A lock                  DONE");
+#endif
                     }
                 if (bOK)
                     {
-                    bOK = importMemoryVCSM  (   m_frameBlockBaseB, m_frameBlockSizeB, m_output_buffer_handle_b, *m_importTxVCSM_C, *m_importRxVCSM_C );                    
-                    bOK = lockMemoryVCSM    (   m_output_buffer_handle_b, m_output_buffer_pointer_b, *m_lockTxVCSM, *m_lockRxVCSM );   
+                    bOK = importMemoryVCSM  (   m_frameBlockBaseB, m_frameBlockSizeB, m_output_buffer_handle_b, *m_importTxVCSM_C, *m_importRxVCSM_C );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B allocation            DONE");
-#endif                                                                           
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B import                DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = lockMemoryVCSM    (   m_output_buffer_handle_b, m_output_buffer_pointer_b, *m_lockTxVCSM, *m_lockRxVCSM );
+#ifdef __LOG_VCSM__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B lock                  DONE");
+#endif
                     }
                 return bOK;        
 }
@@ -242,6 +260,20 @@ bool            CKernel::wrapperMMAL()
 #ifdef __LOG_MMAL__
                         if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output D )            DONE");
 #endif // __LOG_MMAL__
+                        }
+                    if (bOK)
+                        {
+                        PrimeInputBufferBodyMMAL( *m_BufferFromHostTx_Input );
+#ifdef __LOG_MMAL__
+                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeInputBufferBodyMMAL ()              DONE");
+#endif
+                        }
+                    if (bOK)
+                        {
+                        PrimeOutputBufferBodyMMAL( *m_BufferFromHostTx_Output );
+#ifdef __LOG_MMAL__
+                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeOutputBufferBodyMMAL ()             DONE");
+#endif
                         }
                     return bOK;
 }

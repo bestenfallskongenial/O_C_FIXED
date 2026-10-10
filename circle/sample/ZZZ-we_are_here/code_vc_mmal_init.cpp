@@ -209,7 +209,8 @@ void            CKernel::PrimeInputBufferBodyMMAL   (   MMAL_Buffer_From_Host_Ms
                 tx.msg.drvbuf.port_handle                          = m_InputPortHandle;
 
                 tx.msg.buffer_header.data                          = m_input_buffer_handle;
-                tx.msg.buffer_header.alloc_size                    = m_InputBufferSize;
+            //  tx.msg.buffer_header.alloc_size                    = m_InputBufferSize;
+                tx.msg.buffer_header.alloc_size                    = m_videoBlockSize;
 
                 tx.msg.buffer_header.pts_lo                        = 0;
                 tx.msg.buffer_header.pts_hi                        = 0x80000000;
