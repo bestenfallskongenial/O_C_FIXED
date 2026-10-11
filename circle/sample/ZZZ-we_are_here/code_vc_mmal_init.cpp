@@ -246,13 +246,20 @@ void            CKernel::primePortFormatInputMMAL   (   u32 bufferSize,
 
                 tx.msg.format.encoding                             = MMAL_ENCODING_H264;
                 tx.msg.format.encoding_variant                     = MMAL_ENCODING_VARIANT_H264_DEFAULT;
-
+/*
                 tx.msg.es.video.width                              = MIN_VID_H; //m_ResolutionX;
                 tx.msg.es.video.height                             = MAX_VID_H; //m_ResolutionY;
                 tx.msg.es.video.crop.x                             = 0;
                 tx.msg.es.video.crop.y                             = 0;
                 tx.msg.es.video.crop.width                         = MIN_VID_H; //m_ResolutionX;
                 tx.msg.es.video.crop.height                        = MAX_VID_H; //m_ResolutionY;
+*/
+                tx.msg.es.video.width                              = MIN_VID_W;
+                tx.msg.es.video.height                             = MIN_VID_H;
+                tx.msg.es.video.crop.x                             = 0;
+                tx.msg.es.video.crop.y                             = 0;
+                tx.msg.es.video.crop.width                         = MIN_VID_W;
+                tx.msg.es.video.crop.height                        = MIN_VID_H;
 }
 void            CKernel::primePortFormatOutputMMAL  (   u32 bufferSize, 
                                                         const MMAL_Port_Info_Get_Reply& src, 
@@ -272,11 +279,18 @@ void            CKernel::primePortFormatOutputMMAL  (   u32 bufferSize,
                 tx.msg.port.buffer_size                            = bufferSize;
 
                 tx.msg.format.encoding                             = MMAL_ENCODING_I420;
-
+/*
                 tx.msg.es.video.width                              = MIN_VID_H; //m_ResolutionX;
                 tx.msg.es.video.height                             = MAX_VID_H; //m_ResolutionY;
                 tx.msg.es.video.crop.x                             = 0;
                 tx.msg.es.video.crop.y                             = 0;
                 tx.msg.es.video.crop.width                         = MIN_VID_H; //m_ResolutionX;
                 tx.msg.es.video.crop.height                        = MAX_VID_H; //m_ResolutionY;
+*/                
+                tx.msg.es.video.width                              = MIN_VID_W;
+                tx.msg.es.video.height                             = MIN_VID_H;
+                tx.msg.es.video.crop.x                             = 0;
+                tx.msg.es.video.crop.y                             = 0;
+                tx.msg.es.video.crop.width                         = MIN_VID_W;
+                tx.msg.es.video.crop.height                        = MIN_VID_H;
 }

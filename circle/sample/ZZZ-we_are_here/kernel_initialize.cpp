@@ -146,6 +146,13 @@ boolean			CKernel::Initialize						(	void )
                     }
                 if (bOK)
                     {
+                    bOK = initTexturesMMAL();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initTexturesMMAL()                      DONE");
+#endif
+                    }
+                if (bOK)
+                    {
                     bOK = SPI_init();
 #ifdef __LOG_INIT__
                     if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SPI_init()                              DONE");
