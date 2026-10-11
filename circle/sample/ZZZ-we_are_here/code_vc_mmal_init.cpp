@@ -27,17 +27,7 @@ bool            CKernel::initTexturesMMAL         (   )
                 glBindTexture(GL_TEXTURE_2D, 0);
                 if(!checkGLerrorMMAL()) f_count++;
 
-                if( f_count != 0)
-                    { 
-#ifdef __LOG_MMAL__ 
-                    storeLogHex(   MY_BFR, MY_IDX, "Texture Creation    FAILED");
-#endif                   
-                    return false;
-                    }
-#ifdef __LOG_MMAL__             
-                storeLogHex(   MY_BFR, MY_IDX, "Texture Creation    SUCCESS");
-#endif               
-                return true;
+                return (f_count == 0);
 }
 
 bool            CKernel::createComponent            (   u32& ComponentHandle,                   // i assume this is the better approach right? 

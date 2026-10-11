@@ -139,9 +139,14 @@ boolean			CKernel::Initialize						(	void )
                     initOGL( &m_ogl);
 #ifdef __LOG_INIT__
                     if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initOGL(&m_ogl)                         DONE");
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Width   ", m_ogl.screen_width, "EGL Screen Height  ", m_ogl.screen_height);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Element   ", m_ogl.dispman_element, "DISPMANX Display   ", m_ogl.dispman_display );
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Display        ", (u32)(uintptr_t)m_ogl.display, "EGL Surface        ", (u32)(uintptr_t)m_ogl.surface, "EGL Context        ", (u32)(uintptr_t)m_ogl.context );
+
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Width   ", m_ogl.screen_width);
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Height  ", m_ogl.screen_height);
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Element   ", m_ogl.dispman_element);
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Display   ", m_ogl.dispman_display);
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Display        ", (u32)(uintptr_t)m_ogl.display);
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Surface        ", (u32)(uintptr_t)m_ogl.surface);
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Context        ", (u32)(uintptr_t)m_ogl.context);
 #endif
                     }
                 if (bOK)
