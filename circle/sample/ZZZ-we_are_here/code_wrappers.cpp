@@ -59,56 +59,56 @@ bool            CKernel::wrapperVCSM()
                     {
                     bOK = initEventsVCOS(m_EventSMEM, "SMEM");
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initEventsVCOS (m_EventSMEM, SMEM)      DONE");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initEventsVCOS (m_EventSMEM, SMEM)     SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = openServiceVCHI (    *m_ServiceCreateVCSM, VC_SM_VER, VC_SM_MIN_VER, VCHIQ_MAKE_FOURCC('S','M','E','M'), callbackVCSM, &m_EventSMEM, m_VCHIInstance, m_ServiceHandleVCSM );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "openServiceVCHI ('S','M','E','M')       DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "openServiceVCHI ('S','M','E','M')    SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = importMemoryVCSM  (   m_videoBlockBase, m_videoBlockSize, m_input_buffer_handle, *m_importTxVCSM_A, *m_importRxVCSM_A );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input import                   DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input import                SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = lockMemoryVCSM    (   m_input_buffer_handle, m_input_buffer_pointer, *m_lockTxVCSM, *m_lockRxVCSM );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input lock                     DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Input lock                  SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = importMemoryVCSM  (   m_frameBlockBaseA, m_frameBlockSizeA, m_output_buffer_handle_a, *m_importTxVCSM_B, *m_importRxVCSM_B );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A import                DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A import             SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = lockMemoryVCSM    (   m_output_buffer_handle_a, m_output_buffer_pointer_a, *m_lockTxVCSM, *m_lockRxVCSM );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A lock                  DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output A lock               SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = importMemoryVCSM  (   m_frameBlockBaseB, m_frameBlockSizeB, m_output_buffer_handle_b, *m_importTxVCSM_C, *m_importRxVCSM_C );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B import                DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B import             SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = lockMemoryVCSM    (   m_output_buffer_handle_b, m_output_buffer_pointer_b, *m_lockTxVCSM, *m_lockRxVCSM );
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B lock                  DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMEM-MEM Output B lock               SUCCESS");
 #endif
                     }
                 return bOK;        
@@ -116,166 +116,166 @@ bool            CKernel::wrapperVCSM()
 
 bool            CKernel::wrapperMMAL()
 {
-                    bool bOK = TRUE;
-                    
-                    if (bOK)
-                        {
-                        bOK = initEventsVCOS( m_EventMMAL, "MMAL" );
+                bool bOK = TRUE;
+                
+                if (bOK)
+                    {
+                    bOK = initEventsVCOS( m_EventMMAL, "MMAL" );
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initEventsVCOS ( m_EventMMAL, MMAL )    DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initEventsVCOS ( m_EventMMAL, MMAL ) SUCCESS");
 #endif
-                        }
-                    if (bOK)
-                        {
-                        bOK = openServiceVCHI(     *m_ServiceCreateMMAL, VC_MMAL_VER, VC_MMAL_MIN_VER, VCHIQ_MAKE_FOURCC('m','m','a','l'), callbackMMAL, &m_EventMMAL, m_VCHIInstance, m_ServiceHandleMMAL);
+                    }
+                if (bOK)
+                    {
+                    bOK = openServiceVCHI(  *m_ServiceCreateMMAL, VC_MMAL_VER, VC_MMAL_MIN_VER, VCHIQ_MAKE_FOURCC('m','m','a','l'), callbackMMAL, &m_EventMMAL, m_VCHIInstance, m_ServiceHandleMMAL);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "openServiceVCHI ('m','m','a','l')       DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "openServiceVCHI ('m','m','a','l')    SUCCESS");
 #endif
-                        }
-                    if (bOK)
-                        {
-                        bOK = createComponent( m_ComponentHandle, *m_ComponentCreateTx, *m_ComponentCreateRx);
+                    }
+                if (bOK)
+                    {
+                    bOK = createComponent( m_ComponentHandle, *m_ComponentCreateTx, *m_ComponentCreateRx);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "createComponent ()                      DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "createComponent ()                   SUCCESS");
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_A, *m_PortInfoGetRx_Input_A);
+                    }
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_A, *m_PortInfoGetRx_Input_A);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input A )             DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input A )          SUCCESS");
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_A, *m_PortInfoGetRx_Output_A);
+                    }
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_A, *m_PortInfoGetRx_Output_A);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output A )            DONE");
-    
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output A )         SUCCESS");
 #endif 
-                        }          
+                    }          
+                if (bOK)
+                    {
                     primePortFormatInputMMAL ( m_videoBlockSize, *m_PortInfoGetRx_Input_A, *m_PortInfoSetTx_Input);
-
-                    primePortFormatOutputMMAL( m_frameBlockSizeA, *m_PortInfoGetRx_Output_A, *m_PortInfoSetTx_Output);                     
-                    if (bOK)
-                        {
-                        bOK = setPortInfoMMAL( *m_PortInfoSetTx_Input, *m_PortInfoSetRx_Input);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setPortInfoMMAL ( Input )               DONE");
-    
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "primePortFormatInputMMAL ()             DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    primePortFormatOutputMMAL( m_frameBlockSizeA, *m_PortInfoGetRx_Output_A, *m_PortInfoSetTx_Output);
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "primePortFormatOutputMMAL ()            DONE");
+#endif
+                    }    
+                if (bOK)
+                    {
+                    bOK = setPortInfoMMAL( *m_PortInfoSetTx_Input, *m_PortInfoSetRx_Input);
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setPortInfoMMAL ( Input )            SUCCESS");
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = setPortInfoMMAL( *m_PortInfoSetTx_Output, *m_PortInfoSetRx_Output);
+                    }
+                if (bOK)
+                    {
+                    bOK = setPortInfoMMAL( *m_PortInfoSetTx_Output, *m_PortInfoSetRx_Output);
 #ifdef __LOG_MMAL__                                                                                                                        
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setPortInfoMMAL ( Output )              DONE");
-    
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setPortInfoMMAL ( Output )           SUCCESS");
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = enableComponentMMAL( *m_ComponentEnableTx, *m_ComponentEnableRx);
+                    }
+                if (bOK)
+                    {
+                    bOK = enableComponentMMAL( *m_ComponentEnableTx, *m_ComponentEnableRx);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "enableComponentMMAL ()                  DONE");
-    
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "enableComponentMMAL ()               SUCCESS");
 #endif 
-                        }      
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_B, *m_PortInfoGetRx_Input_B);
+                    }      
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_B, *m_PortInfoGetRx_Input_B);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input B )             DONE");
-    
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input B )          SUCCESS");
 #endif 
-                        }
-                       
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_B, *m_PortInfoGetRx_Output_B);
+                    } 
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_B, *m_PortInfoGetRx_Output_B);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output B )            DONE");
-    
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output B )         SUCCESS");
 #endif
-                        }
-                    if (bOK)
-                        {
-                        bOK = setZeroCopyModeMMAL( m_InputPortHandle, *m_PortParamTx_Input, *m_PortParamRx_Input);
+                    }
+                if (bOK)
+                    {
+                    bOK = setZeroCopyModeMMAL( m_InputPortHandle, *m_PortParamTx_Input, *m_PortParamRx_Input);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setZeroCopyModeMMAL ( Input )           DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setZeroCopyModeMMAL ( Input )        SUCCESS");
+#endif 
+                    }
+                if (bOK)
+                    {
+                    bOK = setZeroCopyModeMMAL( m_OutputPortHandle, *m_PortParamTx_Output, *m_PortParamRx_Output);
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setZeroCopyModeMMAL ( Output )       SUCCESS");
+#endif 
+                    }
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_C, *m_PortInfoGetRx_Input_C);
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input C )          SUCCESS");
+#endif 
+                    }
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_C, *m_PortInfoGetRx_Output_C);
+#ifdef __LOG_MMAL__
+                if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output C )             SUCCESS");
+#endif 
+                    }
+                if (bOK)
+                    {
+                    bOK = enablePortMMAL( *m_PortInfoGetRx_Input_C, *m_PortActionTx_Input, *m_PortActionRx_Input);
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "enablePortMMAL ( Input )             SUCCESS");
     
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = setZeroCopyModeMMAL( m_OutputPortHandle, *m_PortParamTx_Output, *m_PortParamRx_Output);
+                    }
+                if (bOK)
+                    {
+                    bOK = enablePortMMAL( *m_PortInfoGetRx_Output_C, *m_PortActionTx_Output, *m_PortActionRx_Output);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "setZeroCopyModeMMAL ( Output )          DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "enablePortMMAL ( Output )            SUCCESS");
     
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_C, *m_PortInfoGetRx_Input_C);
+                    }
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_D, *m_PortInfoGetRx_Input_D);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input C )             DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input D )          SUCCESS");
     
 #endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_C, *m_PortInfoGetRx_Output_C);
+                    }
+                if (bOK)
+                    {
+                    bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_D, *m_PortInfoGetRx_Output_D);
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output C )            DONE");
-    
-#endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = enablePortMMAL( *m_PortInfoGetRx_Input_C, *m_PortActionTx_Input, *m_PortActionRx_Input);
-#ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "enablePortMMAL ( Input )                DONE");
-    
-#endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = enablePortMMAL( *m_PortInfoGetRx_Output_C, *m_PortActionTx_Output, *m_PortActionRx_Output);
-#ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "enablePortMMAL ( Output )               DONE");
-    
-#endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_D, *m_PortInfoGetRx_Input_D);
-#ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input D )             DONE");
-    
-#endif 
-                        }
-                    if (bOK)
-                        {
-                        bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_D, *m_PortInfoGetRx_Output_D);
-#ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output D )            DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output D )         SUCCESS");
 #endif // __LOG_MMAL__
-                        }
-                    if (bOK)
-                        {
-                        PrimeInputBufferBodyMMAL( *m_BufferFromHostTx_Input );
+                    }
+                if (bOK)
+                    {
+                    PrimeInputBufferBodyMMAL( *m_BufferFromHostTx_Input );
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeInputBufferBodyMMAL ()              DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeInputBufferBodyMMAL ()              DONE");
 #endif
-                        }
-                    if (bOK)
-                        {
-                        PrimeOutputBufferBodyMMAL( *m_BufferFromHostTx_Output );
+                    }
+                if (bOK)
+                    {
+                    PrimeOutputBufferBodyMMAL( *m_BufferFromHostTx_Output );
 #ifdef __LOG_MMAL__
-                        if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeOutputBufferBodyMMAL ()             DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeOutputBufferBodyMMAL ()             DONE");
 #endif
-                        }
-                    return bOK;
+                    }
+                return bOK;
 }
 
 void            CKernel::wrapper_load_sd            (   )

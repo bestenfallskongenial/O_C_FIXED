@@ -35,7 +35,7 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = frameBufferInit();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "frameBufferInit()                       DONE");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "frameBufferInit()                    SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -49,14 +49,14 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = m_EMMC.Initialize();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_EMMC.Initialize()                     DONE");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_EMMC.Initialize()                  SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = m_USBHCI.Initialize();
 #ifdef __LOG_INIT__                    
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_USBHCI.Initialize()                   DONE");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_USBHCI.Initialize()                SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -85,7 +85,7 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = m_VCHIQ.Initialize();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_VCHIQ.Initialize()                    DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_VCHIQ.Initialize()                 SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -108,14 +108,14 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = wrapperInitVCSMstruct();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperInitVCSMstruct()                 DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperInitVCSMstruct()              SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = wrapperInitMMALstruct();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperInitMMALstruct()                 DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperInitMMALstruct()              SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -123,7 +123,7 @@ boolean			CKernel::Initialize						(	void )
                     bOK = wrapperVCSM();
 #ifdef __LOG_INIT__
 
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Allocate/Lock VCSM Buffer               DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Allocate/Lock VCSM Buffer            SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -131,7 +131,7 @@ boolean			CKernel::Initialize						(	void )
                     bOK = wrapperMMAL();
 #ifdef __LOG_INIT__
 
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Init MMAL / ril.video_decode            DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Init MMAL / ril.video_decode         SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -153,39 +153,39 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = initTexturesMMAL();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initTexturesMMAL()                      DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initTexturesMMAL()                   SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = SPI_init();
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SPI_init()                              DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SPI_init()                           SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = SMI_Init( LED_PIN);
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMI_Init(LED_PIN)                       DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMI_Init(LED_PIN)                    SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     bOK = WS2812_Init( LED_COUNT );
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "WS2812_Init(LED_COUNT)                  DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "WS2812_Init(LED_COUNT)               SUCCESS");
 #endif
                     }
                 if (bOK)
                     {
                     GPIO_SetAlt( CTRL_PIN, 1, GPIO_PULL_OFF);
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(CTRL_PIN, 1, GPIO_PULL_OFF) DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(CTRL_PIN, 1, PULL_OFF)      DONE");
 #endif
                     GPIO_SetAlt( SW_PIN_A, 0, GPIO_PULL_UP);
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(SW_PIN_A, 0, GPIO_PULL_UP)  DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(SW_PIN_A, 0, PULL_UP)       DONE");
 #endif
                     GPIO_SetAlt( SW_PIN_B, 0, GPIO_PULL_UP);
 #ifdef __LOG_INIT__
@@ -203,7 +203,7 @@ boolean			CKernel::Initialize						(	void )
                     {
                     bOK = wrapperGenerateWaveTables( m_bufferLfo, LFO_SAMPLES);
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperGenerateWaveTables()             DONE");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperGenerateWaveTables()            DONE");
 #endif
                     }                    
                 return bOK;
