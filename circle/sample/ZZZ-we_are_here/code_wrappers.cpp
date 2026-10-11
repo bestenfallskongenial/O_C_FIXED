@@ -59,7 +59,7 @@ bool            CKernel::wrapperVCSM()
                     {
                     bOK = initEventsVCOS(m_EventSMEM, "SMEM");
 #ifdef __LOG_VCSM__
-                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initEventsVCOS (m_EventSMEM, SMEM)     SUCCESS");
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initEventsVCOS (m_EventSMEM, SMEM)   SUCCESS");
 #endif
                     }
                 if (bOK)
@@ -227,7 +227,7 @@ bool            CKernel::wrapperMMAL()
                     {
                     bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_C, *m_PortInfoGetRx_Output_C);
 #ifdef __LOG_MMAL__
-                if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output C )             SUCCESS");
+                if (bOK) storeLogHex(      MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output C )        SUCCESS");
 #endif 
                     }
                 if (bOK)
