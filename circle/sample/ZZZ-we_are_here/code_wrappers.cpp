@@ -155,14 +155,14 @@ bool            CKernel::wrapperMMAL()
                     }          
                 if (bOK)
                     {
-                    primePortFormatInputMMAL ( m_videoBlockSize, *m_PortInfoGetRx_Input_A, *m_PortInfoSetTx_Input);
+                    bOK = primePortFormatInputMMAL ( m_videoBlockSize, *m_PortInfoGetRx_Input_A, *m_PortInfoSetTx_Input);
 #ifdef __LOG_MMAL__
                     if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "primePortFormatInputMMAL ()             DONE");
 #endif
                     }
                 if (bOK)
                     {
-                    primePortFormatOutputMMAL( m_frameBlockSizeA, *m_PortInfoGetRx_Output_A, *m_PortInfoSetTx_Output);
+                    bOK = primePortFormatOutputMMAL( m_frameBlockSizeA, *m_PortInfoGetRx_Output_A, *m_PortInfoSetTx_Output);
 #ifdef __LOG_MMAL__
                     if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "primePortFormatOutputMMAL ()            DONE");
 #endif
