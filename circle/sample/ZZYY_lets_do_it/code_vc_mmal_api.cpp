@@ -434,7 +434,7 @@ bool            CKernel::queueOutputBufferMMAL      (   MMAL_Buffer_From_Host_Ms
                 tx.msg.buffer_header.flags                         = 0;
 
 #ifdef __LOG_MMAL__
-                storeLogHex( MY_BFR, MY_IDX, "BUFFER FROM HOST MSG", (u32)sizeof(tx));     /* expected: sizeof(hdr)+268 */
+                storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "BUFFER FROM HOST MSG", (u32)sizeof(tx));     /* expected: sizeof(hdr)+268 */
                 storeMsg( MY_BFR, MY_IDX, "QueueOutputBuffer", &tx, (u32)sizeof(tx));
 #endif 
                 return (vchi_msg_queue(m_ServiceHandleMMAL, &tx, (u32)sizeof(tx), VCHI_FLAGS_BLOCK_UNTIL_QUEUED, nullptr) == 0);
@@ -454,7 +454,7 @@ bool            CKernel::queueInputBufferMMAL       (   MMAL_Buffer_From_Host_Ms
                 u32 flags                                           = MMAL_BUFFER_HEADER_FLAG_FRAME | MMAL_BUFFER_HEADER_FLAG_KEYFRAME;
                 tx.msg.buffer_header.flags                         = flags;
 #ifdef __LOG_MMAL__
-                storeLogHex( MY_BFR, MY_IDX, "BUFFER FROM HOST MSG", (u32)sizeof(tx));     /* expected: sizeof(hdr)+268 */
+                storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "BUFFER FROM HOST MSG", (u32)sizeof(tx));     /* expected: sizeof(hdr)+268 */
                 storeMsg( MY_BFR, MY_IDX, "QueueInputBuffer", &tx, (u32)sizeof(tx));
 #endif 
                 return (vchi_msg_queue(m_ServiceHandleMMAL, &tx, (u32)sizeof(tx), VCHI_FLAGS_BLOCK_UNTIL_QUEUED, nullptr) == 0);
