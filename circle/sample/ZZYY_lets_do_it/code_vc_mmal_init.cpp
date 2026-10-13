@@ -2,7 +2,7 @@
 
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
     #define MY_IDX   m_logKernelIndex 
-
+/*
 bool            CKernel::initTexturesMMAL         (   )
 {
                 int f_count = 0;
@@ -28,6 +28,53 @@ bool            CKernel::initTexturesMMAL         (   )
                 if(!checkGLerrorMMAL()) f_count++;
 
                 return (f_count == 0);
+}
+*/
+bool CKernel::initTexturesMMAL()            // NEW
+{
+    int f_count = 0;
+
+    glGenTextures(1, &m_tex.gl_tex_vid);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    glBindTexture(GL_TEXTURE_EXTERNAL_OES, m_tex.gl_tex_vid);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    glTexParameteri(
+        GL_TEXTURE_EXTERNAL_OES,
+        GL_TEXTURE_MIN_FILTER,
+        GL_LINEAR);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    glTexParameteri(
+        GL_TEXTURE_EXTERNAL_OES,
+        GL_TEXTURE_MAG_FILTER,
+        GL_LINEAR);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    glTexParameteri(
+        GL_TEXTURE_EXTERNAL_OES,
+        GL_TEXTURE_WRAP_S,
+        GL_CLAMP_TO_EDGE);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    glTexParameteri(
+        GL_TEXTURE_EXTERNAL_OES,
+        GL_TEXTURE_WRAP_T,
+        GL_CLAMP_TO_EDGE);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
+    if (!checkGLerrorMMAL())
+        f_count++;
+
+    return (f_count == 0);
 }
 
 bool            CKernel::createComponent            (   u32& ComponentHandle,                   // i assume this is the better approach right? 
@@ -251,6 +298,7 @@ void            CKernel::primePortFormatInputMMAL   (   u32 bufferSize,
                 tx.msg.es.video.crop.width                         = MIN_VID_W;
                 tx.msg.es.video.crop.height                        = MIN_VID_H;
 }
+/*
 void            CKernel::primePortFormatOutputMMAL  (   u32 bufferSize, 
                                                         const MMAL_Port_Info_Get_Reply& src, 
                                                         MMAL_Port_Info_Set_Msg& tx)
@@ -269,18 +317,96 @@ void            CKernel::primePortFormatOutputMMAL  (   u32 bufferSize,
                 tx.msg.port.buffer_size                            = bufferSize;
 
                 tx.msg.format.encoding                             = MMAL_ENCODING_I420;
-/*
-                tx.msg.es.video.width                              = MIN_VID_H; //m_ResolutionX;
-                tx.msg.es.video.height                             = MAX_VID_H; //m_ResolutionY;
-                tx.msg.es.video.crop.x                             = 0;
-                tx.msg.es.video.crop.y                             = 0;
-                tx.msg.es.video.crop.width                         = MIN_VID_H; //m_ResolutionX;
-                tx.msg.es.video.crop.height                        = MAX_VID_H; //m_ResolutionY;
-*/                
+
+            //  tx.msg.es.video.width                              = MIN_VID_H; //m_ResolutionX;
+            //  tx.msg.es.video.height                             = MAX_VID_H; //m_ResolutionY;
+            //  tx.msg.es.video.crop.x                             = 0;
+            //  tx.msg.es.video.crop.y                             = 0;
+            //  tx.msg.es.video.crop.width                         = MIN_VID_H; //m_ResolutionX;
+            //  tx.msg.es.video.crop.height                        = MAX_VID_H; //m_ResolutionY;
+              
                 tx.msg.es.video.width                              = MIN_VID_W;
                 tx.msg.es.video.height                             = MIN_VID_H;
                 tx.msg.es.video.crop.x                             = 0;
                 tx.msg.es.video.crop.y                             = 0;
                 tx.msg.es.video.crop.width                         = MIN_VID_W;
                 tx.msg.es.video.crop.height                        = MIN_VID_H;
+}
+*/
+void CKernel::primePortFormatOutputMMAL(                                    // NEW
+    u32 bufferSize,
+    const MMAL_Port_Info_Get_Reply& src,
+    MMAL_Port_Info_Set_Msg& tx)
+{
+    tx.msg.component_handle        = m_ComponentHandle;
+    tx.msg.port_type               = MMAL_PORT_TYPE_OUTPUT;
+    tx.msg.port_index              = 0;
+
+    tx.msg.port                    = src.msg.port;
+    tx.msg.format                  = src.msg.format;
+    tx.msg.es                      = src.msg.es;
+
+    tx.msg.port.buffer_num         = NUMBER_OUTPUTBUFFER;
+    tx.msg.port.buffer_size        = bufferSize;
+
+    // Request MMAL opaque image descriptors from the decoder.
+    // EGL_IMAGE_BRCM_MULTIMEDIA consumes these descriptors directly.
+    tx.msg.format.encoding         = MMAL_ENCODING_OPAQUE;
+    tx.msg.format.encoding_variant = 0;
+
+    tx.msg.es.video.width          = MIN_VID_W;
+    tx.msg.es.video.height         = MIN_VID_H;
+    tx.msg.es.video.crop.x         = 0;
+    tx.msg.es.video.crop.y         = 0;
+    tx.msg.es.video.crop.width     = MIN_VID_W;
+    tx.msg.es.video.crop.height    = MIN_VID_H;
+}
+
+bool            CKernel::allocateOpaqueBufferMMAL(  u32& handle,                        // NEW
+                                                    const char* description,
+                                                    MMAL_Opaque_Allocator_Msg& tx,
+                                                    MMAL_Opaque_Allocator_Msg& rx)
+{
+                initHeaderMMAL(tx.hdr, MMAL_MSG_TYPE_OPAQUE_ALLOCATOR_DESC);
+
+                tx.msg = {};
+                tx.msg.op = MMAL_WORKER_OPAQUE_MEM_ALLOC;
+
+                memset(tx.msg.description, 0, sizeof(tx.msg.description));
+                strncpy(
+                    tx.msg.description,
+                    description,
+                    sizeof(tx.msg.description) - 1);
+
+                size_t rx_len = 0;
+
+                if (!sendAndWaitVCHI(
+                        m_ServiceHandleMMAL,
+                        m_EventMMAL,
+                        &tx,
+                        sizeof(tx),
+                        &rx,
+                        sizeof(rx),
+                        &rx_len))
+                {
+                    return false;
+                }
+
+                if (rx.hdr.type != MMAL_MSG_TYPE_OPAQUE_ALLOCATOR_DESC)
+                {
+                    return false;
+                }
+
+                if (rx.hdr.status != MMAL_MSG_STATUS_SUCCESS)
+                {
+                    return false;
+                }
+
+                if (rx.msg.handle == 0)
+                {
+                    return false;
+                }
+
+                handle = rx.msg.handle;
+                return true;
 }

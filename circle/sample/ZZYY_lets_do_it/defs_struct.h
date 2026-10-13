@@ -654,6 +654,14 @@ struct mmal_msg_buffer_from_host_wire32
     u8 short_data[128];           					// unchanged, stays zero - total: 16 + 16 + 56 + 40 + 4 + 4 + 4 + 128 = 268 bytes
 };
 
+struct mmal_worker_opaque_allocator
+{
+    u32 op;
+    u32 handle;
+    u32 status;
+    char description[32];
+};
+
 struct VCSM_Alloc_MEM_Msg
 {
     vc_sm_msg_hdr_t    								hdr;
@@ -762,4 +770,9 @@ struct MMAL_Buffer_From_Host_Msg            		//  9. Runtime buffer flow bidirec
 {
     mmal_msg_header                  				hdr;
     mmal_msg_buffer_from_host_wire32  				msg;
+};
+struct MMAL_Opaque_Allocator_Msg					// NEW
+{
+    mmal_msg_header 								hdr;
+    mmal_worker_opaque_allocator 					msg;
 };

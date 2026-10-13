@@ -269,7 +269,13 @@
     //              FROM MMAL-ENCODINGS.H
     #define         MMAL_ENCODING_H264                                  MMAL_FOURCC('H', '2', '6', '4')
     #define         MMAL_ENCODING_I420                                  MMAL_FOURCC('I', '4', '2', '0')
+    #define         MMAL_ENCODING_OPAQUE                                MMAL_FOURCC('O', 'P', 'Q', 'V')     // NEW
     #define         MMAL_ENCODING_EGL_IMAGE                             MMAL_FOURCC('E', 'G', 'L', 'I')     // An EGL image handle
+
+    #define         MMAL_WORKER_OPAQUE_MEM_ALLOC                        0                                   // NEW
+    #define         MMAL_WORKER_OPAQUE_MEM_RELEASE                      1                                   // NEW
+    #define         MMAL_WORKER_OPAQUE_MEM_ACQUIRE                      2                                   // NEW
+
     // Pre-defined H264 encoding variants //
     #define         MMAL_ENCODING_VARIANT_H264_DEFAULT                  0                                   // ISO 14496-10 Annex B byte stream format //
     #define         MMAL_ENCODING_VARIANT_H264_AVC1                     MMAL_FOURCC('A', 'V', 'C', '1')    // ISO 14496-15 AVC stream format //

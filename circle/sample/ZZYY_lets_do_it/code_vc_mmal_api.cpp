@@ -5,6 +5,7 @@
 
 bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u32 nal_block_length)
 {
+/*    
 #ifdef __LOG_FIRST_FRAME__
                 if (!f_firstFrameQueued)
                     {
@@ -25,6 +26,59 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                     return true;
                     }
 #endif
+*/
+if (!f_firstFrameQueued)
+{
+    if (!queueOutputBufferMMAL(
+            *m_BufferFromHostTx_Output,
+            m_output_buffer_handle_a,
+            m_OutputBufferSizeA))
+    {
+#ifdef __LOG_MMAL__
+        storeLogHex(
+            MY_BFR,
+            MY_IDX,
+            "very first output buffer queue ERROR",
+            m_output_buffer_handle_a);
+#endif
+        return false;
+    }
+
+    if (!queueInputBufferMMAL(
+            *m_BufferFromHostTx_Input,
+            nal_block_offset,
+            nal_block_length))
+    {
+#ifdef __LOG_MMAL__
+        storeLogHex(
+            MY_BFR,
+            MY_IDX,
+            "very first frame queue ERROR!",
+            X_VAL,
+            "Frame offset",
+            nal_block_offset,
+            "length",
+            nal_block_length);
+#endif
+        return false;
+    }
+
+    getPortInfoMMAL(
+        MMAL_PORT_TYPE_INPUT,
+        m_InputPortHandle,
+        *m_PortInfoGetTx_Input_D,
+        *m_PortInfoGetRx_Input_D);
+
+    getPortInfoMMAL(
+        MMAL_PORT_TYPE_OUTPUT,
+        m_OutputPortHandle,
+        *m_PortInfoGetTx_Output_D,
+        *m_PortInfoGetRx_Output_D);
+
+    f_firstFrameQueued = true;
+    return true;
+}
+
 #ifdef __LOG_MMAL__
                 const char*  message = "";
 #endif
@@ -42,6 +96,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                             {
                             switch (m_BufferFromHostTx_Output->hdr.status)   // SECOND AXIS: status (outcome)
                                 {
+/*                                    
                                 case MMAL_MSG_STATUS_SUCCESS:
                                     {
                                     u32 m_CurrentHandle = m_BufferFromHostTx_Output->msg.buffer_header.data;  // Payload layout reused: buffer_from_host
@@ -55,12 +110,14 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 
                                     if (m_CurrentHandle == m_output_buffer_handle_a) // Ping-pong: requeue the other output buffer
                                         {
-                                        if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_b, m_frameBlockSizeB )) // m_OutputBufferSize correct? or a?
+                                    //  if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_b, m_frameBlockSizeB )) // m_OutputBufferSize correct? or a?
+                                        if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_b, m_OutputBufferSizeB))
                                             return false;
                                         }
                                     if (m_CurrentHandle == m_output_buffer_handle_b) 
                                         {
-                                        if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_a, m_frameBlockSizeA )) // m_OutputBufferSize
+                                    //  if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_a, m_frameBlockSizeA )) // m_OutputBufferSize
+                                        if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_a, m_OutputBufferSizeA))
                                             return false;
                                         }
                                     if (!bufferReadyMMAL(m_CurrentHandle))
@@ -73,6 +130,89 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #endif                       
                                     return true;
                                     }
+*/                                    
+case MMAL_MSG_STATUS_SUCCESS:       // NEW
+{
+    u32 currentHandle =
+        m_BufferFromHostTx_Output->msg.buffer_header.data;
+
+    if (currentHandle != m_output_buffer_handle_a &&
+        currentHandle != m_output_buffer_handle_b)
+    {
+        continue;
+    }
+
+    u32 nextOutputHandle = 0;
+    u32 nextOutputSize   = 0;
+
+    if (currentHandle == m_output_buffer_handle_a)
+    {
+        nextOutputHandle = m_output_buffer_handle_b;
+        nextOutputSize   = m_OutputBufferSizeB;
+    }
+    else
+    {
+        nextOutputHandle = m_output_buffer_handle_a;
+        nextOutputSize   = m_OutputBufferSizeA;
+    }
+
+    /*
+     * If the next decoder destination is still backing the video
+     * texture, finish all preceding GL reads before MMAL receives it.
+     *
+     * On the first returned frame m_videoTextureHandle is zero, so
+     * no wait occurs.
+     */
+    if (m_videoTextureHandle == nextOutputHandle)
+    {
+        glFinish();
+
+        if (!checkGLerrorMMAL())
+            return false;
+    }
+
+    if (!queueOutputBufferMMAL(
+            *m_BufferFromHostTx_Output,
+            nextOutputHandle,
+            nextOutputSize))
+    {
+        return false;
+    }
+
+    if (!bufferReadyMMAL(currentHandle))
+        return false;
+
+    /*
+     * bufferReadyMMAL() has successfully attached currentHandle to
+     * m_tex.gl_tex_vid. Record which output must not be recycled until
+     * preceding GL reads have completed.
+     */
+    m_videoTextureHandle = currentHandle;
+
+    if (!queueInputBufferMMAL(
+            *m_BufferFromHostTx_Input,
+            nal_block_offset,
+            nal_block_length))
+    {
+        return false;
+    }
+
+#ifdef __LOG_MMAL__
+    message = "MMAL output ready";
+    storeLogHex(
+        MY_BFR,
+        MY_IDX,
+        message,
+        X_VAL,
+        "Frame offset",
+        nal_block_offset,
+        "length",
+        nal_block_length);
+#endif
+
+    return true;
+}
+
 #ifdef __LOG_MMAL__   
                                 case MMAL_MSG_STATUS_ENOMEM:     message = "MMAL_MSG_STATUS_ENOMEM       - Out of memory                      "; break;
                                 case MMAL_MSG_STATUS_ENOSPC:     message = "MMAL_MSG_STATUS_ENOSPC       - Out of resources other than memory "; break;
@@ -159,6 +299,7 @@ bool            CKernel::bufferReadyMMAL            (   u32 handle)
                 return true;
 }
 */
+/*
 bool            CKernel::bufferReadyMMAL            (   u32 handle)
 {
                 if (m_tex.m_EGLimage != EGL_NO_IMAGE_KHR)
@@ -185,6 +326,57 @@ bool            CKernel::bufferReadyMMAL            (   u32 handle)
                 glBindTexture(GL_TEXTURE_2D, 0);
 
                 return true;
+}
+*/
+bool CKernel::bufferReadyMMAL(u32 handle)
+{
+    EGLImageKHR nextImage = eglCreateImageKHR(
+        m_ogl.display,
+        EGL_NO_CONTEXT,
+        EGL_IMAGE_BRCM_MULTIMEDIA,
+        (EGLClientBuffer)(uintptr_t)handle,
+        nullptr);
+
+    if (nextImage == EGL_NO_IMAGE_KHR)
+    {
+#ifdef __LOG_MMAL__
+        storeLogHex(
+            MY_BFR,
+            MY_IDX,
+            "EGL multimedia image creation FAILED",
+            handle);
+#endif
+        return false;
+    }
+
+    glBindTexture(
+        GL_TEXTURE_EXTERNAL_OES,
+        m_tex.gl_tex_vid);
+
+    glEGLImageTargetTexture2DOES(
+        GL_TEXTURE_EXTERNAL_OES,
+        nextImage);
+
+    if (!checkGLerrorMMAL())
+    {
+        glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
+        eglDestroyImageKHR(m_ogl.display, nextImage);
+        return false;
+    }
+
+    glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
+
+    EGLImageKHR previousImage = m_tex.m_EGLimage;
+    m_tex.m_EGLimage = nextImage;
+
+    if (previousImage != EGL_NO_IMAGE_KHR)
+    {
+        eglDestroyImageKHR(
+            m_ogl.display,
+            previousImage);
+    }
+
+    return true;
 }
 
 bool            CKernel::queueOutputBufferMMAL      (   MMAL_Buffer_From_Host_Msg& tx, 

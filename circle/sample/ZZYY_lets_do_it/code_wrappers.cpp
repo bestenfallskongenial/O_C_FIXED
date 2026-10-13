@@ -50,7 +50,7 @@ void            CKernel::wrapperMEMcleanUp          (   )
                     clearBufferMEM( m_bufferLfo, filecounter[FT_LFO][FLD_MAXSD]+filecounter[FT_LFO][FLD_MAXUSB] );
 
 }
-
+/*
 bool            CKernel::wrapperVCSM()
 {
                 bool bOK = TRUE;
@@ -112,6 +112,89 @@ bool            CKernel::wrapperVCSM()
 #endif
                     }
                 return bOK;        
+}
+*/
+bool CKernel::wrapperVCSM()     // NEW
+{
+    bool bOK = TRUE;
+
+    if (bOK)
+    {
+        bOK = initEventsVCOS(m_EventSMEM, "SMEM");
+#ifdef __LOG_VCSM__
+        if (bOK)
+            storeLogHex(
+                MY_BFR,
+                MY_IDX,
+                ">:",
+                getClockMilliseconds(),
+                "initEventsVCOS (m_EventSMEM, SMEM) SUCCESS");
+#endif
+    }
+
+    if (bOK)
+    {
+        bOK = openServiceVCHI(
+            *m_ServiceCreateVCSM,
+            VC_SM_VER,
+            VC_SM_MIN_VER,
+            VCHIQ_MAKE_FOURCC('S', 'M', 'E', 'M'),
+            callbackVCSM,
+            &m_EventSMEM,
+            m_VCHIInstance,
+            m_ServiceHandleVCSM);
+
+#ifdef __LOG_VCSM__
+        if (bOK)
+            storeLogHex(
+                MY_BFR,
+                MY_IDX,
+                ">:",
+                getClockMilliseconds(),
+                "openServiceVCHI ('S','M','E','M') SUCCESS");
+#endif
+    }
+
+    if (bOK)
+    {
+        bOK = importMemoryVCSM(
+            m_videoBlockBase,
+            m_videoBlockSize,
+            m_input_buffer_handle,
+            *m_importTxVCSM_A,
+            *m_importRxVCSM_A);
+
+#ifdef __LOG_VCSM__
+        if (bOK)
+            storeLogHex(
+                MY_BFR,
+                MY_IDX,
+                ">:",
+                getClockMilliseconds(),
+                "SMEM-MEM Input import SUCCESS");
+#endif
+    }
+
+    if (bOK)
+    {
+        bOK = lockMemoryVCSM(
+            m_input_buffer_handle,
+            m_input_buffer_pointer,
+            *m_lockTxVCSM,
+            *m_lockRxVCSM);
+
+#ifdef __LOG_VCSM__
+        if (bOK)
+            storeLogHex(
+                MY_BFR,
+                MY_IDX,
+                ">:",
+                getClockMilliseconds(),
+                "SMEM-MEM Input lock SUCCESS");
+#endif
+    }
+
+    return bOK;
 }
 
 bool            CKernel::wrapperMMAL()
@@ -261,6 +344,34 @@ bool            CKernel::wrapperMMAL()
                     if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output D )         SUCCESS");
 #endif // __LOG_MMAL__
                     }
+// new                    
+                if (bOK)
+                    {
+                    m_OutputBufferSizeA = m_PortInfoGetRx_Output_D->msg.port.buffer_size;
+
+                    m_OutputBufferSizeB = m_PortInfoGetRx_Output_D->msg.port.buffer_size;
+
+                    bOK = (m_OutputBufferSizeA != 0) && (m_OutputBufferSizeB != 0);
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "buffersize Validated                 SUCCESS");
+#endif // __LOG_MMAL__                    
+                    }
+
+                if (bOK)
+                    {
+                    bOK = allocateOpaqueBufferMMAL( m_output_buffer_handle_a, "video output A", *m_OpaqueAllocatorTx, *m_OpaqueAllocatorRx);
+                    }
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "video output A allocated             SUCCESS");
+#endif // __LOG_MMAL__
+                if (bOK)
+                    {
+                    bOK = allocateOpaqueBufferMMAL( m_output_buffer_handle_b, "video output B", *m_OpaqueAllocatorTx, *m_OpaqueAllocatorRx);
+                    }
+#ifdef __LOG_MMAL__
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "video output B allocated             SUCCESS");
+#endif // __LOG_MMAL__
+// end
                 if (bOK)
                     {
                     PrimeInputBufferBodyMMAL( *m_BufferFromHostTx_Input );
@@ -426,6 +537,8 @@ bool            CKernel::wrapperInitMMALstruct      (   )
                 if (bOK) { m_PortInfoGetTx_Output_D     = new MMAL_Port_Info_Get_Msg();         bOK = (m_PortInfoGetTx_Output_D    != nullptr); }
                 if (bOK) { m_PortInfoGetRx_Output_D     = new MMAL_Port_Info_Get_Reply();       bOK = (m_PortInfoGetRx_Output_D    != nullptr); }
 
+                if (bOK) { m_OpaqueAllocatorTx          = new MMAL_Opaque_Allocator_Msg();      bOK = (m_OpaqueAllocatorTx         != nullptr); }   // NEW
+                if (bOK) { m_OpaqueAllocatorRx          = new MMAL_Opaque_Allocator_Msg();      bOK = (m_OpaqueAllocatorRx         != nullptr); }   // NEW                
                 return bOK;
 }
 
@@ -483,6 +596,9 @@ void            CKernel::wrapperFreeMMALstruct      (   ) // here i must check w
                 delete  m_PortInfoGetRx_Input_D;        m_PortInfoGetRx_Input_D         = nullptr;
                 delete  m_PortInfoGetTx_Output_D;       m_PortInfoGetTx_Output_D        = nullptr;
                 delete  m_PortInfoGetRx_Output_D;       m_PortInfoGetRx_Output_D        = nullptr;
+
+                delete m_OpaqueAllocatorTx;             m_OpaqueAllocatorTx             = nullptr;  // NEW
+                delete m_OpaqueAllocatorRx;             m_OpaqueAllocatorRx             = nullptr;  // NEW
 }
 
 bool            CKernel::wrapperGenerateWaveTables(char** p_buffer, int p_count)

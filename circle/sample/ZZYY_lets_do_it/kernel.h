@@ -498,7 +498,12 @@ public:
                                                                         MMAL_Port_Info_Set_Msg&         tx);
                 void        primePortFormatOutputMMAL   (               u32 bufferSize,
                                                                 const   MMAL_Port_Info_Get_Reply&       src, 
-                                                                        MMAL_Port_Info_Set_Msg&         tx);                
+                                                                        MMAL_Port_Info_Set_Msg&         tx);         
+                                                                        
+                bool        allocateOpaqueBufferMMAL    (               u32&                            handle,         // NEW
+                                                                const   char*                           description,
+                                                                        MMAL_Opaque_Allocator_Msg&      tx,
+                                                                        MMAL_Opaque_Allocator_Msg&      rx);                                                                        
 // code_vc_service.cpp          !! TESTED AND APPROVED !!
         static  void        callbackVCSM                (               void*                           callback_param, 
                                                                         VCHI_CALLBACK_REASON_T          reason, 
