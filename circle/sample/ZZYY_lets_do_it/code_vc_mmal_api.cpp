@@ -1,7 +1,7 @@
 #include "kernel.h"
 
-    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
-    #define MY_IDX   m_logKernelIndex 
+#define MY_BFR m_bufferLog[LOG_MMAL_0]
+#define MY_IDX m_bufferLogIndex[LOG_MMAL_0]
 
 bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u32 nal_block_length)
 {
@@ -27,68 +27,41 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                     }
 #endif
 */
-if (!f_firstFrameQueued)            // NEW
-{
-    if (!queueOutputBufferMMAL(
-            *m_BufferFromHostTx_Output,
-            m_output_buffer_handle_a,
-            m_OutputBufferSizeA))
-    {
+                if (!f_firstFrameQueued)            // NEW
+                    {
+                    if (!queueOutputBufferMMAL(    *m_BufferFromHostTx_Output,
+                                                    m_output_buffer_handle_a,
+                                                    m_OutputBufferSizeA))
+                        {
 #ifdef __LOG_MMAL__
-        storeLogHex(
-            MY_BFR,
-            MY_IDX,
-            "First opaque output queue FAILED",
-            m_output_buffer_handle_a);
+                        storeLogHex( MY_BFR, MY_IDX, "First opaque output queue FAILED", m_output_buffer_handle_a);
 #endif
-        return false;
-    }
+                        return false;
+                        }
 
-    if (!queueInputBufferMMAL(
-            *m_BufferFromHostTx_Input,
-            nal_block_offset,
-            nal_block_length))
-    {
+                    if (!queueInputBufferMMAL(     *m_BufferFromHostTx_Input,
+                                                    nal_block_offset,
+                                                    nal_block_length))
+                        {
 #ifdef __LOG_MMAL__
-        storeLogHex(
-            MY_BFR,
-            MY_IDX,
-            "First input frame queue FAILED",
-            X_VAL,
-            "offset",
-            nal_block_offset,
-            "length",
-            nal_block_length);
+                        storeLogHex( MY_BFR, MY_IDX, "First input frame queue FAILED", X_VAL, "offset", nal_block_offset, "length", nal_block_length);
 #endif
-        return false;
-    }
+                        return false;
+                        }
 
 #ifdef __LOG_FIRST_FRAME__
-    storeLogHex(
-        MY_BFR,
-        MY_IDX,
-        "First decoder work submitted",
-        X_VAL,
-        "output",
-        m_output_buffer_handle_a,
-        "offset",
-        nal_block_offset,
-        "length",
-        nal_block_length);
+                        storeLogHex( MY_BFR, MY_IDX, "First decoder work submitted", X_VAL, "output", m_output_buffer_handle_a, "offset", nal_block_offset, "length", nal_block_length);
 #endif
 
-    f_firstFrameQueued = true;
-    return true;
-}
+                        f_firstFrameQueued = true;
+                        return true;
+                    }
 // END
 #ifdef __LOG_MMAL__
                 const char*  message = "";
 #endif
                 uint32_t msg_len = 0;
-
-
     // Drain RX queue unconditionally (non-blocking)
-
             //  while (vchi_msg_dequeue(m_ServiceHandleMMAL, &m_BufferFromHostTx_Output, sizeof(m_BufferFromHostTx_Output), &msg_len, VCHI_FLAGS_NONE) == 0)
                 while (vchi_msg_dequeue(m_ServiceHandleMMAL, m_BufferFromHostTx_Output, sizeof(*m_BufferFromHostTx_Output), &msg_len, VCHI_FLAGS_NONE) == 0)
                     {
@@ -133,87 +106,64 @@ if (!f_firstFrameQueued)            // NEW
                                     return true;
                                     }
 */                                    
-case MMAL_MSG_STATUS_SUCCESS:       // NEW
-{
-    u32 currentHandle =
-        m_BufferFromHostTx_Output->msg.buffer_header.data;
+                                case MMAL_MSG_STATUS_SUCCESS:       // NEW
+                                    {
+                                    u32 currentHandle =
+                                        m_BufferFromHostTx_Output->msg.buffer_header.data;
 
-    if (currentHandle != m_output_buffer_handle_a &&
-        currentHandle != m_output_buffer_handle_b)
-    {
-        continue;
-    }
+                                    if (currentHandle != m_output_buffer_handle_a &&
+                                        currentHandle != m_output_buffer_handle_b)
+                                    {
+                                        continue;
+                                    }
 
-    u32 nextOutputHandle = 0;
-    u32 nextOutputSize   = 0;
+                                    u32 nextOutputHandle = 0;
+                                    u32 nextOutputSize   = 0;
 
-    if (currentHandle == m_output_buffer_handle_a)
-    {
-        nextOutputHandle = m_output_buffer_handle_b;
-        nextOutputSize   = m_OutputBufferSizeB;
-    }
-    else
-    {
-        nextOutputHandle = m_output_buffer_handle_a;
-        nextOutputSize   = m_OutputBufferSizeA;
-    }
+                                    if (currentHandle == m_output_buffer_handle_a)
+                                        {
+                                        nextOutputHandle = m_output_buffer_handle_b;
+                                        nextOutputSize   = m_OutputBufferSizeB;
+                                        }
+                                    else
+                                        {
+                                        nextOutputHandle = m_output_buffer_handle_a;
+                                        nextOutputSize   = m_OutputBufferSizeA;
+                                        }
 
-    /*
-     * If the next decoder destination is still backing the video
-     * texture, finish all preceding GL reads before MMAL receives it.
-     *
-     * On the first returned frame m_displayedOutputHandle is zero, so
-     * no wait occurs.
-     */
-    if (m_displayedOutputHandle == nextOutputHandle)
-    {
-        glFinish();
+                                    // If the next decoder destination is still backing the video texture, finish all preceding GL reads before MMAL receives it.
+                                    // On the first returned frame m_displayedOutputHandle is zero, so no wait occurs.
 
-        if (!checkGLerrorMMAL())
-            return false;
-    }
+                                    if (m_displayedOutputHandle == nextOutputHandle)
+                                        {
+                                        glFinish();
 
-    if (!queueOutputBufferMMAL(
-            *m_BufferFromHostTx_Output,
-            nextOutputHandle,
-            nextOutputSize))
-    {
-        return false;
-    }
+                                        if (!checkGLerrorMMAL()) return false;
+                                        }
 
-    if (!bufferReadyMMAL(currentHandle))
-        return false;
+                                    if (!queueOutputBufferMMAL( *m_BufferFromHostTx_Output, nextOutputHandle, nextOutputSize))
+                                        {
+                                        return false;
+                                        }
 
-    /*
-     * bufferReadyMMAL() has successfully attached currentHandle to
-     * m_tex.gl_tex_vid. Record which output must not be recycled until
-     * preceding GL reads have completed.
-     */
-    m_displayedOutputHandle = currentHandle;
+                                    if (!bufferReadyMMAL(currentHandle)) return false;
 
-    if (!queueInputBufferMMAL(
-            *m_BufferFromHostTx_Input,
-            nal_block_offset,
-            nal_block_length))
-    {
-        return false;
-    }
+                                    // bufferReadyMMAL() has successfully attached currentHandle to m_tex.gl_tex_vid. Record which output must not be recycled until preceding GL reads have completed.
+
+                                    m_displayedOutputHandle = currentHandle;
+
+                                    if (!queueInputBufferMMAL( *m_BufferFromHostTx_Input, nal_block_offset, nal_block_length))
+                                        {
+                                        return false;
+                                        }
 
 #ifdef __LOG_MMAL__
-    message = "MMAL output ready";
-    storeLogHex(
-        MY_BFR,
-        MY_IDX,
-        message,
-        X_VAL,
-        "Frame offset",
-        nal_block_offset,
-        "length",
-        nal_block_length);
+                                    message = "MMAL output ready";
+                                    storeLogHex( MY_BFR, MY_IDX, message, X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
 #endif
 
-    return true;
-}
+                                    return true;
+                                    }
 
 #ifdef __LOG_MMAL__   
                                 case MMAL_MSG_STATUS_ENOMEM:     message = "MMAL_MSG_STATUS_ENOMEM       - Out of memory                      "; break;
@@ -330,17 +280,17 @@ bool            CKernel::bufferReadyMMAL            (   u32 handle)
                 return true;
 }
 */
-bool CKernel::bufferReadyMMAL(u32 handle)
+bool            CKernel::bufferReadyMMAL(u32 handle)
 {
-    EGLImageKHR nextImage = eglCreateImageKHR(
-        m_ogl.display,
-        EGL_NO_CONTEXT,
-        EGL_IMAGE_BRCM_MULTIMEDIA,
-        (EGLClientBuffer)(uintptr_t)handle,
-        nullptr);
+                EGLImageKHR nextImage = eglCreateImageKHR(
+                    m_ogl.display,
+                    EGL_NO_CONTEXT,
+                    EGL_IMAGE_BRCM_MULTIMEDIA,
+                    (EGLClientBuffer)(uintptr_t)handle,
+                    nullptr);
 
-    if (nextImage == EGL_NO_IMAGE_KHR)
-    {
+                if (nextImage == EGL_NO_IMAGE_KHR)
+                {
 #ifdef __LOG_MMAL__
         storeLogHex(
             MY_BFR,

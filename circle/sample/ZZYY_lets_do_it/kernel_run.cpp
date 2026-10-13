@@ -73,6 +73,25 @@ TShutdownMode CKernel::Run(void)
 
                     applyTargetModes();  // <- correct place here?
 
+                    if (filecounter[FT_VID][FLD_VALID] > 0)
+                        {
+                        framePollerMMAL(
+                            m_vid.nal_block_offset[0][10],
+                            m_vid.nal_block_length[0][10]);
+                        }
+
+                    if (!m_mmalRuntimeLogSaved &&
+                        m_bufferLogIndex[LOG_MMAL_0] >= 8192)
+                        {
+                        saveFromBuffer(
+                            PARTITION_NAME_SD,
+                            "mmalrun.txt",
+                            m_bufferLog[LOG_MMAL_0],
+                            m_bufferLogIndex[LOG_MMAL_0]);
+
+                        m_mmalRuntimeLogSaved = true;
+                        }
+
                     getChannelModeB();
 
                     menuLedUpdate();

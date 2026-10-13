@@ -310,7 +310,7 @@ bool            CKernel::wrapperMMAL()
                     {
                     bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_C, *m_PortInfoGetRx_Output_C);
 #ifdef __LOG_MMAL__
-                if (bOK) storeLogHex(      MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output C )        SUCCESS");
+                if (bOK) storeLogHex(      MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output C )         SUCCESS");
 #endif 
                     }
                 if (bOK)
@@ -376,14 +376,14 @@ bool            CKernel::wrapperMMAL()
                     {
                     PrimeInputBufferBodyMMAL( *m_BufferFromHostTx_Input );
 #ifdef __LOG_MMAL__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeInputBufferBodyMMAL ()              DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeInputBufferBodyMMAL ()             DONE");
 #endif
                     }
                 if (bOK)
                     {
                     PrimeOutputBufferBodyMMAL( *m_BufferFromHostTx_Output );
 #ifdef __LOG_MMAL__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeOutputBufferBodyMMAL ()             DONE");
+                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "PrimeOutputBufferBodyMMAL ()            DONE");
 #endif
                     }
                 return bOK;
