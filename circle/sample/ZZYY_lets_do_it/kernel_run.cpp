@@ -81,7 +81,7 @@ TShutdownMode CKernel::Run(void)
                         }
 
                     if (!m_mmalRuntimeLogSaved &&
-                        m_bufferLogIndex[LOG_MMAL_0] >= 8192)
+                        m_bufferLogIndex[LOG_MMAL_0] >= 32768)
                         {
                         saveFromBuffer(
                             PARTITION_NAME_SD,
