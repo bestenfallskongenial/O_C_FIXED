@@ -34,10 +34,28 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                                     m_OutputBufferSizeA))
                         {
 #ifdef __LOG_MMAL__
-                        storeLogHex( MY_BFR, MY_IDX, "First opaque output queue FAILED", m_output_buffer_handle_a);
+                        storeLogHex( MY_BFR, MY_IDX, "First opaque output A queue FAILED", m_output_buffer_handle_a);
 #endif
                         return false;
                         }
+
+#ifdef __LOG_MMAL__
+                        storeLogHex( MY_BFR, MY_IDX, "First opaque output A queue SUCCESS", m_output_buffer_handle_a);
+#endif
+
+                    if (!queueOutputBufferMMAL(    *m_BufferFromHostTx_Output,
+                                                    m_output_buffer_handle_b,
+                                                    m_OutputBufferSizeB))
+                        {
+#ifdef __LOG_MMAL__
+                        storeLogHex( MY_BFR, MY_IDX, "First opaque output B queue FAILED", m_output_buffer_handle_b);
+#endif
+                        return false;
+                        }
+
+#ifdef __LOG_MMAL__
+                        storeLogHex( MY_BFR, MY_IDX, "First opaque output B queue SUCCESS", m_output_buffer_handle_b);
+#endif
 
                     if (!queueInputBufferMMAL(     *m_BufferFromHostTx_Input,
                                                     nal_block_offset,
@@ -49,8 +67,12 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                         return false;
                         }
 
+#ifdef __LOG_MMAL__
+                        storeLogHex( MY_BFR, MY_IDX, "First input frame queue SUCCESS", X_VAL, "offset", nal_block_offset, "length", nal_block_length);
+#endif
+
 #ifdef __LOG_FIRST_FRAME__
-                        storeLogHex( MY_BFR, MY_IDX, "First decoder work submitted", X_VAL, "output", m_output_buffer_handle_a, "offset", nal_block_offset, "length", nal_block_length);
+                        storeLogHex( MY_BFR, MY_IDX, "First decoder work submitted", X_VAL, "output A", m_output_buffer_handle_a, "output B", m_output_buffer_handle_b);
 #endif
 
                         f_firstFrameQueued = true;
