@@ -533,9 +533,9 @@
 </svg>
 
 <svg id="ADC" class="glyph-tile" data-cell="1,7">
-      <use href="#GLYPH_A" transform="translate(64 40) scale(0.25) translate(-64 -64)"/>
-      <use href="#GLYPH_D" transform="translate(88 40) scale(0.25) translate(-64 -64)"/>
-      <use href="#GLYPH_C" transform="translate(112 40) scale(0.25) translate(-64 -64)"/>
+      <use href="#GLYPH_G" transform="translate(64 40) scale(0.25) translate(-64 -64)"/>
+      <use href="#GLYPH_R" transform="translate(88 40) scale(0.25) translate(-64 -64)"/>
+      <use href="#GLYPH_P" transform="translate(112 40) scale(0.25) translate(-64 -64)"/>
 </svg>
 
 <svg id="LFO" class="glyph-tile" data-cell="3,7">
