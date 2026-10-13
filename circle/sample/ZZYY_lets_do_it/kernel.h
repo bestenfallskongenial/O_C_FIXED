@@ -313,7 +313,8 @@ public:
           
         static  void        LoggerSink                 (                void*                           pContext,
                                                                 const   char*                           pText,
-                                                                        unsigned                        nLength );      // +++ 
+                                                                        unsigned                        nLength ); 
+                void        dumpPortInfoMMAL            (       const   MMAL_Port_Info_Get_Reply&       p_info);                                                                             // +++ 
 // code_menu.cpp                !! NEED FINALLY TO CREATE THE BUTTON CONSUMER / MENU-LAYER CODE DONE !!
                 void        resetMenuPickUpFlags        ();
                 void        storeModes                  ();

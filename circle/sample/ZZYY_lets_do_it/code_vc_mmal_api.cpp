@@ -217,6 +217,45 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #endif               
                             return false;
                             }
+                        case MMAL_MSG_TYPE_EVENT_TO_HOST:
+                            {
+                            const mmal_msg_event_to_host* event = reinterpret_cast<const mmal_msg_event_to_host*>(  &m_BufferFromHostTx_Output->msg);
+
+                            switch (event->cmd)
+                                {
+                                case MMAL_EVENT_ERROR:               message = "MMAL_EVENT_ERROR             - Component reported an error       "; break;
+                                case MMAL_EVENT_EOS:                 message = "MMAL_EVENT_EOS               - End of stream                     "; break;
+
+                                case MMAL_EVENT_FORMAT_CHANGED:
+                                    {
+                                    message = "MMAL_EVENT_FORMAT_CHANGED    - Port format changed                ";
+
+#ifdef __LOG_MMAL__
+                                    if (!getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT,
+                                                          m_OutputPortHandle,
+                                                         *m_PortInfoGetTx_Output_E,
+                                                         *m_PortInfoGetRx_Output_E))
+                                        {
+                                        storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output E )         FAILED");
+                                        return false;
+                                        }
+
+                                    dumpPortInfoMMAL( *m_PortInfoGetRx_Output_E);
+#endif
+                                    break;
+                                    }
+
+                                case MMAL_EVENT_PARAMETER_CHANGED:   message = "MMAL_EVENT_PARAMETER_CHANGED - Port parameter changed             "; break;
+
+                                default:                             message = "Unknown MMAL event           - Unknown event command              "; break;
+                                }
+
+#ifdef __LOG_MMAL__
+                            storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), message, X_VAL, "command", event->cmd);
+                            storeMsg( MY_BFR, MY_IDX, message, m_BufferFromHostTx_Output, msg_len);
+#endif
+                            continue;
+                            }                            
 
                         default: 
                             {
