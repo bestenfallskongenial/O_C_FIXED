@@ -568,6 +568,9 @@ public:
                 MMAL_Opaque_Allocator_Msg*      m_OpaqueAllocatorRx                             = nullptr;      // NEW
 
                 bool                            f_firstFrameQueued                              = false;
+
+                u32                             m_videoTextureHandle                            = 0;
+                
 // placeholder until i solved this!
                 EGLDisplay                      m_eglDisplay;      // is stored in the olg_state struct -> display     and needed by bufferReadyMMAL
                 EGLContext                      m_eglContext;      // is stored in the olg_state struct -> context     and needed by bufferReadyMMAL
