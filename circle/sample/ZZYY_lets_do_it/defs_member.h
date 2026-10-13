@@ -564,9 +564,6 @@ public:
                 MMAL_Port_Info_Get_Msg*         m_PortInfoGetTx_Output_D                        = nullptr;
                 MMAL_Port_Info_Get_Reply*       m_PortInfoGetRx_Output_D                        = nullptr;
 
-                MMAL_Port_Info_Get_Msg*         m_PortInfoGetTx_Output_E                        = nullptr;
-                MMAL_Port_Info_Get_Reply*       m_PortInfoGetRx_Output_E                        = nullptr;
-
                 MMAL_Opaque_Allocator_Msg*      m_OpaqueAllocatorTx                             = nullptr;      // NEW
                 MMAL_Opaque_Allocator_Msg*      m_OpaqueAllocatorRx                             = nullptr;      // NEW
 

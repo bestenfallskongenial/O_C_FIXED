@@ -546,9 +546,6 @@ bool            CKernel::wrapperInitMMALstruct      (   )
                 if (bOK) { m_PortInfoGetTx_Output_D     = new MMAL_Port_Info_Get_Msg();         bOK = (m_PortInfoGetTx_Output_D    != nullptr); }
                 if (bOK) { m_PortInfoGetRx_Output_D     = new MMAL_Port_Info_Get_Reply();       bOK = (m_PortInfoGetRx_Output_D    != nullptr); }
 
-                if (bOK) { m_PortInfoGetTx_Output_E     = new MMAL_Port_Info_Get_Msg();         bOK = (m_PortInfoGetTx_Output_E    != nullptr); }
-                if (bOK) { m_PortInfoGetRx_Output_E     = new MMAL_Port_Info_Get_Reply();       bOK = (m_PortInfoGetRx_Output_E    != nullptr); }
-
                 if (bOK) { m_OpaqueAllocatorTx          = new MMAL_Opaque_Allocator_Msg();      bOK = (m_OpaqueAllocatorTx         != nullptr); }   // NEW
                 if (bOK) { m_OpaqueAllocatorRx          = new MMAL_Opaque_Allocator_Msg();      bOK = (m_OpaqueAllocatorRx         != nullptr); }   // NEW                
                 return bOK;
@@ -608,9 +605,6 @@ void            CKernel::wrapperFreeMMALstruct      (   ) // here i must check w
                 delete  m_PortInfoGetRx_Input_D;        m_PortInfoGetRx_Input_D         = nullptr;
                 delete  m_PortInfoGetTx_Output_D;       m_PortInfoGetTx_Output_D        = nullptr;
                 delete  m_PortInfoGetRx_Output_D;       m_PortInfoGetRx_Output_D        = nullptr;
-
-                delete  m_PortInfoGetTx_Output_E;       m_PortInfoGetTx_Output_E        = nullptr;
-                delete  m_PortInfoGetRx_Output_E;       m_PortInfoGetRx_Output_E        = nullptr;                
 
                 delete m_OpaqueAllocatorTx;             m_OpaqueAllocatorTx             = nullptr;  // NEW
                 delete m_OpaqueAllocatorRx;             m_OpaqueAllocatorRx             = nullptr;  // NEW

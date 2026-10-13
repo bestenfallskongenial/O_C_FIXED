@@ -231,16 +231,41 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                     message = "MMAL_EVENT_FORMAT_CHANGED    - Port format changed                ";
 
 #ifdef __LOG_MMAL__
-                                    if (!getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT,
-                                                          m_OutputPortHandle,
-                                                         *m_PortInfoGetTx_Output_E,
-                                                         *m_PortInfoGetRx_Output_E))
-                                        {
-                                        storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output E )         FAILED");
-                                        return false;
-                                        }
+                                    const mmal_msg_event_format_changed* formatChanged =
+                                        reinterpret_cast<const mmal_msg_event_format_changed*>(
+                                            event->data);
 
-                                    dumpPortInfoMMAL( *m_PortInfoGetRx_Output_E);
+                                    storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "FORMAT CHANGED RX");
+                                    storeLogHex( MY_BFR, MY_IDX, "event.port_type                 ", event->port_type);
+                                    storeLogHex( MY_BFR, MY_IDX, "event.port_num                  ", event->port_num);
+                                    storeLogHex( MY_BFR, MY_IDX, "event.length                    ", event->length);
+
+                                    storeLogHex( MY_BFR, MY_IDX, "buffer_size_min                 ", formatChanged->buffer_size_min);
+                                    storeLogHex( MY_BFR, MY_IDX, "buffer_num_min                  ", formatChanged->buffer_num_min);
+                                    storeLogHex( MY_BFR, MY_IDX, "buffer_size_recommended         ", formatChanged->buffer_size_recommended);
+                                    storeLogHex( MY_BFR, MY_IDX, "buffer_num_recommended          ", formatChanged->buffer_num_recommended);
+                                    storeLogHex( MY_BFR, MY_IDX, "es_ptr                          ", formatChanged->es_ptr);
+
+                                    storeLogHex( MY_BFR, MY_IDX, "format.type                     ", formatChanged->format.type);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.encoding                 ", formatChanged->format.encoding);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.encoding_variant         ", formatChanged->format.encoding_variant);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.es                       ", formatChanged->format.es);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.bitrate                  ", formatChanged->format.bitrate);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.flags                    ", formatChanged->format.flags);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.extradata_size           ", formatChanged->format.extradata_size);
+                                    storeLogHex( MY_BFR, MY_IDX, "format.extradata                ", formatChanged->format.extradata);
+
+                                    storeLogHex( MY_BFR, MY_IDX, "video.width                     ", formatChanged->es.video.width);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.height                    ", formatChanged->es.video.height);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.crop.x                    ", (u32)formatChanged->es.video.crop.x);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.crop.y                    ", (u32)formatChanged->es.video.crop.y);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.crop.width                ", (u32)formatChanged->es.video.crop.width);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.crop.height               ", (u32)formatChanged->es.video.crop.height);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.frame_rate.num            ", (u32)formatChanged->es.video.frame_rate.num);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.frame_rate.den            ", (u32)formatChanged->es.video.frame_rate.den);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.par.num                   ", (u32)formatChanged->es.video.par.num);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.par.den                   ", (u32)formatChanged->es.video.par.den);
+                                    storeLogHex( MY_BFR, MY_IDX, "video.color_space               ", formatChanged->es.video.color_space);
 #endif
                                     break;
                                     }
@@ -435,3 +460,55 @@ bool            CKernel::queueInputBufferMMAL       (   MMAL_Buffer_From_Host_Ms
                 return (vchi_msg_queue(m_ServiceHandleMMAL, &tx, (u32)sizeof(tx), VCHI_FLAGS_BLOCK_UNTIL_QUEUED, nullptr) == 0);
 }
 
+
+
+void            CKernel::dumpPortInfoMMAL           (   const MMAL_Port_Info_Get_Reply&         p_info)
+{
+                storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "MMAL PORT INFO");
+
+                storeLogHex( MY_BFR, MY_IDX, "status                          ", p_info.msg.status);
+                storeLogHex( MY_BFR, MY_IDX, "component_handle                ", p_info.msg.component_handle);
+                storeLogHex( MY_BFR, MY_IDX, "port_type                       ", p_info.msg.port_type);
+                storeLogHex( MY_BFR, MY_IDX, "port_index                      ", p_info.msg.port_index);
+                storeLogHex( MY_BFR, MY_IDX, "found                           ", (u32)p_info.msg.found);
+                storeLogHex( MY_BFR, MY_IDX, "port_handle                     ", p_info.msg.port_handle);
+
+                storeLogHex( MY_BFR, MY_IDX, "port.priv                       ", p_info.msg.port.priv);
+                storeLogHex( MY_BFR, MY_IDX, "port.name                       ", p_info.msg.port.name);
+                storeLogHex( MY_BFR, MY_IDX, "port.type                       ", p_info.msg.port.type);
+                storeLogHex( MY_BFR, MY_IDX, "port.index                      ", p_info.msg.port.index);
+                storeLogHex( MY_BFR, MY_IDX, "port.index_all                  ", p_info.msg.port.index_all);
+                storeLogHex( MY_BFR, MY_IDX, "port.is_enabled                 ", p_info.msg.port.is_enabled);
+                storeLogHex( MY_BFR, MY_IDX, "port.format                     ", p_info.msg.port.format);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_num_min             ", p_info.msg.port.buffer_num_min);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_size_min            ", p_info.msg.port.buffer_size_min);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_alignment_min       ", p_info.msg.port.buffer_alignment_min);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_num_recommended     ", p_info.msg.port.buffer_num_recommended);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_size_recommended    ", p_info.msg.port.buffer_size_recommended);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_num                 ", p_info.msg.port.buffer_num);
+                storeLogHex( MY_BFR, MY_IDX, "port.buffer_size                ", p_info.msg.port.buffer_size);
+                storeLogHex( MY_BFR, MY_IDX, "port.component                  ", p_info.msg.port.component);
+                storeLogHex( MY_BFR, MY_IDX, "port.userdata                   ", p_info.msg.port.userdata);
+                storeLogHex( MY_BFR, MY_IDX, "port.capabilities               ", p_info.msg.port.capabilities);
+
+                storeLogHex( MY_BFR, MY_IDX, "format.type                     ", p_info.msg.format.type);
+                storeLogHex( MY_BFR, MY_IDX, "format.encoding                 ", p_info.msg.format.encoding);
+                storeLogHex( MY_BFR, MY_IDX, "format.encoding_variant         ", p_info.msg.format.encoding_variant);
+                storeLogHex( MY_BFR, MY_IDX, "format.es                       ", p_info.msg.format.es);
+                storeLogHex( MY_BFR, MY_IDX, "format.bitrate                  ", p_info.msg.format.bitrate);
+                storeLogHex( MY_BFR, MY_IDX, "format.flags                    ", p_info.msg.format.flags);
+                storeLogHex( MY_BFR, MY_IDX, "format.extradata_size           ", p_info.msg.format.extradata_size);
+                storeLogHex( MY_BFR, MY_IDX, "format.extradata                ", p_info.msg.format.extradata);
+
+                storeLogHex( MY_BFR, MY_IDX, "video.width                     ", p_info.msg.es.video.width);
+                storeLogHex( MY_BFR, MY_IDX, "video.height                    ", p_info.msg.es.video.height);
+                storeLogHex( MY_BFR, MY_IDX, "video.crop.x                    ", (u32)p_info.msg.es.video.crop.x);
+                storeLogHex( MY_BFR, MY_IDX, "video.crop.y                    ", (u32)p_info.msg.es.video.crop.y);
+                storeLogHex( MY_BFR, MY_IDX, "video.crop.width                ", (u32)p_info.msg.es.video.crop.width);
+                storeLogHex( MY_BFR, MY_IDX, "video.crop.height               ", (u32)p_info.msg.es.video.crop.height);
+                storeLogHex( MY_BFR, MY_IDX, "video.frame_rate.num            ", (u32)p_info.msg.es.video.frame_rate.num);
+                storeLogHex( MY_BFR, MY_IDX, "video.frame_rate.den            ", (u32)p_info.msg.es.video.frame_rate.den);
+                storeLogHex( MY_BFR, MY_IDX, "video.par.num                   ", (u32)p_info.msg.es.video.par.num);
+                storeLogHex( MY_BFR, MY_IDX, "video.par.den                   ", (u32)p_info.msg.es.video.par.den);
+                storeLogHex( MY_BFR, MY_IDX, "video.color_space               ", p_info.msg.es.video.color_space);
+}
