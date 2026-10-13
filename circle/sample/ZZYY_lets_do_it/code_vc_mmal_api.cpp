@@ -27,7 +27,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                     }
 #endif
 */
-if (!f_firstFrameQueued)
+if (!f_firstFrameQueued)            // NEW
 {
     if (!queueOutputBufferMMAL(
             *m_BufferFromHostTx_Output,
@@ -38,7 +38,7 @@ if (!f_firstFrameQueued)
         storeLogHex(
             MY_BFR,
             MY_IDX,
-            "very first output buffer queue ERROR",
+            "First opaque output queue FAILED",
             m_output_buffer_handle_a);
 #endif
         return false;
@@ -53,9 +53,9 @@ if (!f_firstFrameQueued)
         storeLogHex(
             MY_BFR,
             MY_IDX,
-            "very first frame queue ERROR!",
+            "First input frame queue FAILED",
             X_VAL,
-            "Frame offset",
+            "offset",
             nal_block_offset,
             "length",
             nal_block_length);
@@ -63,22 +63,24 @@ if (!f_firstFrameQueued)
         return false;
     }
 
-    getPortInfoMMAL(
-        MMAL_PORT_TYPE_INPUT,
-        m_InputPortHandle,
-        *m_PortInfoGetTx_Input_D,
-        *m_PortInfoGetRx_Input_D);
-
-    getPortInfoMMAL(
-        MMAL_PORT_TYPE_OUTPUT,
-        m_OutputPortHandle,
-        *m_PortInfoGetTx_Output_D,
-        *m_PortInfoGetRx_Output_D);
+#ifdef __LOG_FIRST_FRAME__
+    storeLogHex(
+        MY_BFR,
+        MY_IDX,
+        "First decoder work submitted",
+        X_VAL,
+        "output",
+        m_output_buffer_handle_a,
+        "offset",
+        nal_block_offset,
+        "length",
+        nal_block_length);
+#endif
 
     f_firstFrameQueued = true;
     return true;
 }
-
+// END
 #ifdef __LOG_MMAL__
                 const char*  message = "";
 #endif
