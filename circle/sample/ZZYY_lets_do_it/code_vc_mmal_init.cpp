@@ -391,7 +391,7 @@ bool            CKernel::allocateOpaqueBufferMMAL(  u32& handle,                
                 {
                     return false;
                 }
-
+/*
                 if (rx.hdr.type != MMAL_MSG_TYPE_OPAQUE_ALLOCATOR_DESC)
                 {
                     return false;
@@ -406,7 +406,8 @@ bool            CKernel::allocateOpaqueBufferMMAL(  u32& handle,                
                 {
                     return false;
                 }
-
+*/
                 handle = rx.msg.handle;
-                return true;
+            //  return true;
+                return (rx.msg.status == MMAL_MSG_STATUS_SUCCESS);
 }
