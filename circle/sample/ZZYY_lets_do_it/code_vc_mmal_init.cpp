@@ -408,6 +408,17 @@ bool            CKernel::allocateOpaqueBufferMMAL(  u32& handle,                
                 }
 */
                 handle = rx.msg.handle;
+#ifdef __LOG_MMAL__
+                storeLogHex(   MY_BFR, MY_IDX,
+                            "Opaque Buffer RX", X_VAL,
+                            "OP", rx.msg.op,
+                            "Handle", rx.msg.handle,
+                            "Status", rx.msg.status );
+
+                storeLogHex(   MY_BFR, MY_IDX,
+                            "Description", X_VAL,
+                            rx.msg.description, X_VAL );
+#endif
             //  return true;
                 return (rx.msg.status == MMAL_MSG_STATUS_SUCCESS);
 }
