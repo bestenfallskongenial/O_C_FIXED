@@ -162,10 +162,10 @@ case MMAL_MSG_STATUS_SUCCESS:       // NEW
      * If the next decoder destination is still backing the video
      * texture, finish all preceding GL reads before MMAL receives it.
      *
-     * On the first returned frame m_videoTextureHandle is zero, so
+     * On the first returned frame m_displayedOutputHandle is zero, so
      * no wait occurs.
      */
-    if (m_videoTextureHandle == nextOutputHandle)
+    if (m_displayedOutputHandle == nextOutputHandle)
     {
         glFinish();
 
@@ -189,7 +189,7 @@ case MMAL_MSG_STATUS_SUCCESS:       // NEW
      * m_tex.gl_tex_vid. Record which output must not be recycled until
      * preceding GL reads have completed.
      */
-    m_videoTextureHandle = currentHandle;
+    m_displayedOutputHandle = currentHandle;
 
     if (!queueInputBufferMMAL(
             *m_BufferFromHostTx_Input,
