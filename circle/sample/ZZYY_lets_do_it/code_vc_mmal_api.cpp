@@ -27,6 +27,8 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                     }
 #endif
 */
+                MY_IDX %= (LOG_SIZ - 8192);
+
                 if (!f_firstFrameQueued)            // NEW
                     {
                     if (!queueOutputBufferMMAL(    *m_BufferFromHostTx_Output,
