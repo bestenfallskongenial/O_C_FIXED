@@ -333,15 +333,106 @@ bool            CKernel::wrapperMMAL()
                     {
                     bOK = getPortInfoMMAL( MMAL_PORT_TYPE_INPUT, m_InputPortHandle, *m_PortInfoGetTx_Input_D, *m_PortInfoGetRx_Input_D);
 #ifdef __LOG_MMAL__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input D )          SUCCESS");
-    
+                    if (bOK) 
+                        {
+                    storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Input D )          SUCCESS");
+
+                    storeLogHex( MY_BFR, MY_IDX, "Input status",                  m_PortInfoGetRx_Input_D->msg.status);
+                    storeLogHex( MY_BFR, MY_IDX, "Input component_handle",        m_PortInfoGetRx_Input_D->msg.component_handle);
+                    storeLogHex( MY_BFR, MY_IDX, "Input port_type",               m_PortInfoGetRx_Input_D->msg.port_type);
+                    storeLogHex( MY_BFR, MY_IDX, "Input port_index",              m_PortInfoGetRx_Input_D->msg.port_index);
+                    storeLogHex( MY_BFR, MY_IDX, "Input found",                   (u32)m_PortInfoGetRx_Input_D->msg.found);
+                    storeLogHex( MY_BFR, MY_IDX, "Input port_handle",             m_PortInfoGetRx_Input_D->msg.port_handle);
+                    storeLogHex( MY_BFR, MY_IDX, "Input priv",                    m_PortInfoGetRx_Input_D->msg.port.priv);
+                    storeLogHex( MY_BFR, MY_IDX, "Input name",                    m_PortInfoGetRx_Input_D->msg.port.name);
+                    storeLogHex( MY_BFR, MY_IDX, "Input type",                    m_PortInfoGetRx_Input_D->msg.port.type);
+                    storeLogHex( MY_BFR, MY_IDX, "Input index",                   m_PortInfoGetRx_Input_D->msg.port.index);
+                    storeLogHex( MY_BFR, MY_IDX, "Input index_all",               m_PortInfoGetRx_Input_D->msg.port.index_all);
+                    storeLogHex( MY_BFR, MY_IDX, "Input is_enabled",              m_PortInfoGetRx_Input_D->msg.port.is_enabled);
+                    storeLogHex( MY_BFR, MY_IDX, "Input format",                  m_PortInfoGetRx_Input_D->msg.port.format);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_num_min",          m_PortInfoGetRx_Input_D->msg.port.buffer_num_min);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_size_min",         m_PortInfoGetRx_Input_D->msg.port.buffer_size_min);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_alignment_min",    m_PortInfoGetRx_Input_D->msg.port.buffer_alignment_min);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_num_recommended",  m_PortInfoGetRx_Input_D->msg.port.buffer_num_recommended);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_size_recommended", m_PortInfoGetRx_Input_D->msg.port.buffer_size_recommended);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_num",              m_PortInfoGetRx_Input_D->msg.port.buffer_num);
+                    storeLogHex( MY_BFR, MY_IDX, "Input buffer_size",             m_PortInfoGetRx_Input_D->msg.port.buffer_size);
+                    storeLogHex( MY_BFR, MY_IDX, "Input component",               m_PortInfoGetRx_Input_D->msg.port.component);
+                    storeLogHex( MY_BFR, MY_IDX, "Input userdata",                m_PortInfoGetRx_Input_D->msg.port.userdata);
+                    storeLogHex( MY_BFR, MY_IDX, "Input capabilities",            m_PortInfoGetRx_Input_D->msg.port.capabilities);
+                    storeLogHex( MY_BFR, MY_IDX, "Input format.type",             m_PortInfoGetRx_Input_D->msg.format.type);
+                    storeLogHex( MY_BFR, MY_IDX, "Input encoding",                m_PortInfoGetRx_Input_D->msg.format.encoding);
+                    storeLogHex( MY_BFR, MY_IDX, "Input encoding_variant",        m_PortInfoGetRx_Input_D->msg.format.encoding_variant);
+                    storeLogHex( MY_BFR, MY_IDX, "Input es",                      m_PortInfoGetRx_Input_D->msg.format.es);
+                    storeLogHex( MY_BFR, MY_IDX, "Input bitrate",                 m_PortInfoGetRx_Input_D->msg.format.bitrate);
+                    storeLogHex( MY_BFR, MY_IDX, "Input flags",                   m_PortInfoGetRx_Input_D->msg.format.flags);
+                    storeLogHex( MY_BFR, MY_IDX, "Input extradata_size",          m_PortInfoGetRx_Input_D->msg.format.extradata_size);
+                    storeLogHex( MY_BFR, MY_IDX, "Input extradata",               m_PortInfoGetRx_Input_D->msg.format.extradata);
+                    storeLogHex( MY_BFR, MY_IDX, "Input width",                   m_PortInfoGetRx_Input_D->msg.es.video.width);
+                    storeLogHex( MY_BFR, MY_IDX, "Input height",                  m_PortInfoGetRx_Input_D->msg.es.video.height);
+                    storeLogHex( MY_BFR, MY_IDX, "Input crop.x",                  (u32)m_PortInfoGetRx_Input_D->msg.es.video.crop.x);
+                    storeLogHex( MY_BFR, MY_IDX, "Input crop.y",                  (u32)m_PortInfoGetRx_Input_D->msg.es.video.crop.y);
+                    storeLogHex( MY_BFR, MY_IDX, "Input crop.width",              (u32)m_PortInfoGetRx_Input_D->msg.es.video.crop.width);
+                    storeLogHex( MY_BFR, MY_IDX, "Input crop.height",             (u32)m_PortInfoGetRx_Input_D->msg.es.video.crop.height);
+                    storeLogHex( MY_BFR, MY_IDX, "Input frame_rate.num",          (u32)m_PortInfoGetRx_Input_D->msg.es.video.frame_rate.num);
+                    storeLogHex( MY_BFR, MY_IDX, "Input frame_rate.den",          (u32)m_PortInfoGetRx_Input_D->msg.es.video.frame_rate.den);
+                    storeLogHex( MY_BFR, MY_IDX, "Input par.num",                 (u32)m_PortInfoGetRx_Input_D->msg.es.video.par.num);
+                    storeLogHex( MY_BFR, MY_IDX, "Input par.den",                 (u32)m_PortInfoGetRx_Input_D->msg.es.video.par.den);
+                    storeLogHex( MY_BFR, MY_IDX, "Input color_space",             m_PortInfoGetRx_Input_D->msg.es.video.color_space);    
+                    }
 #endif 
                     }
                 if (bOK)
                     {
                     bOK = getPortInfoMMAL( MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_D, *m_PortInfoGetRx_Output_D);
 #ifdef __LOG_MMAL__
-                    if (bOK) storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output D )         SUCCESS");
+                    if (bOK) 
+                        {
+                        storeLogHex(   MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getPortInfoMMAL ( Output D )         SUCCESS");
+
+                        storeLogHex( MY_BFR, MY_IDX, "Output status",                  m_PortInfoGetRx_Output_D->msg.status);
+                        storeLogHex( MY_BFR, MY_IDX, "Output component_handle",        m_PortInfoGetRx_Output_D->msg.component_handle);
+                        storeLogHex( MY_BFR, MY_IDX, "Output port_type",               m_PortInfoGetRx_Output_D->msg.port_type);
+                        storeLogHex( MY_BFR, MY_IDX, "Output port_index",              m_PortInfoGetRx_Output_D->msg.port_index);
+                        storeLogHex( MY_BFR, MY_IDX, "Output found",                   (u32)m_PortInfoGetRx_Output_D->msg.found);
+                        storeLogHex( MY_BFR, MY_IDX, "Output port_handle",             m_PortInfoGetRx_Output_D->msg.port_handle);
+                        storeLogHex( MY_BFR, MY_IDX, "Output priv",                    m_PortInfoGetRx_Output_D->msg.port.priv);
+                        storeLogHex( MY_BFR, MY_IDX, "Output name",                    m_PortInfoGetRx_Output_D->msg.port.name);
+                        storeLogHex( MY_BFR, MY_IDX, "Output type",                    m_PortInfoGetRx_Output_D->msg.port.type);
+                        storeLogHex( MY_BFR, MY_IDX, "Output index",                   m_PortInfoGetRx_Output_D->msg.port.index);
+                        storeLogHex( MY_BFR, MY_IDX, "Output index_all",               m_PortInfoGetRx_Output_D->msg.port.index_all);
+                        storeLogHex( MY_BFR, MY_IDX, "Output is_enabled",              m_PortInfoGetRx_Output_D->msg.port.is_enabled);
+                        storeLogHex( MY_BFR, MY_IDX, "Output format",                  m_PortInfoGetRx_Output_D->msg.port.format);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_num_min",          m_PortInfoGetRx_Output_D->msg.port.buffer_num_min);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_size_min",         m_PortInfoGetRx_Output_D->msg.port.buffer_size_min);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_alignment_min",    m_PortInfoGetRx_Output_D->msg.port.buffer_alignment_min);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_num_recommended",  m_PortInfoGetRx_Output_D->msg.port.buffer_num_recommended);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_size_recommended", m_PortInfoGetRx_Output_D->msg.port.buffer_size_recommended);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_num",              m_PortInfoGetRx_Output_D->msg.port.buffer_num);
+                        storeLogHex( MY_BFR, MY_IDX, "Output buffer_size",             m_PortInfoGetRx_Output_D->msg.port.buffer_size);
+                        storeLogHex( MY_BFR, MY_IDX, "Output component",               m_PortInfoGetRx_Output_D->msg.port.component);
+                        storeLogHex( MY_BFR, MY_IDX, "Output userdata",                m_PortInfoGetRx_Output_D->msg.port.userdata);
+                        storeLogHex( MY_BFR, MY_IDX, "Output capabilities",            m_PortInfoGetRx_Output_D->msg.port.capabilities);
+                        storeLogHex( MY_BFR, MY_IDX, "Output format.type",             m_PortInfoGetRx_Output_D->msg.format.type);
+                        storeLogHex( MY_BFR, MY_IDX, "Output encoding",                m_PortInfoGetRx_Output_D->msg.format.encoding);
+                        storeLogHex( MY_BFR, MY_IDX, "Output encoding_variant",        m_PortInfoGetRx_Output_D->msg.format.encoding_variant);
+                        storeLogHex( MY_BFR, MY_IDX, "Output es",                      m_PortInfoGetRx_Output_D->msg.format.es);
+                        storeLogHex( MY_BFR, MY_IDX, "Output bitrate",                 m_PortInfoGetRx_Output_D->msg.format.bitrate);
+                        storeLogHex( MY_BFR, MY_IDX, "Output flags",                   m_PortInfoGetRx_Output_D->msg.format.flags);
+                        storeLogHex( MY_BFR, MY_IDX, "Output extradata_size",          m_PortInfoGetRx_Output_D->msg.format.extradata_size);
+                        storeLogHex( MY_BFR, MY_IDX, "Output extradata",               m_PortInfoGetRx_Output_D->msg.format.extradata);
+                        storeLogHex( MY_BFR, MY_IDX, "Output width",                   m_PortInfoGetRx_Output_D->msg.es.video.width);
+                        storeLogHex( MY_BFR, MY_IDX, "Output height",                  m_PortInfoGetRx_Output_D->msg.es.video.height);
+                        storeLogHex( MY_BFR, MY_IDX, "Output crop.x",                  (u32)m_PortInfoGetRx_Output_D->msg.es.video.crop.x);
+                        storeLogHex( MY_BFR, MY_IDX, "Output crop.y",                  (u32)m_PortInfoGetRx_Output_D->msg.es.video.crop.y);
+                        storeLogHex( MY_BFR, MY_IDX, "Output crop.width",              (u32)m_PortInfoGetRx_Output_D->msg.es.video.crop.width);
+                        storeLogHex( MY_BFR, MY_IDX, "Output crop.height",             (u32)m_PortInfoGetRx_Output_D->msg.es.video.crop.height);
+                        storeLogHex( MY_BFR, MY_IDX, "Output frame_rate.num",          (u32)m_PortInfoGetRx_Output_D->msg.es.video.frame_rate.num);
+                        storeLogHex( MY_BFR, MY_IDX, "Output frame_rate.den",          (u32)m_PortInfoGetRx_Output_D->msg.es.video.frame_rate.den);
+                        storeLogHex( MY_BFR, MY_IDX, "Output par.num",                 (u32)m_PortInfoGetRx_Output_D->msg.es.video.par.num);
+                        storeLogHex( MY_BFR, MY_IDX, "Output par.den",                 (u32)m_PortInfoGetRx_Output_D->msg.es.video.par.den);
+                        storeLogHex( MY_BFR, MY_IDX, "Output color_space",             m_PortInfoGetRx_Output_D->msg.es.video.color_space);
+}                        
 #endif // __LOG_MMAL__
                     }
 // new                    
