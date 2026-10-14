@@ -76,8 +76,11 @@ TShutdownMode CKernel::Run(void)
                     if (filecounter[FT_VID][FLD_VALID] > 0 )
                         {
                         framePollerMMAL(
-                            m_vid.nal_block_offset[0][10],
-                            m_vid.nal_block_length[0][10]);
+                            m_vid.nal_block_offset[0][m_activeFrame],
+                            m_vid.nal_block_length[0][m_activeFrame]);
+                          //m_vid.nal_block_offset[m_activeVideo][m_activeFrame],
+                          //m_vid.nal_block_length[m_activeVideo][m_activeFrame]);
+
                         }
 
                     if (m_bufferLogIndex[LOG_MMAL_0] >= 65536)
