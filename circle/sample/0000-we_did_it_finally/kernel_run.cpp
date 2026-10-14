@@ -73,7 +73,7 @@ TShutdownMode CKernel::Run(void)
 
                     applyTargetModes();  // <- correct place here?
 
-                    if ( m_SD_has_load && m_USB_has_load && filecounter[FT_VID][FLD_VALID] > 0 && )
+                    if ( m_SD_has_load && m_USB_has_load && filecounter[FT_VID][FLD_VALID] > 0 )
                         {
                         framePollerMMAL(
                             m_vid.nal_block_offset[m_activeVideo][m_activeFrame],
