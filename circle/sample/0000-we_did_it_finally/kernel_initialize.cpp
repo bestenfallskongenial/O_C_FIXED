@@ -138,15 +138,25 @@ boolean			CKernel::Initialize						(	void )
                     {
                     initOGL( &m_ogl);
 #ifdef __LOG_INIT__
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initOGL(&m_ogl)                         DONE");
 
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Width   ", m_ogl.screen_width);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Height  ", m_ogl.screen_height);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Element   ", m_ogl.dispman_element);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Display   ", m_ogl.dispman_display);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Display        ", (u32)(uintptr_t)m_ogl.display);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Surface        ", (u32)(uintptr_t)m_ogl.surface);
-                    if (bOK) storeLogHex( MY_BFR, MY_IDX, "   EGL Context        ", (u32)(uintptr_t)m_ogl.context);
+                    if (bOK) 
+                        {
+                        const char* f_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+
+                        const bool f_externalImageSupported = f_extensions != nullptr && strstr(f_extensions, "GL_OES_EGL_image_external") != nullptr;
+
+                        storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initOGL(&m_ogl)                         DONE");
+
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Width   ", m_ogl.screen_width);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Height  ", m_ogl.screen_height);
+                        storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Element   ", m_ogl.dispman_element);
+                        storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Display   ", m_ogl.dispman_display);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Display        ", (u32)(uintptr_t)m_ogl.display);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Surface        ", (u32)(uintptr_t)m_ogl.surface);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Context        ", (u32)(uintptr_t)m_ogl.context);
+
+                        storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), f_externalImageSupported ? "GL_OES_EGL_image_external          SUPPORTED" : "GL_OES_EGL_image_external        UNSUPPORTED");
+                        }
 #endif
                     }
                 if (bOK)
@@ -194,7 +204,7 @@ boolean			CKernel::Initialize						(	void )
                     }
                 if (bOK)
                     {
-                    bOK = setSystemVariables();         
+                    bOK = setSystemVariables();      // absolute open end! we need to prep the moded buffer and maybe even rearange it ( to have no block to layer missmatch )   
 #ifdef __LOG_INIT__
                     if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "System Variables Setup                  DONE");
 #endif

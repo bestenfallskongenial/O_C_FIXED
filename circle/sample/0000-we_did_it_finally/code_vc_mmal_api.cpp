@@ -5,28 +5,6 @@
 
 bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u32 nal_block_length)
 {
-/*    
-#ifdef __LOG_FIRST_FRAME__
-                if (!f_firstFrameQueued)
-                    {
-                    if (!queueInputBufferMMAL(*m_BufferFromHostTx_Input, nal_block_offset, nal_block_length))
-                        {
-#ifdef __LOG_MMAL__
-                        storeLogHex( MY_BFR, MY_IDX, "very first frame queue ERROR!", X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
-#endif
-                        return false;
-                        }
-#ifdef __LOG_MMAL__
-                    storeLogHex( MY_BFR, MY_IDX, "very first frame queue SUCCESS", X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
-#endif
-                    getPortInfoMMAL(MMAL_PORT_TYPE_INPUT,  m_InputPortHandle,  *m_PortInfoGetTx_Input_D, *m_PortInfoGetRx_Input_D);
-                    getPortInfoMMAL(MMAL_PORT_TYPE_OUTPUT, m_OutputPortHandle, *m_PortInfoGetTx_Output_D, *m_PortInfoGetRx_Output_D);
-
-                    f_firstFrameQueued = true;
-                    return true;
-                    }
-#endif
-*/
                 MY_IDX %= (LOG_SIZ - 32768);
 
                 if (!f_firstFrameQueued)            // NEW
@@ -94,53 +72,16 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                         case MMAL_MSG_TYPE_BUFFER_TO_HOST:
                             {
                             switch (m_BufferFromHostTx_Output->hdr.status)   // SECOND AXIS: status (outcome)
-                                {
-/*                                    
-                                case MMAL_MSG_STATUS_SUCCESS:
-                                    {
-                                    u32 m_CurrentHandle = m_BufferFromHostTx_Output->msg.buffer_header.data;  // Payload layout reused: buffer_from_host
-#ifdef __LOG_MMAL__   
-                                    storeLogHex( MY_BFR, MY_IDX, "frame offset", nal_block_offset, "length", nal_block_length, "status", m_BufferFromHostTx_Output->hdr.status, "handle", m_CurrentHandle);
-#endif 
-                                    if (m_CurrentHandle != m_output_buffer_handle_a && m_CurrentHandle != m_output_buffer_handle_b)
-                                        {
-                                        continue; // as long as we really want to drain, break; will only proceed the switch (m_RxMsg.h.status) // unrelated buffer, keep draining
-                                        }
-
-                                    if (m_CurrentHandle == m_output_buffer_handle_a) // Ping-pong: requeue the other output buffer
-                                        {
-                                    //  if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_b, m_frameBlockSizeB )) // m_OutputBufferSize correct? or a?
-                                        if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_b, m_OutputBufferSizeB))
-                                            return false;
-                                        }
-                                    if (m_CurrentHandle == m_output_buffer_handle_b) 
-                                        {
-                                    //  if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_a, m_frameBlockSizeA )) // m_OutputBufferSize
-                                        if (!queueOutputBufferMMAL(*m_BufferFromHostTx_Output, m_output_buffer_handle_a, m_OutputBufferSizeA))
-                                            return false;
-                                        }
-                                    if (!bufferReadyMMAL(m_CurrentHandle))
-                                        return false;
-                                    if (!queueInputBufferMMAL(*m_BufferFromHostTx_Input, nal_block_offset, nal_block_length))
-                                        return false;
-#ifdef __LOG_MMAL__   
-                                    message = "MMAL_MSG_STATUS_SUCCESS      - All is Fine";
-                                    storeLogHex( MY_BFR, MY_IDX, message, X_VAL, "frame offset", nal_block_offset, "length", nal_block_length);
-#endif                       
-                                    return true;
-                                    }
-*/                                    
+                                {                                 
                                 case MMAL_MSG_STATUS_SUCCESS:       // NEW
                                     {
                                     u32 currentHandle =
                                         m_BufferFromHostTx_Output->msg.buffer_header.data;
 
-                                    if (currentHandle != m_output_buffer_handle_a &&
-                                        currentHandle != m_output_buffer_handle_b)
-                                    {
+                                    if (currentHandle != m_output_buffer_handle_a && currentHandle != m_output_buffer_handle_b)
+                                        {
                                         continue;
-                                    }
-
+                                        }
                                     u32 nextOutputHandle = 0;
                                     u32 nextOutputSize   = 0;
 
@@ -155,8 +96,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                         nextOutputSize   = m_OutputBufferSizeA;
                                         }
 
-                                    // If the next decoder destination is still backing the video texture, finish all preceding GL reads before MMAL receives it.
-                                    // On the first returned frame m_displayedOutputHandle is zero, so no wait occurs.
+                                    // If the next decoder destination is still backing the video texture, finish all preceding GL reads before MMAL receives it. On the first returned frame m_displayedOutputHandle is zero, so no wait occurs.
 
                                     if (m_displayedOutputHandle == nextOutputHandle)
                                         {
@@ -182,7 +122,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                         }
 
 #ifdef __LOG_MMAL__
-                                    message = "MMAL output ready";
+                                    message = "MMAL output ready"; // does this ever apear in my log?!?!
                                     storeLogHex( MY_BFR, MY_IDX, message, X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
 #endif
 
@@ -212,11 +152,12 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #ifdef __LOG_MMAL__   
                         //  nextline( MY_BFR, MY_IDX );
                             storeLogHex( MY_BFR, MY_IDX, message, X_VAL, "Frame offset", nal_block_offset, "length", nal_block_length);
-                        //  storeMsg( MY_BFR, MY_IDX, "Poller ERROR (BUFFER_TO_HOST)", &m_BufferFromHostTx_Output, msg_len);
                             storeMsg( MY_BFR, MY_IDX, "Poller ERROR (BUFFER_TO_HOST)", m_BufferFromHostTx_Output, msg_len);
 #endif               
                             return false;
                             }
+#ifdef __LOG_MMAL__                            
+                        // the only purpose was fo figure out what the format change was, we figured that the vpu simply added the framerate to our buffer / port settings!                            
                         case MMAL_MSG_TYPE_EVENT_TO_HOST:
                             {
                             const mmal_msg_event_to_host* event = reinterpret_cast<const mmal_msg_event_to_host*>(  &m_BufferFromHostTx_Output->msg);
@@ -230,10 +171,8 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                     {
                                     message = "MMAL_EVENT_FORMAT_CHANGED    - Port format changed                ";
 
-#ifdef __LOG_MMAL__
-                                    const mmal_msg_event_format_changed* formatChanged =
-                                        reinterpret_cast<const mmal_msg_event_format_changed*>(
-                                            event->data);
+
+                                    const mmal_msg_event_format_changed* formatChanged = reinterpret_cast<const mmal_msg_event_format_changed*>(event->data);
 
                                     storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "FORMAT CHANGED RX");
                                     storeLogHex( MY_BFR, MY_IDX, "event.port_type                 ", event->port_type);
@@ -266,7 +205,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                     storeLogHex( MY_BFR, MY_IDX, "video.par.num                   ", (u32)formatChanged->es.video.par.num);
                                     storeLogHex( MY_BFR, MY_IDX, "video.par.den                   ", (u32)formatChanged->es.video.par.den);
                                     storeLogHex( MY_BFR, MY_IDX, "video.color_space               ", formatChanged->es.video.color_space);
-#endif
+
                                     break;
                                     }
 
@@ -275,13 +214,12 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                 default:                             message = "Unknown MMAL event           - Unknown event command              "; break;
                                 }
 
-#ifdef __LOG_MMAL__
                             storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), message, X_VAL, "command", event->cmd);
                             storeMsg( MY_BFR, MY_IDX, message, m_BufferFromHostTx_Output, msg_len);
-#endif
+
                             continue;
                             }                            
-
+#endif
                         default: 
                             {
 #ifdef __LOG_MMAL__                                  
@@ -289,7 +227,6 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
   
                         //  nextline( MY_BFR, MY_IDX );
                             storeLogHex( MY_BFR, MY_IDX, message,  X_VAL, "Frame offset", nal_block_offset, "Type",  m_BufferFromHostTx_Output->hdr.type, "Status", m_BufferFromHostTx_Output->hdr.status);
-                        //  storeMsg( MY_BFR, MY_IDX, "Poller ERROR (UNEXPECTED MESSAGE)", &m_BufferFromHostTx_Output, msg_len);
                             storeMsg( MY_BFR, MY_IDX, "Poller ERROR (UNEXPECTED MESSAGE)", m_BufferFromHostTx_Output, msg_len);
 #endif 
                             break;
@@ -308,66 +245,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 #endif 
                 return true;
 }
-/*
-bool            CKernel::bufferReadyMMAL            (   u32 handle)
-{
-        //      if (handle != m_VCSMHandleA && handle != m_VCSMHandleB)         // Only react to our two output buffers
-        //          return true;                                                // why???? we have filtered before ad infiniti 
-                if (m_EGLimage != EGL_NO_IMAGE_KHR)                             // Destroy previous EGLImage (if any)
-                    {
-                    eglDestroyImageKHR(m_eglDisplay, m_EGLimage);
-                    m_EGLimage = EGL_NO_IMAGE_KHR;
-                    }
-                egl_image_brcm_vcsm_info info =                                 // Describe the finished VCSM buffer
-                    {
-                    .width       = MIN_VID_H, //m_ResolutionX,
-                    .height      = MAX_VID_H, //m_ResolutionY,
-                    .vcsm_handle = handle
-                    };
-                m_EGLimage = eglCreateImageKHR( m_eglDisplay, m_eglContext, EGL_IMAGE_BRCM_VCSM, (EGLClientBuffer)&info, nullptr ); // Create new EGLImage viewing this buffer
-                if (m_EGLimage == EGL_NO_IMAGE_KHR)
-                    {
-#ifdef __LOG_MMAL__        
-                    storeLogHex( MY_BFR, MY_IDX, "EGLImage creation FAILED", handle);
-#endif 
-                    return false;
-                    }
-                glBindTexture(GL_TEXTURE_2D, m_Texture);                    // Bind the EGLImage to the single public texture
-                glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, m_EGLimage);
-                glBindTexture(GL_TEXTURE_2D, 0);
 
-                return true;
-}
-*/
-/*
-bool            CKernel::bufferReadyMMAL            (   u32 handle)
-{
-                if (m_tex.m_EGLimage != EGL_NO_IMAGE_KHR)
-                    {
-                    eglDestroyImageKHR(m_ogl.display, m_tex.m_EGLimage);
-                    m_tex.m_EGLimage = EGL_NO_IMAGE_KHR;
-                    }
-                egl_image_brcm_vcsm_info info =
-                    {
-                    .width       = MIN_VID_H,
-                    .height      = MAX_VID_H,
-                    .vcsm_handle = handle
-                    };
-                m_tex.m_EGLimage = eglCreateImageKHR( m_ogl.display, m_ogl.context, EGL_IMAGE_BRCM_VCSM, (EGLClientBuffer)&info, nullptr );
-                if (m_tex.m_EGLimage == EGL_NO_IMAGE_KHR)
-                    {
-#ifdef __LOG_MMAL__
-                    storeLogHex( MY_BFR, MY_IDX, "EGLImage creation FAILED", handle);
-#endif
-                    return false;
-                    }
-                glBindTexture(GL_TEXTURE_2D, m_tex.gl_tex_vid);
-                glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, m_tex.m_EGLimage);
-                glBindTexture(GL_TEXTURE_2D, 0);
-
-                return true;
-}
-*/
 bool            CKernel::bufferReadyMMAL(u32 handle)
 {
                 EGLImageKHR nextImage = eglCreateImageKHR(
@@ -378,45 +256,35 @@ bool            CKernel::bufferReadyMMAL(u32 handle)
                     nullptr);
 
                 if (nextImage == EGL_NO_IMAGE_KHR)
-                {
+                    {
 #ifdef __LOG_MMAL__
-        storeLogHex(
-            MY_BFR,
-            MY_IDX,
-            "EGL multimedia image creation FAILED",
-            handle);
+                    storeLogHex( MY_BFR, MY_IDX, "EGL multimedia image creation FAILED", handle);
 #endif
-        return false;
-    }
+                    return false;
+                    }
 
-    glBindTexture(
-        GL_TEXTURE_EXTERNAL_OES,
-        m_tex.gl_tex_vid);
+                glBindTexture( GL_TEXTURE_EXTERNAL_OES, m_tex.gl_tex_vid);
 
-    glEGLImageTargetTexture2DOES(
-        GL_TEXTURE_EXTERNAL_OES,
-        nextImage);
+                glEGLImageTargetTexture2DOES( GL_TEXTURE_EXTERNAL_OES, nextImage);
 
-    if (!checkGLerrorMMAL())
-    {
-        glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
-        eglDestroyImageKHR(m_ogl.display, nextImage);
-        return false;
-    }
+                if (!checkGLerrorMMAL())
+                    {
+                    glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
+                    eglDestroyImageKHR(m_ogl.display, nextImage);
+                    return false;
+                    }
 
-    glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
+                glBindTexture(GL_TEXTURE_EXTERNAL_OES, 0);
 
-    EGLImageKHR previousImage = m_tex.m_EGLimage;
-    m_tex.m_EGLimage = nextImage;
+                EGLImageKHR previousImage = m_tex.m_EGLimage;
+                m_tex.m_EGLimage = nextImage;
 
-    if (previousImage != EGL_NO_IMAGE_KHR)
-    {
-        eglDestroyImageKHR(
-            m_ogl.display,
-            previousImage);
-    }
+                if (previousImage != EGL_NO_IMAGE_KHR)
+                    {
+                    eglDestroyImageKHR( m_ogl.display, previousImage);
+                    }
 
-    return true;
+                return true;
 }
 
 bool            CKernel::queueOutputBufferMMAL      (   MMAL_Buffer_From_Host_Msg& tx, 
@@ -464,6 +332,8 @@ bool            CKernel::queueInputBufferMMAL       (   MMAL_Buffer_From_Host_Ms
 
 void            CKernel::dumpPortInfoMMAL           (   const MMAL_Port_Info_Get_Reply&         p_info)
 {
+#ifdef __LOG_MMAL__ 
+                // the only purpose was fo figure out what the format change was, we figured that the vpu simply added the framerate to our buffer / port settings!
                 storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "MMAL PORT INFO");
 
                 storeLogHex( MY_BFR, MY_IDX, "status                          ", p_info.msg.status);
@@ -511,4 +381,5 @@ void            CKernel::dumpPortInfoMMAL           (   const MMAL_Port_Info_Get
                 storeLogHex( MY_BFR, MY_IDX, "video.par.num                   ", (u32)p_info.msg.es.video.par.num);
                 storeLogHex( MY_BFR, MY_IDX, "video.par.den                   ", (u32)p_info.msg.es.video.par.den);
                 storeLogHex( MY_BFR, MY_IDX, "video.color_space               ", p_info.msg.es.video.color_space);
+#endif                
 }
