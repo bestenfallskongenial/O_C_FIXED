@@ -209,7 +209,9 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                                                 ">:", getClockMilliseconds(),
                                                 message,
                                                 X_VAL,
-                                                "Returned", currentHandle,
+                                                "Returned", currentHandle);
+
+                                    storeLogHex( MY_BFR, MY_IDX,
                                                 "Recycled", recycleHandle,
                                                 "Next offset", nal_block_offset,
                                                 "length", nal_block_length);
