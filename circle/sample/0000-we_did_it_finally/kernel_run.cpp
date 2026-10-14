@@ -86,8 +86,8 @@ if (m_SD_has_load &&
     m_vid.frame_count[3] > 100)
     {
     framePollerMMAL(
-        m_vid.nal_block_offset[3][100],
-        m_vid.nal_block_length[3][100]);
+        m_vid.nal_block_offset[0][100],
+        m_vid.nal_block_length[0][100]);
     }
 
                     if (!m_mmalRuntimeLogSaved &&
