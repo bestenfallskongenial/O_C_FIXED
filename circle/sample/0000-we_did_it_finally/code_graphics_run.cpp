@@ -85,95 +85,13 @@ void            CKernel::setUniPrg                  (   olg_state*  o,
                 debug_gl();
 #endif
 }
-/*
-void            CKernel::setTexPrg                  (   olg_state*  o, 
-                                                        glsl_state* s, 
-                                                        tex_state*  t,
-                                                        int         gl_current_tex,
-                                                        unsigned    p_validTextureCount )
-{
-#ifdef __H264_DEBUG_TEX__
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, m_TextureA);
 
-                if (t->u_tex_id[g_gl_program_current][0] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][0], 0);
-#ifdef __DEBUG_GL__
-                debug_gl();
-#endif   
-
-#endif   
-
-#ifndef __H264_DEBUG_TEX__
-                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] == FLAG_THRESHOLD)
-                    {
-                    for (unsigned i = 0; i < p_validTextureCount; i++)
-                        {
-                        glActiveTexture(GL_TEXTURE0+i);
-                        glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[i]);
-
-                        if (t->u_tex_id[g_gl_program_current][i] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][i], i);
-#ifdef __DEBUG_GL__
-                        debug_gl();
-#endif   
-                        }
-                    }
-                else
-                    {
-                    switch(p_validTextureCount)
-                        {
-                        case 0:
-
-                        break;
-
-                        case 1:
-                            glActiveTexture(GL_TEXTURE0);
-                            glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[gl_current_tex]);
-
-                            if (t->u_tex_id[g_gl_program_current][0] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][0], 0);
-#ifdef __DEBUG_GL__
-                            debug_gl();
-#endif   
-                        break;
-
-                        default:
-                            glActiveTexture(GL_TEXTURE0);
-                            glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[gl_current_tex]);
-
-                            if (t->u_tex_id[g_gl_program_current][0] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][0], 0);
-#ifdef __DEBUG_GL__
-                            debug_gl();
-#endif   
-                            glActiveTexture(GL_TEXTURE1);
-                            glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[gl_current_tex + 1]);
-
-                            if (t->u_tex_id[g_gl_program_current][1] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][1], 1);
-#ifdef __DEBUG_GL__
-                            debug_gl();
-#endif   
-                        break;
-                        }
-                    }
-#endif   
-}
-*/
 void            CKernel::setTexPrg                  (   olg_state*  o,
                                                         glsl_state* s,
                                                         tex_state*  t,
                                                         int         gl_current_tex,
                                                         unsigned    p_validTextureCount )
 {
-#ifdef __H264_DEBUG_TEX__
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, m_TextureA);
-
-                if (t->u_tex_id[g_gl_program_current][0] != -1) glUniform1i(t->u_tex_id[g_gl_program_current][0], 0);
-#ifdef __DEBUG_GL__
-                debug_gl();
-#endif
-
-#endif
-
-#ifndef __H264_DEBUG_TEX__
                 if (p_validTextureCount == 0)
                     {
                     return;
@@ -194,53 +112,8 @@ void            CKernel::setTexPrg                  (   olg_state*  o,
                     debug_gl();
 #endif
                     }
-#endif
 }
-/*
-bool            CKernel::setTexBackbuffer           (   glsl_state* s,
-                                                        tex_state*  t,
-                                                        unsigned    p_validTextureCount )
-{
-                if (!t->gl_tex_bfr || t->u_tex_bfr[g_gl_program_current] == -1)
-                    {
-                    return false;
-                    }
 
-                GLint f_textureUnits = 0;
-                glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &f_textureUnits);
-
-                unsigned f_usedTextureUnits = 0;
-
-                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] == FLAG_THRESHOLD)
-                    {
-                    f_usedTextureUnits = p_validTextureCount;
-                    }
-                else if (p_validTextureCount == 1)
-                    {
-                    f_usedTextureUnits = 1;
-                    }
-                else if (p_validTextureCount > 1)
-                    {
-                    f_usedTextureUnits = 2;
-                    }
-
-                if (f_usedTextureUnits >= (unsigned)f_textureUnits)
-                    {
-                    return false;
-                    }
-
-                glActiveTexture(GL_TEXTURE0 + f_usedTextureUnits);
-                glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
-
-                glUniform1i(t->u_tex_bfr[g_gl_program_current], f_usedTextureUnits);
-
-#ifdef __DEBUG_GL__
-                debug_gl();
-#endif
-
-                return true;
-}
-*/
 void            CKernel::setTexVideo                (   )
 {
                 if (!m_tex.gl_tex_vid)
@@ -253,9 +126,9 @@ void            CKernel::setTexVideo                (   )
                     return;
                     }
 
-            //  const GLint f_textureUnit = 6;
+              const GLint f_textureUnit = 6;            // test!!!
 
-                const GLint f_textureUnit = 7;                // test!!!
+            //  const GLint f_textureUnit = 7;          // org!       
 
                 glActiveTexture(GL_TEXTURE0 + f_textureUnit);
                 glBindTexture(GL_TEXTURE_EXTERNAL_OES, m_tex.gl_tex_vid);
@@ -302,25 +175,7 @@ bool            CKernel::setTexBackbuffer           (   glsl_state* s,
 
                 return true;
 }
-/*
-void            CKernel::captureBackbuffer          (   olg_state*  o,
-                                                        tex_state*  t )
-{
-                if (!t->gl_tex_bfr)
-                    {
-                    return;
-                    }
 
-                glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
-
-                glCopyTexSubImage2D( GL_TEXTURE_2D, 0, 0, 0, 0, 0,
-                                    o->screen_width, o->screen_height);
-
-#ifdef __DEBUG_GL__
-                debug_gl();
-#endif
-}
-*/
 void            CKernel::captureBackbuffer          (   olg_state*  o,
                                                         tex_state*  t )
 {

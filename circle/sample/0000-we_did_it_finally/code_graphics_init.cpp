@@ -210,7 +210,6 @@ void            CKernel::initTexture                (   vtx_state*  v,
                             glDeleteTextures(1, &t->gl_tex_id[valid_count]);
                             }
                         }
-                     // m_Watchdog.Start(TIMEOUT);
                     }
 }
 
@@ -277,12 +276,12 @@ void            CKernel::initUniform                (   vtx_state*  v,
                     s->u_tex_l[i]      = glGetUniformLocation(s->gl_program_id[i], "tex_l");
 
                     t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "bfr");
-/* debug/test
+// debug/test
                     if (t == &m_tex)
                         {
                         m_uTexVideo[i] = glGetUniformLocation(s->gl_program_id[i], "vid");
                         }
-*/
+//
 #ifdef __DEBUG_GL__
                     debug_gl();     // really?!?!?!
 #endif

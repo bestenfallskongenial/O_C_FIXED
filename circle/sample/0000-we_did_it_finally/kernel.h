@@ -131,7 +131,6 @@ public:
                                                                         tex_state*                      t,
                                                                         int                             p_fromFile,
                                                                         int                             p_toFile);
-                void        setTexVideo                 ();                                                                        
 // code_graphics_log.cpp        !! TESTED AND APPROVED - EXCEPT gfx_check() - does it actually put out log before the crash or should i use CLooger there instead ??
                 bool        shaderLog                   (               GLint                           shader, 
                                                                         int                             shaderIndex,
@@ -160,6 +159,7 @@ public:
                                                                         tex_state*                      t,
                                                                         unsigned                        p_validTextureCount);
 */
+                void        setTexVideo                 ();  
                 bool        setTexBackbuffer            (               glsl_state*                     s,
                                                                         tex_state*                      t);
                                                                         

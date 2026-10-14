@@ -73,11 +73,11 @@ TShutdownMode CKernel::Run(void)
 
                     applyTargetModes();  // <- correct place here?
 
-                    if (filecounter[FT_VID][FLD_VALID] > 0)
+                    if (filecounter[FT_VID][FLD_VALID] > 0 && m_vid.frame_count[m_activeVideo] > 0)
                         {
                         framePollerMMAL(
-                            m_vid.nal_block_offset[0][10],
-                            m_vid.nal_block_length[0][10]);
+                            m_vid.nal_block_offset[m_activeVideo][m_activeFrame],
+                            m_vid.nal_block_length[m_activeVideo][m_activeFrame]);
                         }
 
                     if (!m_mmalRuntimeLogSaved &&
@@ -117,14 +117,14 @@ TShutdownMode CKernel::Run(void)
                             
                     setTexPrg(&m_ogl, &m_fsh, &m_tex, m_activeTex, filecounter[FT_TEX][FLD_VALID]);                            
 
-                //  setTexVideo();
+                    setTexVideo();
 
                 //  setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
-                    setTexBackbuffer( &m_fsh, &m_tex ); // removed for the test!!!
+                //  setTexBackbuffer( &m_fsh, &m_tex ); // removed for the test!!!
                     
                     drawGLsPrg();
 
-                    captureBackbuffer( &m_ogl, &m_tex ); // removed for the test!!!
+                //  captureBackbuffer( &m_ogl, &m_tex ); // removed for the test!!!
 // lets see...
                     if (g_menuLayer != 0 || m_BPM_hold_A)
                         {
