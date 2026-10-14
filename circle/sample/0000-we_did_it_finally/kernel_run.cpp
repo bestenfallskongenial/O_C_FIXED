@@ -72,13 +72,23 @@ TShutdownMode CKernel::Run(void)
                     dispatchLayer();
 
                     applyTargetModes();  // <- correct place here?
-
+/*
                     if (filecounter[FT_VID][FLD_VALID] > 0 && m_vid.frame_count[m_activeVideo] > 0)
                         {
                         framePollerMMAL(
                             m_vid.nal_block_offset[m_activeVideo][m_activeFrame],
                             m_vid.nal_block_length[m_activeVideo][m_activeFrame]);
                         }
+*/
+if (m_SD_has_load &&
+    m_USB_has_load &&
+    filecounter[FT_VID][FLD_VALID] > 3 &&
+    m_vid.frame_count[3] > 100)
+    {
+    framePollerMMAL(
+        m_vid.nal_block_offset[3][100],
+        m_vid.nal_block_length[3][100]);
+    }
 
                     if (!m_mmalRuntimeLogSaved &&
                         m_bufferLogIndex[LOG_MMAL_0] >= 32768)
