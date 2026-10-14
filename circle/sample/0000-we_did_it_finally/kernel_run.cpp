@@ -80,16 +80,23 @@ TShutdownMode CKernel::Run(void)
                             m_vid.nal_block_length[0][10]);
                         }
 
-                    if (!m_mmalRuntimeLogSaved &&
-                        m_bufferLogIndex[LOG_MMAL_0] >= 32768)
+                    if (m_bufferLogIndex[LOG_MMAL_0] >= 65536)
                         {
-                        saveFromBuffer(
-                            PARTITION_NAME_SD,
-                            "mmalrun.txt",
-                            m_bufferLog[LOG_MMAL_0],
-                            m_bufferLogIndex[LOG_MMAL_0]);
+                        const char* f_fileName = m_mmalRuntimeLogSaved
+                                               ? "mmalnext.txt"
+                                               : "mmalrun.txt";
 
-                        m_mmalRuntimeLogSaved = true;
+                        if (saveFromBuffer(
+                                PARTITION_NAME_SD,
+                                f_fileName,
+                                m_bufferLog[LOG_MMAL_0],
+                                m_bufferLogIndex[LOG_MMAL_0]))
+                            {
+                            m_bufferLogIndex[LOG_MMAL_0] = 0;
+                            m_bufferLog[LOG_MMAL_0][0] = '\0';
+
+                            m_mmalRuntimeLogSaved = true;
+                            }
                         }
 
                     getChannelModeB();
@@ -109,7 +116,7 @@ TShutdownMode CKernel::Run(void)
                 //  logInfoFrameRate( 20 );
 
                 //  logTextureUnitsRuntime( 22 );
-                
+
                     logVideoRuntime( 2 );                
                     
                     setUniPrg(&m_ogl,
