@@ -277,7 +277,7 @@ bool            CKernel::parse264                  (    h264_state* h,
                                 "Extradata Dump",          h->extradata[dst], h->extradata_len[dst] );
                     nextline(   logBuffer, logIndex );
 
-                    randomVec8( getClockMilliseconds())
+                    randomVec8( getClockMilliseconds());
 
                     saveFromBuffer  (   PARTITION_NAME_SD,
                                         gen83FileName("txt"),
