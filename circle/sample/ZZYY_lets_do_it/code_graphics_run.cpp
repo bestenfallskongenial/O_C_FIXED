@@ -241,6 +241,32 @@ bool            CKernel::setTexBackbuffer           (   glsl_state* s,
                 return true;
 }
 */
+void            CKernel::setTexVideo                (   )
+{
+                if (!m_tex.gl_tex_vid)
+                    {
+                    return;
+                    }
+
+                if (m_uTexVideo[g_gl_program_current] == -1)
+                    {
+                    return;
+                    }
+
+                const GLint f_textureUnit = 6;
+
+                const GLint f_textureUnit = 7;                // test!!!
+
+                glActiveTexture(GL_TEXTURE0 + f_textureUnit);
+                glBindTexture(GL_TEXTURE_EXTERNAL_OES, m_tex.gl_tex_vid);
+
+                glUniform1i(m_uTexVideo[g_gl_program_current], f_textureUnit);
+
+#ifdef __DEBUG_GL__
+                debug_gl();
+#endif
+}
+
 bool            CKernel::setTexBackbuffer           (   glsl_state* s,
                                                         tex_state*  t )
 {

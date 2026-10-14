@@ -572,6 +572,8 @@ public:
                 u32                             m_displayedOutputHandle                         = 0;
 
                 bool                            m_mmalRuntimeLogSaved                           = false;
+// direct external video texture test
+                GLint                           m_uTexVideo[MAX_SHADER];                       
 
 // placeholder until i solved this!
                 EGLDisplay                      m_eglDisplay;      // is stored in the olg_state struct -> display     and needed by bufferReadyMMAL
