@@ -253,7 +253,7 @@ void            CKernel::setTexVideo                (   )
                     return;
                     }
 
-                const GLint f_textureUnit = 6;
+            //  const GLint f_textureUnit = 6;
 
                 const GLint f_textureUnit = 7;                // test!!!
 
