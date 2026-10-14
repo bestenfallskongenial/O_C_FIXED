@@ -443,6 +443,7 @@ void            CKernel::applyTargetModes           (   )
                         g_gl_program_current = g_activeProgram;
                         }
                     }
+/*                    
                 if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] < FLAG_THRESHOLD)
                     {
                     m_activeTex = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX]][OUT] * (filecounter[FT_TEX][FLD_VALID])) >> 10;
@@ -463,6 +464,32 @@ void            CKernel::applyTargetModes           (   )
                     {
                     GLtime = g_frameStart / 1000.0f;
                     }
+*/
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] < FLAG_THRESHOLD &&
+                    filecounter[FT_TEX][FLD_VALID] > 0)
+                    {
+                    m_activeTex = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX]][OUT] * (filecounter[FT_TEX][FLD_VALID])) >> 10;
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_VID] < FLAG_THRESHOLD &&
+                    filecounter[FT_VID][FLD_VALID] > 0)
+                    {
+                    m_activeVideo = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_VID]][OUT] * (filecounter[FT_VID][FLD_VALID])) >> 10;
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] < FLAG_THRESHOLD &&
+                    filecounter[FT_VID][FLD_VALID] > 0 &&
+                    m_vid.frame_count[m_activeVideo] > 0)
+                    {
+                    m_activeFrame = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM]][OUT] * (m_vid.frame_count[m_activeVideo])) >> 10;
+                    }
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME] < FLAG_THRESHOLD)
+                    {
+                    GLtime = g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME]][OUT] / 36.0f;
+                    }
+                else
+                    {
+                    GLtime = g_frameStart / 1000.0f;
+                    }
+
                 if (g_centralModeBuffer[g_currentProgramBuffer][FLAG_EXT] && g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT] < FLAG_THRESHOLD)
                     {
                     g_centralModeBuffer[g_currentProgramBuffer][LAST_EXT] = g_centralModeBuffer[g_currentProgramBuffer][SEL_EXT];

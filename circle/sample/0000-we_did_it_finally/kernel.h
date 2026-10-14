@@ -57,6 +57,7 @@ public:
                 void        logInOutRuntime             (               int                             row );      // +++
                 void        logInfosRuntime             (               int                             row );
                 void        logTextureUnitsRuntime      (               int                             row );
+                void        logVideoRuntime             (               int                             row );                
                 void        logScreenUpdate             (               void );
                 bool        startupScreen               (               void ); /// +++      
                 void        logInfoFrameRate            (               int                             row,

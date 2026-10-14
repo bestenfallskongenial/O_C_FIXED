@@ -109,6 +109,21 @@ void            CKernel::logTextureUnitsRuntime( int row )
                 bufferScreenDraw(   f_logBuffer, 0, f_logIndex, 0, row, 0xFFFFFFFF );
 }
 
+void            CKernel::logVideoRuntime            (   int row )
+{
+                char f_logBuffer[512];
+                u32  f_logIndex = 0;
+
+                f_logBuffer[0] = '\0';
+
+                storeLogU32(    f_logBuffer, f_logIndex, "Valid Videos     ", filecounter[FT_VID][FLD_VALID] );
+                storeLogU32(    f_logBuffer, f_logIndex, "Current Video    ", m_activeVideo + 1 );
+                storeLogU32(    f_logBuffer, f_logIndex, "Frames in Video  ", m_vid.frame_count[m_activeVideo] );
+                storeLogU32(    f_logBuffer, f_logIndex, "Current Frame    ", m_activeFrame );
+
+                bufferScreenDraw(   f_logBuffer, 0, f_logIndex, 0, row, 0xFFFFFFFF );
+}
+
 bool            CKernel::startupScreen( void )
 {
                 const char* machineName =  m_MachineInfo.GetMachineName();
