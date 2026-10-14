@@ -73,6 +73,7 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
                             {
                             switch (m_BufferFromHostTx_Output->hdr.status)   // SECOND AXIS: status (outcome)
                                 {                                 
+/*                                    
                                 case MMAL_MSG_STATUS_SUCCESS:       // NEW
                                     {
                                     u32 currentHandle =
@@ -128,7 +129,94 @@ bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u3
 
                                     return true;
                                     }
+*/                                    
+                                case MMAL_MSG_STATUS_SUCCESS:
+                                    {
+                                    u32 currentHandle =
+                                        m_BufferFromHostTx_Output->msg.buffer_header.data;
 
+                                    if (currentHandle != m_output_buffer_handle_a && currentHandle != m_output_buffer_handle_b)
+                                        {
+                                        continue;
+                                        }
+
+                                    u32 recycleHandle = m_displayedOutputHandle;
+                                    u32 recycleSize   = 0;
+
+                                    if (recycleHandle != 0)
+                                        {
+                                        if (recycleHandle == currentHandle)
+                                            {
+#ifdef __LOG_MMAL__
+                                            storeLogHex( MY_BFR, MY_IDX,
+                                                        ">:", getClockMilliseconds(),
+                                                        "MMAL output ownership ERROR",
+                                                        X_VAL,
+                                                        "Returned", currentHandle,
+                                                        "Displayed", m_displayedOutputHandle);
+#endif
+                                            return false;
+                                            }
+
+                                        if (recycleHandle == m_output_buffer_handle_a)
+                                            {
+                                            recycleSize = m_OutputBufferSizeA;
+                                            }
+                                        else if (recycleHandle == m_output_buffer_handle_b)
+                                            {
+                                            recycleSize = m_OutputBufferSizeB;
+                                            }
+                                        else
+                                            {
+                                            return false;
+                                            }
+
+                                        glFinish();
+
+                                        if (!checkGLerrorMMAL()) return false;
+                                        }
+
+                                    if (!bufferReadyMMAL(currentHandle))
+                                        {
+                                        return false;
+                                        }
+
+                                    m_displayedOutputHandle = currentHandle;
+
+                                    if (recycleHandle != 0)
+                                        {
+                                        if (!queueOutputBufferMMAL( *m_BufferFromHostTx_Output,
+                                                                    recycleHandle,
+                                                                    recycleSize))
+                                            {
+                                            return false;
+                                            }
+                                        }
+
+                                    if (!queueInputBufferMMAL( *m_BufferFromHostTx_Input,
+                                                               nal_block_offset,
+                                                               nal_block_length))
+                                        {
+                                        return false;
+                                        }
+
+#ifdef __LOG_MMAL__
+                                    message = currentHandle == m_output_buffer_handle_a
+                                            ? "MMAL output ready A"
+                                            : "MMAL output ready B";
+
+                                    storeLogHex( MY_BFR, MY_IDX,
+                                                ">:", getClockMilliseconds(),
+                                                message,
+                                                X_VAL,
+                                                "Returned", currentHandle,
+                                                "Recycled", recycleHandle,
+                                                "Next offset", nal_block_offset,
+                                                "length", nal_block_length);
+#endif
+
+                                    return true;
+                                    }
 #ifdef __LOG_MMAL__   
                                 case MMAL_MSG_STATUS_ENOMEM:     message = "MMAL_MSG_STATUS_ENOMEM       - Out of memory                      "; break;
                                 case MMAL_MSG_STATUS_ENOSPC:     message = "MMAL_MSG_STATUS_ENOSPC       - Out of resources other than memory "; break;
