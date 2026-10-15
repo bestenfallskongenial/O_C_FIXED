@@ -57,12 +57,16 @@ public:         // Logging
 // local copies of my graphics related structs
                 olg_state                       m_ogl                                           =       {};           
                 vtx_state                       m_vtx                                           =       {};
+
                 glsl_state                      m_vsh                                           =       {};
                 glsl_state                      m_fsh                                           =       {};
                 glsl_state                      m_osh                                           =       {};
+                glsl_state                      m_csh                                           =       {};
+
                 tex_state                       m_tex                                           =       {};
                 tex_state                       m_omt                                           =       {};
-                tex_state                       m_cvt                                           =       {};     // NEW                
+                tex_state                       m_cvt                                           =       {};     // NEW       
+
                 h264_state                      m_vid                                           =       {};    
 
           
