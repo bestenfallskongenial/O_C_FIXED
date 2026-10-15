@@ -147,7 +147,7 @@
     #define         MAX_USER_TEXTURE_UNITS  7
     #define         MAX_TEXTURE_UNITS       ( MAX_USER_TEXTURE_UNITS + 1 )    
 
-    #define         MAX_BITMAP_TEXTURE_UNITS(MAX_USER_TEXTURE_UNITS - 1)        // NEW
+    #define         MAX_BITMAP_TEXTURE_UNITS ( MAX_USER_TEXTURE_UNITS - 1 )        // NEW
     #define         VIDEO_TEXTURE_UNIT      MAX_BITMAP_TEXTURE_UNITS            // NEW
 
     #define         MAX_FRAMES              2048
