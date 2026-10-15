@@ -142,11 +142,11 @@ TShutdownMode CKernel::Run(void)
                     setTexVideo(&m_tex, &m_cvt);
 
                 //  setTexBackbuffer( &m_fsh, &m_tex, filecounter[FT_TEX][FLD_VALID]);
-                //  setTexBackbuffer( &m_fsh, &m_tex ); // removed for the test!!!
+                    setTexBackbuffer( &m_fsh, &m_tex ); // removed for the test!!!
                     
                     drawGLsPrg();
 
-                //  captureBackbuffer( &m_ogl, &m_tex ); // removed for the test!!!
+                    captureBackbuffer( &m_ogl, &m_tex ); // removed for the test!!!
 // lets see...
                     if (g_menuLayer != 0 || m_BPM_hold_A)
                         {

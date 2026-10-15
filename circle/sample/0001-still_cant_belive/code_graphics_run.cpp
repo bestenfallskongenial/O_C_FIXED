@@ -181,6 +181,7 @@ void            CKernel::setTexVideo                (   )
 #endif
 }
 */
+/*
 void CKernel::setTexVideo(
     tex_state* t,
     tex_state* video)
@@ -205,6 +206,41 @@ void CKernel::setTexVideo(
     glUniform1i(
         t->u_tex_id[g_gl_program_current][f_textureUnit],
         f_textureUnit);
+
+#ifdef __DEBUG_GL__
+    debug_gl();
+#endif
+}
+*/
+void CKernel::setTexVideo(
+    tex_state* t,
+    tex_state* video)
+{
+    if (!video->gl_tex_id[0])
+    {
+        return;
+    }
+
+    const GLint f_textureUnit = VIDEO_TEXTURE_UNIT; // test!!!
+
+    //  const GLint f_textureUnit = 7; // org!
+
+    glActiveTexture(GL_TEXTURE0 + f_textureUnit);
+    glBindTexture(GL_TEXTURE_2D, video->gl_tex_id[0]);
+
+    if (t->u_tex_id[g_gl_program_current][f_textureUnit] != -1)
+    {
+        glUniform1i(
+            t->u_tex_id[g_gl_program_current][f_textureUnit],
+            f_textureUnit);
+    }
+
+    if (t->u_tex_vid[g_gl_program_current] != -1)
+    {
+        glUniform1i(
+            t->u_tex_vid[g_gl_program_current],
+            f_textureUnit);
+    }
 
 #ifdef __DEBUG_GL__
     debug_gl();
