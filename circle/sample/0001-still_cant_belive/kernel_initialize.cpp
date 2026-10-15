@@ -1,0 +1,220 @@
+#include "kernel.h"
+
+    #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
+    #define MY_IDX   m_logKernelIndex 
+
+boolean			CKernel::Initialize						(	void )
+{
+                bool bOK = TRUE;
+
+                if (bOK)
+                    {
+                    bOK = m_Interrupt.Initialize();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_Interrupt.Initialize()                DONE");
+#endif
+                    }       
+                if (bOK)
+                    {
+                    bOK = m_Timer.Initialize();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_Timer.Initialize()                    DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    CLogger::SetRawSink(CKernel::LoggerSink, this);
+
+                    bOK = m_Logger.Initialize(0);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SetRawSink(CKernel::LoggerSink, this)   DONE");
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_Logger.Initialize(0)                  DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = frameBufferInit();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "frameBufferInit()                    SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = startupScreen();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Hardware Info Log                       DONE");
+#endif
+                    }                
+                if (bOK)
+                    {
+                    bOK = m_EMMC.Initialize();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_EMMC.Initialize()                  SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = m_USBHCI.Initialize();
+#ifdef __LOG_INIT__                    
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_USBHCI.Initialize()                SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    m_USBHCI.UpdatePlugAndPlay(); 
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_USBHCI.UpdatePlugAndPlay()            DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = wrapperInitDMA();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "InitDMA Buffer                          DONE");
+#endif
+                    }
+
+                if (bOK)
+                    {
+                    bOK = wrapperInitMEM();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "InitMEM Buffer                          DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = m_VCHIQ.Initialize();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "m_VCHIQ.Initialize()                 SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bcm_host_init();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "bcm_host_init()                         DONE");
+#endif
+                    }    
+                if (bOK)
+                    {
+                    getStateVCHI();
+#ifdef __LOG_INIT__
+                    storeLogHex( MY_BFR, MY_IDX, "   VCHI_INSTANCE_T", (u32)m_VCHIInstance, "/ VCHI_CONNECTION_T", (u32)m_Connection );
+
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "getStateVCHI()                          DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = wrapperInitVCSMstruct();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperInitVCSMstruct()              SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = wrapperInitMMALstruct();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperInitMMALstruct()              SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = wrapperVCSM();
+#ifdef __LOG_INIT__
+
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Allocate/Lock VCSM Buffer            SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = wrapperMMAL();
+#ifdef __LOG_INIT__
+
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "Init MMAL / ril.video_decode         SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    initOGL( &m_ogl);
+#ifdef __LOG_INIT__
+
+                    if (bOK) 
+                        {
+                        const char* f_extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+
+                        const bool f_externalImageSupported = f_extensions != nullptr && strstr(f_extensions, "GL_OES_EGL_image_external") != nullptr;
+
+                        storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initOGL(&m_ogl)                         DONE");
+
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Width   ", m_ogl.screen_width);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Screen Height  ", m_ogl.screen_height);
+                        storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Element   ", m_ogl.dispman_element);
+                        storeLogHex( MY_BFR, MY_IDX, "   DISPMANX Display   ", m_ogl.dispman_display);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Display        ", (u32)(uintptr_t)m_ogl.display);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Surface        ", (u32)(uintptr_t)m_ogl.surface);
+                        storeLogHex( MY_BFR, MY_IDX, "   EGL Context        ", (u32)(uintptr_t)m_ogl.context);
+
+                        storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), f_externalImageSupported ? "GL_OES_EGL_image_external          SUPPORTED" : "GL_OES_EGL_image_external        UNSUPPORTED");
+                        }
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = initTexturesMMAL();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "initTexturesMMAL()                   SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = SPI_init();
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SPI_init()                           SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = SMI_Init( LED_PIN);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "SMI_Init(LED_PIN)                    SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = WS2812_Init( LED_COUNT );
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "WS2812_Init(LED_COUNT)               SUCCESS");
+#endif
+                    }
+                if (bOK)
+                    {
+                    GPIO_SetAlt( CTRL_PIN, 1, GPIO_PULL_OFF);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(CTRL_PIN, 1, PULL_OFF)      DONE");
+#endif
+                    GPIO_SetAlt( SW_PIN_A, 0, GPIO_PULL_UP);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(SW_PIN_A, 0, PULL_UP)       DONE");
+#endif
+                    GPIO_SetAlt( SW_PIN_B, 0, GPIO_PULL_UP);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "GPIO_SetAlt(SW_PIN_B, 0, GPIO_PULL_UP)  DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = setSystemVariables();      // absolute open end! we need to prep the moded buffer and maybe even rearange it ( to have no block to layer missmatch )   
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex( MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "System Variables Setup                  DONE");
+#endif
+                    }
+                if (bOK)
+                    {
+                    bOK = wrapperGenerateWaveTables( m_bufferLfo, LFO_SAMPLES);
+#ifdef __LOG_INIT__
+                    if (bOK) storeLogHex(  MY_BFR, MY_IDX, ">:", getClockMilliseconds(), "wrapperGenerateWaveTables()             DONE");
+#endif
+                    }                    
+                return bOK;
+}
