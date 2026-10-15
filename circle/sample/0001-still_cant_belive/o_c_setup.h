@@ -38,6 +38,7 @@
     #define         VSH_SD             		1	// max number of u_vertex shader on sd
     #define         OMF_SD             		1	// max number of fragment shader on sd
     #define         FSH_SD             		1	// max number of fragment shader on sd
+    #define         CSH_SD                  1   // NEW 
     #define         LFO_SD                  16    
     #define         OMT_SD             		1	// max number of fragment shader on sd
     #define         TEX_SD             		1	// max number of textures on sd
@@ -66,6 +67,7 @@
     #define         VSH_USB                 0	// max number of u_vertex shader on sd
     #define         OMF_USB            		0	// max number of fragment shader on sd
     #define         FSH_USB            		32	// max number of fragment shader on sd
+    #define         CSH_USB                 0   // NEW    
     #define         LFO_USB                 0    
     #define         OMT_USB            		0	// max number of fragment shader on sd
     #define         TEX_USB            		15	// max number of textures on sd
@@ -77,6 +79,7 @@
     #define         VSH_EXT                 1   // the file extensions 
     #define         OMF_EXT                 1
     #define         FSH_EXT                 1
+    #define         CSH_EXT                 1   // NEW    
     #define         OMT_EXT                 1
     #define         TEX_EXT                 1
     #define         VID_EXT                 1
@@ -85,6 +88,7 @@
     #define         VSH_SIZ                 (1024*32)           // 32kb
     #define         OMF_SIZ                 (1024*32)           // 32kb
     #define         FSH_SIZ                 (1024*32)           // 32kb
+    #define         CSH_SIZ                 (1024*32)    
     #define         OMT_SIZ                 (1024*1024*4)       // 4mb
     #define         TEX_SIZ                 (1024*1024*4)       // 4mb
     #define         VID_SIZ                 (1024*1024*8)       // 8mb
@@ -142,6 +146,9 @@
 
     #define         MAX_USER_TEXTURE_UNITS  7
     #define         MAX_TEXTURE_UNITS       ( MAX_USER_TEXTURE_UNITS + 1 )    
+
+    #define         MAX_BITMAP_TEXTURE_UNITS(MAX_USER_TEXTURE_UNITS - 1)        // NEW
+    #define         VIDEO_TEXTURE_UNIT      MAX_BITMAP_TEXTURE_UNITS            // NEW
 
     #define         MAX_FRAMES              2048
 

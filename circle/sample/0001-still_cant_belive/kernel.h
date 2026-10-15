@@ -126,6 +126,10 @@ public:
                                                                         
                 bool        initTextureBackbuffer       (               olg_state*                      o,
                                                                         tex_state*                      t);
+
+                void        initTextureVideo            (               tex_state*                      t,              // NEW
+                                                                        GLsizei                         width,
+                                                                        GLsizei                         height);
                                                                                                                                             
                 void        initUniform                 (               vtx_state*                      v,
                                                                         glsl_state*                     s,
@@ -160,7 +164,17 @@ public:
                                                                         tex_state*                      t,
                                                                         unsigned                        p_validTextureCount);
 */
-                void        setTexVideo                 ();  
+        //      void        setTexVideo                 ();  
+
+                void        convertVideoTexture(                        olg_state*                      o,
+                                                                        vtx_state*                      v,
+                                                                        glsl_state*                     s,
+                                                                        tex_state*                      source,
+                                                                        tex_state*                      target);
+
+                void        setTexVideo(                                tex_state*                      t,
+                                                                        tex_state*                      video);
+
                 bool        setTexBackbuffer            (               glsl_state*                     s,
                                                                         tex_state*                      t);
                                                                         

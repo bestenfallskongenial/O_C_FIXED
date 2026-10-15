@@ -62,6 +62,7 @@ public:         // Logging
                 glsl_state                      m_osh                                           =       {};
                 tex_state                       m_tex                                           =       {};
                 tex_state                       m_omt                                           =       {};
+                tex_state                       m_cvt                                           =       {};     // NEW                
                 h264_state                      m_vid                                           =       {};    
 
           
@@ -153,13 +154,17 @@ public:         // Logging
 
                 char** 				m_bufferVsh                                     = nullptr;
                 char** 				m_bufferOmf                                     = nullptr;                
-                char** 				m_bufferFsh                                     = nullptr; 
+                char** 				m_bufferFsh                                     = nullptr;
+
+                char**                          m_bufferCsh                                     = nullptr;      // NEW                
 
                 char**                          m_bufferLfo                                     = nullptr;
 // the populated filecounter array - source and truth and hub for init and load                                MAXSD   MAXUSB    EXTCNT     SCANNED   LOADED  PREV    V_CNT    SIZE  
                 unsigned                        filecounter[FT_COUNT][FLD_COUNT]                =       {   { VSH_SD, VSH_USB,  VSH_EXT,    0,        0,      0,      0,       VSH_SIZ },  // VSH vertex shader
                                                                                                             { OMF_SD, OMF_USB,  OMF_EXT,    0,        0,      0,      0,       OMF_SIZ },  // OMF overlay fragment shader
                                                                                                             { FSH_SD, FSH_USB,  FSH_EXT,    0,        0,      0,      0,       FSH_SIZ },  // FSH user fragment shader
+
+                                                                                                            { CSH_SD, CSH_USB,  CSH_EXT,    0,        0,      0,      0,       CSH_SIZ },  // NEW - deliberatly put here not at the end!
 
                                                                                                             { LFO_SD, LFO_USB,        0,    0,        0,      0,      0,       LFO_SIZ },
 
@@ -173,6 +178,7 @@ public:         // Logging
         const   char*                           g_SufVsh[VSH_EXT]			        =           { "vsh" };    // vertex shaders
         const   char*                           g_SufOmf[OMF_EXT]			        =           { "omf" };	// is a fsh file but used for the overlay atlas
         const   char*                           g_SufFsh[FSH_EXT]			        =           { "fsh" };    // fragment shaders 
+        const   char*                           g_SufCsh[CSH_EXT]                               =           { "csh" };    // NEW - THE CONVERSION SHADER!!
         const   char*                           g_SufOmt[OMT_EXT]			        =           { "omt" };    // is a bpm file but used for the overlay atlas
         const   char*                           g_SufTex[TEX_EXT]			        =           { "bmp" };    // for textures 24bit rgb
         const   char*                           g_SufVid[VID_EXT]			        =           { "264" };    // video in raw h264 annex b encoded 
@@ -181,6 +187,7 @@ public:         // Logging
                 char*                           g_ScnVsh[VSH_SD + VSH_USB]     	                =           { 0 };    
         	char*				g_ScnOmf[OMF_SD + OMF_USB] 		        =           { 0 };
                 char*                           g_ScnFsh[FSH_SD + FSH_USB]     	                =           { 0 };
+                char*                           g_ScnCsh[CSH_SD + CSH_USB]                      =           { 0 };      // NEW
         	char*				g_ScnOmt[OMT_SD + OMT_USB] 		        =           { 0 };
                 char*                           g_ScnTex[TEX_SD + TEX_USB]     	                =           { 0 };
                 char*                           g_ScnVid[VID_SD + VID_USB]     	                =           { 0 };
@@ -189,6 +196,7 @@ public:         // Logging
                 unsigned                        g_bytVsh[VSH_SD + VSH_USB]                      =           { 0 };
                 unsigned                        g_bytOmf[OMF_SD + OMF_USB]                      =           { 0 };
                 unsigned                        g_bytFsh[FSH_SD + FSH_USB]                      =           { 0 };
+                unsigned                        g_bytCsh[CSH_SD + CSH_USB]                      =           { 0 };      // NEW
                 unsigned                        g_bytOmt[OMT_SD + OMT_USB]                      =           { 0 };
                 unsigned                        g_bytTex[TEX_SD + TEX_USB]                      =           { 0 };
                 unsigned                        g_bytVid[VID_SD + VID_USB]                      =           { 0 };
@@ -573,7 +581,7 @@ public:
 
                 bool                            m_mmalRuntimeLogSaved                           = false;
 // direct external video texture test
-                GLint                           m_uTexVideo[MAX_SHADER];                       
+            //  GLint                           m_uTexVideo[MAX_SHADER];                       
 
 // lets try the fps break here:
 

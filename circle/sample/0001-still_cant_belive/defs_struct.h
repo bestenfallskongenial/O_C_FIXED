@@ -60,7 +60,10 @@ struct tex_state
     GLuint                      gl_tex_bfr;
     GLint                       u_tex_bfr[MAX_SHADER];	
 
-       // for my video frame texture 
+// Conversion destination framebuffer and external sampler locations.
+	GLuint 						gl_fbo_vid = 0;				// NEW 
+	GLint  						u_tex_vid[MAX_SHADER];		// NEW
+// External video source and its changing backing image.
     GLuint          			gl_tex_vid;                 // video texture handle
     EGLImageKHR     			m_EGLimage = nullptr;       // backing (changes per frame) 
 };

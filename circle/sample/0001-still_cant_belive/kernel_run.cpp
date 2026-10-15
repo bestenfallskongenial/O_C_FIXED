@@ -120,7 +120,17 @@ TShutdownMode CKernel::Run(void)
 
                 //  logTextureUnitsRuntime( 22 );
 
-                    logVideoRuntime( 2 );                
+                    logVideoRuntime( 2 );    
+                    
+        if (m_tex.m_EGLimage != EGL_NO_IMAGE_KHR)
+        {
+            convertVideoTexture(
+                &m_ogl,
+                &m_vtx,
+                &m_csh,
+                &m_tex,
+                &m_cvt);
+        }                    
                     
                     setUniPrg(&m_ogl,
                             &m_fsh,

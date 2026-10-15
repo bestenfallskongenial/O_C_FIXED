@@ -79,7 +79,8 @@ void            CKernel::setUniPrg                  (   olg_state*  o,
                 debug_gl();
 #endif                                                                                                        
             //  if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current],p_validTextureCount); 
-                if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current], p_validTextureCount < MAX_USER_TEXTURE_UNITS ? p_validTextureCount : MAX_USER_TEXTURE_UNITS);
+            //  if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current], p_validTextureCount < MAX_USER_TEXTURE_UNITS ? p_validTextureCount : MAX_USER_TEXTURE_UNITS);
+                if(s->u_tex_l[g_gl_program_current] != -1) glUniform1i(s->u_tex_l[g_gl_program_current], p_validTextureCount < MAX_BITMAP_TEXTURE_UNITS ? p_validTextureCount : MAX_BITMAP_TEXTURE_UNITS);                
 
 #ifdef __DEBUG_GL__
                 debug_gl();
@@ -98,7 +99,8 @@ void            CKernel::setTexPrg                  (   olg_state*  o,
                     }
 
                 const unsigned f_firstTexture = g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] == FLAG_THRESHOLD ? 0 : gl_current_tex;
-                const unsigned f_exposedTextureCount = p_validTextureCount < MAX_USER_TEXTURE_UNITS ? p_validTextureCount : MAX_USER_TEXTURE_UNITS;
+//              const unsigned f_exposedTextureCount = p_validTextureCount < MAX_USER_TEXTURE_UNITS ? p_validTextureCount : MAX_USER_TEXTURE_UNITS;
+                const unsigned f_exposedTextureCount = p_validTextureCount < MAX_BITMAP_TEXTURE_UNITS ? p_validTextureCount : MAX_BITMAP_TEXTURE_UNITS;
 
                 for (unsigned i = 0; i < f_exposedTextureCount; i++)
                     {
@@ -114,6 +116,45 @@ void            CKernel::setTexPrg                  (   olg_state*  o,
                     }
 }
 
+void CKernel::convertVideoTexture(
+    olg_state* o,
+    vtx_state* v,
+    glsl_state* s,
+    tex_state* source,
+    tex_state* target)
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, target->gl_fbo_vid);
+
+    glViewport(
+        0,
+        0,
+        target->width[0],
+        target->height[0]);
+
+    glUseProgram(s->gl_program_id[0]);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_EXTERNAL_OES, source->gl_tex_vid);
+
+    glUniform1i(target->u_tex_vid[0], 0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, v->gl_buf);
+
+    drawGLsPrg();
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glViewport(
+        0,
+        0,
+        o->screen_width,
+        o->screen_height);
+
+#ifdef __DEBUG_GL__
+    debug_gl();
+#endif
+}
+/*
 void            CKernel::setTexVideo                (   )
 {
                 if (!m_tex.gl_tex_vid)
@@ -137,6 +178,36 @@ void            CKernel::setTexVideo                (   )
 
 #ifdef __DEBUG_GL__
                 debug_gl();
+#endif
+}
+*/
+void CKernel::setTexVideo(
+    tex_state* t,
+    tex_state* video)
+{
+    if (!video->gl_tex_id[0])
+    {
+        return;
+    }
+
+    if (t->u_tex_id[g_gl_program_current][VIDEO_TEXTURE_UNIT] == -1)
+    {
+        return;
+    }
+
+    const GLint f_textureUnit = VIDEO_TEXTURE_UNIT; // test!!!
+
+    //  const GLint f_textureUnit = 7; // org!
+
+    glActiveTexture(GL_TEXTURE0 + f_textureUnit);
+    glBindTexture(GL_TEXTURE_2D, video->gl_tex_id[0]);
+
+    glUniform1i(
+        t->u_tex_id[g_gl_program_current][f_textureUnit],
+        f_textureUnit);
+
+#ifdef __DEBUG_GL__
+    debug_gl();
 #endif
 }
 

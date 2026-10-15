@@ -244,6 +244,66 @@ bool            CKernel::initTextureBackbuffer      (   olg_state*  o,
 
                 return true;
 }
+
+void CKernel::initTextureVideo(
+    tex_state* t,
+    GLsizei width,
+    GLsizei height)
+{
+    t->width[0]  = width;
+    t->height[0] = height;
+
+    glActiveTexture(GL_TEXTURE0);
+
+    glGenTextures(1, &t->gl_tex_id[0]);
+    glBindTexture(GL_TEXTURE_2D, t->gl_tex_id[0]);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+    glTexImage2D(
+        GL_TEXTURE_2D,
+        0,
+        GL_RGBA,
+        t->width[0],
+        t->height[0],
+        0,
+        GL_RGBA,
+        GL_UNSIGNED_BYTE,
+        nullptr);
+
+    glGenFramebuffers(1, &t->gl_fbo_vid);
+    glBindFramebuffer(GL_FRAMEBUFFER, t->gl_fbo_vid);
+
+    glFramebufferTexture2D(
+        GL_FRAMEBUFFER,
+        GL_COLOR_ATTACHMENT0,
+        GL_TEXTURE_2D,
+        t->gl_tex_id[0],
+        0);
+
+    GLfloat previousClear[4];
+    glGetFloatv(GL_COLOR_CLEAR_VALUE, previousClear);
+
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glClearColor(
+        previousClear[0],
+        previousClear[1],
+        previousClear[2],
+        previousClear[3]);
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+#ifdef __DEBUG_GL__
+    debug_gl();
+#endif
+}
+
 void            CKernel::initUniform                (   vtx_state*  v,
                                                         glsl_state* s,
                                                         tex_state*  t,
@@ -277,10 +337,7 @@ void            CKernel::initUniform                (   vtx_state*  v,
 
                     t->u_tex_bfr[i]    = glGetUniformLocation(s->gl_program_id[i], "bfr");
 // debug/test
-                    if (t == &m_tex)
-                        {
-                        m_uTexVideo[i] = glGetUniformLocation(s->gl_program_id[i], "vid");
-                        }
+                    t->u_tex_vid[i]     = glGetUniformLocation(s->gl_program_id[i], "vid");
 //
 #ifdef __DEBUG_GL__
                     debug_gl();     // really?!?!?!

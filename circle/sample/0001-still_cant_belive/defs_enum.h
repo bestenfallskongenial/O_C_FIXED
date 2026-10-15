@@ -174,6 +174,8 @@ enum FileType
     FT_OMF,                                         // overlay fragment shader 
     FT_FSH,                                         // user fragment shader
 
+    FT_CSH,                                         // NEW
+
     FT_LFO,
 
     FT_OMT,                                         // overlay texture
