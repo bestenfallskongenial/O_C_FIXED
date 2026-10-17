@@ -465,18 +465,15 @@ void            CKernel::applyTargetModes           (   )
                     GLtime = g_frameStart / 1000.0f;
                     }
 */
-                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] < FLAG_THRESHOLD &&
-                    filecounter[FT_TEX][FLD_VALID] > 0)
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX] < FLAG_THRESHOLD && filecounter[FT_TEX][FLD_VALID] > 0)
                     {
                     m_activeTex = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_TEX]][OUT] * (filecounter[FT_TEX][FLD_VALID])) >> 10;
                     }
-                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_VID] < FLAG_THRESHOLD &&
-                    filecounter[FT_VID][FLD_VALID] > 0)
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_VID] < FLAG_THRESHOLD && filecounter[FT_VID][FLD_VALID] > 0)
                     {
                     m_activeVideo = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_VID]][OUT] * (filecounter[FT_VID][FLD_VALID])) >> 10;
                     }
-                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] < FLAG_THRESHOLD &&
-                    filecounter[FT_VID][FLD_VALID] > 0 &&
+                if (g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] < FLAG_THRESHOLD && filecounter[FT_VID][FLD_VALID] > 0 &&
                     m_vid.frame_count[m_activeVideo] > 0)
                     {
                     m_activeFrame = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM]][OUT] * (m_vid.frame_count[m_activeVideo])) >> 10;

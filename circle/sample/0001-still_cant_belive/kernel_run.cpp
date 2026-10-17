@@ -5,7 +5,7 @@
 
 TShutdownMode CKernel::Run(void)
 {
-                while (/*m_resetFlag == false*/ 1)
+                while ( m_resetFlag == false )
                     {
                     fpsBegin();                 // here starts the actual runtimeloop
 
@@ -102,6 +102,24 @@ TShutdownMode CKernel::Run(void)
                             }
                         }
 
+                    if (m_bufferLogIndex[LOG_GLSL_0] >= 65536)
+                        {
+                    //  const char* f_fileName = m_glslRuntimeLogSaved ? "glslnext.txt" : "glslrun.txt";
+
+                        const char* f_fileName = "GLSLRUN"
+                        if (saveFromBuffer(
+                                PARTITION_NAME_SD,
+                                f_fileName,
+                                m_bufferLog[LOG_GLSL_0],
+                                m_bufferLogIndex[LOG_GLSL_0]))
+                            {
+                            m_bufferLogIndex[LOG_GLSL_0] = 0;
+                            m_bufferLog[LOG_GLSL_0][0] = '\0';
+
+                            m_glslRuntimeLogSaved = true;
+                            }
+                        }
+
                     getChannelModeB();
 
                     menuLedUpdate();
@@ -165,6 +183,31 @@ TShutdownMode CKernel::Run(void)
 
                 fpsEnd();
 
+
+                    buttonPingB( 0, SW_PIN_A, 1, SW_PIN_B );                        //
+
+                    if (g_buttons_states[0][BTN_HOLD_TICK] >= 100 && g_buttons_states[1][BTN_HOLD_TICK] >= 100) m_resetFlag = true;
+
+                    buttonConsumer(0,1);                                              //  here goes the button consumer and menu code                
                     }
+
+                if (m_bufferLogIndex[LOG_MMAL_0] != 0)
+                    {
+                    saveFromBuffer(
+                        PARTITION_NAME_SD,
+                        "mmalnext.txt",
+                        m_bufferLog[LOG_MMAL_0],
+                        m_bufferLogIndex[LOG_MMAL_0]);
+                    }
+
+                if (m_bufferLogIndex[LOG_GLSL_0] != 0)
+                    {
+                    saveFromBuffer(
+                        PARTITION_NAME_SD,
+                        "glslnext.txt",
+                        m_bufferLog[LOG_GLSL_0],
+                        m_bufferLogIndex[LOG_GLSL_0]);
+                    }
+
                 return ShutdownHalt;                    
 }

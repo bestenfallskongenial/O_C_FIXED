@@ -584,7 +584,8 @@ public:
                 u32                             m_displayedOutputHandle                         = 0;
 
                 bool                            m_mmalRuntimeLogSaved                           = false;
-// direct external video texture test
+                bool                            m_glslRuntimeLogSaved                           = false;
+// direct external video texture test   
             //  GLint                           m_uTexVideo[MAX_SHADER];                       
 
 // lets try the fps break here:
