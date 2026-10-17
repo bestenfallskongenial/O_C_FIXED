@@ -106,7 +106,7 @@ TShutdownMode CKernel::Run(void)
                         {
                     //  const char* f_fileName = m_glslRuntimeLogSaved ? "glslnext.txt" : "glslrun.txt";
 
-                        const char* f_fileName = "GLSLRUN"
+                        const char* f_fileName = "GLSLRUN";
                         if (saveFromBuffer(
                                 PARTITION_NAME_SD,
                                 f_fileName,
@@ -116,7 +116,7 @@ TShutdownMode CKernel::Run(void)
                             m_bufferLogIndex[LOG_GLSL_0] = 0;
                             m_bufferLog[LOG_GLSL_0][0] = '\0';
 
-                            m_glslRuntimeLogSaved = true;
+                        //  m_glslRuntimeLogSaved = true;
                             }
                         }
 
