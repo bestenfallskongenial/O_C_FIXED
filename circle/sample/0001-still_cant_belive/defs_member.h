@@ -78,7 +78,7 @@ public:         // Logging
                 int                             g_activeProgramTemp                             = 0;
                 
                 u64                             m_autoFrameCounter                              = 0;
-                unsigned                        m_autoFrameRemainder
+        unsigned                        m_autoFrameRemainder                                    = 0;
 // missing globals / shared state / dummies for now
                 bool                            m_SD_has_load                                   = false;
                 bool                            m_USB_has_load                                  = false;
