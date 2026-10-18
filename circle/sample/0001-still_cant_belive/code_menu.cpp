@@ -429,8 +429,8 @@ void            CKernel::applyTargetModes           (   )
 
                 if (g_menuLayer == 0)
                     {
-                    g_activeProgram = (g_inOutMatrixInt[ADC_SELECT_PRG][OUT] * (filecounter[FT_FSH][FLD_VALID])) >> 10;
-
+                //  g_activeProgram = (g_inOutMatrixInt[ADC_SELECT_PRG][OUT] * (filecounter[FT_FSH][FLD_VALID])) >> 10;
+                    g_activeProgram = ((g_inOutMatrixInt[ADC_SELECT_PRG][OUT] * (filecounter[FT_FSH][FLD_VALID])) >> 10) % filecounter[FT_FSH][FLD_VALID];
                     if (g_centralModeBuffer[g_currentProgramBuffer][SEL_PRG] == 0)
                         {
                         if (g_activeProgram == g_gl_program_current)
