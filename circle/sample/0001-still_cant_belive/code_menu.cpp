@@ -473,10 +473,19 @@ void            CKernel::applyTargetModes           (   )
                     {
                     m_activeVideo = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_VID]][OUT] * (filecounter[FT_VID][FLD_VALID])) >> 10;
                     }
+                else
+                    {
+                    m_activeVideo   = 0;
+                    m_activeTex     = 0; // should i rather set a flag to shut down the complete mechanism here?!
+                    }    
                 if (g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM] < FLAG_THRESHOLD && filecounter[FT_VID][FLD_VALID] > 0 &&
                     m_vid.frame_count[m_activeVideo] > 0)
                     {
                     m_activeFrame = (g_inOutMatrixInt[g_centralModeBuffer[g_currentProgramBuffer][SEL_FRM]][OUT] * (m_vid.frame_count[m_activeVideo])) >> 10;
+                    }
+                else
+                    {
+                    m_activeFrame = (m_autoFrameCounter * m_vid.frame_count[m_activeVideo]) / TARGET_FPS;    
                     }
                 if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME] < FLAG_THRESHOLD)
                     {
