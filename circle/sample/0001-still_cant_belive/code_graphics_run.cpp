@@ -425,7 +425,11 @@ void            CKernel::fpsEnd()
                 g_frameTime        = g_frameEnd - g_frameStart;
 
                 if (g_frameTime) g_currentFPS = 1000.0f / g_frameTime;
-                
-                m_autoFrameCounter = (m_autoFrameCounter + 1) % TARGET_FPS;
+
+                const u64 f_autoFrameTicks =
+                    m_autoFrameRemainder + (u64)g_frameTime * 24;
+
+                m_autoFrameCounter += f_autoFrameTicks / 1000;
+                m_autoFrameRemainder = f_autoFrameTicks % 1000;
 }
 

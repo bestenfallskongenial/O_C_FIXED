@@ -485,7 +485,15 @@ void            CKernel::applyTargetModes           (   )
                     }
                 else
                     {
-                    m_activeFrame = (m_autoFrameCounter * m_vid.frame_count[m_activeVideo]) / TARGET_FPS;    
+                //  m_activeFrame = (m_autoFrameCounter * m_vid.frame_count[m_activeVideo]) / TARGET_FPS;    
+                    if (m_vid.frame_count[m_activeVideo] > 0)
+                        {
+                        m_activeFrame = m_autoFrameCounter % m_vid.frame_count[m_activeVideo];
+                        }
+                    else
+                        {
+                        m_activeFrame = 0;
+                        }                
                     }
                 if (g_centralModeBuffer[g_currentProgramBuffer][SEL_TIME] < FLAG_THRESHOLD)
                     {
