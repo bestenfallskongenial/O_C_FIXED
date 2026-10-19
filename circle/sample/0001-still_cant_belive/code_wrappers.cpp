@@ -5,7 +5,7 @@
 
 // runtimeWrapper
 
-void loadFromSDruntime()
+void CKernel::loadFromSDruntime()
 {
                     if (!m_SD_has_load)         // first load block - get the system files from sd
                         {
@@ -19,7 +19,7 @@ void loadFromSDruntime()
                         }
 }
 
-void loadFromUSBruntime()
+void CKernel::loadFromUSBruntime()
 {
                     if (updateUSB("umsd1") == true && m_USB_has_load == false)      // second load block - get user files from usb AND there is a devide attached
                         {
@@ -32,7 +32,7 @@ void loadFromUSBruntime()
                         m_USB_has_load = true;
                         }    
 }
-void storeBootLogsRuntime()
+void CKernel::storeBootLogsRuntime()
 {
                     if( m_SD_has_load && m_USB_has_load && !m_bootLogsSaved )
                         {
@@ -53,7 +53,7 @@ void storeBootLogsRuntime()
                         }     
 }
 
-void storeMMALlogRuntime()
+void CKernel::storeMMALlogRuntime()
 {
                     if (m_bufferLogIndex[LOG_MMAL_0] >= 65536)
                         {
@@ -69,7 +69,7 @@ void storeMMALlogRuntime()
                         }    
 }
 
-void storeGLSLlogRuntime()
+void CKernel::storeGLSLlogRuntime()
 {
                     if (m_bufferLogIndex[LOG_GLSL_0] >= 65536)
                         {
@@ -85,7 +85,7 @@ void storeGLSLlogRuntime()
                         }
 }
 
-void storeBootlogReset()
+void CKernel::storeBootlogReset()
 {
                     saveFromBuffer( PARTITION_NAME_SD,
                                     "boot_end.txt",
@@ -93,7 +93,7 @@ void storeBootlogReset()
                                     m_logKernelIndex);
 }
 
-void storeMMALlogReset()
+void CKernel::storeMMALlogReset()
 {
                     saveFromBuffer( PARTITION_NAME_SD,
                                     "mmal_end.txt",
@@ -102,7 +102,7 @@ void storeMMALlogReset()
 
 }
 
-void storeGLSLlogReset()
+void CKernel::storeGLSLlogReset()
 {
                     saveFromBuffer( PARTITION_NAME_SD,
                                     "glsl_end.txt",
