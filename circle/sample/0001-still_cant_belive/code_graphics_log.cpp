@@ -236,8 +236,6 @@ void            CKernel::gfx_check                  (   const char* file,
                     storeLogHex(    MY_BFR, MY_IDX, "OpenGL Error", (u32)error, "ticks", (u32)ticks, "line", (u32)line );
                     storeLogHex(    MY_BFR, MY_IDX, severity, X_VAL, error_str, X_VAL, file, X_VAL );
 
-                    if (error_count == 0)
-                        {
                         GLint f_program = 0;
                         GLint f_framebuffer = 0;
                         GLint f_textureUnit = 0;
@@ -323,7 +321,7 @@ void            CKernel::gfx_check                  (   const char* file,
                                                 "NAL length", (u32)m_vid.nal_block_length[m_activeVideo][m_activeFrame] );
                                 }
                             }
-                        }
+
 #endif
                     error_count++;
                     
