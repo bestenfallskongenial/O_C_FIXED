@@ -581,6 +581,15 @@ public:
                                                                         VCSM_Free_MEM_Msg&              tx, 
                                                                         VCSM_Free_MEM_Reply&            rx);
 // code_wrappers.cpp - HERE THE JOY BEGINS
+                void        loadFromSDruntime();
+                void        loadFromUSBruntime();
+                void        storeBootLogsRuntime();
+                void        storeMMALlogRuntime();
+                void        storeGLSLlogRuntime();
+                void        storeBootlogReset();
+                void        storeMMALlogReset();
+                void        storeGLSLlogReset();
+
                 bool        wrapperInitDMA              ();             // init/alloc the dma buffers +++
                 bool        wrapperInitMEM              ();             // init/alloc the mem buffers +++
                 void        wrapperDMAcleanUp           ();             // clean/delete the dma buffers +++

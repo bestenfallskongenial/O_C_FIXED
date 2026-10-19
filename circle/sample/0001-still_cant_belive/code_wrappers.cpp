@@ -3,6 +3,114 @@
     #define MY_BFR   m_logKernel                 // means the log goes into the pre-init buffer 
     #define MY_IDX   m_logKernelIndex 
 
+// runtimeWrapper
+
+void loadFromSDruntime()
+{
+                    if (!m_SD_has_load)         // first load block - get the system files from sd
+                        {
+                        wrapper_load_sd();
+                        wrapper_parser_sd();
+                        wrapper_init_gl_sd();
+
+                        bufferScreenClear();
+
+                        m_SD_has_load = true;
+                        }
+}
+
+void loadFromUSBruntime()
+{
+                    if (updateUSB("umsd1") == true && m_USB_has_load == false)      // second load block - get user files from usb AND there is a devide attached
+                        {
+                        wrapper_load_usb();   
+                        wrapper_parser_usb();
+                        wrapper_init_gl_usb();
+
+                        bufferScreenClear();
+
+                        m_USB_has_load = true;
+                        }    
+}
+void storeBootLogsRuntime()
+{
+                    if( m_SD_has_load && m_USB_has_load && !m_bootLogsSaved )
+                        {
+                        m_bootLogsSaved = true;
+                        
+                        saveFromBuffer  (   PARTITION_NAME_SD,
+                                            "bootlog.txt",
+                                            m_logKernel,            // stores the pre-init buffer
+                                            m_logKernelIndex );
+
+                        saveFromBuffer  (   PARTITION_NAME_SD,
+                                            "GLSLlog.txt",
+                                            m_bufferLog[LOG_GLSL_0],
+                                            m_bufferLogIndex[LOG_GLSL_0] );          
+
+                        m_logKernelIndex = 0;
+                        bufferScreenClear();
+                        }     
+}
+
+void storeMMALlogRuntime()
+{
+                    if (m_bufferLogIndex[LOG_MMAL_0] >= 65536)
+                        {
+                        const char* f_fileName = m_mmalRuntimeLogSaved ? "mmalnext.txt" : "mmalrun.txt";
+
+                        if (saveFromBuffer( PARTITION_NAME_SD, f_fileName, m_bufferLog[LOG_MMAL_0], m_bufferLogIndex[LOG_MMAL_0]))
+                            {
+                            m_bufferLogIndex[LOG_MMAL_0] = 0;
+                            m_bufferLog[LOG_MMAL_0][0] = '\0';
+
+                            m_mmalRuntimeLogSaved = true;
+                            }
+                        }    
+}
+
+void storeGLSLlogRuntime()
+{
+                    if (m_bufferLogIndex[LOG_GLSL_0] >= 65536)
+                        {
+                        const char* f_fileName = m_mmalRuntimeLogSaved ? "glslnext.txt" : "glslrun.txt";
+
+                        if (saveFromBuffer( PARTITION_NAME_SD, f_fileName, m_bufferLog[LOG_GLSL_0], m_bufferLogIndex[LOG_GLSL_0]))
+                            {
+                            m_bufferLogIndex[LOG_GLSL_0] = 0;
+                            m_bufferLog[LOG_GLSL_0][0] = '\0';
+
+                            m_glslRuntimeLogSaved = true;
+                            }
+                        }
+}
+
+void storeBootlogReset()
+{
+                    saveFromBuffer( PARTITION_NAME_SD,
+                                    "boot_end.txt",
+                                    m_logKernel,
+                                    m_logKernelIndex);
+}
+
+void storeMMALlogReset()
+{
+                    saveFromBuffer( PARTITION_NAME_SD,
+                                    "mmal_end.txt",
+                                    m_bufferLog[LOG_MMAL_0],
+                                    m_bufferLogIndex[LOG_MMAL_0]);
+
+}
+
+void storeGLSLlogReset()
+{
+                    saveFromBuffer( PARTITION_NAME_SD,
+                                    "glsl_end.txt",
+                                    m_bufferLog[LOG_GLSL_0],
+                                    m_bufferLogIndex[LOG_GLSL_0]);
+}
+
+// INITWRAPPER
 bool            CKernel::wrapperInitDMA             (   )
 {
                 bool bOK = true;
