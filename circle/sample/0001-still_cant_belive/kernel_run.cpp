@@ -15,7 +15,7 @@ TShutdownMode CKernel::Run(void)
 
                     loadFromUSBruntime();
 
-                    storeBootLogsRuntime()
+                    storeBootLogsRuntime();
 
                     updateMIDI();
                   
