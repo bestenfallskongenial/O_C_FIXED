@@ -140,7 +140,7 @@ void            CKernel::gfx_check                  (   const char* file,
 {
                 static unsigned error_count = 0;
                 static bool summary_written = false;
-                const unsigned ERROR_THRESHOLD = 1024;
+                const unsigned ERROR_THRESHOLD = 256;
 
                 if (m_resetFlag && !summary_written)
                     {
