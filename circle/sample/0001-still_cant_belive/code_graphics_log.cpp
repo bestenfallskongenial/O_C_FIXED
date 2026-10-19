@@ -232,10 +232,99 @@ void            CKernel::gfx_check                  (   const char* file,
 #endif
                             break;
                         }
-#ifdef __LOG_GLSL__ 
+#ifdef __LOG_GLSL__
                     storeLogHex(    MY_BFR, MY_IDX, "OpenGL Error", (u32)error, "ticks", (u32)ticks, "line", (u32)line );
                     storeLogHex(    MY_BFR, MY_IDX, severity, X_VAL, error_str, X_VAL, file, X_VAL );
-#endif  
+
+                    if (error_count == 0)
+                        {
+                        GLint f_program = 0;
+                        GLint f_framebuffer = 0;
+                        GLint f_textureUnit = 0;
+                        GLint f_texture2D = 0;
+                        GLint f_textureExternal = 0;
+                        GLint f_vertexBuffer = 0;
+
+                        glGetIntegerv(GL_CURRENT_PROGRAM, &f_program);
+                        glGetIntegerv(GL_FRAMEBUFFER_BINDING, &f_framebuffer);
+                        glGetIntegerv(GL_ACTIVE_TEXTURE, &f_textureUnit);
+                        glGetIntegerv(GL_TEXTURE_BINDING_2D, &f_texture2D);
+                        glGetIntegerv(GL_TEXTURE_BINDING_EXTERNAL_OES, &f_textureExternal);
+                        glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &f_vertexBuffer);
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "Selected", (u32)g_gl_program_current,
+                                        "Valid", (u32)filecounter[FT_FSH][FLD_VALID],
+                                        "Select OUT", (u32)g_inOutMatrixInt[ADC_SELECT_PRG][OUT],
+                                        "Mode buffer", (u32)g_currentProgramBuffer );
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "GL program", (u32)f_program,
+                                        "Conversion", (u32)m_csh.gl_program_id[0],
+                                        "Overlay", (u32)m_osh.gl_program_id[0],
+                                        "GL framebuffer", (u32)f_framebuffer );
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "GL unit", (u32)f_textureUnit,
+                                        "GL texture2D", (u32)f_texture2D,
+                                        "GL external", (u32)f_textureExternal,
+                                        "GL vertex buffer", (u32)f_vertexBuffer );
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "Video source", (u32)m_tex.gl_tex_vid,
+                                        "Video converted", (u32)m_cvt.gl_tex_id[0],
+                                        "Backbuffer", (u32)m_tex.gl_tex_bfr,
+                                        "Overlay atlas", (u32)m_omt.gl_tex_id[0] );
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "Conversion FBO", (u32)m_cvt.gl_fbo_vid,
+                                        "Vertex buffer", (u32)m_vtx.gl_buf,
+                                        "Bitmap index", (u32)m_activeTex,
+                                        "Valid bitmaps", (u32)filecounter[FT_TEX][FLD_VALID] );
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "Kernel log index", (u32)m_logKernelIndex,
+                                        "Kernel log size", (u32)sizeof(m_logKernel),
+                                        "GLSL log index", (u32)m_bufferLogIndex[LOG_GLSL_0],
+                                        "MMAL log index", (u32)m_bufferLogIndex[LOG_MMAL_0] );
+
+                        if (g_gl_program_current >= 0 &&
+                            g_gl_program_current < MAX_SHADER)
+                            {
+                            storeLogHex(    MY_BFR, MY_IDX,
+                                            "User handle", (u32)m_fsh.gl_program_id[g_gl_program_current],
+                                            "GL recognizes", (u32)glIsProgram(m_fsh.gl_program_id[g_gl_program_current]),
+                                            "Audio location", (u32)m_fsh.u_aud[g_gl_program_current],
+                                            "Time location", (u32)m_fsh.u_time[g_gl_program_current] );
+
+                            storeLogHex(    MY_BFR, MY_IDX,
+                                            "Video location", (u32)m_tex.u_tex_vid[g_gl_program_current],
+                                            "Backbuffer location", (u32)m_tex.u_tex_bfr[g_gl_program_current],
+                                            "tex6 location", (u32)m_tex.u_tex_id[g_gl_program_current][6],
+                                            "tex7 location", (u32)m_tex.u_tex_id[g_gl_program_current][7] );
+                            }
+
+                        storeLogHex(    MY_BFR, MY_IDX,
+                                        "Video index", (u32)m_activeVideo,
+                                        "Valid videos", (u32)filecounter[FT_VID][FLD_VALID],
+                                        "Frame index", (u32)m_activeFrame,
+                                        "Frame capacity", (u32)MAX_FRAMES );
+
+                        if (m_activeVideo >= 0 && m_activeVideo < MAX_VIDEOS)
+                            {
+                            storeLogHex(    MY_BFR, MY_IDX,
+                                            "Frame count", (u32)m_vid.frame_count[m_activeVideo],
+                                            "Video size", (u32)m_vid.size[m_activeVideo] );
+
+                            if (m_activeFrame >= 0 && m_activeFrame < MAX_FRAMES)
+                                {
+                                storeLogHex(    MY_BFR, MY_IDX,
+                                                "NAL offset", (u32)m_vid.nal_block_offset[m_activeVideo][m_activeFrame],
+                                                "NAL length", (u32)m_vid.nal_block_length[m_activeVideo][m_activeFrame] );
+                                }
+                            }
+                        }
+#endif
                     error_count++;
                     
                     if (error_count >= ERROR_THRESHOLD) m_resetFlag = true;
