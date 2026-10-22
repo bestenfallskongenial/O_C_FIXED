@@ -59,7 +59,7 @@ unsigned        CKernel::loadToBuffer               (           char*       p_bu
                     }
                 return 0;
 }
-
+/*
 bool            CKernel::saveFromBuffer             (   const   char*       p_deviceName,  
                                                         const   char*       p_fileName,             
                                                         const   char*       p_bufferArray,
@@ -104,6 +104,74 @@ bool            CKernel::saveFromBuffer             (   const   char*       p_de
                 UnMount();
                             
                 return true;
+}
+*/
+bool CKernel::saveFromBuffer(
+    const char* p_deviceName,
+    const char* p_fileName,
+    const char* p_bufferArray,
+    unsigned p_bufferSize)
+{
+    if (!Mount(p_deviceName))
+    {
+#ifdef __LOG_FILE_STORAGE__
+        storeLogHex(MY_BFR, MY_IDX,
+                    "  Failed to Mount Device", X_VAL, p_deviceName);
+#endif
+        return false;
+    }
+
+    if (m_pFileSystem == 0 || p_fileName == 0 ||
+        p_bufferArray == 0 || p_bufferSize == 0)
+    {
+#ifdef __LOG_FILE_STORAGE__
+        storeLogHex(MY_BFR, MY_IDX,
+                    "  Failed store Input", X_VAL,
+                    "file", X_VAL, p_fileName, X_VAL,
+                    "size", (u32)p_bufferSize);
+#endif
+        UnMount();
+        return false;
+    }
+
+    g_hFile = m_pFileSystem->FileCreate(p_fileName);
+    if (g_hFile == 0)
+    {
+#ifdef __LOG_FILE_STORAGE__
+        storeLogHex(MY_BFR, MY_IDX,
+                    "  Failed to create File", X_VAL,
+                    p_fileName, X_VAL,
+                    "on Device", X_VAL, p_deviceName);
+#endif
+        UnMount();
+        return false;
+    }
+
+    if (m_pFileSystem->FileWrite(
+            g_hFile, p_bufferArray, p_bufferSize) != p_bufferSize)
+    {
+#ifdef __LOG_FILE_STORAGE__
+        storeLogHex(MY_BFR, MY_IDX,
+                    "  Failed to store File", X_VAL,
+                    p_fileName, X_VAL,
+                    "size", (u32)p_bufferSize);
+#endif
+        closeFile();
+        UnMount();
+        return false;
+    }
+
+#ifdef __LOG_FILE_STORAGE__
+    storeLogHex(MY_BFR, MY_IDX,
+                "  Successful Stored", X_VAL,
+                p_fileName, X_VAL,
+                "size", (u32)p_bufferSize);
+#endif
+
+    closeFile();
+    UnMount();
+
+    return true;
 }
 
 bool            CKernel::closeFile                  (   )	                                                                        

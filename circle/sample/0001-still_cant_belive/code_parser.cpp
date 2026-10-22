@@ -130,6 +130,8 @@ bool            CKernel::parse264                  (    h264_state* h,
 #endif
                     for (size_t pos = 0; pos < size - 3; )
                         {
+                        if (i >= MAX_FRAMES) break;
+
                         size_t sc_len = (data[pos + 2] == 1) ? 3 : 4;
                         u8 nal_type = data[pos + sc_len] & 0x1F;
 

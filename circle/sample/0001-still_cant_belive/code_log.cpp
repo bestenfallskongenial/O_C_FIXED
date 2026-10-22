@@ -12,6 +12,8 @@ void            CKernel::storeLogHex               (   char*       p_buffer,
                                                         const char* p_string2, u32 p_value2,
                                                         const char* p_string3, u32 p_value3)
 {
+                index %= ((p_buffer == m_logKernel ? LOG_KERNEL_SIZE : LOG_SIZ) - HEADROOM);  
+
                 for (const char* p = p_string0; *p; ++p)
                     {
                     p_buffer[index++] = *p;
@@ -98,6 +100,8 @@ void            CKernel::storeLogU32                (   char*       p_buffer,
                                                         const char* p_string2, u32 p_value2,
                                                         const char* p_string3, u32 p_value3)
 {
+                index %= ((p_buffer == m_logKernel ? LOG_KERNEL_SIZE : LOG_SIZ) - HEADROOM);
+
                 for (const char* p = p_string0; *p; ++p)
                     {
                     p_buffer[index++] = *p;
@@ -228,6 +232,8 @@ void            CKernel::storeMsg                   (   char*       p_buffer,
                                                         const void* tx_msg,
                                                         u32         total_size)
 {
+                index %= ((p_buffer == m_logKernel ? LOG_KERNEL_SIZE : LOG_SIZ) - HEADROOM);
+
                 p_buffer[index++]           = '\n';
 
                 for (const char* p = label; *p; ++p)
@@ -263,6 +269,8 @@ void            CKernel::storeMsg                   (   char*       p_buffer,
 void            CKernel::nextline                   (   char*       p_buffer,
                                                         u32&        index)
 {
+                index %= ((p_buffer == m_logKernel ? LOG_KERNEL_SIZE : LOG_SIZ) - HEADROOM);
+                
                 p_buffer[index++]           = '\n';
                 p_buffer[index]             = '\0';
 #ifdef __LOG_TO_SCREEN__

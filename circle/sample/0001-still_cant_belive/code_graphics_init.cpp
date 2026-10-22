@@ -212,7 +212,7 @@ void            CKernel::initTexture                (   vtx_state*  v,
                         }
                     }
 }
-
+/*
 bool            CKernel::initTextureBackbuffer      (   olg_state*  o,
                                                         tex_state*  t )
 {
@@ -243,6 +243,35 @@ bool            CKernel::initTextureBackbuffer      (   olg_state*  o,
                                     o->screen_width, o->screen_height);
 
                 return true;
+}
+*/
+bool CKernel::initTextureBackbuffer(olg_state* o, tex_state* t)
+{
+    glDeleteTextures(1, &t->gl_tex_bfr);
+    glGenTextures(1, &t->gl_tex_bfr);
+    glBindTexture(GL_TEXTURE_2D, t->gl_tex_bfr);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+                 o->screen_width, o->screen_height,
+                 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+
+    if (glGetError() != GL_NO_ERROR)
+    {
+        glDeleteTextures(1, &t->gl_tex_bfr);
+        t->gl_tex_bfr = 0;
+
+        return false;
+    }
+
+    glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0,
+                       o->screen_width, o->screen_height);
+
+    return true;
 }
 
 void CKernel::initTextureVideo(

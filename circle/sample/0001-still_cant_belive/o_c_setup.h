@@ -98,6 +98,8 @@
     #define         LFO_SIZ                 (1024*32)           // 32kb
     #define         LOG_KERNEL_SIZE         (1024*32)           // bigger will break my code!!
 
+    #define         HEADROOM                2048
+
     #define         ADC_SELECT_PRG          7                   // we will map this modes to input channels later
 
     #define         DEVICE_NAME_SD          "emmc1"

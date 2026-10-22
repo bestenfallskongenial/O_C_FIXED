@@ -5,7 +5,7 @@
 
 bool            CKernel::framePollerMMAL            (   u32 nal_block_offset, u32 nal_block_length)
 {
-                MY_IDX %= (LOG_SIZ - 32768);
+//              MY_IDX %= (LOG_SIZ - 32768);
 
                 if (!f_firstFrameQueued)            // NEW
                     {

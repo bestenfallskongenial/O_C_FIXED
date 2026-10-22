@@ -52,7 +52,7 @@ void CKernel::storeBootLogsRuntime()
                         bufferScreenClear();
                         }     
 }
-
+/*
 void CKernel::storeMMALlogRuntime()
 {
                     if (m_bufferLogIndex[LOG_MMAL_0] >= 65536)
@@ -83,6 +83,44 @@ void CKernel::storeGLSLlogRuntime()
                             m_glslRuntimeLogSaved = true;
                             }
                         }
+}
+*/
+void CKernel::storeMMALlogRuntime()
+{
+    if (m_bufferLogIndex[LOG_MMAL_0] >= LOG_SIZ - 4096)
+    {
+        const char* f_fileName = m_mmalRuntimeLogSaved
+                              ? "mmalnext.txt" : "mmalrun.txt";
+
+        if (saveFromBuffer(PARTITION_NAME_SD, f_fileName,
+                           m_bufferLog[LOG_MMAL_0],
+                           m_bufferLogIndex[LOG_MMAL_0]))
+        {
+            m_bufferLogIndex[LOG_MMAL_0] = 0;
+            m_bufferLog[LOG_MMAL_0][0] = '\0';
+
+            m_mmalRuntimeLogSaved = true;
+        }
+    }
+}
+
+void CKernel::storeGLSLlogRuntime()
+{
+    if (m_bufferLogIndex[LOG_GLSL_0] >= LOG_SIZ - 4096)
+    {
+        const char* f_fileName = m_glslRuntimeLogSaved
+                              ? "glslnext.txt" : "glslrun.txt";
+
+        if (saveFromBuffer(PARTITION_NAME_SD, f_fileName,
+                           m_bufferLog[LOG_GLSL_0],
+                           m_bufferLogIndex[LOG_GLSL_0]))
+        {
+            m_bufferLogIndex[LOG_GLSL_0] = 0;
+            m_bufferLog[LOG_GLSL_0][0] = '\0';
+
+            m_glslRuntimeLogSaved = true;
+        }
+    }
 }
 
 void CKernel::storeBootlogReset()
