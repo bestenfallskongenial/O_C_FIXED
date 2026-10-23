@@ -174,3 +174,6 @@
     #define         FLAG_THRESHOLD          ADC_SELECT_PRG //is 7 aka ADC_SELECT_PRG because it defines the upper bound for the target mode selector. i wonder, theoretically i cant select channel 7, is it still correct 
 
     #define         TARGET_FPS              24
+
+
+    
