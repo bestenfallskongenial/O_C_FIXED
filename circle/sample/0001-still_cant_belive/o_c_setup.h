@@ -3,7 +3,7 @@
 */
 
 // here we define the firmware version to log /  show on startup 
-    #define         OS_VERSION                  2
+    #define         OS_VERSION                  2 
     #define         OS_REVISION                 1
 // here we define the log/debug level preprocessor 
     #define 		LOGLEVEL				    2	                            // 0: only panic / 1: also errors / 2: also warnings / 3: also notices / 4: also debug output (default))
