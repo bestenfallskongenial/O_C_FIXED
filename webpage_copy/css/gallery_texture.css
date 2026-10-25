@@ -1,0 +1,114 @@
+/* texture gallery layout + controls */
+
+:root {
+	--texture-gallery-left: 35%;
+	--texture-gallery-right: 35%;
+	--texture-gallery-top: 10%;
+	--texture-gallery-bottom: 10%;
+	--texture-gallery-opacity: 0.95;
+	--texture-gallery-radius: 20px;
+	--texture-gallery-gap: 12px;
+
+	--texture-label-display: none;
+	--texture-label-font-family: monospace;
+	--texture-label-font-size: 11px;
+	--texture-label-text-transform: uppercase;
+
+	--texture-details-display: block;
+	--texture-details-font-size: 10px;
+	--texture-details-opacity: 0.8;
+}
+
+#textureGallery {
+	position: fixed;
+	top: var(--texture-gallery-top);
+	bottom: var(--texture-gallery-bottom);
+	left: var(--texture-gallery-left);
+	right: var(--texture-gallery-right);
+	width: auto;
+	height: auto;
+	z-index: 2;
+	padding: 8px;
+	background-color: transparent;
+	opacity: var(--texture-gallery-opacity);
+	display: flex;
+	flex-direction: column;
+	gap: var(--texture-gallery-gap);
+	border-radius: var(--texture-gallery-radius);
+	overflow: hidden;
+	transition: background-color 500ms;	
+}
+
+#textureGallery.gallery-hidden {
+	display: none;
+}
+
+#textureGallery:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* texture gallery grid */
+.texture-grid {
+	flex: 1 1 auto;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	grid-auto-rows: minmax(0, 1fr);
+	gap: var(--texture-gallery-gap);
+	min-height: 0;
+}
+
+.texture-tile {
+	position: relative;
+	border: 0;
+	border-radius: var(--texture-gallery-radius);
+	padding: 12px;
+	min-height: 0;
+	color: #ffffff;
+	background-color: #111;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	font-family: monospace;
+	font-size: 11px;
+	text-transform: uppercase;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: background-color 0.2s ease;
+}
+
+.texture-tile:hover {
+	background-color: #222;
+}
+
+.texture-tile-loaded {
+	color: #ffffff;
+	text-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
+}
+
+.texture-tile-error {
+	background-color: #3a0f0f;
+}
+
+.texture-label {
+	display: var(--texture-label-display);
+	font-family: var(--texture-label-font-family);
+	font-size: var(--texture-label-font-size);
+	text-transform: var(--texture-label-text-transform);
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.texture-details {
+	display: var(--texture-details-display);
+	font-size: var(--texture-details-font-size);
+	opacity: var(--texture-details-opacity);
+	text-transform: none;
+}
+
+.texture-input {
+	display: none;
+}

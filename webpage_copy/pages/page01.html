@@ -1,0 +1,52 @@
+<!-- /pages/render.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GLSL Sandbox</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<link rel="stylesheet" href="/css/render_glsl.css">
+	<link rel="stylesheet" href="/css/toolbar.css">
+	<link rel="stylesheet" href="/css/gallery_shader.css">
+	<link rel="stylesheet" href="/css/gallery_texture.css">
+	<link rel="stylesheet" href="/css/hardware_controls.css">
+</head>
+
+<body>
+	<div id="app">
+		<!-- LEFT: gallery -->
+		<div id="gallery">
+			<!-- keep label (but move controls to overlay via CSS) -->
+			<div class="gallery-controls">
+				<button id="galleryPrev" type="button" title="Previous 10 images">◀</button>
+				<span id="galleryPageLabel">1–10</span>
+				<button id="galleryNext" type="button" title="Next 10 images">▶</button>
+			</div>
+
+			<div class="gallery-grid" id="galleryGrid">
+				<!-- filled by /js/carousel.js -->
+			</div>
+		</div>
+
+		<!-- RIGHT: render + editor (render.js owns this) -->
+		<div id="main"></div>
+	</div>
+
+	<link rel="stylesheet" href="/css/codemirror.css">
+	<link rel="stylesheet" href="/css/default.css">
+
+	<script src="/js/helpers.js"></script>
+	<script src="/js/codemirror.js"></script>
+	<script src="/js/glsl.js"></script>
+	<script src="/js/carousel_render_glsl.js"></script>
+	<script src="/js/render_ui.js"></script>
+	<script src="/js/render_gl_setup.js"></script>
+	<script src="/js/render_input.js"></script>
+	<script src="/js/render_shader_compile.js"></script>
+	<script src="/js/render_targets.js"></script>
+	<script src="/js/render_textures.js"></script>
+	<script src="/js/render_hardware_controls.js"></script>
+	<script src="/js/render_loop.js"></script>
+	<script src="/js/render.js"></script>
+</body>
+</html>
